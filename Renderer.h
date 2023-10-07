@@ -1,6 +1,7 @@
 #pragma once
 
 #include "ShaderLib.h"
+#include "ModelManager.h"
 #include "Component.h"
 #include "Color.h"
 

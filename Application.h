@@ -10,6 +10,7 @@
 #include "SpriteRenderer.h"
 #include "MeshRenderer.h"
 #include "Color.h"
+#include "ModelManager.h"
 
 
 class Application

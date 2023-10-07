@@ -61,7 +61,7 @@ GLuint ShaderLib::CreateShaderProgram(std::string vertexShaderPath, std::string 
 }
 
 
-void ShaderLib::init()
+void ShaderLib::Init()
 {
 	if (initialized) {
 		std::cerr << "ShaderLib is already initialized." << std::endl;
@@ -73,6 +73,9 @@ void ShaderLib::init()
 
 	shaderProgram = CreateShaderProgram("Shaders/single_color_vertex_shader.glsl", "Shaders/simple_fragment_shader.glsl");
 	shaderPrograms.push_back(std::make_pair("ColorShader", shaderProgram));
+
+	shaderProgram = CreateShaderProgram("Shaders/texture_vertex_shader.glsl", "Shaders/texture_fragment_shader.glsl");
+	shaderPrograms.push_back(std::make_pair("TextureShader", shaderProgram));
 
 
 	initialized = true;
@@ -94,10 +97,6 @@ void ShaderLib::UseShader(int shaderID)
 	currentShader = shaderID;
 }
 
-ModelManager& ShaderLib::GetModelManager()
-{
-	return this->modelManger;
-}
 
 std::string ShaderLib::ReadShaderSource(const std::string& filePath) {
 	std::ifstream file(filePath);

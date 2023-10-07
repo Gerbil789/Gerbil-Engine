@@ -12,10 +12,6 @@
 #include <fstream>
 #include <string>
 
-#include "ModelManager.h"
-
-
-
 
 
 class ShaderLib
@@ -26,10 +22,9 @@ public:
 		return instance;
 	}
 	
-	void init();
+	void Init();
 	void UseShader(int shaderID);
 	std::vector<std::pair<std::string, GLuint>> shaderPrograms;
-	ModelManager& GetModelManager();
 
 private:
 	ShaderLib() {};
@@ -40,7 +35,6 @@ private:
 	std::string ReadShaderSource(const std::string& filePath);
 	GLuint CreateShaderProgram(std::string vertexShaderPath, std::string fragmentShaderPath);
 
-	ModelManager modelManger;
 	
 };
 

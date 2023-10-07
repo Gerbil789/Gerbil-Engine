@@ -1,13 +1,20 @@
 #pragma once
 
 #include "Model.h"
-#include <vector>
+#include <filesystem>
+#include <map>
 
 class ModelManager
 {
 public:
-	ModelManager();
+	static ModelManager& getInstance() {
+		static ModelManager instance;
+		return instance;
+	}
+	void Init();
 	Model* GetModel(std::string _name);
-	std::vector<Model*> models;
+private:
+	ModelManager() {};
+	std::map<std::string, Model*> models;
 };
 

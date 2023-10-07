@@ -45,7 +45,7 @@ void Application::Init()
 	glfwWindowHint(GLFW_OPENGL_PROFILE,
 		GLFW_OPENGL_CORE_PROFILE);
 
-	window = glfwCreateWindow(720, 720, "wrum wrum", NULL, NULL);
+	window = glfwCreateWindow(720, 720, "Gerbil Engine", NULL, NULL);
 	if (!window)
 	{
 		glfwTerminate();
@@ -78,6 +78,7 @@ void Application::Init()
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
 	glOrtho(-ratio, ratio, -1.f, 1.f, 1.f, -1.f);
+	
 
 	glfwSetKeyCallback(window, key_callback);
 
@@ -92,24 +93,27 @@ void Application::Init()
 	glfwSetWindowSizeCallback(window, window_size_callback);
 
 	ShaderLib& shaderLib = ShaderLib::getInstance();
-	shaderLib.init();
+	shaderLib.Init();
+
+	ModelManager& modelManager = ModelManager::getInstance();
+	modelManager.Init();
 
 	Scene scene;
 
 	GameObject* go1 = new GameObject("gopos");
-	go1->AddComponent<SpriteRenderer>(Color::Red);
+	go1->AddComponent<MeshRenderer>(Color::Red, "cube");
 	go1->GetComponent<Transform>()->setScale(glm::vec3(0.2f, 0.2f, 0.2f));
 	go1->GetComponent<Transform>()->setPosition(glm::vec3(-0.5f, 0.0f, 0.0f));
 	scene.Add(go1);
 
 	GameObject* go2 = new GameObject("gorot");
-	go2->AddComponent<MeshRenderer>(Color::Cyan);
+	go2->AddComponent<MeshRenderer>(Color::Cyan, "cylinder");
 	go2->GetComponent<Transform>()->setScale(glm::vec3(0.2f, 0.2f, 0.2f));
 	go2->GetComponent<Transform>()->setPosition(glm::vec3(0.0f, 0.0f, 0.0f));
 	scene.Add(go2);
 
 	GameObject* go3 = new GameObject("goscl");
-	go3->AddComponent<SpriteRenderer>(Color::Blue);
+	go3->AddComponent<MeshRenderer>(Color::Blue, "cone");
 	go3->GetComponent<Transform>()->setScale(glm::vec3(0.2f, 0.2f, 0.2f));
 	go3->GetComponent<Transform>()->setPosition(glm::vec3(0.5f, 0.0f, 0.0f));
 	scene.Add(go3);
@@ -118,9 +122,11 @@ void Application::Init()
 	double angle = 1.0;
 	while (!glfwWindowShouldClose(window)) {
 		go1->GetComponent<Transform>()->setPosition(glm::vec3(-0.5f, std::sin(angle) * 0.1f, 0.0f));
-		go2->GetComponent<Transform>()->rotateBy(5.0f, glm::vec3(1.0f, 1.0f, 1.0f));
+		go1->GetComponent<Transform>()->rotateBy(0.5f, glm::vec3(1.0f, 1.0f, 0.0f));
+		go2->GetComponent<Transform>()->rotateBy(1.0f, glm::vec3(1.0f, 1.0f, 1.0f));
 		go3->GetComponent<Transform>()->setScale(glm::vec3(0.2f, std::sin(angle) * 0.1 + 0.4, 0.2f));
-		angle += 0.1;
+		go3->GetComponent<Transform>()->rotateBy(-0.5f, glm::vec3(1.0f, 0.0f, 0.0f));
+		angle += 0.05;
 		scene.Draw();
 		glfwPollEvents();
 		glfwSwapBuffers(window);

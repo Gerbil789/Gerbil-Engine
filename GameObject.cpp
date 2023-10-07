@@ -1,6 +1,6 @@
 #include "GameObject.h"
 #include "Component.h"
-#include "Transform.h";
+#include "Transform.h"
 
 GameObject::GameObject(std::string name)
 {

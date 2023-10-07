@@ -8,21 +8,28 @@
 #include <glm/gtc/matrix_transform.hpp> // glm::translate, glm::rotate, glm::scale, glm::perspective
 #include <glm/gtc/type_ptr.hpp> // glm::value_ptr
 #include <iostream>
+#include <vector>
+#include <string>
+
+#include <sstream>
+#include <fstream>
 
 
 
-struct Vertex {
-  glm::vec4 pos;
-	glm::vec4 color;
-};
+
 
 class Model {
 public:
-  Model(std::string _name, const Vertex _vertices[], int _numVertices);
+  Model(std::string path);
   ~Model();
+  void Draw();
 
   std::string name;
-  Vertex* vertices;
-  int numVertices;
-  GLuint VBO = 0, VAO = 0;
+  std::vector< glm::vec3 > vertices;
+  std::vector< glm::vec2 > uvs;
+  std::vector< glm::vec3 > normals;
+  GLuint VBO = 0, VAO = 0, textureID = 0;
+private:
+  bool LoadOBJ(std::string path, std::vector < glm::vec3 >& out_vertices, std::vector < glm::vec2 >& out_uvs, std::vector < glm::vec3 >& out_normals);
+  bool LoadTexture(std::string path);
 };

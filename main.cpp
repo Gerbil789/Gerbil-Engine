@@ -1,8 +1,14 @@
-﻿/*
-	RUB0031
-	vojtech.rubes.st@vsb.cz
-	21.9.2023
-*/
+﻿/**
+ * @file main.cpp
+ *
+ * @brief Main function
+ * 
+ *
+ * @author Vojta Rubeš
+	**/
+
+//USE C++ 17 or newer !!!
+//It wont compile otherwise
 
 #include "Application.h"
 
