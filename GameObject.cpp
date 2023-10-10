@@ -5,9 +5,8 @@
 GameObject::GameObject(std::string name)
 {
 	this->name = name;
-	AddComponent<Transform>();
+	this->transform = new Transform();
 }
-
 
 size_t GameObject::GetId()
 {

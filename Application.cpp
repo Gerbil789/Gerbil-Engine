@@ -92,7 +92,7 @@ void Application::Init()
 
 	glfwSetWindowSizeCallback(window, window_size_callback);
 
-	ShaderLib& shaderLib = ShaderLib::getInstance();
+	ShaderManager& shaderLib = ShaderManager::getInstance();
 	shaderLib.Init();
 
 	ModelManager& modelManager = ModelManager::getInstance();
@@ -101,29 +101,29 @@ void Application::Init()
 	Scene scene;
 
 	GameObject* go1 = new GameObject("gopos");
-	go1->AddComponent<MeshRenderer>(Color::Red, "character_test");
-	go1->GetComponent<Transform>()->setScale(glm::vec3(0.02f, 0.02f, 0.02f));
-	go1->GetComponent<Transform>()->setPosition(glm::vec3(-0.5f, 0.0f, 0.0f));
+	go1->AddComponent<MeshRenderer>(Color::Red, "cube");
+	go1->transform->SetScale(glm::vec3(0.2f, 0.2f, 0.2f));
+	go1->transform->SetPosition(glm::vec3(-0.5f, 0.0f, 0.0f));
 	scene.Add(go1);
 
 	GameObject* go2 = new GameObject("gorot");
-	go2->AddComponent<MeshRenderer>(Color::Cyan, "character_test");
-	go2->GetComponent<Transform>()->setScale(glm::vec3(0.03f, 0.03f, 0.03f));
-	go2->GetComponent<Transform>()->setPosition(glm::vec3(0.0f, 0.0f, 0.0f));
+	go2->AddComponent<MeshRenderer>(Color::Cyan, "torus");
+	go2->transform->SetScale(glm::vec3(0.3f, 0.3f, 0.3f));
+	go2->transform->SetPosition(glm::vec3(0.0f, 0.0f, 0.0f));
 	scene.Add(go2);
 
 	GameObject* go3 = new GameObject("goscl");
-	go3->AddComponent<MeshRenderer>(Color::Blue, "character_test");
-	go3->GetComponent<Transform>()->setScale(glm::vec3(0.02f, 0.02f, 0.02f));
-	go3->GetComponent<Transform>()->setPosition(glm::vec3(0.5f, 0.0f, 0.0f));
+	go3->AddComponent<MeshRenderer>(Color::Blue, "cylinder");
+	go3->transform->SetScale(glm::vec3(0.2f, 0.2f, 0.2f));
+	go3->transform->SetPosition(glm::vec3(0.5f, 0.0f, 0.0f));
 	scene.Add(go3);
 
 	//main loop
 	while (!glfwWindowShouldClose(window)) {
-		go1->GetComponent<Transform>()->rotateBy(0.5f, glm::vec3(0.0f, 1.0f, 0.0f));
-		go2->GetComponent<Transform>()->rotateBy(1.0f, glm::vec3(0.0f, 1.0f, 0.0f));
+		go1->transform->RotateBy(0.5f, glm::vec3(1.0f, 1.0f, 1.0f));
+		go2->transform->RotateBy(1.0f, glm::vec3(1.0f, 1.0f, 1.0f));
 		//go3->GetComponent<Transform>()->setScale(glm::vec3(0.2f, std::sin(angle) * 0.1 + 0.4, 0.2f));
-		go3->GetComponent<Transform>()->rotateBy(-0.5f, glm::vec3(0.0f, 1.0f, 0.0f));
+		go3->transform->RotateBy(-0.5f, glm::vec3(1.0f, 1.0f, 1.0f));
 		scene.Draw();
 		glfwPollEvents();
 		glfwSwapBuffers(window);

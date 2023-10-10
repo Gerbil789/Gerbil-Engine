@@ -2,6 +2,7 @@
 
 #include "Renderer.h"
 #include "Transform.h"
+#include "GameObject.h"
 
 
 class SpriteRenderer : public IRenderer

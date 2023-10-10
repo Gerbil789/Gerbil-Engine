@@ -4,19 +4,19 @@ SpriteRenderer::SpriteRenderer(glm::vec4 color)
 {
 	this->spriteColor = color;
 	this->VAO = ModelManager::getInstance().GetModel("cube")->VAO;
-	this->shaderProgram = ShaderLib::getInstance().shaderPrograms[1].second;
+	this->shaderProgram = ShaderManager::getInstance().shaderPrograms[1].second;
 }
 
 void SpriteRenderer::Draw()
 {
-	Transform* transform = gameObject->GetComponent<Transform>();
-	ShaderLib::getInstance().UseShader(shaderProgram);
+	Transform* transform = gameObject->transform;
+	ShaderManager::getInstance().UseShader(shaderProgram);
 
 	GLint idModelTransform = glGetUniformLocation(shaderProgram, "modelMatrix");
 	if (idModelTransform == -1) {
 		std::cout << "ERROR: could not find model transform location\n";
 	}
-	glUniformMatrix4fv(idModelTransform, 1, GL_FALSE, glm::value_ptr(transform->getModel()));
+	glUniformMatrix4fv(idModelTransform, 1, GL_FALSE, glm::value_ptr(transform->GetModel()));
 
 
 	GLint uniformLocation = glGetUniformLocation(shaderProgram, "color");

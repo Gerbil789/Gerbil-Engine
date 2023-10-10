@@ -3,7 +3,6 @@
 #include <string>
 #include <vector>
 
-
 #include "Component.h"
 #include "Transform.h"
 #include "Renderer.h"
@@ -16,13 +15,13 @@ public:
 	void SetId(size_t id);
 	std::string GetName();
 	void Dispose();
+	Transform* transform = new Transform();
 
-
-	//TEMPLATE FUNCTUON DEFINITION MUST BE IN HEADER FILE !!!!!! 3hours wasted... (<>_<>)
 	template <typename T>
 	void AddComponent() {
 		T* newComponent = new T();
 		newComponent->SetGameObject(this);
+		newComponent->SetTransform(this->transform);
 		components.push_back(newComponent);
 	}
 
@@ -30,10 +29,10 @@ public:
 	T* AddComponent(Args... args) {
 		T* newComponent = new T(args...);
 		newComponent->SetGameObject(this);
+		newComponent->SetTransform(this->transform);
 		components.push_back(newComponent);
 		return newComponent;
 	}
-
 
 	template <typename T>
 	T* GetComponent() {
@@ -44,6 +43,8 @@ public:
 		}
 		return nullptr;
 	}
+
+	
 
 private:
 	size_t id;

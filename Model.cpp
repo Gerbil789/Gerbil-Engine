@@ -38,7 +38,7 @@ Model::Model(std::string path) {
 	// Configure the vertex attributes
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(glm::vec3), (GLvoid*)0);
 	glEnableVertexAttribArray(0);
-	//glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, sizeof(glm::vec2), (GLvoid*)(3 * sizeof(float)));
+ 	//glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, sizeof(glm::vec2), (GLvoid*)(3 * sizeof(float)));
 	//glEnableVertexAttribArray(1);
 
 	// Unbind VBO and VAO

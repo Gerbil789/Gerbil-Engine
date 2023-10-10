@@ -1,9 +1,10 @@
 #pragma once
 
-#include "ShaderLib.h"
+#include "ShaderManager.h"
 #include "ModelManager.h"
 #include "Component.h"
 #include "Color.h"
+#include "GameObject.h"
 
 #include <glm/vec3.hpp> // glm::vec3
 #include <glm/vec4.hpp> // glm::vec4
@@ -20,5 +21,6 @@ class IRenderer : public IComponent
 {
 public:
 	virtual void Draw() = 0;
+
 };
 

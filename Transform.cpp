@@ -7,10 +7,7 @@ Transform::Transform(glm::vec3 position, glm::vec3 rotation, glm::vec3 scale)
 	this->scale = scale;
 }
 
-
-
-
-glm::mat4 Transform::getModel() const
+glm::mat4 Transform::GetModel() const
 {
 	glm::mat4 model = glm::mat4(1.0f);
 	model = glm::translate(model, this->position);
@@ -20,46 +17,46 @@ glm::mat4 Transform::getModel() const
 	return model;
 }
 
-glm::vec3 Transform::getPosition() const
+glm::vec3 Transform::GetPosition() const
 {
 	return this->position;
 }
-glm::quat Transform::getRotation() const
+glm::quat Transform::GetRotation() const
 {
 	return this->rotation;
 }
-glm::vec3 Transform::getScale() const
+glm::vec3 Transform::GetScale() const
 {
 	return this->scale;
 }
 
-void Transform::setPosition(const glm::vec3& position)
+void Transform::SetPosition(const glm::vec3& position)
 {
 	this->position = position;
 }
-void Transform::moveBy(const glm::vec3& offset)
+void Transform::MoveBy(const glm::vec3& offset)
 {
 	this->position += offset;
 }
 
-void Transform::setRotation(float angle, const glm::vec3& axis)
+void Transform::SetRotation(float angle, const glm::vec3& axis)
 {
 	this->rotation = glm::rotate(glm::quat(), glm::radians(angle), axis);
 }
-void Transform::setRotation(glm::quat quaternion)
+void Transform::SetRotation(glm::quat quaternion)
 {
 	this->rotation = quaternion;
 }
-void Transform::rotateBy(float angle, const glm::vec3& axis)
+void Transform::RotateBy(float angle, const glm::vec3& axis)
 {
 	this->rotation = glm::rotate(rotation, glm::radians(angle), axis);
 }
 
-void Transform::setScale(const glm::vec3& scale)
+void Transform::SetScale(const glm::vec3& scale)
 {
 	this->scale = scale;
 }
-void Transform::scaleBy(const glm::vec3& scale)
+void Transform::ScaleBy(const glm::vec3& scale)
 {
 	this->scale *= scale;
 }

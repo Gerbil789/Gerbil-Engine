@@ -1,6 +1,7 @@
 #pragma once
 #include "Renderer.h"
 #include "Transform.h"
+#include "GameObject.h"
 
 class MeshRenderer : public IRenderer
 {
@@ -11,6 +12,5 @@ public:
 	Model* model;
 private:
 	GLuint shaderProgram;
-
 };
 

@@ -3,7 +3,7 @@
 MeshRenderer::MeshRenderer(glm::vec4 _color, const char* _model)
 {
 	this->color = _color;
-	this->shaderProgram = ShaderLib::getInstance().shaderPrograms[1].second;
+	this->shaderProgram = ShaderManager::getInstance().shaderPrograms[1].second;
 	this->model = ModelManager::getInstance().GetModel(_model);
 
 	if (model == nullptr) { std::cerr << "[MeshRemderer] ERROR: could not load model [" << _model << "]\n"; }
@@ -12,10 +12,10 @@ MeshRenderer::MeshRenderer(glm::vec4 _color, const char* _model)
 void MeshRenderer::Draw()
 {
 	//TO DO: move this somewhere else :d
-	Transform* transform = gameObject->GetComponent<Transform>();
+
 
 	//set shader program
-	ShaderLib::getInstance().UseShader(shaderProgram);
+	ShaderManager::getInstance().UseShader(shaderProgram);
 
 
 	//set transform
@@ -23,7 +23,7 @@ void MeshRenderer::Draw()
 	if (idModelTransform == -1) {
 		std::cout << "ERROR: could not find model transform location\n";
 	}
-	glUniformMatrix4fv(idModelTransform, 1, GL_FALSE, glm::value_ptr(transform->getModel()));
+	glUniformMatrix4fv(idModelTransform, 1, GL_FALSE, glm::value_ptr(transform->GetModel()));
 
 	//set color
 	

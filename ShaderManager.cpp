@@ -1,7 +1,7 @@
-#include "ShaderLib.h"
+#include "ShaderManager.h"
 
 
-void ShaderLib::CheckShaderCompilation(GLuint shader, const std::string& shaderType) {
+void ShaderManager::CheckShaderCompilation(GLuint shader, const std::string& shaderType) {
 	GLint success;
 	glGetShaderiv(shader, GL_COMPILE_STATUS, &success);
 	if (!success) {
@@ -14,7 +14,7 @@ void ShaderLib::CheckShaderCompilation(GLuint shader, const std::string& shaderT
 	}
 }
 
-void ShaderLib::CheckProgramLinking(GLuint program) {
+void ShaderManager::CheckProgramLinking(GLuint program) {
 	GLint success;
 	glGetProgramiv(program, GL_LINK_STATUS, &success);
 	if (!success) {
@@ -27,7 +27,7 @@ void ShaderLib::CheckProgramLinking(GLuint program) {
 	}
 }
 
-GLuint ShaderLib::CreateShaderProgram(std::string vertexShaderPath, std::string fragmentShaderPath)
+GLuint ShaderManager::CreateShaderProgram(std::string vertexShaderPath, std::string fragmentShaderPath)
 {
 	std::string vertex_shader_str = ReadShaderSource(vertexShaderPath);
 	std::string fragment_shader_str = ReadShaderSource(fragmentShaderPath);
@@ -61,7 +61,7 @@ GLuint ShaderLib::CreateShaderProgram(std::string vertexShaderPath, std::string 
 }
 
 
-void ShaderLib::Init()
+void ShaderManager::Init()
 {
 	if (initialized) {
 		std::cerr << "ShaderLib is already initialized." << std::endl;
@@ -81,7 +81,7 @@ void ShaderLib::Init()
 	initialized = true;
 }
 
-void ShaderLib::UseShader(int shaderID)
+void ShaderManager::UseShader(int shaderID)
 {
 	if (!initialized) {
 		std::cerr << "ShaderLib is not initialized. Call init() first." << std::endl;
@@ -98,7 +98,7 @@ void ShaderLib::UseShader(int shaderID)
 }
 
 
-std::string ShaderLib::ReadShaderSource(const std::string& filePath) {
+std::string ShaderManager::ReadShaderSource(const std::string& filePath) {
 	std::ifstream file(filePath);
 	if (!file.is_open()) {
 		std::cerr << "Failed to open the shader file: " << filePath << std::endl;

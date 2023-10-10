@@ -12,13 +12,11 @@
 #include <fstream>
 #include <string>
 
-
-
-class ShaderLib
+class ShaderManager
 {
 public:
-	static ShaderLib& getInstance() {
-		static ShaderLib instance; 
+	static ShaderManager& getInstance() {
+		static ShaderManager instance; 
 		return instance;
 	}
 	
@@ -27,15 +25,13 @@ public:
 	std::vector<std::pair<std::string, GLuint>> shaderPrograms;
 
 private:
-	ShaderLib() {};
+	ShaderManager() {};
 	void CheckShaderCompilation(GLuint shader, const std::string& shaderType);
 	void CheckProgramLinking(GLuint program);
 	int currentShader = -1;
 	bool initialized = false;
 	std::string ReadShaderSource(const std::string& filePath);
 	GLuint CreateShaderProgram(std::string vertexShaderPath, std::string fragmentShaderPath);
-
-	
 };
 
 
