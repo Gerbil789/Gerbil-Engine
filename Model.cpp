@@ -9,7 +9,7 @@ std::string GetName(std::string input) {
 		result = result.substr(foundStart + 7); // "Models/".length() is 7
 	}
 
-	// Remove "./obj" from the end
+	// Remove ".obj" from the end
 	size_t foundEnd = result.find(".obj");
 	if (foundEnd != std::string::npos) {
 		result = result.substr(0, foundEnd);
@@ -38,8 +38,10 @@ Model::Model(std::string path) {
 	// Configure the vertex attributes
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(glm::vec3), (GLvoid*)0);
 	glEnableVertexAttribArray(0);
- 	//glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, sizeof(glm::vec2), (GLvoid*)(3 * sizeof(float)));
+ 	//glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, sizeof(glm::vec3), (GLvoid*)(3 * sizeof(float)));
 	//glEnableVertexAttribArray(1);
+	//glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, sizeof(glm::vec2), (GLvoid*)(6 * sizeof(float)));
+	//glEnableVertexAttribArray(2);
 
 	// Unbind VBO and VAO
 	glBindBuffer(GL_ARRAY_BUFFER, 0);

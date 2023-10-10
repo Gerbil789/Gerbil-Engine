@@ -22,7 +22,7 @@ public:
 	
 	void Init();
 	void UseShader(int shaderID);
-	std::vector<std::pair<std::string, GLuint>> shaderPrograms;
+	GLuint GetShaderProgram(std::string shader_name);
 
 private:
 	ShaderManager() {};
@@ -30,6 +30,7 @@ private:
 	void CheckProgramLinking(GLuint program);
 	int currentShader = -1;
 	bool initialized = false;
+	std::vector<std::pair<std::string, GLuint>> shaderPrograms;
 	std::string ReadShaderSource(const std::string& filePath);
 	GLuint CreateShaderProgram(std::string vertexShaderPath, std::string fragmentShaderPath);
 };

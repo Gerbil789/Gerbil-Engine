@@ -68,15 +68,8 @@ void ShaderManager::Init()
 		return;
 	}
 	GLuint shaderProgram;
-	shaderProgram = CreateShaderProgram("Shaders/simple_vertex_shader.glsl", "Shaders/simple_fragment_shader.glsl");
-	shaderPrograms.push_back(std::make_pair("SimpleShader", shaderProgram));
-
-	shaderProgram = CreateShaderProgram("Shaders/single_color_vertex_shader.glsl", "Shaders/simple_fragment_shader.glsl");
-	shaderPrograms.push_back(std::make_pair("ColorShader", shaderProgram));
-
-	shaderProgram = CreateShaderProgram("Shaders/texture_vertex_shader.glsl", "Shaders/texture_fragment_shader.glsl");
-	shaderPrograms.push_back(std::make_pair("TextureShader", shaderProgram));
-
+	shaderProgram = CreateShaderProgram("Shaders/model_vertex.glsl", "Shaders/model_fragment.glsl");
+	shaderPrograms.push_back(std::make_pair("ModelShader", shaderProgram));
 
 	initialized = true;
 }
@@ -95,6 +88,17 @@ void ShaderManager::UseShader(int shaderID)
 	glUseProgram(shaderID);
 
 	currentShader = shaderID;
+}
+
+GLuint ShaderManager::GetShaderProgram(std::string shader_name)
+{
+	for (const auto& pair : shaderPrograms) {
+		if (pair.first == shader_name) {
+			return pair.second;
+		}
+	}
+	std::cout << "Shader [" << shader_name << "] does not exist\n";
+	return 0;
 }
 
 

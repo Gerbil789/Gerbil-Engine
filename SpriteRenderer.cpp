@@ -4,7 +4,7 @@ SpriteRenderer::SpriteRenderer(glm::vec4 color)
 {
 	this->spriteColor = color;
 	this->VAO = ModelManager::getInstance().GetModel("cube")->VAO;
-	this->shaderProgram = ShaderManager::getInstance().shaderPrograms[1].second;
+	this->shaderProgram = ShaderManager::getInstance().GetShaderProgram("ModelShader");
 }
 
 void SpriteRenderer::Draw()

@@ -106,28 +106,26 @@ void Application::Init()
 	go1->transform->SetPosition(glm::vec3(-0.5f, 0.0f, 0.0f));
 	scene.Add(go1);
 
-	GameObject* go2 = new GameObject("gorot");
-	go2->AddComponent<MeshRenderer>(Color::Cyan, "torus");
-	go2->transform->SetScale(glm::vec3(0.3f, 0.3f, 0.3f));
-	go2->transform->SetPosition(glm::vec3(0.0f, 0.0f, 0.0f));
-	scene.Add(go2);
-
 	GameObject* go3 = new GameObject("goscl");
 	go3->AddComponent<MeshRenderer>(Color::Blue, "cylinder");
 	go3->transform->SetScale(glm::vec3(0.2f, 0.2f, 0.2f));
 	go3->transform->SetPosition(glm::vec3(0.5f, 0.0f, 0.0f));
 	scene.Add(go3);
 
+	GameObject* go2 = new GameObject("gorot");
+	go2->AddComponent<MeshRenderer>(Color::Cyan, "torus");
+	go2->transform->SetScale(glm::vec3(0.3f, 0.3f, 0.3f));
+	go2->transform->SetPosition(glm::vec3(0.0f, 0.0f, 0.0f));
+	scene.Add(go2);
+
 	//main loop
 	while (!glfwWindowShouldClose(window)) {
 		go1->transform->RotateBy(0.5f, glm::vec3(1.0f, 1.0f, 1.0f));
 		go2->transform->RotateBy(1.0f, glm::vec3(1.0f, 1.0f, 1.0f));
-		//go3->GetComponent<Transform>()->setScale(glm::vec3(0.2f, std::sin(angle) * 0.1 + 0.4, 0.2f));
 		go3->transform->RotateBy(-0.5f, glm::vec3(1.0f, 1.0f, 1.0f));
 		scene.Draw();
 		glfwPollEvents();
 		glfwSwapBuffers(window);
-		
 	}
 
 	glfwDestroyWindow(window);
