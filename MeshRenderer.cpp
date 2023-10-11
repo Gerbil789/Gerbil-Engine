@@ -27,14 +27,16 @@ void MeshRenderer::Draw()
 	if (idView == -1) {
 		std::cout << "ERROR: could not find viewMatrix location\n";
 	}
-	glUniformMatrix4fv(idView, 1, GL_FALSE, glm::value_ptr(glm::mat4(1.0f)));
+	glm::mat4 tmp = ShaderManager::getInstance().GetCam()->CalculateViewMatrix();
+	glUniformMatrix4fv(idView, 1, GL_FALSE, glm::value_ptr(tmp));
 
 	//projectionMatrix
 	GLint idProjection = glGetUniformLocation(shaderProgram, "projectionMatrix");
 	if (idProjection == -1) {
 		std::cout << "ERROR: could not find projectionMatrix location\n";
 	}
-	glUniformMatrix4fv(idProjection, 1, GL_FALSE, glm::value_ptr(glm::mat4(1.0f)));
+	tmp = ShaderManager::getInstance().GetCam()->CalculateProjectionMatrix();
+	glUniformMatrix4fv(idProjection, 1, GL_FALSE, glm::value_ptr(tmp));
 
 	//color
 	GLint idColor = glGetUniformLocation(shaderProgram, "color");

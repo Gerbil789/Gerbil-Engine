@@ -101,6 +101,16 @@ GLuint ShaderManager::GetShaderProgram(std::string shader_name)
 	return 0;
 }
 
+Camera* ShaderManager::GetCam()
+{
+	return cam;
+}
+
+void ShaderManager::SetCam(Camera* _cam)
+{
+	cam = _cam;
+}
+
 
 std::string ShaderManager::ReadShaderSource(const std::string& filePath) {
 	std::ifstream file(filePath);

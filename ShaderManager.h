@@ -12,6 +12,8 @@
 #include <fstream>
 #include <string>
 
+#include "Camera.h"
+
 class ShaderManager
 {
 public:
@@ -23,6 +25,8 @@ public:
 	void Init();
 	void UseShader(int shaderID);
 	GLuint GetShaderProgram(std::string shader_name);
+	Camera* GetCam();
+	void SetCam(Camera* _cam);
 
 private:
 	ShaderManager() {};
@@ -33,6 +37,7 @@ private:
 	std::vector<std::pair<std::string, GLuint>> shaderPrograms;
 	std::string ReadShaderSource(const std::string& filePath);
 	GLuint CreateShaderProgram(std::string vertexShaderPath, std::string fragmentShaderPath);
+	Camera* cam;
 };
 
 
