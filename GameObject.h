@@ -16,6 +16,9 @@ public:
 	std::string GetName();
 	void Dispose();
 	Transform* transform = new Transform();
+	void AddChildren(GameObject* _child);
+	void RemoveChildren(GameObject* _child);
+	void SetParent(GameObject* _parent);
 
 	template <typename T>
 	void AddComponent() {
@@ -50,5 +53,7 @@ private:
 	size_t id;
 	std::string name;
 	std::vector<IComponent*> components;
+	GameObject* parent = nullptr;
+	std::vector<GameObject*> children;
 };
 

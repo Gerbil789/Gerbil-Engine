@@ -16,6 +16,7 @@ public:
   static const glm::vec4 Black;
   static const glm::vec4 White;
   static const glm::vec4 DarkGreen;
+  static const glm::vec4 Gray;
 };
 
 #endif

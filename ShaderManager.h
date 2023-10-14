@@ -37,7 +37,7 @@ private:
 	std::vector<std::pair<std::string, GLuint>> shaderPrograms;
 	std::string ReadShaderSource(const std::string& filePath);
 	GLuint CreateShaderProgram(std::string vertexShaderPath, std::string fragmentShaderPath);
-	Camera* cam;
+	Camera* cam = 0;
 };
 
 

@@ -103,15 +103,19 @@ void Application::Init()
 
 	Scene scene;
 
+	GameObject* grid = new GameObject("grid");
+	grid->AddComponent<MeshRenderer>(Color::Gray, "grid");
+	scene.Add(grid);
+
 	GameObject* go1 = new GameObject("gopos");
 	go1->AddComponent<MeshRenderer>(Color::Red, "torus");
-	go1->transform->SetScale(glm::vec3(0.2f, 0.2f, 0.2f));
+	go1->transform->SetScale(glm::vec3(1.0f));
 	go1->transform->SetPosition(glm::vec3(-0.5f, 0.0f, -2.0f));
 	scene.Add(go1);
 
 	GameObject* go2 = new GameObject("gorot");
 	go2->AddComponent<MeshRenderer>(Color::Cyan, "torus");
-	go2->transform->SetScale(glm::vec3(0.2f, 0.2f, 0.2f));
+	go2->transform->SetScale(glm::vec3(0.5f));
 	go2->transform->SetPosition(glm::vec3(0.0f, 0.0f, -2.0f));
 	scene.Add(go2);
 
@@ -121,7 +125,8 @@ void Application::Init()
 	go3->transform->SetPosition(glm::vec3(0.5f, 0.0f, -2.0f));
 	scene.Add(go3);
 
-	
+	go1->AddChildren(go2);
+	go2->AddChildren(go3);
 
 	GameObject* player_go = new GameObject("player");
 	player_go->transform->SetPosition(glm::vec3(0.0f, 0.0f, 0.0f));

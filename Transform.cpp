@@ -7,9 +7,18 @@ Transform::Transform(glm::vec3 position, glm::vec3 rotation, glm::vec3 scale)
 	this->scale = scale;
 }
 
+void Transform::SetParentTransform(Transform* _transform)
+{
+	parentTransform = _transform;
+}
+
 glm::mat4 Transform::GetModel() const
 {
 	glm::mat4 model = glm::mat4(1.0f);
+	if (parentTransform != nullptr) {
+		model = parentTransform->GetModel();
+	}
+	
 	model = glm::translate(model, this->position);
 	model *= glm::mat4_cast(this->rotation);
 	model = glm::scale(model, this->scale);

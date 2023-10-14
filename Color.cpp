@@ -10,3 +10,4 @@ const glm::vec4 Color::Cyan = glm::vec4(0.0f, 1.0f, 1.0f, 1.0f);
 const glm::vec4 Color::Black = glm::vec4(0.0f, 0.0f, 0.0f, 1.0f);
 const glm::vec4 Color::White = glm::vec4(1.0f, 1.0f, 1.0f, 1.0f);
 const glm::vec4 Color::DarkGreen = glm::vec4(0.0f, 0.5f, 0.0f, 1.0f);
+const glm::vec4 Color::Gray = glm::vec4(0.4f, 0.4f, 0.4f, 1.0f);
