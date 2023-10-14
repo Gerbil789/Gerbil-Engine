@@ -3,19 +3,19 @@
 MeshRenderer::MeshRenderer(glm::vec4 _color, std::string _model)
 {
 	this->color = _color;
-	this->shaderProgram = ShaderManager::getInstance().GetShaderProgram("ModelShader");
-	this->model = ModelManager::getInstance().GetModel(_model);
+	this->shaderProgram = ShaderManager::GetInstance().GetShaderProgram("ModelShader");
+	this->model = ModelManager::GetInstance().GetModel(_model);
 
 	if (model == nullptr) { std::cerr << "[MeshRemderer] ERROR: could not load model [" << _model << "]\n"; }
 }
 
-void MeshRenderer::Draw()
+void MeshRenderer::Update()
 {
 	//set shader program
-	ShaderManager::getInstance().UseShader(shaderProgram);
+	ShaderManager::GetInstance().UseShader(shaderProgram);
 
 	//set uniforms
-	//transform
+	//transformMatrix
 	GLint idModelTransform = glGetUniformLocation(shaderProgram, "modelMatrix");
 	if (idModelTransform == -1) {
 		std::cout << "ERROR: could not find model transform location\n";
@@ -27,7 +27,7 @@ void MeshRenderer::Draw()
 	if (idView == -1) {
 		std::cout << "ERROR: could not find viewMatrix location\n";
 	}
-	glm::mat4 tmp = ShaderManager::getInstance().GetCam()->CalculateViewMatrix();
+	glm::mat4 tmp = ShaderManager::GetInstance().GetCam()->CalculateViewMatrix();
 	glUniformMatrix4fv(idView, 1, GL_FALSE, glm::value_ptr(tmp));
 
 	//projectionMatrix
@@ -35,7 +35,7 @@ void MeshRenderer::Draw()
 	if (idProjection == -1) {
 		std::cout << "ERROR: could not find projectionMatrix location\n";
 	}
-	tmp = ShaderManager::getInstance().GetCam()->CalculateProjectionMatrix();
+	tmp = ShaderManager::GetInstance().GetCam()->CalculateProjectionMatrix();
 	glUniformMatrix4fv(idProjection, 1, GL_FALSE, glm::value_ptr(tmp));
 
 	//color

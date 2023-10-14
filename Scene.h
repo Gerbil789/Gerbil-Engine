@@ -8,7 +8,7 @@ class Scene
 {
 public:
 	Scene();
-	void Draw();
+	void Update();
 
 	void Dispose();
 

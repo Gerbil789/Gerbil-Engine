@@ -35,14 +35,10 @@ size_t ObjectManager::GetObjectCount()
 	return this->objects.size();
 }
 
-void ObjectManager::DrawObjects()
+void ObjectManager::UpdateObjects()
 {
 	for (const auto& pair : objects) {
-		
-		IRenderer* renderer = pair.second->GetComponent<IRenderer>();
-		if (renderer != nullptr) {
-			renderer->Draw();
-		}
+		pair.second->Update();
 	}
 }
 

@@ -19,8 +19,6 @@
 
 class IRenderer : public IComponent
 {
-public:
-	virtual void Draw() = 0;
 
 };
 

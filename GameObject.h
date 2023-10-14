@@ -11,6 +11,7 @@ class GameObject
 {
 public:
 	GameObject(std::string name);
+	void Update();
 	size_t GetId();
 	void SetId(size_t id);
 	std::string GetName();

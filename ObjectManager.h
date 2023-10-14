@@ -18,7 +18,7 @@ public:
 	void Remove(size_t id);
 
 	size_t GetObjectCount();
-	void DrawObjects();
+	void UpdateObjects();
 
 	GameObject* FindByName(std::string name);
 

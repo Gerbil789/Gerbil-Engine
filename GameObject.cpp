@@ -8,6 +8,13 @@ GameObject::GameObject(std::string name)
 	this->transform = new Transform();
 }
 
+void GameObject::Update()
+{
+	for (IComponent* component : components) {
+		component->Update();
+	}
+}
+
 size_t GameObject::GetId()
 {
 	return this->id;

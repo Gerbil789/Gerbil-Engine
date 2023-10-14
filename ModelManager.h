@@ -7,7 +7,7 @@
 class ModelManager
 {
 public:
-	static ModelManager& getInstance() {
+	static ModelManager& GetInstance() {
 		static ModelManager instance;
 		return instance;
 	}
