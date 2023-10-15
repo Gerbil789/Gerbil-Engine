@@ -62,7 +62,7 @@ void Application::Init()
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
 	glOrtho(-ratio, ratio, -1.f, 1.f, 1.f, -1.f);
-	glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+	//glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 
 	
 
@@ -130,6 +130,9 @@ void Application::Init()
 	glfwSetCursorPosCallback(window, player_go->GetComponent<CameraController>()->cursor_callback);
 	scene.Add(player_go);
 
+	
+	GUI gui(window);
+
 	//main loop
 	while (!glfwWindowShouldClose(window)) {
 
@@ -144,12 +147,17 @@ void Application::Init()
 		go2->transform->RotateBy(1.0f, glm::vec3(0.0f, 1.0f, 0.0f));
 		go3->transform->RotateBy(-0.5f, glm::vec3(1.0f, 1.0f, 1.0f));
 
-
+		
 		scene.Update();
+		gui.Update();
+
 		glfwPollEvents();
 		glfwSwapBuffers(window);
 	}
 
+	
+
+	gui.Dispose();
 	glfwDestroyWindow(window);
 	glfwTerminate();
 	exit(EXIT_SUCCESS);

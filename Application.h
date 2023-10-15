@@ -15,6 +15,8 @@
 #include "../Components/SpriteRenderer.h"
 #include "../Components/MeshRenderer.h"
 #include "../Components/Camera.h"
+#include "../GUI.h"
+
 
 class Application
 {
