@@ -3,37 +3,7 @@
 static void error_callback(int error, const char* description) { fputs(description, stderr); }
 
 
-double lastX = Input::GetMouseX();
-double lastY = Input::GetMouseY();
-double yaw = -90.0f;
-double pitch = 0.0f;
 
-static void cursor_callback(GLFWwindow* window, double x, double y)
-{
-	glm::vec3 direction;
-
-	double xoffset = x - lastX;
-	double yoffset = lastY - y;
-	lastX = x;
-	lastY = y;
-
-	float sensitivity = 0.1f;
-	xoffset *= sensitivity;
-	yoffset *= sensitivity;
-
-	yaw += xoffset;
-	pitch += yoffset;
-
-	if (pitch > 89.0f)
-		pitch = 89.0f;
-	if (pitch < -89.0f)
-		pitch = -89.0f;
-
-	direction.x = cos(glm::radians(yaw)) * cos(glm::radians(pitch));
-	direction.y = sin(glm::radians(pitch));
-	direction.z = sin(glm::radians(yaw)) * cos(glm::radians(pitch));
-	ShaderManager::GetInstance().GetCam()->SetTarget((glm::normalize(direction)));
-}
 
 static void window_size_callback(GLFWwindow* window, int width, int height) {
 	printf("resize %d, %d \n", width, height);
@@ -97,7 +67,7 @@ void Application::Init()
 	glOrtho(-ratio, ratio, -1.f, 1.f, 1.f, -1.f);
 	glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 
-	glfwSetCursorPosCallback(window, cursor_callback);
+	
 
 	glfwSetWindowFocusCallback(window, window_focus_callback);
 
@@ -133,6 +103,7 @@ void Application::Init()
 
 	GameObject* go2 = new GameObject("planet");
 	go2->AddComponent<MeshRenderer>(Color::Green, "sphere");
+	go2->AddComponent<MeshRenderer>(Color::DarkGreen, "torus");
 	go2->transform->SetScale(glm::vec3(0.5f));
 	go2->transform->SetPosition(glm::vec3(3.0f, 0.0f, 0.0f));
 	
@@ -157,12 +128,11 @@ void Application::Init()
 	player_go->GetComponent<Camera>()->SetTarget(glm::vec3(0.0f, 0.0f, -5.0f));
 	player_go->GetComponent<Camera>()->SetAspect(ratio);
 	shaderManager.SetCam(player_go->GetComponent<Camera>());
-	
+	player_go->AddComponent<CameraController>();
+
+	glfwSetCursorPosCallback(window, player_go->GetComponent<CameraController>()->cursor_callback);
 	scene.Add(player_go);
 
-	const float playerSpeed = 2.0f;
-
-	Camera* cam = player_go->GetComponent<Camera>();
 	//main loop
 	while (!glfwWindowShouldClose(window)) {
 
@@ -176,31 +146,6 @@ void Application::Init()
 		sun->transform->RotateBy(0.5f, glm::vec3(0.0f, 1.0f, 0.0f));
 		go2->transform->RotateBy(1.0f, glm::vec3(0.0f, 1.0f, 0.0f));
 		go3->transform->RotateBy(-0.5f, glm::vec3(1.0f, 1.0f, 1.0f));
-
-
-		if (Input::IsKeyDown(GLFW_KEY_W)) {
-			player_go->transform->MoveBy(cam->GetFront() * playerSpeed * (float)Time::deltaTime);
-		}
-
-		if (Input::IsKeyDown(GLFW_KEY_S)) {
-			player_go->transform->MoveBy(-cam->GetFront() * playerSpeed * (float)Time::deltaTime);
-		}
-
-		if (Input::IsKeyDown(GLFW_KEY_A)) {
-			player_go->transform->MoveBy(cam->GetLeft() * playerSpeed * (float)Time::deltaTime);
-		}
-		  
-		if (Input::IsKeyDown(GLFW_KEY_D)) {
-			player_go->transform->MoveBy(-cam->GetLeft() * playerSpeed * (float)Time::deltaTime);
-		}
-
-		if (Input::IsKeyDown(GLFW_KEY_SPACE)) {
-			player_go->transform->MoveBy(glm::vec3(0.0f, 1.0f, 0.0f) * playerSpeed * (float)Time::deltaTime);
-		}
-
-		if (Input::IsKeyDown(GLFW_KEY_LEFT_SHIFT)) {
-			player_go->transform->MoveBy(glm::vec3(0.0f, -1.0f, 0.0f) * playerSpeed * (float)Time::deltaTime);
-		}
 
 
 		scene.Update();

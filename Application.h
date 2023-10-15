@@ -14,6 +14,7 @@
 #include "ModelManager.h"
 #include "Input.h"
 #include "Time.h"
+#include "CameraController.h"
 
 
 class Application
