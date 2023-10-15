@@ -1,7 +1,9 @@
 #pragma once
-#include "Component.h"
+
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
+
+#include "../Components/Component.h"
 
 class Camera : public IComponent
 {

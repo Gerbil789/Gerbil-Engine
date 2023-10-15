@@ -105,7 +105,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>.\lib\glfw-3.3.8.bin.WIN64\glfw-3.3.8.bin.WIN64\include;.\lib\glm-master;.\lib\glew-2.1.0-win32\glew-2.1.0\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.\lib\glfw-3.3.8.bin.WIN64\glfw-3.3.8.bin.WIN64\include;.\lib\glm-master;.\Components;.\lib\glew-2.1.0-win32\glew-2.1.0\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
@@ -133,44 +133,44 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Application.h" />
-    <ClInclude Include="Camera.h" />
-    <ClInclude Include="CameraController.h" />
-    <ClInclude Include="Color.h" />
-    <ClInclude Include="GameObject.h" />
-    <ClInclude Include="Component.h" />
-    <ClInclude Include="Input.h" />
-    <ClInclude Include="MeshRenderer.h" />
+    <ClInclude Include="Components/Camera.h" />
+    <ClInclude Include="Components/CameraController.h" />
+    <ClInclude Include="Utilities/Color.h" />
+    <ClInclude Include="GameObject/GameObject.h" />
+    <ClInclude Include="Components/Component.h" />
+    <ClInclude Include="Utilities/Input.h" />
+    <ClInclude Include="Components/MeshRenderer.h" />
     <ClInclude Include="Model.h" />
-    <ClInclude Include="ModelManager.h" />
-    <ClInclude Include="ObjectManager.h" />
-    <ClInclude Include="Renderer.h" />
+    <ClInclude Include="Managers/ModelManager.h" />
+    <ClInclude Include="Managers/ObjectManager.h" />
+    <ClInclude Include="Components/Renderer.h" />
     <ClInclude Include="Scene.h" />
-    <ClInclude Include="SpriteRenderer.h" />
-    <ClInclude Include="Time.h" />
-    <ClInclude Include="Transform.h" />
-    <ClInclude Include="ShaderManager.h" />
+    <ClInclude Include="Components/SpriteRenderer.h" />
+    <ClInclude Include="Utilities/Time.h" />
+    <ClInclude Include="GameObject/Transform.h" />
+    <ClInclude Include="Managers/ShaderManager.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Application.cpp" />
-    <ClCompile Include="Camera.cpp" />
-    <ClCompile Include="CameraController.cpp" />
-    <ClCompile Include="Color.cpp" />
-    <ClCompile Include="Component.cpp" />
-    <ClCompile Include="GameObject.cpp" />
-    <ClCompile Include="Input.cpp" />
+    <ClCompile Include="Components/Camera.cpp" />
+    <ClCompile Include="Components/CameraController.cpp" />
+    <ClCompile Include="Utilities/Color.cpp" />
+    <ClCompile Include="Components/Component.cpp" />
+    <ClCompile Include="GameObject/GameObject.cpp" />
+    <ClCompile Include="Utilities/Input.cpp" />
     <ClCompile Include="main.cpp">
       <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Users\vojta\OneDrive\Dokumenty\vsb\ZPG\CV_01\ZPG_01\lib\glfw-3.3.8.bin.WIN64\glfw-3.3.8.bin.WIN64\include\GLFW;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
-    <ClCompile Include="MeshRenderer.cpp" />
+    <ClCompile Include="Components/MeshRenderer.cpp" />
     <ClCompile Include="Model.cpp" />
-    <ClCompile Include="ModelManager.cpp" />
-    <ClCompile Include="ObjectManager.cpp" />
-    <ClCompile Include="Renderer.cpp" />
+    <ClCompile Include="Managers/ModelManager.cpp" />
+    <ClCompile Include="Managers/ObjectManager.cpp" />
+    <ClCompile Include="Components/Renderer.cpp" />
     <ClCompile Include="Scene.cpp" />
-    <ClCompile Include="ShaderManager.cpp" />
-    <ClCompile Include="SpriteRenderer.cpp" />
-    <ClCompile Include="Time.cpp" />
-    <ClCompile Include="Transform.cpp" />
+    <ClCompile Include="Managers/ShaderManager.cpp" />
+    <ClCompile Include="Components/SpriteRenderer.cpp" />
+    <ClCompile Include="Utilities/Time.cpp" />
+    <ClCompile Include="GameObject/Transform.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

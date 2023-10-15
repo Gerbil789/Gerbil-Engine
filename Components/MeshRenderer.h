@@ -1,7 +1,7 @@
 #pragma once
-#include "Renderer.h"
-#include "Transform.h"
-#include "GameObject.h"
+
+#include "../Components/Renderer.h"
+#include "../GameObject/GameObject.h"
 
 class MeshRenderer : public IRenderer
 {

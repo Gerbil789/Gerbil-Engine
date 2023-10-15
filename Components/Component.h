@@ -1,9 +1,9 @@
 #pragma once
-#include "Transform.h"
+
+#include "../GameObject/Transform.h"
 
 class GameObject;
 class Transform;
-
 
 class IComponent
 {

@@ -1,11 +1,12 @@
 #pragma once
 
-#include "GameObject.h"
 #include <vector>
 #include <string>
 #include <unordered_map>
 #include <set>
 #include <algorithm>
+
+#include "../GameObject/GameObject.h"
 
 class ObjectManager
 {

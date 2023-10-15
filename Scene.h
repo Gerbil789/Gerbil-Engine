@@ -1,7 +1,7 @@
 #pragma once
 
-#include "ShaderManager.h"
-#include "ObjectManager.h"
+#include "../Managers/ShaderManager.h"
+#include "../Managers/ObjectManager.h"
  
 
 class Scene

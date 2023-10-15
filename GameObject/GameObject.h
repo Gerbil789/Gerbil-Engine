@@ -3,9 +3,8 @@
 #include <string>
 #include <vector>
 
-#include "Component.h"
-#include "Transform.h"
-#include "Renderer.h"
+#include "../GameObject/Transform.h"
+#include "../Components/Component.h"
 
 class GameObject
 {

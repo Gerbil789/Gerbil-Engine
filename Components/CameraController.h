@@ -1,9 +1,9 @@
 #pragma once
-#include "Camera.h"
-#include "ShaderManager.h"
-#include "Component.h"
-#include "Input.h"
-#include "Time.h"
+
+#include "../Managers/ShaderManager.h"
+#include "../Components/Camera.h"
+#include "../Utilities/Input.h"
+#include "../Utilities/Time.h"
 
 class CameraController : public IComponent
 {

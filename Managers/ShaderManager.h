@@ -12,7 +12,7 @@
 #include <fstream>
 #include <string>
 
-#include "Camera.h"
+#include "../Components/Camera.h"
 
 class ShaderManager
 {
