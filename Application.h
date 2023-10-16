@@ -22,6 +22,11 @@ class Application
 {
 public:
 	void Init();
+	void Run();
+private:
+	GLFWwindow* window;
+	int width, height;
+	float ratio;
 	
 
 };

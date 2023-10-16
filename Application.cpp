@@ -14,7 +14,6 @@ static void window_iconify_callback(GLFWwindow* window, int iconified) { printf(
 
 void Application::Init()
 {
-	GLFWwindow* window;
 	glfwSetErrorCallback(error_callback);
 
 	if (!glfwInit()) {
@@ -53,18 +52,15 @@ void Application::Init()
 	glfwGetVersion(&major, &minor, &revision);
 	printf("Using GLFW %i.%i.%i\n", major, minor, revision);
 
-	int width, height;
 	glfwGetFramebufferSize(window, &width, &height);
-	float ratio = width / (float)height;
+	ratio = width / (float)height;
 	glViewport(0, 0, width, height);
 	
 
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
 	glOrtho(-ratio, ratio, -1.f, 1.f, 1.f, -1.f);
-	//glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
-
-	
+	glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 
 	glfwSetWindowFocusCallback(window, window_focus_callback);
 
@@ -72,13 +68,13 @@ void Application::Init()
 
 	glfwSetWindowSizeCallback(window, window_size_callback);
 
-	ShaderManager& shaderManager = ShaderManager::GetInstance();
-	shaderManager.Init();
+	ShaderManager::GetInstance().Init();
 	
+	ModelManager::GetInstance().Init();
+}
 
-	ModelManager& modelManager = ModelManager::GetInstance();
-	modelManager.Init();
-
+void Application::Run()
+{
 	Scene scene;
 
 	GameObject* grid = new GameObject("grid");
@@ -103,7 +99,7 @@ void Application::Init()
 	go2->AddComponent<MeshRenderer>(Color::DarkGreen, "torus");
 	go2->transform->SetScale(glm::vec3(0.5f));
 	go2->transform->SetPosition(glm::vec3(3.0f, 0.0f, 0.0f));
-	
+
 
 	GameObject* go3 = new GameObject("planet");
 	go3->AddComponent<MeshRenderer>(Color::Cyan, "cylinder");
@@ -124,13 +120,13 @@ void Application::Init()
 	player_go->AddComponent<Camera>();
 	player_go->GetComponent<Camera>()->SetTarget(glm::vec3(0.0f, 0.0f, -5.0f));
 	player_go->GetComponent<Camera>()->SetAspect(ratio);
-	shaderManager.SetCam(player_go->GetComponent<Camera>());
+	ShaderManager::GetInstance().SetCam(player_go->GetComponent<Camera>());
 	player_go->AddComponent<CameraController>();
 
 	glfwSetCursorPosCallback(window, player_go->GetComponent<CameraController>()->cursor_callback);
 	scene.Add(player_go);
 
-	
+
 	GUI gui(window);
 
 	//main loop
@@ -147,7 +143,7 @@ void Application::Init()
 		go2->transform->RotateBy(1.0f, glm::vec3(0.0f, 1.0f, 0.0f));
 		go3->transform->RotateBy(-0.5f, glm::vec3(1.0f, 1.0f, 1.0f));
 
-		
+
 		scene.Update();
 		gui.Update();
 
@@ -155,7 +151,7 @@ void Application::Init()
 		glfwSwapBuffers(window);
 	}
 
-	
+
 
 	gui.Dispose();
 	glfwDestroyWindow(window);
