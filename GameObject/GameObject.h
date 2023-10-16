@@ -19,6 +19,8 @@ public:
 	void AddChildren(GameObject* _child);
 	void RemoveChildren(GameObject* _child);
 	void SetParent(GameObject* _parent);
+	GameObject* GetParent();
+	std::vector<GameObject*> GetChildren();
 
 	template <typename T>
 	void AddComponent() {

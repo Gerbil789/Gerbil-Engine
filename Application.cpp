@@ -75,60 +75,46 @@ void Application::Init()
 
 void Application::Run()
 {
-	Scene scene;
-
 	GameObject* grid = new GameObject("grid");
 	grid->AddComponent<MeshRenderer>(Color::Gray, "grid");
-	scene.Add(grid);
-
-	GameObject* cone = new GameObject("center");
-	cone->AddComponent<MeshRenderer>(Color::White, "cone");
-	cone->transform->SetScale(glm::vec3(0.2f));
-	scene.Add(cone);
-
-	GameObject* center = new GameObject("center");
-	scene.Add(center);
-
 
 	GameObject* sun = new GameObject("sun");
 	sun->AddComponent<MeshRenderer>(Color::Yellow, "sphere");
-	sun->transform->SetPosition(glm::vec3(4.0f, 0.0f, 0.0f));
+	sun->transform->SetPosition(glm::vec3(0.0f, 0.0f, 0.0f));
 
-	GameObject* go2 = new GameObject("planet");
-	go2->AddComponent<MeshRenderer>(Color::Green, "sphere");
-	go2->AddComponent<MeshRenderer>(Color::DarkGreen, "torus");
-	go2->transform->SetScale(glm::vec3(0.5f));
-	go2->transform->SetPosition(glm::vec3(3.0f, 0.0f, 0.0f));
+	GameObject* planet = new GameObject("planet");
+	planet->AddComponent<MeshRenderer>(Color::Green, "sphere");
+	planet->transform->SetScale(glm::vec3(0.5f));
+	planet->transform->SetPosition(glm::vec3(3.0f, 0.0f, 0.0f));
 
+	GameObject* moon = new GameObject("moon");
+	moon->AddComponent<MeshRenderer>(Color::Gray, "sphere");
+	moon->transform->SetScale(glm::vec3(0.5f));
+	moon->transform->SetPosition(glm::vec3(2.0f, 0.0f, 0.0f));
 
-	GameObject* go3 = new GameObject("planet");
-	go3->AddComponent<MeshRenderer>(Color::Cyan, "cylinder");
-	go3->transform->SetScale(glm::vec3(0.5f, 4.0f, 0.5f));
-	go3->transform->SetPosition(glm::vec3(2.0f, 0.0f, 0.0f));
-
-
-	scene.Add(go3);
-	scene.Add(go2);
-	scene.Add(sun);
-
-	center->AddChildren(sun);
-	sun->AddChildren(go2);
-	go2->AddChildren(go3);
+	sun->AddChildren(planet);
+	planet->AddChildren(moon);
 
 	GameObject* player_go = new GameObject("player");
-	player_go->transform->SetPosition(glm::vec3(0.0f, 0.0f, 0.0f));
+	player_go->transform->SetPosition(glm::vec3(0.0f, 0.0f, 5.0f));
 	player_go->AddComponent<Camera>();
 	player_go->GetComponent<Camera>()->SetTarget(glm::vec3(0.0f, 0.0f, -5.0f));
 	player_go->GetComponent<Camera>()->SetAspect(ratio);
 	ShaderManager::GetInstance().SetCam(player_go->GetComponent<Camera>());
 	player_go->AddComponent<CameraController>();
-
 	glfwSetCursorPosCallback(window, player_go->GetComponent<CameraController>()->cursor_callback);
-	scene.Add(player_go);
+	
 
+	Scene* scene = new Scene();
+	scene->Add(grid);
+	scene->Add(moon);
+	scene->Add(planet);
+	scene->Add(sun);
+	scene->Add(player_go);
 
-	GUI gui(window);
+	GUI gui(window, scene);
 
+	bool showCursor = false;
 	//main loop
 	while (!glfwWindowShouldClose(window)) {
 
@@ -136,18 +122,29 @@ void Application::Run()
 			glfwSetWindowShouldClose(window, GL_TRUE);
 		}
 
+		if (Input::IsKeyDown(GLFW_KEY_TAB)) {
+			showCursor = !showCursor;
+			if (showCursor) {
+				glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
+			}
+			else {
+				glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+			}
+			
+			
+		}
+
 		Time::Update();
 
-		center->transform->RotateBy(0.4f, glm::vec3(0.0f, 1.0f, 0.0f));
-		sun->transform->RotateBy(0.5f, glm::vec3(0.0f, 1.0f, 0.0f));
-		go2->transform->RotateBy(1.0f, glm::vec3(0.0f, 1.0f, 0.0f));
-		go3->transform->RotateBy(-0.5f, glm::vec3(1.0f, 1.0f, 1.0f));
+		sun->transform->RotateBy(100.0f * Time::deltaTime, glm::vec3(0.0f, 1.0f, 0.0f));
+		planet->transform->RotateBy(-450.0f * Time::deltaTime, glm::vec3(0.0f, 1.0f, 0.0f));
+		moon->transform->RotateBy(-0.5f * Time::deltaTime, glm::vec3(1.0f, 1.0f, 0.0f));
 
-
-		scene.Update();
-		gui.Update();
+		scene->Update();
+		
 
 		glfwPollEvents();
+		gui.Update();
 		glfwSwapBuffers(window);
 	}
 

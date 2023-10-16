@@ -4,14 +4,17 @@
 #include "../imgui/imgui_impl_glfw.h"
 #include "../imgui/imgui_impl_opengl3.h"
 
+#include "../Scene.h"
+
 
 class GUI
 {
 public:
-	GUI(GLFWwindow* _window);
+	GUI(GLFWwindow* _window, Scene* _scene);
 	void Dispose();
 	void Update();
 private:
-	void ShowHierarchy(int n);
+	void ShowHierarchy();
+	Scene* scene;
 };
 

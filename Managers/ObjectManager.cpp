@@ -5,28 +5,14 @@ size_t ObjectManager::objectId = 0;
 
 ObjectManager::ObjectManager()
 {
-	//this->objects.resize(100);
-	//std::fill(this->objects.begin(), this->objects.end(), nullptr);
+
 }
 
-GameObject* ObjectManager::Get(size_t id)
-{
-	auto obj = objects.find(id);
-	if (obj != objects.end()) 
-	{
-		GameObject* foundObject = obj->second;
-		return foundObject;
-	}
-	else 
-	{
-		return nullptr;
-	}
-}
-void ObjectManager::Add(GameObject* object)
+void ObjectManager::Add(GameObject* _object)
 {
 	size_t id = ObjectManager::objectId++;
-	object->SetId(id);
-	this->objects.emplace(id, object);
+	_object->SetId(id);
+	objects.push_back(_object);
 }
 
 
@@ -35,46 +21,44 @@ size_t ObjectManager::GetObjectCount()
 	return this->objects.size();
 }
 
+std::vector<GameObject*> ObjectManager::GetObjects()
+{
+	return objects;
+}
+
 void ObjectManager::UpdateObjects()
 {
-	for (const auto& pair : objects) {
-		pair.second->Update();
+	for (GameObject* ptr : objects) {
+		ptr->Update();
 	}
 }
 
-
-
-
-//WARNING: this find only one objects, even if there are multiple objects with same name
-GameObject* ObjectManager::FindByName(std::string name)
+GameObject* ObjectManager::FindByName(std::string _name)
 {
-	for (const auto& pair : objects) {
-		if (pair.second->GetName() == name) {
-			GameObject* foundObject = pair.second;
-			return foundObject;
+	for (GameObject* ptr : objects) {
+		if (ptr->GetName() == _name) {
+			return ptr;
 		}
 	}
 	return nullptr;
 }
 
-
 void ObjectManager::Dispose()
 {
-	for (const auto& pair : objects) {
-		GameObject* object = pair.second;
-
-		if (object != nullptr) {
-			object->Dispose();
-			delete object;
-		}
+	for (GameObject* ptr : objects) {
+		ptr->Dispose();
+		delete ptr;
 	}
 }
 
-void ObjectManager::Remove(size_t id)
+void ObjectManager::Remove(GameObject* _object)
 {
-	GameObject* object = this->objects[id];
-
-	this->objects.erase(id);
-	object->Dispose();
-	delete object;
+	objects.erase(
+		std::remove_if(
+			objects.begin(),
+			objects.end(),
+			[_object](GameObject* ptr) { return ptr == _object; }
+		),
+		objects.end()
+	);
 }

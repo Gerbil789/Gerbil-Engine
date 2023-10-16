@@ -58,3 +58,13 @@ void GameObject::SetParent(GameObject* _parent)
 	}
 	parent = _parent;
 }
+
+GameObject* GameObject::GetParent()
+{
+	return parent;
+}
+
+std::vector<GameObject*> GameObject::GetChildren()
+{
+	return children;
+}

@@ -1,7 +1,8 @@
 #include "GUI.h"
 
-GUI::GUI(GLFWwindow* _window)
+GUI::GUI(GLFWwindow* _window, Scene* _scene)
 {
+	scene = _scene;
 	// Setup Dear ImGui context
 	IMGUI_CHECKVERSION();
 	ImGui::CreateContext();
@@ -11,7 +12,6 @@ GUI::GUI(GLFWwindow* _window)
 
 	// Setup Dear ImGui style
 	ImGui::StyleColorsDark();
-	//ImGui::StyleColorsLight();
 
 	// Setup Platform/Renderer backends
 	ImGui_ImplGlfw_InitForOpenGL(_window, true);
@@ -29,8 +29,7 @@ void GUI::Update()
 	ImGui::SetNextWindowSize(ImVec2(200, 400), ImGuiCond_Always);
 	ImGui::Begin("Hiearchy");
 
-	ImGui::Text("This is some useful text.");
-	ShowHierarchy(6);
+	ShowHierarchy();
 
 	ImGui::End();
 
@@ -39,22 +38,30 @@ void GUI::Update()
 	ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 }
 
-void GUI::ShowHierarchy(int n)
-{
-	if (n == 0) {
+void ShowObject(GameObject* _object) {
+	if (_object == nullptr) {
 		return;
 	}
 
-	// Display a TreeNode for the current level
-	bool nodeIsOpen = ImGui::TreeNode("TEST");
+	bool nodeOpen = ImGui::TreeNode(_object->GetName().c_str());
 
-	if (nodeIsOpen) {
-		// You can add content specific to this hierarchy level here.
-
-		// Recursively call ShowHierarchy with n-1 for children
-		ShowHierarchy(n - 1);
+	if (nodeOpen) {
+		for (GameObject* ptr : _object->GetChildren()) {
+			ShowObject(ptr);
+		}
 
 		ImGui::TreePop();
+	}
+}
+
+void GUI::ShowHierarchy()
+{
+	std::vector<GameObject*> objects = scene->GetObjectManager().GetObjects();
+
+	for (GameObject* ptr : objects) {
+		if (ptr->GetParent() == nullptr) {
+			ShowObject(ptr);
+		}
 	}
 }
 
