@@ -40,8 +40,8 @@ Model::Model(std::string path) {
 	glEnableVertexAttribArray(0);
  	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, sizeof(glm::vec3), (GLvoid*)(3 * sizeof(float)));
 	glEnableVertexAttribArray(1);
-	//glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, sizeof(glm::vec2), (GLvoid*)(6 * sizeof(float)));
-	//glEnableVertexAttribArray(2);
+	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, sizeof(glm::vec2), (GLvoid*)(6 * sizeof(float)));
+	glEnableVertexAttribArray(2);
 
 	// Unbind VBO and VAO
 	glBindBuffer(GL_ARRAY_BUFFER, 0);

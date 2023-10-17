@@ -46,11 +46,18 @@ void MeshRenderer::Update()
 	}
 	glUniformMatrix3fv(idNormal, 1, GL_FALSE, glm::value_ptr(glm::mat3(1.0f)));
 
+	//lightPos
+	GLint idLight = glGetUniformLocation(shaderProgram, "lightPosition");
+	if (idLight == -1) {
+		std::cout << "ERROR: could not find lightPosition location\n";
+	}
+	glUniform3fv(idLight, 1, glm::value_ptr(glm::vec3(0.0f, 0.0f, 0.0f)));
+
 
 	//color
 	GLint idColor = glGetUniformLocation(shaderProgram, "color");
 	if (idColor == -1) {
-		std::cerr << "Uniform not found in shader." << std::endl;
+		std::cerr << "Uniform color not found in shader." << std::endl;
 	}
 	glUniform4fv(idColor, 1, glm::value_ptr(color));
 

@@ -76,12 +76,12 @@ void Application::Init()
 
 void Application::Run()
 {
-	GameObject* grid = new GameObject("grid");
-	grid->AddComponent<MeshRenderer>(Color::Gray, "grid");
+	//GameObject* grid = new GameObject("grid");
+	//grid->AddComponent<MeshRenderer>(Color::Gray, "grid");
 
 	GameObject* sun = new GameObject("sun");
 	sun->AddComponent<MeshRenderer>(Color::Yellow, "sphere");
-	sun->transform->SetPosition(glm::vec3(0.0f, 0.0f, 0.0f));
+	sun->transform->SetPosition(glm::vec3(0.0f, 0.0f, -10.0f));
 
 	GameObject* planet = new GameObject("planet");
 	planet->AddComponent<MeshRenderer>(Color::Green, "sphere");
@@ -104,14 +104,38 @@ void Application::Run()
 	ShaderManager::GetInstance().SetCam(player_go->GetComponent<Camera>());
 	player_go->AddComponent<CameraController>();
 	glfwSetCursorPosCallback(window, player_go->GetComponent<CameraController>()->cursor_callback);
-	
+
+
+	GameObject* sphere1 = new GameObject("sphere1");
+	sphere1->AddComponent<MeshRenderer>(Color::Red, "sphere");
+	sphere1->transform->SetPosition(glm::vec3(2.0f, 0.0f, 0.0f));
+
+	GameObject* sphere2 = new GameObject("sphere2");
+	sphere2->AddComponent<MeshRenderer>(Color::Green, "sphere");
+	sphere2->transform->SetPosition(glm::vec3(-2.0f, 0.0f, 0.0f));
+
+	GameObject* sphere3 = new GameObject("sphere3");
+	sphere3->AddComponent<MeshRenderer>(Color::Blue, "sphere");
+	sphere3->transform->SetPosition(glm::vec3(0.0f, 2.0f, 0.0f));
+
+	GameObject* sphere4 = new GameObject("sphere4");
+	sphere4->AddComponent<MeshRenderer>(Color::Cyan, "sphere");
+	sphere4->transform->SetPosition(glm::vec3(0.0f, -2.0f, 0.0f));
+
+
+
 
 	Scene* scene = new Scene();
-	scene->Add(grid);
+	//scene->Add(grid);
 	scene->Add(moon);
 	scene->Add(planet);
 	scene->Add(sun);
 	scene->Add(player_go);
+
+	scene->Add(sphere1);
+	scene->Add(sphere2);
+	scene->Add(sphere3);
+	scene->Add(sphere4);
 
 	GUI gui(window, scene);
 
@@ -123,7 +147,7 @@ void Application::Run()
 			glfwSetWindowShouldClose(window, GL_TRUE);
 		}
 
-		if (Input::IsKeyDown(GLFW_KEY_TAB)) {
+		if (Input::IsKeyDown(GLFW_KEY_C)) {
 			showCursor = !showCursor;
 			if (showCursor) {
 				glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
@@ -140,6 +164,11 @@ void Application::Run()
 		sun->transform->RotateBy(100.0f * Time::deltaTime, glm::vec3(0.0f, 1.0f, 0.0f));
 		planet->transform->RotateBy(-450.0f * Time::deltaTime, glm::vec3(0.0f, 1.0f, 0.0f));
 		moon->transform->RotateBy(-0.5f * Time::deltaTime, glm::vec3(1.0f, 1.0f, 0.0f));
+
+		sphere1->transform->RotateBy(-50.0f * Time::deltaTime, glm::vec3(0.0f, 1.0f, 0.0f));
+		sphere2->transform->RotateBy(50.0f * Time::deltaTime, glm::vec3(0.0f, 1.0f, 0.0f));
+		sphere3->transform->RotateBy(-50.0f * Time::deltaTime, glm::vec3(1.0f, 0.0f, 0.0f));
+		sphere4->transform->RotateBy(50.0f * Time::deltaTime, glm::vec3(1.0f, 0.0f, 0.0f));
 
 		scene->Update();
 		
