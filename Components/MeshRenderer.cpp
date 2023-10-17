@@ -38,6 +38,15 @@ void MeshRenderer::Update()
 	tmp = ShaderManager::GetInstance().GetCam()->CalculateProjectionMatrix();
 	glUniformMatrix4fv(idProjection, 1, GL_FALSE, glm::value_ptr(tmp));
 
+
+	//normalMatrix
+	GLint idNormal = glGetUniformLocation(shaderProgram, "normalMatrix");
+	if (idNormal == -1) {
+		std::cout << "ERROR: could not find normalMatrix location\n";
+	}
+	glUniformMatrix3fv(idNormal, 1, GL_FALSE, glm::value_ptr(glm::mat3(1.0f)));
+
+
 	//color
 	GLint idColor = glGetUniformLocation(shaderProgram, "color");
 	if (idColor == -1) {

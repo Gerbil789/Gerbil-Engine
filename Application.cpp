@@ -61,6 +61,7 @@ void Application::Init()
 	glLoadIdentity();
 	glOrtho(-ratio, ratio, -1.f, 1.f, 1.f, -1.f);
 	glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+	glEnable(GL_DEPTH_TEST);
 
 	glfwSetWindowFocusCallback(window, window_focus_callback);
 
