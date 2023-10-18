@@ -107,20 +107,24 @@ void Application::Run()
 
 
 	GameObject* sphere1 = new GameObject("sphere1");
-	sphere1->AddComponent<MeshRenderer>(Color::Red, "monkey");
+	sphere1->AddComponent<MeshRenderer>(Color::Red, "rat");
 	sphere1->transform->SetPosition(glm::vec3(2.0f, 0.0f, 0.0f));
+	sphere1->transform->SetScale(glm::vec3(0.5f));
 
 	GameObject* sphere2 = new GameObject("sphere2");
-	sphere2->AddComponent<MeshRenderer>(Color::Green, "monkey_flat");
+	sphere2->AddComponent<MeshRenderer>(Color::Green, "rat");
 	sphere2->transform->SetPosition(glm::vec3(-2.0f, 0.0f, 0.0f));
+	sphere2->transform->SetScale(glm::vec3(0.5f));
 
 	GameObject* sphere3 = new GameObject("sphere3");
-	sphere3->AddComponent<MeshRenderer>(Color::Blue, "cone");
+	sphere3->AddComponent<MeshRenderer>(Color::Blue, "rat");
 	sphere3->transform->SetPosition(glm::vec3(0.0f, 2.0f, 0.0f));
+	sphere3->transform->SetScale(glm::vec3(0.5f));
 
 	GameObject* sphere4 = new GameObject("sphere4");
-	sphere4->AddComponent<MeshRenderer>(Color::Cyan, "sphere");
+	sphere4->AddComponent<MeshRenderer>(Color::Cyan, "rat");
 	sphere4->transform->SetPosition(glm::vec3(0.0f, -2.0f, 0.0f));
+	sphere4->transform->SetScale(glm::vec3(0.5f));
 
 	GameObject* pointLight = new GameObject("point light");
 	pointLight->AddComponent<PointLight>();
