@@ -76,8 +76,8 @@ void Application::Init()
 
 void Application::Run()
 {
-	//GameObject* grid = new GameObject("grid");
-	//grid->AddComponent<MeshRenderer>(Color::Gray, "grid");
+	GameObject* grid = new GameObject("grid");
+	grid->AddComponent<MeshRenderer>(Color::Gray, "grid");
 
 	GameObject* sun = new GameObject("sun");
 	sun->AddComponent<MeshRenderer>(Color::Yellow, "sphere");
@@ -107,20 +107,23 @@ void Application::Run()
 
 
 	GameObject* sphere1 = new GameObject("sphere1");
-	sphere1->AddComponent<MeshRenderer>(Color::Red, "sphere");
+	sphere1->AddComponent<MeshRenderer>(Color::Red, "monkey");
 	sphere1->transform->SetPosition(glm::vec3(2.0f, 0.0f, 0.0f));
 
 	GameObject* sphere2 = new GameObject("sphere2");
-	sphere2->AddComponent<MeshRenderer>(Color::Green, "sphere");
+	sphere2->AddComponent<MeshRenderer>(Color::Green, "monkey_flat");
 	sphere2->transform->SetPosition(glm::vec3(-2.0f, 0.0f, 0.0f));
 
 	GameObject* sphere3 = new GameObject("sphere3");
-	sphere3->AddComponent<MeshRenderer>(Color::Blue, "sphere");
+	sphere3->AddComponent<MeshRenderer>(Color::Blue, "cone");
 	sphere3->transform->SetPosition(glm::vec3(0.0f, 2.0f, 0.0f));
 
 	GameObject* sphere4 = new GameObject("sphere4");
 	sphere4->AddComponent<MeshRenderer>(Color::Cyan, "sphere");
 	sphere4->transform->SetPosition(glm::vec3(0.0f, -2.0f, 0.0f));
+
+	GameObject* pointLight = new GameObject("point light");
+	pointLight->AddComponent<PointLight>();
 
 
 
@@ -136,6 +139,8 @@ void Application::Run()
 	scene->Add(sphere2);
 	scene->Add(sphere3);
 	scene->Add(sphere4);
+
+	scene->Add(pointLight);
 
 	GUI gui(window, scene);
 

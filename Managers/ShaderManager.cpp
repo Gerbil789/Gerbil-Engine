@@ -68,8 +68,11 @@ void ShaderManager::Init()
 		return;
 	}
 	GLuint shaderProgram;
-	shaderProgram = CreateShaderProgram("Shaders/model_vertex.glsl", "Shaders/model_fragment.glsl");
-	shaderPrograms.push_back(std::make_pair("ModelShader", shaderProgram));
+	shaderProgram = CreateShaderProgram("Shaders/lambert_vert.glsl", "Shaders/lambert_frag.glsl");
+	shaderPrograms.push_back(std::make_pair("lambert", shaderProgram));
+
+	shaderProgram = CreateShaderProgram("Shaders/constant_vert.glsl", "Shaders/constant_frag.glsl");
+	shaderPrograms.push_back(std::make_pair("constant", shaderProgram));
 
 	initialized = true;
 }

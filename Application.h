@@ -16,6 +16,7 @@
 #include "../Components/MeshRenderer.h"
 #include "../Components/Camera.h"
 #include "../GUI.h"
+#include "../Components/PointLight.h"
 
 
 class Application

@@ -12,7 +12,7 @@ struct VertexData {
 };
 
 out VertexData vertexData;
-
+out mat4 model;
 
 uniform mat4 modelMatrix;
 uniform mat4 viewMatrix;
@@ -28,6 +28,7 @@ void main()
 	vertexData.texCoords = texCoords;
     vertexData.color = color;
 
+	model = modelMatrix;
 	gl_Position = projectionMatrix * viewMatrix * modelMatrix * vec4(position, 1.0f);
 }
 

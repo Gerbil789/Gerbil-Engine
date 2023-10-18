@@ -3,7 +3,7 @@
 MeshRenderer::MeshRenderer(glm::vec4 _color, std::string _model)
 {
 	this->color = _color;
-	this->shaderProgram = ShaderManager::GetInstance().GetShaderProgram("ModelShader");
+	this->shaderProgram = ShaderManager::GetInstance().GetShaderProgram("lambert");
 	this->model = ModelManager::GetInstance().GetModel(_model);
 
 	if (model == nullptr) { std::cerr << "[MeshRemderer] ERROR: could not load model [" << _model << "]\n"; }
