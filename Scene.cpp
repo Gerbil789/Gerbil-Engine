@@ -31,3 +31,17 @@ ObjectManager& Scene::GetObjectManager()
 {
 	return this->objectManager;
 }
+
+void Scene::SetActiveCamera(Camera* _cam)
+{
+	activeCam = _cam;
+	ShaderManager::GetInstance().SetCamForShaders(activeCam);
+}
+
+Camera* Scene::GetActiveCamera()
+{
+	if (activeCam == nullptr) {
+		std::cerr << "ERROR: No active camera found.\n";
+	}
+	return activeCam;
+}

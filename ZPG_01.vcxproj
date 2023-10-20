@@ -146,6 +146,9 @@
     <ClInclude Include="imgui\imstb_textedit.h" />
     <ClInclude Include="imgui\imstb_truetype.h" />
     <ClInclude Include="Components/PointLight.h" />
+    <ClInclude Include="Observer.h" />
+    <ClInclude Include="SceneManager.h" />
+    <ClInclude Include="Shader.h" />
     <ClInclude Include="Utilities/Color.h" />
     <ClInclude Include="GameObject/GameObject.h" />
     <ClInclude Include="Components/Component.h" />
@@ -174,6 +177,9 @@
     <ClCompile Include="imgui\imgui_tables.cpp" />
     <ClCompile Include="imgui\imgui_widgets.cpp" />
     <ClCompile Include="Components/PointLight.cpp" />
+    <ClCompile Include="Observer.cpp" />
+    <ClCompile Include="SceneManager.cpp" />
+    <ClCompile Include="Shader.cpp" />
     <ClCompile Include="Utilities/Color.cpp" />
     <ClCompile Include="Components/Component.cpp" />
     <ClCompile Include="GameObject/GameObject.cpp" />

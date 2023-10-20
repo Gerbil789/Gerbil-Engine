@@ -27,7 +27,7 @@ void ShaderManager::CheckProgramLinking(GLuint program) {
 	}
 }
 
-GLuint ShaderManager::CreateShaderProgram(std::string vertexShaderPath, std::string fragmentShaderPath)
+Shader* ShaderManager::CreateShader(std::string _name, std::string vertexShaderPath, std::string fragmentShaderPath)
 {
 	std::string vertex_shader_str = ReadShaderSource(vertexShaderPath);
 	std::string fragment_shader_str = ReadShaderSource(fragmentShaderPath);
@@ -57,9 +57,9 @@ GLuint ShaderManager::CreateShaderProgram(std::string vertexShaderPath, std::str
 	glDeleteShader(vertexShader);
 	glDeleteShader(fragmentShader);
 
-	return shaderProgram;
+	Shader* shader = new Shader(shaderProgram, _name);
+	return shader;
 }
-
 
 void ShaderManager::Init()
 {
@@ -67,51 +67,36 @@ void ShaderManager::Init()
 		std::cerr << "ShaderLib is already initialized." << std::endl;
 		return;
 	}
-	GLuint shaderProgram;
-	shaderProgram = CreateShaderProgram("Shaders/lambert_vert.glsl", "Shaders/lambert_frag.glsl");
-	shaderPrograms.push_back(std::make_pair("lambert", shaderProgram));
 
-	shaderProgram = CreateShaderProgram("Shaders/constant_vert.glsl", "Shaders/constant_frag.glsl");
-	shaderPrograms.push_back(std::make_pair("constant", shaderProgram));
+	Shader* constantShader = CreateShader("constant", "Shaders/constant_vert.glsl", "Shaders/constant_frag.glsl");
+	shaderPrograms.push_back(constantShader);
 
+	Shader* lambertShader = CreateShader("lambert", "Shaders/lambert_vert.glsl", "Shaders/lambert_frag.glsl");
+	lambertShader->SetFlag(Shader::NORMAL);
+	shaderPrograms.push_back(lambertShader);
+
+
+	
 	initialized = true;
 }
 
-void ShaderManager::UseShader(int shaderID)
+
+Shader* ShaderManager::GetShaderProgram(std::string shader_name)
 {
-	if (!initialized) {
-		std::cerr << "ShaderLib is not initialized. Call init() first." << std::endl;
-		return;
-	}
-
-	if (shaderID == currentShader) {
-		return;
-	}
-
-	glUseProgram(shaderID);
-
-	currentShader = shaderID;
-}
-
-GLuint ShaderManager::GetShaderProgram(std::string shader_name)
-{
-	for (const auto& pair : shaderPrograms) {
-		if (pair.first == shader_name) {
-			return pair.second;
+	for (Shader* shader : shaderPrograms) {
+		if (shader->name == shader_name) {
+			return shader;
 		}
 	}
 	std::cout << "Shader [" << shader_name << "] does not exist\n";
 	return 0;
 }
 
-Camera* ShaderManager::GetCam()
+void ShaderManager::SetCamForShaders(Camera* _cam)
 {
-	return cam;
-}
-
-void ShaderManager::SetCam(Camera* _cam)
-{
-	cam = _cam;
+	for (Shader* shader : shaderPrograms) {
+		shader->SetCamSubject(_cam);
+	}
 }
 
 

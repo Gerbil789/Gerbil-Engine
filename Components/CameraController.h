@@ -4,11 +4,12 @@
 #include "../Components/Camera.h"
 #include "../Utilities/Input.h"
 #include "../Utilities/Time.h"
+#include "../SceneManager.h"
 
 class CameraController : public IComponent
 {
 public:
-	CameraController();
+	CameraController(Camera* _cam);
 	void Update() override;
 	static void cursor_callback(GLFWwindow* window, double x, double y);
 	float playerSpeed = 2.0f;

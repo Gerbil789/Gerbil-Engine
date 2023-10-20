@@ -17,6 +17,7 @@
 #include "../Components/Camera.h"
 #include "../GUI.h"
 #include "../Components/PointLight.h"
+#include "SceneManager.h"
 
 
 class Application

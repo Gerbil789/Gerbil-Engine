@@ -4,7 +4,7 @@ static void error_callback(int error, const char* description) { fputs(descripti
 
 static void window_size_callback(GLFWwindow* window, int width, int height) {
 	printf("resize %d, %d \n", width, height);
-	ShaderManager::GetInstance().GetCam()->SetAspect((float)width / height);
+	//ShaderManager::GetInstance().GetCam()->SetAspect((float)width / height);
 	glViewport(0, 0, width, height);
 }
 
@@ -99,30 +99,29 @@ void Application::Run()
 	GameObject* player_go = new GameObject("player");
 	player_go->transform->SetPosition(glm::vec3(0.0f, 0.0f, 5.0f));
 	player_go->AddComponent<Camera>();
-	player_go->GetComponent<Camera>()->SetTarget(glm::vec3(0.0f, 0.0f, -5.0f));
+	//player_go->GetComponent<Camera>()->SetTarget(glm::vec3(0.0f, 0.0f, -5.0f));
 	player_go->GetComponent<Camera>()->SetAspect(ratio);
-	ShaderManager::GetInstance().SetCam(player_go->GetComponent<Camera>());
-	player_go->AddComponent<CameraController>();
+	player_go->AddComponent<CameraController>(player_go->GetComponent<Camera>());
 	glfwSetCursorPosCallback(window, player_go->GetComponent<CameraController>()->cursor_callback);
 
 
 	GameObject* sphere1 = new GameObject("sphere1");
-	sphere1->AddComponent<MeshRenderer>(Color::Red, "rat");
+	sphere1->AddComponent<MeshRenderer>(Color::Red, "sphere");
 	sphere1->transform->SetPosition(glm::vec3(2.0f, 0.0f, 0.0f));
 	sphere1->transform->SetScale(glm::vec3(0.5f));
 
 	GameObject* sphere2 = new GameObject("sphere2");
-	sphere2->AddComponent<MeshRenderer>(Color::Green, "rat");
+	sphere2->AddComponent<MeshRenderer>(Color::Green, "sphere");
 	sphere2->transform->SetPosition(glm::vec3(-2.0f, 0.0f, 0.0f));
 	sphere2->transform->SetScale(glm::vec3(0.5f));
 
 	GameObject* sphere3 = new GameObject("sphere3");
-	sphere3->AddComponent<MeshRenderer>(Color::Blue, "rat");
+	sphere3->AddComponent<MeshRenderer>(Color::Blue, "sphere");
 	sphere3->transform->SetPosition(glm::vec3(0.0f, 2.0f, 0.0f));
 	sphere3->transform->SetScale(glm::vec3(0.5f));
 
 	GameObject* sphere4 = new GameObject("sphere4");
-	sphere4->AddComponent<MeshRenderer>(Color::Cyan, "rat");
+	sphere4->AddComponent<MeshRenderer>(Color::Cyan, "sphere");
 	sphere4->transform->SetPosition(glm::vec3(0.0f, -2.0f, 0.0f));
 	sphere4->transform->SetScale(glm::vec3(0.5f));
 
@@ -130,8 +129,7 @@ void Application::Run()
 	pointLight->AddComponent<PointLight>();
 
 
-
-
+	
 	Scene* scene = new Scene();
 	//scene->Add(grid);
 	scene->Add(moon);
@@ -143,8 +141,11 @@ void Application::Run()
 	scene->Add(sphere2);
 	scene->Add(sphere3);
 	scene->Add(sphere4);
-
 	scene->Add(pointLight);
+
+	scene->SetActiveCamera(player_go->GetComponent<Camera>());
+	SceneManager::GetInstance().AddScene(scene);
+	SceneManager::GetInstance().SetActiveScene(scene);
 
 	GUI gui(window, scene);
 

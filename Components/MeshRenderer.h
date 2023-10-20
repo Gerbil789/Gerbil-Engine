@@ -11,6 +11,7 @@ public:
 	glm::vec4 color;
 	Model* model;
 private:
-	GLuint shaderProgram;
+	Shader* shaderProgram;
+	GLuint shaderId;
 };
 

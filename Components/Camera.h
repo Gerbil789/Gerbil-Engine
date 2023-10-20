@@ -2,10 +2,15 @@
 
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
+#include <vector>
 
 #include "../Components/Component.h"
+#include "../Observer.h"
 
-class Camera : public IComponent
+
+class Shader;
+
+class Camera : public IComponent, public ISubject, public IObserver
 {
 public:
 	Camera(
@@ -24,13 +29,29 @@ public:
 	void SetAspect(float _aspect);
 	void SetNearPlane(float _nearPlane);
 	void SetFarPlane(float _farPlane);
-	glm::mat4 CalculateViewMatrix();
-	glm::mat4 CalculateProjectionMatrix();
+
+	glm::mat4 GetViewMatrix();
+	glm::mat4 GetProjectionMatrix();
+	
+	void UpdateObserver() override; //get update from transform
+
+	void Attach(IObserver* _observer) override;
+	void Detach(IObserver* _observer) override;
+	void Notify() override;
+
+	void SetTransform(Transform* t) override;
 private:
 	glm::vec3 target;
 	float fov;
 	float aspect;
 	float nearPlane;
 	float farPlane;
+
+	glm::mat4 viewMatrix;
+	glm::mat4 projectionMatrix;
+	void CalculateViewMatrix();
+	void CalculateProjectionMatrix();
+
+	std::vector<IObserver*> observers; //shaders
 };
 

@@ -3,8 +3,11 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/quaternion.hpp>
+#include <vector>
 
-class Transform
+#include "../Observer.h"
+
+class Transform: public ISubject
 {
 public:
 	Transform(glm::vec3 position = glm::vec3(0.0f), glm::vec3 rotation = glm::vec3(0.0f), glm::vec3 scale = glm::vec3(1.0f));
@@ -26,10 +29,15 @@ public:
 	void SetScale(const glm::vec3& scale);
 	void ScaleBy(const glm::vec3& scale);
 
+	void Attach(IObserver* _observer) override;
+	void Detach(IObserver* _observer) override;
+	void Notify() override;
 private:
 	Transform* parentTransform = nullptr;
 	glm::vec3 position;
 	glm::vec3 scale;
 	glm::quat rotation;
+
+	std::vector<IObserver*> observers;
 };
 

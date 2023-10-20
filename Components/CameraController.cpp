@@ -1,11 +1,12 @@
 #include "CameraController.h"
+#include "../GameObject/GameObject.h"
 
-
-
-CameraController::CameraController()
+CameraController::CameraController(Camera* _cam)
 {
-	cam = ShaderManager::GetInstance().GetCam();
-	
+	cam = _cam;
+	if (cam == nullptr) {
+		std::cerr << "ERROR: CameraController is missing Camera component.\n";
+	}
 }
 
 void CameraController::Update()
@@ -64,5 +65,6 @@ void CameraController::cursor_callback(GLFWwindow* window, double x, double y)
 	direction.x = cos(glm::radians(yaw)) * cos(glm::radians(pitch));
 	direction.y = sin(glm::radians(pitch));
 	direction.z = sin(glm::radians(yaw)) * cos(glm::radians(pitch));
-	ShaderManager::GetInstance().GetCam()->SetTarget((glm::normalize(direction)));
+	//TO DO: fix this
+	SceneManager::GetInstance().GetActiveScene()->GetActiveCamera()->SetTarget((glm::normalize(direction)));
 }
