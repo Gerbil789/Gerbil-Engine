@@ -19,9 +19,9 @@ class Shader : public IObserver
 {
 public:
 	enum FLAGS {
-		COLOR = 1 << 0,  // 1
-		NORMAL = 1 << 1,  // 2
-		CAMERA = 1 << 2   // 4
+		NORMAL = 1 << 0,  // 1
+		CAMERA = 1 << 1,  // 2
+		SPECULAR = 1 << 2   // 4
 	};
 
 	Shader(GLuint _id, std::string _name);

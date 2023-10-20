@@ -3,7 +3,7 @@
 MeshRenderer::MeshRenderer(glm::vec4 _color, std::string _model)
 {
 	this->color = _color;
-	this->shaderProgram = ShaderManager::GetInstance().GetShaderProgram("lambert");
+	this->shaderProgram = ShaderManager::GetInstance().GetShaderProgram("phong");
 	this->shaderId = shaderProgram->id;
 	this->model = ModelManager::GetInstance().GetModel(_model);
 

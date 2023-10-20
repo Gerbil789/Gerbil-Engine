@@ -75,6 +75,11 @@ void ShaderManager::Init()
 	lambertShader->SetFlag(Shader::NORMAL);
 	shaderPrograms.push_back(lambertShader);
 
+	Shader* phongShader = CreateShader("phong", "Shaders/phong_vert.glsl", "Shaders/phong_frag.glsl");
+	phongShader->SetFlag(Shader::NORMAL);
+	phongShader->SetFlag(Shader::CAMERA);
+	phongShader->SetFlag(Shader::SPECULAR);
+	shaderPrograms.push_back(phongShader);
 
 	
 	initialized = true;

@@ -40,7 +40,21 @@ void Shader::SetUniforms()
 	}
 
 	if (IsFlagSet(CAMERA)) {
-		
+		//TO DO: optimize this
+		GLint idcam = glGetUniformLocation(id, "cameraPosition");
+		if (idcam == -1) {
+			std::cout << "ERROR: could not find cameraPosition location\n";
+		}
+		glUniform3fv(idcam, 1, glm::value_ptr(camSubject->transform->GetPosition()));
+	}
+
+	if (IsFlagSet(SPECULAR)) {
+
+		GLint idSpec = glGetUniformLocation(id, "specularStrength");
+		if (idSpec == -1) {
+			std::cout << "ERROR: could not find specularStrength location\n";
+		}
+		glUniform1f(idSpec, 16.0f);
 	}
 }
 

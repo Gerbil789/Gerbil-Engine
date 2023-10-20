@@ -15,9 +15,9 @@ public:
 	virtual void SetTransform(Transform* t);
 
 	GameObject* GetGameObject();
-
-protected:
 	GameObject* gameObject;
 	Transform* transform;
+
+	
 };
 
