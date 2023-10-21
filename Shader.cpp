@@ -8,14 +8,27 @@ Shader::Shader(GLuint _id, std::string _name)
     flags = 0;
 }
 
-void Shader::UseShader()
+void Shader::UseShader(glm::mat4 transformMatrix, glm::vec4 color)
 {
-	SetUniforms();
+	SetUniforms(transformMatrix, color);
 	glUseProgram(id);
 }
 
-void Shader::SetUniforms()
+void Shader::SetUniforms(glm::mat4 transformMatrix, glm::vec4 color)
 {
+	//transformMatrix
+	GLint idModelTransform = glGetUniformLocation(id, "modelMatrix");
+	if (idModelTransform == -1) {
+		std::cout << "ERROR: could not find model transform location\n";
+	}
+	glUniformMatrix4fv(idModelTransform, 1, GL_FALSE, glm::value_ptr(transformMatrix));
+
+	//color
+	GLint idColor = glGetUniformLocation(id, "color");
+	if (idColor == -1) {
+		std::cerr << "Uniform color not found in shader." << std::endl;
+	}
+	glUniform4fv(idColor, 1, glm::value_ptr(color));
 	//viewMatrix
 	GLint idView = glGetUniformLocation(id, "viewMatrix");
 	if (idView == -1) {
@@ -55,6 +68,14 @@ void Shader::SetUniforms()
 			std::cout << "ERROR: could not find specularStrength location\n";
 		}
 		glUniform1f(idSpec, 16.0f);
+	}
+
+	if (IsFlagSet(LIGHTS)) {
+		GLint idLight = glGetUniformLocation(id, "lightPosition");
+		if (idLight == -1) {
+			std::cout << "ERROR: could not find lightPosition location\n";
+		}
+		glUniform3fv(idLight, 1, glm::value_ptr(glm::vec3(0.0f, 0.0f, 0.0f)));
 	}
 }
 

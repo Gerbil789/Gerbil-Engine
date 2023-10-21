@@ -19,13 +19,15 @@ class Shader : public IObserver
 {
 public:
 	enum FLAGS {
-		NORMAL = 1 << 0,  // 1
-		CAMERA = 1 << 1,  // 2
-		SPECULAR = 1 << 2   // 4
+		NORMAL = 1 << 0,	// 1
+		CAMERA = 1 << 1,	// 2
+		SPECULAR = 1 << 2,  // 4
+		LIGHTS = 1 << 3		// 8
+
 	};
 
 	Shader(GLuint _id, std::string _name);
-	void UseShader();
+	void UseShader(glm::mat4 transformMatrix, glm::vec4 color);
 	GLuint id;
 	std::string name;
 	
@@ -41,6 +43,6 @@ private:
 	glm::mat4 viewMatrix = glm::mat4(1.0f);
 	glm::mat4 projectionMatrix = glm::mat4(1.0f);
 
-	void SetUniforms();
+	void SetUniforms(glm::mat4 transformMatrix, glm::vec4 color);
 };
 

@@ -64,7 +64,7 @@ Shader* ShaderManager::CreateShader(std::string _name, std::string vertexShaderP
 void ShaderManager::Init()
 {
 	if (initialized) {
-		std::cerr << "ShaderLib is already initialized." << std::endl;
+		std::cerr << "ShaderManager is already initialized." << std::endl;
 		return;
 	}
 
@@ -79,6 +79,7 @@ void ShaderManager::Init()
 	phongShader->SetFlag(Shader::NORMAL);
 	phongShader->SetFlag(Shader::CAMERA);
 	phongShader->SetFlag(Shader::SPECULAR);
+	phongShader->SetFlag(Shader::LIGHTS);
 	shaderPrograms.push_back(phongShader);
 
 	

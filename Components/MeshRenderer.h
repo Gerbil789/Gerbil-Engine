@@ -3,15 +3,21 @@
 #include "../Components/Renderer.h"
 #include "../GameObject/GameObject.h"
 
-class MeshRenderer : public IRenderer
+#include "../Observer.h"
+
+class Transform;
+
+class MeshRenderer : public IRenderer, public IObserver
 {
 public:
 	MeshRenderer(glm::vec4 _color, std::string _model);
 	void Update() override;
 	glm::vec4 color;
 	Model* model;
+	void SetTransform(Transform* t) override;
+	void UpdateObserver() override;
 private:
 	Shader* shaderProgram;
-	GLuint shaderId;
+	glm::mat4 transformMatrix;
 };
 

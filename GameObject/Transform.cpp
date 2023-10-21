@@ -64,15 +64,18 @@ void Transform::SetRotation(glm::quat quaternion)
 void Transform::RotateBy(float angle, const glm::vec3& axis)
 {
 	this->rotation = glm::rotate(rotation, glm::radians(angle), axis);
+	Notify();
 }
 
 void Transform::SetScale(const glm::vec3& scale)
 {
 	this->scale = scale;
+	Notify();
 }
 void Transform::ScaleBy(const glm::vec3& scale)
 {
 	this->scale *= scale;
+	Notify();
 }
 
 
