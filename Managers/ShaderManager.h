@@ -17,8 +17,8 @@ public:
 	}
 	
 	void Init();
-	void UseShader(int shaderID);
-	Shader* GetShaderProgram(std::string shader_name);
+	void UseShader(GLuint _id, glm::mat4 transformMatrix, glm::vec4 color, float specular);
+	GLuint GetShaderProgram(std::string shader_name);
 	void SetCamForShaders(Camera* _cam);
 
 private:

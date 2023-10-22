@@ -86,12 +86,20 @@ void ShaderManager::Init()
 	initialized = true;
 }
 
+void ShaderManager::UseShader(GLuint _id, glm::mat4 transformMatrix, glm::vec4 color, float specular)
+{
+	for (Shader* shader : shaderPrograms) {
+		if (shader->id == _id) {
+			shader->UseShader(transformMatrix, color, specular);
+		}
+	}
+}
 
-Shader* ShaderManager::GetShaderProgram(std::string shader_name)
+GLuint ShaderManager::GetShaderProgram(std::string shader_name)
 {
 	for (Shader* shader : shaderPrograms) {
 		if (shader->name == shader_name) {
-			return shader;
+			return shader->id;
 		}
 	}
 	std::cout << "Shader [" << shader_name << "] does not exist\n";
@@ -104,7 +112,6 @@ void ShaderManager::SetCamForShaders(Camera* _cam)
 		shader->SetCamSubject(_cam);
 	}
 }
-
 
 std::string ShaderManager::ReadShaderSource(const std::string& filePath) {
 	std::ifstream file(filePath);

@@ -1,20 +1,20 @@
 #include "MeshRenderer.h"
 #include "../GameObject/Transform.h"
 
-MeshRenderer::MeshRenderer(glm::vec4 _color, std::string _model)
+MeshRenderer::MeshRenderer(std::string _model, glm::vec4 _color, std::string _shader, float _specular)
 {
-	this->color = _color;
-	this->shaderProgram = ShaderManager::GetInstance().GetShaderProgram("phong");
-	this->model = ModelManager::GetInstance().GetModel(_model);
+	color = _color;
+	specular = _specular;
+	transformMatrix = glm::mat4(1.0f);
+	shaderProgram = ShaderManager::GetInstance().GetShaderProgram(_shader);
+	model = ModelManager::GetInstance().GetModel(_model);
 	
 	if (model == nullptr) { std::cerr << "[MeshRemderer] ERROR: could not load model [" << _model << "]\n"; }
-	transformMatrix = glm::mat4(1.0f);
 }
 
 void MeshRenderer::Update()
 {
-	shaderProgram->UseShader(transformMatrix, color);
-
+	ShaderManager::GetInstance().UseShader(shaderProgram, transformMatrix, color, specular);
 	model->Draw();
 }
 

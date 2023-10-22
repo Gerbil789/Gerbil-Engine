@@ -8,13 +8,14 @@ Shader::Shader(GLuint _id, std::string _name)
     flags = 0;
 }
 
-void Shader::UseShader(glm::mat4 transformMatrix, glm::vec4 color)
+void Shader::UseShader(glm::mat4 transformMatrix, glm::vec4 color, float specular)
 {
-	SetUniforms(transformMatrix, color);
 	glUseProgram(id);
+	SetUniforms(transformMatrix, color, specular);
+	
 }
 
-void Shader::SetUniforms(glm::mat4 transformMatrix, glm::vec4 color)
+void Shader::SetUniforms(glm::mat4 transformMatrix, glm::vec4 color, float specular)
 {
 	//transformMatrix
 	GLint idModelTransform = glGetUniformLocation(id, "modelMatrix");
@@ -29,6 +30,7 @@ void Shader::SetUniforms(glm::mat4 transformMatrix, glm::vec4 color)
 		std::cerr << "Uniform color not found in shader." << std::endl;
 	}
 	glUniform4fv(idColor, 1, glm::value_ptr(color));
+
 	//viewMatrix
 	GLint idView = glGetUniformLocation(id, "viewMatrix");
 	if (idView == -1) {
@@ -53,24 +55,25 @@ void Shader::SetUniforms(glm::mat4 transformMatrix, glm::vec4 color)
 	}
 
 	if (IsFlagSet(CAMERA)) {
-		//TO DO: optimize this
+		//cameraPosition
 		GLint idcam = glGetUniformLocation(id, "cameraPosition");
 		if (idcam == -1) {
 			std::cout << "ERROR: could not find cameraPosition location\n";
 		}
-		glUniform3fv(idcam, 1, glm::value_ptr(camSubject->transform->GetPosition()));
+		glUniform3fv(idcam, 1, glm::value_ptr(camPosition));
 	}
 
 	if (IsFlagSet(SPECULAR)) {
-
+		//specularStrength
 		GLint idSpec = glGetUniformLocation(id, "specularStrength");
 		if (idSpec == -1) {
 			std::cout << "ERROR: could not find specularStrength location\n";
 		}
-		glUniform1f(idSpec, 16.0f);
+		glUniform1f(idSpec, specular);
 	}
 
 	if (IsFlagSet(LIGHTS)) {
+		//lights positions
 		GLint idLight = glGetUniformLocation(id, "lightPosition");
 		if (idLight == -1) {
 			std::cout << "ERROR: could not find lightPosition location\n";
@@ -87,6 +90,7 @@ void Shader::SetCamSubject(Camera* _camSubject)
 
 void Shader::UpdateObserver()
 {
+	camPosition = camSubject->transform->GetPosition();
     projectionMatrix = camSubject->GetProjectionMatrix();
     viewMatrix = camSubject->GetViewMatrix();
 }

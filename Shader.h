@@ -27,7 +27,7 @@ public:
 	};
 
 	Shader(GLuint _id, std::string _name);
-	void UseShader(glm::mat4 transformMatrix, glm::vec4 color);
+	void UseShader(glm::mat4 transformMatrix, glm::vec4 color, float specular);
 	GLuint id;
 	std::string name;
 	
@@ -40,9 +40,10 @@ public:
 private:
 	int flags;
 	Camera* camSubject;
+	glm::vec3 camPosition = glm::vec3(1.0f);
 	glm::mat4 viewMatrix = glm::mat4(1.0f);
 	glm::mat4 projectionMatrix = glm::mat4(1.0f);
 
-	void SetUniforms(glm::mat4 transformMatrix, glm::vec4 color);
+	void SetUniforms(glm::mat4 transformMatrix, glm::vec4 color, float specular = 16.0f);
 };
 
