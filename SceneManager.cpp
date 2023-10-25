@@ -1,9 +1,8 @@
 #include "SceneManager.h"
 
-#include "../Scene.h"
-
 void SceneManager::Init()
 {
+
 }
 
 void SceneManager::SetActiveScene(Scene* _scene)
@@ -15,6 +14,7 @@ Scene* SceneManager::GetActiveScene()
 {
 	if (activeScene == nullptr) {
 		std::cerr << "ERROR: No active scene found.\n";
+		exit(1);
 	}
 	return activeScene;
 }
@@ -22,4 +22,7 @@ Scene* SceneManager::GetActiveScene()
 void SceneManager::AddScene(Scene* _scene)
 {
 	scenes.push_back(_scene);
+	if (activeScene == nullptr) {
+		activeScene = _scene;
+	}
 }

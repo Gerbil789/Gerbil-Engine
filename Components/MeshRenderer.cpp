@@ -1,6 +1,5 @@
 #include "MeshRenderer.h"
 #include "../GameObject/Transform.h"
-#include "../Scene.h"
 
 MeshRenderer::MeshRenderer(std::string _model, glm::vec3 _color, std::string _shader, float _shininess)
 {

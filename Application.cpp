@@ -71,10 +71,13 @@ void Application::Init()
 	ShaderManager::GetInstance().Init();
 	
 	ModelManager::GetInstance().Init();
+
+	SceneManager::GetInstance().Init();
 }
 
-void Application::Run()
+void Application::InitScenes()
 {
+	//------------Scene 1--------------
 	GameObject* player_go = new GameObject("player");
 	player_go->transform->SetPosition(glm::vec3(0.0f, 0.0f, 5.0f));
 	player_go->AddComponent<Camera>();
@@ -83,88 +86,136 @@ void Application::Run()
 	player_go->AddComponent<CameraController>(player_go->GetComponent<Camera>());
 	glfwSetCursorPosCallback(window, player_go->GetComponent<CameraController>()->cursor_callback);
 
-	GameObject* grid = new GameObject("grid");
-	grid->AddComponent<MeshRenderer>("grid", Color::Gray, "constant");
-	grid->transform->SetPosition(glm::vec3(0.0f, -4.0f, 0.0f));
-
 	GameObject* sphere1 = new GameObject("sphere1");
-	sphere1->AddComponent<MeshRenderer>("sphere", Color::Red, "phong", 2.0f);
+	sphere1->AddComponent<MeshRenderer>("sphere", Color::White);
 	sphere1->transform->SetPosition(glm::vec3(2.0f, 0.0f, 0.0f));
 
 	GameObject* sphere2 = new GameObject("sphere2");
-	sphere2->AddComponent<MeshRenderer>("sphere", Color::Cyan, "phong", 32.0f);
+	sphere2->AddComponent<MeshRenderer>("sphere", Color::White);
 	sphere2->transform->SetPosition(glm::vec3(-2.0f, 0.0f, 0.0f));
 
 	GameObject* sphere3 = new GameObject("sphere3");
-	sphere3->AddComponent<MeshRenderer>("sphere", Color::White, "phong", 16.0f);
+	sphere3->AddComponent<MeshRenderer>("sphere", Color::White);
 	sphere3->transform->SetPosition(glm::vec3(0.0f, 2.0f, 0.0f));
 
 	GameObject* sphere4 = new GameObject("sphere4");
-	sphere4->AddComponent<MeshRenderer>("sphere", Color::White, "phong", 64.0f);
+	sphere4->AddComponent<MeshRenderer>("sphere", Color::White);
 	sphere4->transform->SetPosition(glm::vec3(0.0f, -2.0f, 0.0f));
 
-	GameObject* pointLight1 = new GameObject("white point light");
-	pointLight1->AddComponent<Light>(Light::POINT, Color::White);
-	pointLight1->transform->SetPosition(glm::vec3(0.0f, 0.0f, 2.0f));
+	GameObject* pointLight = new GameObject("point light");
+	pointLight->AddComponent<Light>(Light::POINT, Color::White);
 
-	GameObject* pointLight2 = new GameObject("red point light");
-	pointLight2->AddComponent<Light>(Light::POINT, Color::Red);
-	pointLight2->transform->SetPosition(glm::vec3(0.0f, 0.0f, -2.0f));
+	Scene* scene1 = new Scene();
+	scene1->Add(player_go);
+	scene1->Add(sphere1);
+	scene1->Add(sphere2);
+	scene1->Add(sphere3);
+	scene1->Add(sphere4);
+	scene1->Add(pointLight);
 
-	Scene* scene = new Scene();
+	scene1->SetActiveCamera(player_go->GetComponent<Camera>());
 	
-	scene->Add(player_go);
-	//scene->Add(grid);
-	scene->Add(sphere1);
-	scene->Add(sphere2);
-	scene->Add(sphere3);
-	scene->Add(sphere4);
-	scene->Add(pointLight1);
-	scene->Add(pointLight2);
+	SceneManager::GetInstance().AddScene(scene1);
+
+	//------------Scene 2--------------
+	GameObject* empty = new GameObject("empty");
+	empty->AddComponent<RotationScript>(-100);
+
+	GameObject* sun = new GameObject("sun");
+	sun->AddComponent<MeshRenderer>("sphere", Color::Yellow);
+	sun->transform->SetScale(glm::vec3(3.0f));
+	sun->AddComponent<RotationScript>();
+
+	GameObject* earth = new GameObject("earth");
+	earth->AddComponent<MeshRenderer>("sphere", Color::Blue, "phong", 4.0f);
+	earth->transform->SetPosition(glm::vec3(-9.0f, 0.0f, 0.0f));
+	earth->transform->SetScale(glm::vec3(1.2));
+	earth->AddComponent<RotationScript>(500.0f);
+
+	GameObject* moon = new GameObject("moon");
+	moon->AddComponent<MeshRenderer>("sphere", Color::Gray);
+	moon->transform->SetPosition(glm::vec3(-4.0f, 0.0f, 0.0f));
+	moon->transform->SetScale(glm::vec3(0.4f));
+	moon->AddComponent<RotationScript>(150.0f);
+
+	GameObject* mars = new GameObject("mars");
+	mars->AddComponent<MeshRenderer>("sphere", Color::Red);
+	mars->transform->SetPosition(glm::vec3(-5.0f, 0.0f, 0.0f));
+	mars->transform->SetScale(glm::vec3(0.5f));
+	mars->AddComponent<RotationScript>(-350.0f);
+
+	GameObject* pointLight1 = new GameObject("point light");
+	pointLight1->AddComponent<Light>(Light::POINT, Color::White);
+	pointLight1->transform->SetPosition(glm::vec3(20.0f, 5.0f, 0.0f));
+
+	GameObject* pointLight2 = new GameObject("point light");
+	pointLight2->AddComponent<Light>(Light::POINT, Color::White);
+	pointLight2->transform->SetPosition(glm::vec3(-20.0f, 5.0f, 0.0f));
+
+	GameObject* pointLight3 = new GameObject("point light");
+	pointLight3->AddComponent<Light>(Light::POINT, Color::White);
+	pointLight3->transform->SetPosition(glm::vec3(0.0f, 5.0f, 20.0f));
+
+	GameObject* pointLight4 = new GameObject("point light");
+	pointLight4->AddComponent<Light>(Light::POINT, Color::White);
+	pointLight4->transform->SetPosition(glm::vec3(0.0f, 5.0f, -20.0f));
 
 
-	scene->SetActiveCamera(player_go->GetComponent<Camera>());
-	SceneManager::GetInstance().AddScene(scene);
-	SceneManager::GetInstance().SetActiveScene(scene);
+	empty->AddChildren(earth);
+	earth->AddChildren(moon);
+	sun->AddChildren(mars);
 
-	GUI gui(window, scene);
+	Scene* scene2 = new Scene();
+	scene2->Add(player_go);
+	scene2->Add(empty);
+	scene2->Add(sun);
+	scene2->Add(earth);
+	scene2->Add(moon);
+	scene2->Add(mars);
+	scene2->Add(pointLight1);
+	scene2->Add(pointLight2);
+	scene2->Add(pointLight3);
+	scene2->Add(pointLight4);
 
-	bool showCursor = false;
-	//main loop
+	scene2->SetActiveCamera(player_go->GetComponent<Camera>());
+
+	SceneManager::GetInstance().AddScene(scene2);
+	SceneManager::GetInstance().SetActiveScene(scene2);
+
+	//------------Scene 3--------------
+	//------------Scene 4--------------
+	//------------Scene 5--------------
+
+}
+
+void Application::Run()
+{
+	//GUI gui(window, scene);
+
 	while (!glfwWindowShouldClose(window)) {
 
 		if (Input::IsKeyDown(GLFW_KEY_ESCAPE)) {
 			glfwSetWindowShouldClose(window, GL_TRUE);
 		}
 
-		//TMP
-		if (Input::IsKeyDown(GLFW_KEY_C)) {
-			showCursor = !showCursor;
-			if (showCursor) {
-				glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
-			}
-			else {
-				glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
-			}
-		}
 
 		Time::Update();
 
-		sphere1->transform->RotateBy(-50.0f * Time::deltaTime, glm::vec3(0.0f, 1.0f, 0.0f));
-		sphere2->transform->RotateBy(50.0f * Time::deltaTime, glm::vec3(0.0f, 1.0f, 0.0f));
-		sphere3->transform->RotateBy(-50.0f * Time::deltaTime, glm::vec3(1.0f, 0.0f, 0.0f));
-		sphere4->transform->RotateBy(50.0f * Time::deltaTime, glm::vec3(1.0f, 0.0f, 0.0f));
+		//sphere1->transform->RotateBy(-50.0f * Time::deltaTime, glm::vec3(0.0f, 1.0f, 0.0f));
+		//sphere2->transform->RotateBy(50.0f * Time::deltaTime, glm::vec3(0.0f, 1.0f, 0.0f));
+		//sphere3->transform->RotateBy(-50.0f * Time::deltaTime, glm::vec3(1.0f, 0.0f, 0.0f));
+		//sphere4->transform->RotateBy(50.0f * Time::deltaTime, glm::vec3(1.0f, 0.0f, 0.0f));
 
 
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-		scene->Update();
+		SceneManager::GetInstance().GetActiveScene()->Update();
 		
 		glfwPollEvents();
-		gui.Update();
+		//gui.Update();
 		glfwSwapBuffers(window);
 	}
 
-	gui.Dispose();
+	//gui.Dispose();
 	glfwDestroyWindow(window);
 	glfwTerminate();
 	exit(EXIT_SUCCESS);

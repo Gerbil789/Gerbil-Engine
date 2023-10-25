@@ -15,6 +15,7 @@ int main(void)
 {
 	Application* app = new Application();
 	app->Init();
+	app->InitScenes();
 	app->Run();
 
 }

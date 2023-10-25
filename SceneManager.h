@@ -1,7 +1,7 @@
 #pragma once
 
 #include <vector>
-class Scene;
+#include "../Scene.h"
 
 class SceneManager
 {

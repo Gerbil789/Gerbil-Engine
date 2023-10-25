@@ -11,7 +11,7 @@ Scene::Scene(const std::string& _name)
 	}
 	else 
 	{
-		name = name;
+		name = _name;
 	}
 }
 

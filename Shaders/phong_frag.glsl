@@ -36,13 +36,20 @@ void main()
 	vec3 viewDir = normalize(cameraPosition - vertexData.worldPosition);
     for (int i = 0; i < numLights; i++) {
         vec3 lightDir = normalize(lights[i].position - vertexData.worldPosition);
+		float distance = length(lightDir);
+
+		float constant = 1.0;
+        float linear = 0.09;
+        float quadratic = 0.032;
+        float attenuation = 1.0 / (constant + linear * distance + quadratic * (distance * distance));
+
         vec3 lightColor = lights[i].color * lights[i].intensity;
 		vec3 ambient = lights[i].color * material.ambient;
         vec3 diffuse = lightColor * max(dot(lightDir, normalize(vertexData.normal)), 0.0) * material.diffuse;
 		vec3 reflectDir = reflect(-lightDir, vertexData.normal);
         vec3 specular = lightColor * pow(max(dot(viewDir, reflectDir), 0.0), material.shininess) * material.specular;
 
-        finalColor += (ambient + diffuse + specular);
+        finalColor += attenuation * (ambient + diffuse + specular);
     }
 	
 	outColor = vec4(finalColor, 1.0);

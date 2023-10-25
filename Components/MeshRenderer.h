@@ -2,6 +2,7 @@
 
 #include "../Components/Renderer.h"
 #include "../GameObject/GameObject.h"
+#include "../SceneManager.h"
 
 #include "../Observer.h"
 
