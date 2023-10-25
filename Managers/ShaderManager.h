@@ -7,6 +7,8 @@
 
 #include "../Components/Camera.h"
 #include "../Shader.h"
+#include "../SceneManager.h"
+
 
 class ShaderManager
 {
@@ -17,16 +19,24 @@ public:
 	}
 	
 	void Init();
-	void UseShader(GLuint _id, glm::mat4 transformMatrix, glm::vec4 color, float specular);
-	GLuint GetShaderProgram(std::string shader_name);
+	void UseShader(GLuint _id);
+	GLuint GetShaderProgramId(std::string shader_name);
+	Shader* GetShaderProgram(GLuint _id);
 	void SetCamForShaders(Camera* _cam);
 
+	void SetUniform(const char* _uniform, const glm::mat3& _value);
+	void SetUniform(const char* _uniform, const glm::mat4& _value);
+	void SetUniform(const char* _uniform, const glm::vec3& _value);
+	void SetUniform(const char* _uniform, const int& _value);
+	void SetUniform(const char* _uniform, const float& _value);
 private:
+	int currentShaderId = -1;
+	bool initialized = false;
+	
+
 	ShaderManager() {};
 	void CheckShaderCompilation(GLuint shader, const std::string& shaderType);
 	void CheckProgramLinking(GLuint program);
-	int currentShader = -1;
-	bool initialized = false;
 	std::vector<Shader*> shaderPrograms;
 	std::string ReadShaderSource(const std::string& filePath);
 	Shader* CreateShader(std::string _name, std::string vertexShaderPath, std::string fragmentShaderPath);

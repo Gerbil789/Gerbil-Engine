@@ -24,8 +24,7 @@ void Application::Init()
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
 	glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
-	glfwWindowHint(GLFW_OPENGL_PROFILE,
-		GLFW_OPENGL_CORE_PROFILE);
+	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
 	window = glfwCreateWindow(1080, 720, "Gerbil Engine", NULL, NULL);
 	if (!window)
@@ -89,33 +88,39 @@ void Application::Run()
 	grid->transform->SetPosition(glm::vec3(0.0f, -4.0f, 0.0f));
 
 	GameObject* sphere1 = new GameObject("sphere1");
-	sphere1->AddComponent<MeshRenderer>("sphere", Color::Red);
+	sphere1->AddComponent<MeshRenderer>("sphere", Color::Red, "phong", 2.0f);
 	sphere1->transform->SetPosition(glm::vec3(2.0f, 0.0f, 0.0f));
 
 	GameObject* sphere2 = new GameObject("sphere2");
-	sphere2->AddComponent<MeshRenderer>("sphere", Color::Green);
+	sphere2->AddComponent<MeshRenderer>("sphere", Color::Cyan, "phong", 32.0f);
 	sphere2->transform->SetPosition(glm::vec3(-2.0f, 0.0f, 0.0f));
 
 	GameObject* sphere3 = new GameObject("sphere3");
-	sphere3->AddComponent<MeshRenderer>("sphere", Color::Blue);
+	sphere3->AddComponent<MeshRenderer>("sphere", Color::White, "phong", 16.0f);
 	sphere3->transform->SetPosition(glm::vec3(0.0f, 2.0f, 0.0f));
 
 	GameObject* sphere4 = new GameObject("sphere4");
-	sphere4->AddComponent<MeshRenderer>("sphere", Color::White);
+	sphere4->AddComponent<MeshRenderer>("sphere", Color::White, "phong", 64.0f);
 	sphere4->transform->SetPosition(glm::vec3(0.0f, -2.0f, 0.0f));
 
-	GameObject* pointLight = new GameObject("point light");
-	pointLight->AddComponent<PointLight>();
+	GameObject* pointLight1 = new GameObject("white point light");
+	pointLight1->AddComponent<Light>(Light::POINT, Color::White);
+	pointLight1->transform->SetPosition(glm::vec3(0.0f, 0.0f, 2.0f));
+
+	GameObject* pointLight2 = new GameObject("red point light");
+	pointLight2->AddComponent<Light>(Light::POINT, Color::Red);
+	pointLight2->transform->SetPosition(glm::vec3(0.0f, 0.0f, -2.0f));
 
 	Scene* scene = new Scene();
 	
 	scene->Add(player_go);
-	scene->Add(grid);
+	//scene->Add(grid);
 	scene->Add(sphere1);
 	scene->Add(sphere2);
 	scene->Add(sphere3);
 	scene->Add(sphere4);
-	scene->Add(pointLight);
+	scene->Add(pointLight1);
+	scene->Add(pointLight2);
 
 
 	scene->SetActiveCamera(player_go->GetComponent<Camera>());

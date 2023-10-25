@@ -1,6 +1,7 @@
 #pragma once
-#include "../Scene.h"
 
+#include <vector>
+class Scene;
 
 class SceneManager
 {
@@ -9,13 +10,14 @@ public:
 		static SceneManager instance;
 		return instance;
 	}
+	void Init();
 	void SetActiveScene(Scene* _scene);
 	Scene* GetActiveScene();
 	void AddScene(Scene* _scene);
 
 private:
 	SceneManager() {};
-	Scene* activeScene;
+	Scene* activeScene = nullptr;
 	std::vector<Scene*> scenes;
 };
 

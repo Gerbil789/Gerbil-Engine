@@ -6,17 +6,17 @@
 
 class Color {
 public:
-  static const glm::vec4 Red;
-  static const glm::vec4 Green;
-  static const glm::vec4 Blue;
-  static const glm::vec4 Yellow;
-  static const glm::vec4 Pink;
-  static const glm::vec4 Purple;
-  static const glm::vec4 Cyan;
-  static const glm::vec4 Black;
-  static const glm::vec4 White;
-  static const glm::vec4 DarkGreen;
-  static const glm::vec4 Gray;
+  static const glm::vec3 Red;
+  static const glm::vec3 Green;
+  static const glm::vec3 Blue;
+  static const glm::vec3 Yellow;
+  static const glm::vec3 Pink;
+  static const glm::vec3 Purple;
+  static const glm::vec3 Cyan;
+  static const glm::vec3 Black;
+  static const glm::vec3 White;
+  static const glm::vec3 DarkGreen;
+  static const glm::vec3 Gray;
 };
 
 #endif

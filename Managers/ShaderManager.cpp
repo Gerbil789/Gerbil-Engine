@@ -72,30 +72,24 @@ void ShaderManager::Init()
 	shaderPrograms.push_back(constantShader);
 
 	Shader* lambertShader = CreateShader("lambert", "Shaders/lambert_vert.glsl", "Shaders/lambert_frag.glsl");
-	lambertShader->SetFlag(Shader::NORMAL);
 	shaderPrograms.push_back(lambertShader);
 
 	Shader* phongShader = CreateShader("phong", "Shaders/phong_vert.glsl", "Shaders/phong_frag.glsl");
-	phongShader->SetFlag(Shader::NORMAL);
-	phongShader->SetFlag(Shader::CAMERA);
-	phongShader->SetFlag(Shader::SPECULAR);
-	phongShader->SetFlag(Shader::LIGHTS);
 	shaderPrograms.push_back(phongShader);
 
 	
 	initialized = true;
 }
 
-void ShaderManager::UseShader(GLuint _id, glm::mat4 transformMatrix, glm::vec4 color, float specular)
+void ShaderManager::UseShader(GLuint _id)
 {
-	for (Shader* shader : shaderPrograms) {
-		if (shader->id == _id) {
-			shader->UseShader(transformMatrix, color, specular);
-		}
+	if (currentShaderId != _id) {
+		currentShaderId = _id;
+		glUseProgram(currentShaderId);
 	}
 }
 
-GLuint ShaderManager::GetShaderProgram(std::string shader_name)
+GLuint ShaderManager::GetShaderProgramId(std::string shader_name)
 {
 	for (Shader* shader : shaderPrograms) {
 		if (shader->name == shader_name) {
@@ -104,6 +98,17 @@ GLuint ShaderManager::GetShaderProgram(std::string shader_name)
 	}
 	std::cout << "Shader [" << shader_name << "] does not exist\n";
 	return 0;
+}
+
+Shader* ShaderManager::GetShaderProgram(GLuint _id)
+{
+	for (Shader* shader : shaderPrograms) {
+		if (shader->id == _id) {
+			return shader;
+		}
+	}
+	std::cout << "Shader with ID [" << _id << "] does not exist\n";
+	return nullptr;
 }
 
 void ShaderManager::SetCamForShaders(Camera* _cam)
@@ -122,4 +127,50 @@ std::string ShaderManager::ReadShaderSource(const std::string& filePath) {
 
 	std::string shaderSource((std::istreambuf_iterator<char>(file)), std::istreambuf_iterator<char>());
 	return shaderSource;
+}
+
+
+void ShaderManager::SetUniform(const char* _uniform, const glm::mat3& _value)
+{
+	GLint uniform_id = glGetUniformLocation(currentShaderId, _uniform);
+	if (uniform_id == -1) {
+		std::cout << "ERROR: could not find " << _uniform << " uniform\n";
+	}
+	glUniformMatrix3fv(uniform_id, 1, GL_FALSE, glm::value_ptr(_value));
+}
+
+void ShaderManager::SetUniform(const char* _uniform, const glm::mat4& _value)
+{
+	GLint uniform_id = glGetUniformLocation(currentShaderId, _uniform);
+	if (uniform_id == -1) {
+		std::cout << "ERROR: could not find " << _uniform << " uniform\n";
+	}
+	glUniformMatrix4fv(uniform_id, 1, GL_FALSE, glm::value_ptr(_value));
+}
+
+void ShaderManager::SetUniform(const char* _uniform, const glm::vec3& _value)
+{
+	GLint uniform_id = glGetUniformLocation(currentShaderId, _uniform);
+	if (uniform_id == -1) {
+		std::cout << "ERROR: could not find " << _uniform << " uniform\n";
+	}
+	glUniform3fv(uniform_id, 1, glm::value_ptr(_value));
+}
+
+void ShaderManager::SetUniform(const char* _uniform, const int& _value)
+{
+	GLint uniform_id = glGetUniformLocation(currentShaderId, _uniform);
+	if (uniform_id == -1) {
+		std::cout << "ERROR: could not find " << _uniform << " uniform\n";
+	}
+	glUniform1i(uniform_id, _value);
+}
+
+void ShaderManager::SetUniform(const char* _uniform, const float& _value)
+{
+	GLint uniform_id = glGetUniformLocation(currentShaderId, _uniform);
+	if (uniform_id == -1) {
+		std::cout << "ERROR: could not find " << _uniform << " uniform\n";
+	}
+	glUniform1f(uniform_id, _value);
 }

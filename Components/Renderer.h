@@ -13,6 +13,23 @@
 
 class IRenderer : public IComponent
 {
+public:
+	enum FLAGS {
+		NORMAL = 1 << 0,	// 1
+		CAMERA = 1 << 1,	// 2
+		SPECULAR = 1 << 2,  // 4
+		AMBIENT = 1 << 3,	// 8
+		DIFFUSE = 1 << 4,	// 16
+		SHININESS = 1 << 5, // 32
+		LIGHTS = 1 << 6		// 64
+	};
 
+	void SetFlag(FLAGS _flag);
+	void RemoveFlag(FLAGS _flag);
+	bool IsFlagSet(FLAGS _flag);
+
+protected:
+	ShaderManager& shaderManager = ShaderManager::GetInstance();
+	int flags = 0;
 };
 

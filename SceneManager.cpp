@@ -1,6 +1,10 @@
 #include "SceneManager.h"
 
+#include "../Scene.h"
 
+void SceneManager::Init()
+{
+}
 
 void SceneManager::SetActiveScene(Scene* _scene)
 {

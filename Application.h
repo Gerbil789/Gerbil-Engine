@@ -5,7 +5,6 @@
 #include <iostream>
 #include <cmath>
 
-#include "../Scene.h"
 #include "../GameObject/GameObject.h"
 #include "../Managers/ModelManager.h"
 #include "../Utilities/Color.h"
@@ -15,9 +14,11 @@
 #include "../Components/SpriteRenderer.h"
 #include "../Components/MeshRenderer.h"
 #include "../Components/Camera.h"
+
+#include "../Light.h"
+#include "../Scene.h"
+#include "../SceneManager.h"
 #include "../GUI.h"
-#include "../Components/PointLight.h"
-#include "SceneManager.h"
 
 
 class Application

@@ -8,7 +8,6 @@ struct VertexData {
 	vec3 worldPosition;
 	vec3 normal;
 	vec2 texCoords;
-	vec4 color;
 };
 
 out VertexData vertexData;
@@ -18,7 +17,7 @@ uniform mat4 modelMatrix;
 uniform mat4 viewMatrix;
 uniform mat4 projectionMatrix;
 uniform mat3 normalMatrix;
-uniform vec4 color;
+
 
 
 void main()
@@ -26,7 +25,6 @@ void main()
 	vertexData.worldPosition = vec3(modelMatrix * vec4(position, 1.0f));
 	vertexData.normal = mat3(transpose(inverse(modelMatrix))) * normalMatrix * normal;
 	vertexData.texCoords = texCoords;
-    vertexData.color = color;
 
 	model = modelMatrix;
 	gl_Position = projectionMatrix * viewMatrix * modelMatrix * vec4(position, 1.0f);

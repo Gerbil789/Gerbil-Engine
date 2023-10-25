@@ -7,10 +7,10 @@
 class SpriteRenderer : public IRenderer
 {
 public:
-	SpriteRenderer(glm::vec4 color = glm::vec4(1.0f));
+	SpriteRenderer(glm::vec3 color = glm::vec3(1.0f));
 	void Update() override;
 private:
-	glm::vec4 spriteColor;
+	glm::vec3 spriteColor;
 	GLuint VAO, shaderProgram;
 };
 
