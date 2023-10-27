@@ -78,6 +78,10 @@ void Application::Init()
 void Application::InitScenes()
 {
 	//------------Scene 1--------------
+	Scene* scene1 = new Scene();
+	SceneManager::GetInstance().AddScene(scene1);
+
+
 	GameObject* player_go = new GameObject("player");
 	player_go->transform->SetPosition(glm::vec3(0.0f, 0.0f, 5.0f));
 	player_go->AddComponent<Camera>();
@@ -87,25 +91,25 @@ void Application::InitScenes()
 	glfwSetCursorPosCallback(window, player_go->GetComponent<CameraController>()->cursor_callback);
 
 	GameObject* sphere1 = new GameObject("sphere1");
-	sphere1->AddComponent<MeshRenderer>("sphere", Color::White);
+	sphere1->AddComponent<MeshRenderer>("sphere");
 	sphere1->transform->SetPosition(glm::vec3(2.0f, 0.0f, 0.0f));
 
 	GameObject* sphere2 = new GameObject("sphere2");
-	sphere2->AddComponent<MeshRenderer>("sphere", Color::White);
+	sphere2->AddComponent<MeshRenderer>("sphere");
 	sphere2->transform->SetPosition(glm::vec3(-2.0f, 0.0f, 0.0f));
 
 	GameObject* sphere3 = new GameObject("sphere3");
-	sphere3->AddComponent<MeshRenderer>("sphere", Color::White);
+	sphere3->AddComponent<MeshRenderer>("sphere");
 	sphere3->transform->SetPosition(glm::vec3(0.0f, 2.0f, 0.0f));
 
 	GameObject* sphere4 = new GameObject("sphere4");
-	sphere4->AddComponent<MeshRenderer>("sphere", Color::White);
+	sphere4->AddComponent<MeshRenderer>("sphere");
 	sphere4->transform->SetPosition(glm::vec3(0.0f, -2.0f, 0.0f));
 
 	GameObject* pointLight = new GameObject("point light");
 	pointLight->AddComponent<Light>(Light::POINT, Color::White);
 
-	Scene* scene1 = new Scene();
+
 	scene1->Add(player_go);
 	scene1->Add(sphere1);
 	scene1->Add(sphere2);
@@ -115,10 +119,10 @@ void Application::InitScenes()
 
 	scene1->SetActiveCamera(player_go->GetComponent<Camera>());
 	
-	SceneManager::GetInstance().AddScene(scene1);
+	Serializer::SerializeToJson(scene1);
 
 	//------------Scene 2--------------
-	GameObject* empty = new GameObject("empty");
+	/*GameObject* empty = new GameObject("empty");
 	empty->AddComponent<RotationScript>(-100);
 
 	GameObject* sun = new GameObject("sun");
@@ -180,7 +184,7 @@ void Application::InitScenes()
 	scene2->SetActiveCamera(player_go->GetComponent<Camera>());
 
 	SceneManager::GetInstance().AddScene(scene2);
-	SceneManager::GetInstance().SetActiveScene(scene2);
+	SceneManager::GetInstance().SetActiveScene(scene2);*/
 
 	//------------Scene 3--------------
 	//------------Scene 4--------------

@@ -11,17 +11,19 @@ class Transform;
 class MeshRenderer : public IRenderer, public IObserver
 {
 public:
-	MeshRenderer(std::string _model = "sphere", glm::vec3 _color = glm::vec3(1.0f), std::string _shader = "phong", float _shininess = 16.0f);
+	MeshRenderer(std::string _model = "sphere", std::string _shader = "phong", Material* _material = new Material());
 	void Update() override;
 	
 	void SetTransform(Transform* t) override;
+	void UpdateObserver(ISubject* _subject) override; //update transformMatrix
 	void UpdateObserver() override; //update transformMatrix
 private:
 	GLuint shaderProgramId;
 	Shader* shader;
+	int numLights = 0;
+	std::vector<Light*> lights;
 	glm::mat4 transformMatrix;
 	Model* model;
-	glm::vec3 diffuse;
-	float shininess;
+	Material* material;
 };
 

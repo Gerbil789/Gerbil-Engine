@@ -2,6 +2,8 @@
 
 Light::Light(int _type, glm::vec3 _color, float _intensity)
 {
+	componentName = "light";
+
 	type = _type;
 	color = _color;
 	intensity = _intensity;

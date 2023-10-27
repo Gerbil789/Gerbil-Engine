@@ -30,10 +30,15 @@ public:
 	void SetNearPlane(float _nearPlane);
 	void SetFarPlane(float _farPlane);
 
+	float GetFov();
+	float GetAspect();
+	float GetNearPlane();
+	float GetFarPlane();
+
 	glm::mat4 GetViewMatrix();
 	glm::mat4 GetProjectionMatrix();
-	
-	void UpdateObserver() override; //get update from transform
+	 
+	void UpdateObserver() override;//get update from transform
 
 	void Attach(IObserver* _observer) override;
 	void Detach(IObserver* _observer) override;

@@ -1,9 +1,11 @@
 #pragma once
+class ISubject;
 
 class IObserver
 {
 public:
-	virtual void UpdateObserver() = 0;
+    virtual void UpdateObserver(ISubject* _subject) {};
+    virtual void UpdateObserver() {};
 };
 
 class ISubject {

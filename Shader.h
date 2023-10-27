@@ -13,6 +13,7 @@
 
 #include "Observer.h"
 #include "../Light.h"
+#include "../Scene.h"
 
 class Camera;
 
@@ -23,15 +24,10 @@ public:
 	GLuint id;
 	std::string name;
 	
-	void SetCamSubject(Camera* _camSubject);
-	void UpdateObserver() override;
+	void UpdateObserver(ISubject* _subject) override;
 
 	glm::vec3 camPosition = glm::vec3(1.0f);
 	glm::mat4 viewMatrix = glm::mat4(1.0f);
 	glm::mat4 projectionMatrix = glm::mat4(1.0f);
-	std::vector<Light*> lights;
-private:
-	Camera* camSubject;
-	
 };
 

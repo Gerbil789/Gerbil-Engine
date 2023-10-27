@@ -21,7 +21,7 @@ public:
 	void UseShader(GLuint _id);
 	GLuint GetShaderProgramId(std::string shader_name);
 	Shader* GetShaderProgram(GLuint _id);
-	void SetCamForShaders(Camera* _cam);
+	std::vector<Shader*> GetShaderPrograms();
 
 	void SetUniform(const char* _uniform, const glm::mat3& _value);
 	void SetUniform(const char* _uniform, const glm::mat4& _value);

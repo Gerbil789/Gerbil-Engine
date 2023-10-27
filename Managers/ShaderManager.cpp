@@ -111,12 +111,11 @@ Shader* ShaderManager::GetShaderProgram(GLuint _id)
 	return nullptr;
 }
 
-void ShaderManager::SetCamForShaders(Camera* _cam)
+std::vector<Shader*> ShaderManager::GetShaderPrograms()
 {
-	for (Shader* shader : shaderPrograms) {
-		shader->SetCamSubject(_cam);
-	}
+	return shaderPrograms;
 }
+
 
 std::string ShaderManager::ReadShaderSource(const std::string& filePath) {
 	std::ifstream file(filePath);

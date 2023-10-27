@@ -1,8 +1,6 @@
 #include "ObjectManager.h"
 #include <iostream>
 
-size_t ObjectManager::objectId = 0;
-
 ObjectManager::ObjectManager()
 {
 
@@ -10,8 +8,6 @@ ObjectManager::ObjectManager()
 
 void ObjectManager::Add(GameObject* _object)
 {
-	size_t id = ObjectManager::objectId++;
-	_object->SetId(id);
 	objects.push_back(_object);
 }
 

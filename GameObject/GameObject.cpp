@@ -13,15 +13,6 @@ void GameObject::Update()
 	}
 }
 
-size_t GameObject::GetId()
-{
-	return this->id;
-}
-
-void GameObject::SetId(size_t id)
-{
-	this->id = id;
-}
 
 std::string GameObject::GetName()
 {
@@ -67,4 +58,9 @@ GameObject* GameObject::GetParent()
 std::vector<GameObject*> GameObject::GetChildren()
 {
 	return children;
+}
+
+std::vector<IComponent*> GameObject::GetComponents()
+{
+	return components;
 }

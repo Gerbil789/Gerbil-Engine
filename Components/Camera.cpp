@@ -3,6 +3,8 @@
 
 Camera::Camera(glm::vec3 _target, float _fov, float _aspect, float _nearPlane, float _farPlane)
 {
+	componentName = "camera";
+
 	target = _target;
 	fov = _fov;
 	aspect = _aspect;
@@ -10,6 +12,11 @@ Camera::Camera(glm::vec3 _target, float _fov, float _aspect, float _nearPlane, f
 	farPlane = _farPlane;
 	projectionMatrix = glm::mat4(1.0f);
 	viewMatrix = glm::mat4(1.0f);
+
+	std::vector<Shader*> shaders = ShaderManager::GetInstance().GetShaderPrograms();
+	for (Shader* shader : shaders) {
+		Attach(shader);
+	}
 }
 
 void Camera::SetTarget(glm::vec3 _target)
@@ -57,6 +64,26 @@ void Camera::SetFarPlane(float _farPlane)
 	Notify();
 }
 
+float Camera::GetFov()
+{
+	return fov;
+}
+
+float Camera::GetAspect()
+{
+	return aspect;
+}
+
+float Camera::GetNearPlane()
+{
+	return nearPlane;
+}
+
+float Camera::GetFarPlane()
+{
+	return farPlane;
+}
+
 glm::mat4 Camera::GetViewMatrix()
 {
 	return viewMatrix;
@@ -66,6 +93,7 @@ glm::mat4 Camera::GetProjectionMatrix()
 {
 	return projectionMatrix;
 }
+
 
 void Camera::UpdateObserver()
 {
@@ -107,7 +135,7 @@ void Camera::Notify()
 	CalculateViewMatrix();
 
 	for (IObserver* observer : observers) {
-		observer->UpdateObserver();
+		observer->UpdateObserver(this);
 	}
 }
 

@@ -8,18 +8,20 @@ Shader::Shader(GLuint _id, std::string _name)
     name = _name;
 }
 
-void Shader::SetCamSubject(Camera* _camSubject)
+
+
+void Shader::UpdateObserver(ISubject* _subject)
 {
-    camSubject = _camSubject;
-    camSubject->Attach(this);
+    if (Camera* cam = dynamic_cast<Camera*>(_subject)) {
+        camPosition = cam->transform->GetPosition();
+        projectionMatrix = cam->GetProjectionMatrix();
+        viewMatrix = cam->GetViewMatrix();
+    }
+    else {
+        std::cout << "[Shader.cpp] ERROR: dynamic cast failed\n";
+    }
 }
 
-void Shader::UpdateObserver()
-{
-	camPosition = camSubject->transform->GetPosition();
-    projectionMatrix = camSubject->GetProjectionMatrix();
-    viewMatrix = camSubject->GetViewMatrix();
-}
 
 
 

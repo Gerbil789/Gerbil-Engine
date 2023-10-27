@@ -20,6 +20,11 @@ void Scene::Update()
 	objectManager.UpdateObjects();
 }
 
+std::string Scene::GetName()
+{
+	return name;
+}
+
 
 void Scene::Dispose()
 {
@@ -31,7 +36,7 @@ void Scene::Add(GameObject* _object)
 	objectManager.Add(_object);
 
 	if (Light* light = _object->GetComponent<Light>()) {
-		lights.push_back(light);
+		AddLight(light);
 	}
 }
 
@@ -43,7 +48,6 @@ ObjectManager& Scene::GetObjectManager()
 void Scene::SetActiveCamera(Camera* _cam)
 {
 	activeCam = _cam;
-	ShaderManager::GetInstance().SetCamForShaders(activeCam);
 }
 
 Camera* Scene::GetActiveCamera()
@@ -63,6 +67,7 @@ std::vector<Light*> Scene::GetLights()
 void Scene::AddLight(Light* _light)
 {
 	lights.push_back(_light);
+	Notify();
 }
 
 void Scene::RemoveLight(Light* _light)
@@ -75,4 +80,27 @@ void Scene::RemoveLight(Light* _light)
 		),
 		lights.end()
 	);
+	Notify();
+}
+
+void Scene::Attach(IObserver* _observer)
+{
+	observers.push_back(_observer);
+}
+
+void Scene::Detach(IObserver* _observer)
+{
+	for (auto it = observers.begin(); it != observers.end(); ++it) {
+		if (*it == _observer) {
+			observers.erase(it);
+			break;
+		}
+	}
+}
+
+void Scene::Notify()
+{
+	for (IObserver* observer : observers) {
+		observer->UpdateObserver(this);
+	}
 }

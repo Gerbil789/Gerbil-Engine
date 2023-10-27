@@ -11,8 +11,6 @@ class GameObject
 public:
 	GameObject(std::string name);
 	void Update();
-	size_t GetId();
-	void SetId(size_t id);
 	std::string GetName();
 	void Dispose();
 	Transform* transform = new Transform();
@@ -21,6 +19,7 @@ public:
 	void SetParent(GameObject* _parent);
 	GameObject* GetParent();
 	std::vector<GameObject*> GetChildren();
+	std::vector<IComponent*> GetComponents();
 
 	template <typename T>
 	void AddComponent() {
@@ -52,7 +51,6 @@ public:
 	
 
 private:
-	size_t id;
 	std::string name;
 	std::vector<IComponent*> components;
 	GameObject* parent = nullptr;

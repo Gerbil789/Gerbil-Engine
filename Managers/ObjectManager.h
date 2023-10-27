@@ -23,7 +23,6 @@ public:
 	void Dispose();
 
 private:
-	static size_t objectId;
 	std::vector<GameObject*> objects;
 };
 

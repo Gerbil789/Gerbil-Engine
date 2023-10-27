@@ -4,6 +4,8 @@
 
 CameraController::CameraController(Camera* _cam)
 {
+	componentName = "cameraController";
+
 	cam = _cam;
 	if (cam == nullptr) {
 		std::cerr << "ERROR: CameraController is missing Camera component.\n";
