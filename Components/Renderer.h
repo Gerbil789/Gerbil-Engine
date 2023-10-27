@@ -10,7 +10,7 @@
 #include "../Managers/ShaderManager.h"
 #include "../Managers/ModelManager.h"
 #include "../Components/Component.h"
-#include "../Material.h"
+#include "../Engine/Material.h"
 
 class IRenderer : public IComponent
 {

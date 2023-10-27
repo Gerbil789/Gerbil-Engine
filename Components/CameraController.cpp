@@ -1,6 +1,6 @@
 #include "CameraController.h"
-#include "../GameObject/GameObject.h"
-#include "../Scene.h"
+#include "../Engine/GameObject.h"
+#include "../Engine/Scene.h"
 
 CameraController::CameraController(Camera* _cam)
 {

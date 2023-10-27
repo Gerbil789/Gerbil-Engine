@@ -6,7 +6,7 @@
 #include <set>
 #include <algorithm>
 
-#include "../GameObject/GameObject.h"
+#include "../Engine/GameObject.h"
 
 class ObjectManager
 {

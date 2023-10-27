@@ -7,14 +7,15 @@
 #include "../Utilities/Color.h"
 #include "../Utilities/Input.h"
 #include "../Utilities/Time.h"
+#include "../Utilities/Serializer.h"
 
 #include "../Components/MeshRenderer.h"
 #include "../Components/CameraController.h"
-#include "../GameObject/GameObject.h"
+#include "../Engine/GameObject.h"
 #include "../Managers/ModelManager.h"
-#include "../RotationScript.h"
-#include "../GUI.h"
-#include "../Serializer.h"
+#include "../Scripts/RotationScript.h"
+#include "../GUI/GUI.h"
+
 
 class Application
 {

@@ -5,7 +5,7 @@
 #include <vector>
 
 #include "../Components/Component.h"
-#include "../Observer.h"
+#include "../Engine/Observer.h"
 
 
 class Shader;

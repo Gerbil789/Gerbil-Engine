@@ -6,7 +6,7 @@
 #include <string>
 
 #include "../Components/Camera.h"
-#include "../Shader.h"
+#include "../Engine/Shader.h"
 
 
 class ShaderManager

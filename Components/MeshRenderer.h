@@ -1,10 +1,10 @@
 #pragma once
 
 #include "../Components/Renderer.h"
-#include "../GameObject/GameObject.h"
-#include "../SceneManager.h"
+#include "../Engine/GameObject.h"
+#include "../Managers/SceneManager.h"
 
-#include "../Observer.h"
+#include "../Engine/Observer.h"
 
 class Transform;
 

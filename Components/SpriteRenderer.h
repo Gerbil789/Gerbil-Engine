@@ -1,7 +1,7 @@
 #pragma once
 
 #include "../Components/Renderer.h"
-#include "../GameObject/GameObject.h"
+#include "../Engine/GameObject.h"
 
 
 class SpriteRenderer : public IRenderer

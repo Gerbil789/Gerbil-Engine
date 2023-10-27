@@ -4,7 +4,7 @@
 #include "../Components/Camera.h"
 #include "../Utilities/Input.h"
 #include "../Utilities/Time.h"
-#include "../SceneManager.h"
+#include "../Managers/SceneManager.h"
 
 class CameraController : public IComponent
 {
