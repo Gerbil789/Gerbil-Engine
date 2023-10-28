@@ -18,8 +18,21 @@ void Serializer::SerializeToJson(Scene* _scene)
     }
 }
 
-Scene* Serializer::DeserializeFromJson(std::string path)
+Scene* Serializer::DeserializeFromJson(const std::string& path)
 {
+    std::ifstream inputFile(path);
+    if (inputFile.is_open()) {
+        json sceneData;
+        inputFile >> sceneData;
+
+        Scene* scene = DeserializeScene(sceneData);
+        SceneManager::GetInstance().AddScene(scene);
+   
+        inputFile.close();
+    }
+    else {
+        std::cerr << "Failed to open the JSON file " << path << "\n";
+    }
 	return nullptr;
 }
 
@@ -46,7 +59,6 @@ json Serializer::SerializeGameObject(GameObject* _gameObject)
 
     //transform
     serializedGameObject["transform"] = SerializeTransform(_gameObject->transform);
-
 
     //components
     json componentsArray;
@@ -93,7 +105,8 @@ json Serializer::SerializeComponent(IComponent* _component)
         serializedComponent["farPlane"] = cam->GetFarPlane();
     }
     else if (name == "cameraController") {
-
+        CameraController* cameraController = dynamic_cast<CameraController*>(_component);
+        serializedComponent["speed"] = cameraController->GetSpeed();
     }
     else if (name == "light") {
         Light* light = dynamic_cast<Light*>(_component);
@@ -103,7 +116,10 @@ json Serializer::SerializeComponent(IComponent* _component)
         serializedComponent["color"] = { col.x, col.y, col.z };
     }
     else if (name == "meshRenderer") {
-
+        MeshRenderer* meshRenderer = dynamic_cast<MeshRenderer*>(_component);
+        serializedComponent["shader"] = meshRenderer->GetShader()->name;
+        serializedComponent["model"] = meshRenderer->GetModel()->name;
+        serializedComponent["material"] = meshRenderer->GetMaterial()->name;
     }
     else {
         std::cout << "[NOT IMPLEMENTED] serialization component of type " << name << "\n";
@@ -111,3 +127,53 @@ json Serializer::SerializeComponent(IComponent* _component)
 
     return serializedComponent;
 }
+
+Scene* Serializer::DeserializeScene(const json& _sceneData)
+{
+    Scene* scene = new Scene(_sceneData["sceneName"]);
+    const json& gameObjectsArray = _sceneData["gameObjects"];
+    for (const json& gameObjectData : gameObjectsArray) {
+
+        GameObject* gameObject = DeserializeGameObject(gameObjectData);
+        scene->Add(gameObject);
+    }
+
+    return scene;
+}
+
+GameObject* Serializer::DeserializeGameObject(const json& _gameObjectData)
+{
+    std::string name = _gameObjectData["name"];
+    Transform* transform = DeserializeTransform(_gameObjectData["transform"]);
+
+    GameObject* gameObject = new GameObject(name);
+    //add transform
+
+    // Deserialize and add child GameObjects if they exist
+    if (_gameObjectData.find("children") != _gameObjectData.end() && !_gameObjectData["children"].is_null()) {
+        for (const auto& childData : _gameObjectData["children"]) {
+            GameObject* childObject = DeserializeGameObject(childData);
+            gameObject->AddChildren(childObject);
+        }
+    }
+
+    // Deserialize and add components to the GameObject
+    const json& componentsArray = _gameObjectData["components"];
+    for (const auto& componentData : componentsArray) {
+        IComponent* component = DeserializeComponent(componentData);
+        //gameObject->AddComponent<>(component);
+    }
+
+    return gameObject;
+}
+
+Transform* Serializer::DeserializeTransform(const json& _transformObjectData)
+{
+    return nullptr;
+}
+
+IComponent* Serializer::DeserializeComponent(const json& _componentData)
+{
+    return nullptr;
+}
+

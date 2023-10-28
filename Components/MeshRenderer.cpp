@@ -7,7 +7,7 @@ MeshRenderer::MeshRenderer(std::string _model, std::string _shader, Material* _m
 
 	material = _material;
 	transformMatrix = glm::mat4(1.0f);
-	shaderProgramId = ShaderManager::GetInstance().GetShaderProgramId(_shader);
+	shaderProgramId = shaderManager.GetShaderProgramId(_shader);
 	shader = shaderManager.GetShaderProgram(shaderProgramId);
 	model = ModelManager::GetInstance().GetModel(_model);
 	
@@ -61,8 +61,9 @@ void MeshRenderer::Update()
 			shaderManager.SetUniform(("lights[" + std::to_string(i) + "].position").c_str(), lights[i]->transform->GetPosition());
 			shaderManager.SetUniform(("lights[" + std::to_string(i) + "].color").c_str(), lights[i]->GetColor());
 			shaderManager.SetUniform(("lights[" + std::to_string(i) + "].intensity").c_str(), lights[i]->GetIntensity());
-
-			//glUniform1i(glGetUniformLocation(id, ("lights[" + std::to_string(i) + "].type").c_str()), lights[i].type);
+			
+			//light type - not implemented
+			//shaderManager.SetUniform(("lights[" + std::to_string(i) + "].type").c_str(), lights[i]->GetType());
 		}
 	}
 
@@ -87,6 +88,37 @@ void MeshRenderer::UpdateObserver(ISubject* _subject)
 void MeshRenderer::UpdateObserver()
 {
 	transformMatrix = transform->GetModel();
+}
+
+void MeshRenderer::SetShader(std::string _shader)
+{
+	shaderProgramId = shaderManager.GetShaderProgramId(_shader);
+	shader = shaderManager.GetShaderProgram(shaderProgramId);
+}
+
+Shader* MeshRenderer::GetShader()
+{
+	return shader;
+}
+
+void MeshRenderer::SetModel(std::string _model)
+{
+	model = ModelManager::GetInstance().GetModel(_model);
+}
+
+Model* MeshRenderer::GetModel()
+{
+	return model;
+}
+
+void MeshRenderer::SetMaterial(Material* _material)
+{
+	material = _material;
+}
+
+Material* MeshRenderer::GetMaterial()
+{
+	return material;
 }
 
 

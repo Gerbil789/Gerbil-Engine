@@ -120,6 +120,7 @@ void Application::InitScenes()
 	scene1->SetActiveCamera(player_go->GetComponent<Camera>());
 	
 	Serializer::SerializeToJson(scene1);
+	Serializer::DeserializeFromJson("Scenes/newScene1.json");
 
 	//------------Scene 2--------------
 	/*GameObject* empty = new GameObject("empty");

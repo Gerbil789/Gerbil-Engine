@@ -5,7 +5,7 @@ int Scene::sceneCount = 0;
 Scene::Scene(const std::string& _name)
 {
 	sceneCount++;
-	if (name.empty()) 
+	if (_name.empty())
 	{
 		name = "newScene" + std::to_string(sceneCount++);
 	}

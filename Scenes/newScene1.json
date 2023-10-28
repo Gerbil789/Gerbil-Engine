@@ -11,7 +11,8 @@
                     "nearPlane": 0.10000000149011612
                 },
                 {
-                    "name": "cameraController"
+                    "name": "cameraController",
+                    "speed": 2.0
                 }
             ],
             "name": "player",
@@ -38,7 +39,10 @@
             "children": null,
             "components": [
                 {
-                    "name": "meshRenderer"
+                    "material": "material",
+                    "model": "sphere",
+                    "name": "meshRenderer",
+                    "shader": "phong"
                 }
             ],
             "name": "sphere1",
@@ -65,7 +69,10 @@
             "children": null,
             "components": [
                 {
-                    "name": "meshRenderer"
+                    "material": "material",
+                    "model": "sphere",
+                    "name": "meshRenderer",
+                    "shader": "phong"
                 }
             ],
             "name": "sphere2",
@@ -92,7 +99,10 @@
             "children": null,
             "components": [
                 {
-                    "name": "meshRenderer"
+                    "material": "material",
+                    "model": "sphere",
+                    "name": "meshRenderer",
+                    "shader": "phong"
                 }
             ],
             "name": "sphere3",
@@ -119,7 +129,10 @@
             "children": null,
             "components": [
                 {
-                    "name": "meshRenderer"
+                    "material": "material",
+                    "model": "sphere",
+                    "name": "meshRenderer",
+                    "shader": "phong"
                 }
             ],
             "name": "sphere4",

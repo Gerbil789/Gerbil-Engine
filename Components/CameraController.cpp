@@ -15,27 +15,27 @@ CameraController::CameraController(Camera* _cam)
 void CameraController::Update()
 {
 	if (Input::IsKeyDown(GLFW_KEY_W)) {
-		transform->MoveBy(cam->GetFront() * playerSpeed * (float)Time::deltaTime);
+		transform->MoveBy(cam->GetFront() * speed * (float)Time::deltaTime);
 	}
 
 	if (Input::IsKeyDown(GLFW_KEY_S)) {
-		transform->MoveBy(-cam->GetFront() * playerSpeed * (float)Time::deltaTime);
+		transform->MoveBy(-cam->GetFront() * speed * (float)Time::deltaTime);
 	}
 
 	if (Input::IsKeyDown(GLFW_KEY_A)) {
-		transform->MoveBy(cam->GetLeft() * playerSpeed * (float)Time::deltaTime);
+		transform->MoveBy(cam->GetLeft() * speed * (float)Time::deltaTime);
 	}
 
 	if (Input::IsKeyDown(GLFW_KEY_D)) {
-		transform->MoveBy(-cam->GetLeft() * playerSpeed * (float)Time::deltaTime);
+		transform->MoveBy(-cam->GetLeft() * speed * (float)Time::deltaTime);
 	}
 
 	if (Input::IsKeyDown(GLFW_KEY_SPACE)) {
-		transform->MoveBy(glm::vec3(0.0f, 1.0f, 0.0f) * playerSpeed * (float)Time::deltaTime);
+		transform->MoveBy(glm::vec3(0.0f, 1.0f, 0.0f) * speed * (float)Time::deltaTime);
 	}
 
 	if (Input::IsKeyDown(GLFW_KEY_LEFT_SHIFT)) {
-		transform->MoveBy(glm::vec3(0.0f, -1.0f, 0.0f) * playerSpeed * (float)Time::deltaTime);
+		transform->MoveBy(glm::vec3(0.0f, -1.0f, 0.0f) * speed * (float)Time::deltaTime);
 	}
 }
 
@@ -70,4 +70,14 @@ void CameraController::cursor_callback(GLFWwindow* window, double x, double y)
 	direction.z = sin(glm::radians(yaw)) * cos(glm::radians(pitch));
 	//TO DO: fix this
 	SceneManager::GetInstance().GetActiveScene()->GetActiveCamera()->SetTarget((glm::normalize(direction)));
+}
+
+float CameraController::GetSpeed()
+{
+	return speed;
+}
+
+void CameraController::SetSpeed(float _speed)
+{
+	speed = _speed;
 }

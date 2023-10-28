@@ -12,8 +12,10 @@ public:
 	CameraController(Camera* _cam);
 	void Update() override;
 	static void cursor_callback(GLFWwindow* window, double x, double y);
-	float playerSpeed = 2.0f;
+	float GetSpeed();
+	void SetSpeed(float _speed);
 private:
 	Camera* cam;
+	float speed = 2.0f;
 };
 

@@ -13,10 +13,17 @@ class MeshRenderer : public IRenderer, public IObserver
 public:
 	MeshRenderer(std::string _model = "sphere", std::string _shader = "phong", Material* _material = new Material());
 	void Update() override;
-	
 	void SetTransform(Transform* t) override;
-	void UpdateObserver(ISubject* _subject) override; //update transformMatrix
-	void UpdateObserver() override; //update transformMatrix
+	void UpdateObserver(ISubject* _subject) override; 
+	void UpdateObserver() override;
+
+	void SetShader(std::string _shader);
+	Shader* GetShader();
+	void SetModel(std::string _model);
+	Model* GetModel();
+	void SetMaterial(Material* _material);
+	Material* GetMaterial();
+
 private:
 	GLuint shaderProgramId;
 	Shader* shader;
