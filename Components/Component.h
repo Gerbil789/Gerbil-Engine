@@ -17,8 +17,8 @@ public:
 	std::string GetName();
 
 	GameObject* GetGameObject();
-	GameObject* gameObject;
-	Transform* transform;
+	GameObject* gameObject = nullptr;
+	Transform* transform = nullptr;
 protected:
 	std::string componentName = "undefinedComponent";
 

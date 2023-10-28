@@ -2,14 +2,19 @@
 #include "../Engine/GameObject.h"
 #include "../Engine/Scene.h"
 
-CameraController::CameraController(Camera* _cam)
+CameraController::CameraController(float _speed, Camera* _cam)
 {
 	componentName = "cameraController";
 
-	cam = _cam;
-	if (cam == nullptr) {
-		std::cerr << "ERROR: CameraController is missing Camera component.\n";
+	speed = _speed;
+	
+	if (_cam == nullptr) {
+		std::cerr << "WARNING: CameraController is missing Camera component.\n";
 	}
+	else {
+		cam = _cam;
+	}
+
 }
 
 void CameraController::Update()
@@ -37,21 +42,22 @@ void CameraController::Update()
 	if (Input::IsKeyDown(GLFW_KEY_LEFT_SHIFT)) {
 		transform->MoveBy(glm::vec3(0.0f, -1.0f, 0.0f) * speed * (float)Time::deltaTime);
 	}
+
+	if (Input::CursorMoved()) {
+		ProcessCameraView();
+	}
 }
 
-static double lastX = Input::GetMouseX();
-static double lastY = Input::GetMouseY();
-static double yaw = -90.0f;
-static double pitch = 0.0f;
 
-void CameraController::cursor_callback(GLFWwindow* window, double x, double y)
+
+void CameraController::ProcessCameraView()
 {
 	glm::vec3 direction;
 
-	double xoffset = x - lastX;
-	double yoffset = lastY - y;
-	lastX = x;
-	lastY = y;
+	double xoffset = Input::GetMouseX() - lastX;
+	double yoffset = lastY - Input::GetMouseY();
+	lastX = Input::GetMouseX();
+	lastY = Input::GetMouseY();
 
 	float sensitivity = 0.1f;
 	xoffset *= sensitivity;
@@ -65,11 +71,11 @@ void CameraController::cursor_callback(GLFWwindow* window, double x, double y)
 	if (pitch < -89.0f)
 		pitch = -89.0f;
 
-	direction.x = cos(glm::radians(yaw)) * cos(glm::radians(pitch));
-	direction.y = sin(glm::radians(pitch));
-	direction.z = sin(glm::radians(yaw)) * cos(glm::radians(pitch));
-	//TO DO: fix this
-	SceneManager::GetInstance().GetActiveScene()->GetActiveCamera()->SetTarget((glm::normalize(direction)));
+	direction.x = static_cast<float>(cos(glm::radians(yaw)) * cos(glm::radians(pitch)));
+	direction.y = static_cast<float>(sin(glm::radians(pitch)));
+	direction.z = static_cast<float>(sin(glm::radians(yaw)) * cos(glm::radians(pitch)));
+
+	cam->SetTarget((glm::normalize(direction)));
 }
 
 float CameraController::GetSpeed()
@@ -80,4 +86,9 @@ float CameraController::GetSpeed()
 void CameraController::SetSpeed(float _speed)
 {
 	speed = _speed;
+}
+
+void CameraController::SetCam(Camera* _cam)
+{
+	cam = _cam;
 }

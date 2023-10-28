@@ -14,11 +14,11 @@ class Camera : public IComponent, public ISubject, public IObserver
 {
 public:
 	Camera(
-		glm::vec3 _target = glm::vec3(0.0f),
 		float _fov = 45.0f,
 		float _aspect = 4.0f / 3.0f,
 		float _nearPlane = 0.1f,
-		float _farPlane = 100.0f
+		float _farPlane = 100.0f,
+		glm::vec3 _target = glm::vec3(0.0f)
 	);
 
 	void SetTarget(glm::vec3 _target);

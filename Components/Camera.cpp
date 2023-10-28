@@ -1,7 +1,7 @@
 #include "Camera.h"
 #include "../Engine/Shader.h"
 
-Camera::Camera(glm::vec3 _target, float _fov, float _aspect, float _nearPlane, float _farPlane)
+Camera::Camera(float _fov, float _aspect, float _nearPlane, float _farPlane, glm::vec3 _target)
 {
 	componentName = "camera";
 

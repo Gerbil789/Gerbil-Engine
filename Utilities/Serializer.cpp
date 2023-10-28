@@ -26,9 +26,9 @@ Scene* Serializer::DeserializeFromJson(const std::string& path)
         inputFile >> sceneData;
 
         Scene* scene = DeserializeScene(sceneData);
-        SceneManager::GetInstance().AddScene(scene);
    
         inputFile.close();
+        return scene;
     }
     else {
         std::cerr << "Failed to open the JSON file " << path << "\n";
@@ -144,12 +144,11 @@ Scene* Serializer::DeserializeScene(const json& _sceneData)
 GameObject* Serializer::DeserializeGameObject(const json& _gameObjectData)
 {
     std::string name = _gameObjectData["name"];
-    Transform* transform = DeserializeTransform(_gameObjectData["transform"]);
 
     GameObject* gameObject = new GameObject(name);
-    //add transform
+    gameObject->transform = DeserializeTransform(_gameObjectData["transform"]);
 
-    // Deserialize and add child GameObjects if they exist
+    //children
     if (_gameObjectData.find("children") != _gameObjectData.end() && !_gameObjectData["children"].is_null()) {
         for (const auto& childData : _gameObjectData["children"]) {
             GameObject* childObject = DeserializeGameObject(childData);
@@ -157,11 +156,10 @@ GameObject* Serializer::DeserializeGameObject(const json& _gameObjectData)
         }
     }
 
-    // Deserialize and add components to the GameObject
+    //components
     const json& componentsArray = _gameObjectData["components"];
     for (const auto& componentData : componentsArray) {
-        IComponent* component = DeserializeComponent(componentData);
-        //gameObject->AddComponent<>(component);
+        DeserializeComponent(componentData, gameObject);
     }
 
     return gameObject;
@@ -169,11 +167,75 @@ GameObject* Serializer::DeserializeGameObject(const json& _gameObjectData)
 
 Transform* Serializer::DeserializeTransform(const json& _transformObjectData)
 {
-    return nullptr;
+
+    const json& positionArray = _transformObjectData["position"];
+    glm::vec3 position(
+        positionArray[0].get<float>(),
+        positionArray[1].get<float>(),
+        positionArray[2].get<float>()
+    );
+
+    const json& rotationArray = _transformObjectData["rotation"];
+	glm::quat rotation(
+		rotationArray[0].get<float>(), // w
+		rotationArray[1].get<float>(), // x
+		rotationArray[2].get<float>(), // y
+		rotationArray[3].get<float>()  // z
+	);
+
+    const json& scaleArray = _transformObjectData["scale"];
+    glm::vec3 scale(
+        scaleArray[0].get<float>(),
+        scaleArray[1].get<float>(),
+        scaleArray[2].get<float>()
+    );
+
+    Transform* transform = new Transform();
+    transform->SetPosition(position);
+    //transform->SetRotation(rotation);
+    transform->SetRotation(0.0f, glm::vec3(1.0f));
+    transform->SetScale(scale);
+
+    return transform;
 }
 
-IComponent* Serializer::DeserializeComponent(const json& _componentData)
+void Serializer::DeserializeComponent(const json& _componentData, GameObject* _gameObject)
 {
-    return nullptr;
+    std::string name = _componentData["name"];
+
+    if (name == "camera") {
+        float fov = _componentData["fov"];
+        float aspect = _componentData["aspect"];
+        float nearPlane = _componentData["nearPlane"];
+        float farPlane = _componentData["farPlane"];
+        _gameObject->AddComponent<Camera>(fov, aspect, nearPlane, farPlane);
+    }
+    else if (name == "cameraController") {
+        float speed = _componentData["speed"];
+        _gameObject->AddComponent<CameraController>(speed); 
+    }
+    else if (name == "light") {
+        int type = _componentData["type"];
+        const json& positionArray = _componentData["color"];
+        glm::vec3 color(
+            positionArray[0].get<float>(),
+            positionArray[1].get<float>(),
+            positionArray[2].get<float>()
+        );
+        float intensity = _componentData["intensity"];
+
+        _gameObject->AddComponent<Light>(type, color, intensity);
+    }
+    else if (name == "meshRenderer") {
+
+
+        std::string model = _componentData["model"];
+        std::string shader = _componentData["shader"];
+        std::string material = _componentData["material"];
+        _gameObject->AddComponent<MeshRenderer>(model, shader);
+    }
+    else {
+        std::cout << "[NOT IMPLEMENTED] deserialization component\n";
+    }
 }
 

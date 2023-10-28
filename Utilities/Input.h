@@ -5,24 +5,28 @@
 
 class Input {
 public:
-  static bool IsKeyPressed(int key);
+	static bool CursorMoved();
 
-  static bool IsKeyDown(int key);
+	static bool IsKeyPressed(int key);
 
-  static bool IsKeyUp(int key);
+	static bool IsKeyDown(int key);
 
-  static bool IsMouseButtonPressed(int button);
+	static bool IsKeyUp(int key);
 
-  static bool IsMouseButtonClicked(int button);
+	static bool IsMouseButtonPressed(int button);
 
-  static double GetMouseX();
+	static bool IsMouseButtonClicked(int button);
 
-  static double GetMouseY();
+	static double GetMouseX();
 
-  static void Update();
+	static double GetMouseY();
+
+	static void Update();
 
 private:
-  static bool keyStates[GLFW_KEY_LAST];
-  static bool mouseButtonStates[GLFW_MOUSE_BUTTON_LAST + 1];
+	static bool keyStates[GLFW_KEY_LAST];
+	static bool mouseButtonStates[GLFW_MOUSE_BUTTON_LAST + 1];
+
+	static double prevCursorX, prevCursorY;
 
 };

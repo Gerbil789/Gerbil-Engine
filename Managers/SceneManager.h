@@ -2,6 +2,7 @@
 
 #include <vector>
 #include "../Engine/Scene.h"
+#include "../Utilities/Serializer.h"
 
 class SceneManager
 {
@@ -10,14 +11,15 @@ public:
 		static SceneManager instance;
 		return instance;
 	}
-	void Init();
-	void SetActiveScene(Scene* _scene);
+
+	void LoadScene(Scene* _scene); //load from code
+	void LoadScene(std::string _scene);	//load from file
+	void SaveScene(); //save to file
+
 	Scene* GetActiveScene();
-	void AddScene(Scene* _scene);
 
 private:
 	SceneManager() {};
 	Scene* activeScene = nullptr;
-	std::vector<Scene*> scenes;
 };
 

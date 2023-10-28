@@ -1,5 +1,5 @@
 #include "Scene.h"
-
+#include "../Components/MeshRenderer.h"
 int Scene::sceneCount = 0;
 
 Scene::Scene(const std::string& _name)
@@ -12,6 +12,21 @@ Scene::Scene(const std::string& _name)
 	else 
 	{
 		name = _name;
+	}
+}
+
+void Scene::Init()
+{
+	for (GameObject* go : objectManager.GetObjects()) {
+		if (MeshRenderer* meshRenderer = go->GetComponent<MeshRenderer>()) {
+			Attach(meshRenderer);
+		}
+		
+		if (CameraController* cameraController = go->GetComponent<CameraController>()) {
+			cameraController->SetCam(GetActiveCamera());
+		}
+
+		
 	}
 }
 
@@ -53,6 +68,14 @@ void Scene::SetActiveCamera(Camera* _cam)
 Camera* Scene::GetActiveCamera()
 {
 	if (activeCam == nullptr) {
+		for (GameObject* go : objectManager.GetObjects()) {
+			
+			if (Camera* cam = go->GetComponent<Camera>()) {
+				SetActiveCamera(cam);
+				return activeCam;
+			}
+		}
+		
 		std::cerr << "ERROR: No active camera found.\n";
 	}
 	return activeCam;

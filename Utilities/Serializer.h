@@ -23,6 +23,6 @@ private:
 	static Scene* DeserializeScene(const json& _sceneData);
 	static GameObject* DeserializeGameObject(const json& _gameObjectData);
 	static Transform* DeserializeTransform(const json& _transformObjectData);
-	static IComponent* DeserializeComponent(const json& _componentData);
+	static void DeserializeComponent(const json& _componentData, GameObject* _gameObject);
 };
 

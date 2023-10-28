@@ -21,7 +21,9 @@ MeshRenderer::MeshRenderer(std::string _model, std::string _shader, Material* _m
 	SetFlag(CAMERA);
 	SetFlag(LIGHTS);
 
-	SceneManager::GetInstance().GetActiveScene()->Attach(this);
+	if (Scene* scene = SceneManager::GetInstance().GetActiveScene()) {
+		scene->Attach(this);
+	}
 }
 
 void MeshRenderer::Update()
@@ -81,7 +83,7 @@ void MeshRenderer::UpdateObserver(ISubject* _subject)
 {
 	if (Scene* scene = dynamic_cast<Scene*>(_subject)) {
 		lights = scene->GetLights();
-		numLights = lights.size();
+		numLights = (int)lights.size();
 	}
 }
 

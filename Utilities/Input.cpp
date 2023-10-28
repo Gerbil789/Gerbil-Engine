@@ -1,5 +1,25 @@
 #include "Input.h"
 
+double Input::prevCursorX = 0.0;
+double Input::prevCursorY = 0.0;
+
+
+bool Input::CursorMoved()
+{
+    GLFWwindow* window = glfwGetCurrentContext();
+    if (window) {
+        double currentCursorX, currentCursorY;
+        glfwGetCursorPos(window, &currentCursorX, &currentCursorY);
+
+        if (currentCursorX != prevCursorX || currentCursorY != prevCursorY) {
+            prevCursorX = currentCursorX;
+            prevCursorY = currentCursorY;
+            return true;
+        }
+    }
+    return false;
+}
+
 bool Input::IsKeyPressed(int key) {
 	GLFWwindow* window = glfwGetCurrentContext();
 	return glfwGetKey(window, key) == GLFW_PRESS;
@@ -33,17 +53,11 @@ bool Input::IsMouseButtonClicked(int button) {
 }
 
 double Input::GetMouseX() {
-  GLFWwindow* window = glfwGetCurrentContext();
-  double xpos, ypos;
-  glfwGetCursorPos(window, &xpos, &ypos);
-  return xpos;
+  return prevCursorX;
 }
 
 double Input::GetMouseY() {
-  GLFWwindow* window = glfwGetCurrentContext();
-  double xpos, ypos;
-  glfwGetCursorPos(window, &xpos, &ypos);
-  return ypos;
+  return prevCursorY;
 }
 
 void Input::Update() {

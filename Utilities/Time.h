@@ -6,10 +6,10 @@ class Time
 {
 public:
 	static void Update();
-	static double deltaTime;
+	static float deltaTime;
 
 private:
-	static double previousTime;
+	static float previousTime;
 
 };
 

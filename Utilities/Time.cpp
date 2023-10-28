@@ -3,10 +3,10 @@
 
 void Time::Update()
 {
-	double currentTime = glfwGetTime();
+	float currentTime = static_cast<float>(glfwGetTime());
 	deltaTime = currentTime - previousTime;
 	previousTime = currentTime;
 }
 
-double Time::previousTime = glfwGetTime();
-double Time::deltaTime = glfwGetTime();
+float Time::previousTime = static_cast<float>(glfwGetTime());
+float Time::deltaTime = static_cast<float>(glfwGetTime());

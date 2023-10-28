@@ -71,15 +71,15 @@ void Application::Init()
 	ShaderManager::GetInstance().Init();
 	
 	ModelManager::GetInstance().Init();
-
-	SceneManager::GetInstance().Init();
 }
 
 void Application::InitScenes()
 {
+	//SceneManager::GetInstance().LoadScene("newScene1");
 	//------------Scene 1--------------
+
 	Scene* scene1 = new Scene();
-	SceneManager::GetInstance().AddScene(scene1);
+	SceneManager::GetInstance().LoadScene(scene1);
 
 
 	GameObject* player_go = new GameObject("player");
@@ -87,8 +87,7 @@ void Application::InitScenes()
 	player_go->AddComponent<Camera>();
 	player_go->GetComponent<Camera>()->SetTarget(glm::vec3(0.0f, 0.0f, -5.0f));
 	player_go->GetComponent<Camera>()->SetAspect(ratio);
-	player_go->AddComponent<CameraController>(player_go->GetComponent<Camera>());
-	glfwSetCursorPosCallback(window, player_go->GetComponent<CameraController>()->cursor_callback);
+	player_go->AddComponent<CameraController>(2.0f, player_go->GetComponent<Camera>());
 
 	GameObject* sphere1 = new GameObject("sphere1");
 	sphere1->AddComponent<MeshRenderer>("sphere");
@@ -119,8 +118,11 @@ void Application::InitScenes()
 
 	scene1->SetActiveCamera(player_go->GetComponent<Camera>());
 	
-	Serializer::SerializeToJson(scene1);
-	Serializer::DeserializeFromJson("Scenes/newScene1.json");
+	SceneManager::GetInstance().SaveScene();
+	//Serializer::SerializeToJson(scene1);
+	//Serializer::DeserializeFromJson("Scenes/newScene1.json");
+
+
 
 	//------------Scene 2--------------
 	/*GameObject* empty = new GameObject("empty");
@@ -195,7 +197,7 @@ void Application::InitScenes()
 
 void Application::Run()
 {
-	//GUI gui(window, scene);
+	GUI gui(window, SceneManager::GetInstance().GetActiveScene());
 
 	while (!glfwWindowShouldClose(window)) {
 
@@ -206,21 +208,15 @@ void Application::Run()
 
 		Time::Update();
 
-		//sphere1->transform->RotateBy(-50.0f * Time::deltaTime, glm::vec3(0.0f, 1.0f, 0.0f));
-		//sphere2->transform->RotateBy(50.0f * Time::deltaTime, glm::vec3(0.0f, 1.0f, 0.0f));
-		//sphere3->transform->RotateBy(-50.0f * Time::deltaTime, glm::vec3(1.0f, 0.0f, 0.0f));
-		//sphere4->transform->RotateBy(50.0f * Time::deltaTime, glm::vec3(1.0f, 0.0f, 0.0f));
-
-
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		SceneManager::GetInstance().GetActiveScene()->Update();
 		
 		glfwPollEvents();
-		//gui.Update();
+		gui.Update();
 		glfwSwapBuffers(window);
 	}
 
-	//gui.Dispose();
+	gui.Dispose();
 	glfwDestroyWindow(window);
 	glfwTerminate();
 	exit(EXIT_SUCCESS);

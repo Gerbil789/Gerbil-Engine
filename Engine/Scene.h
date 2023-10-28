@@ -4,12 +4,13 @@
 #include "../Managers/ObjectManager.h"
 #include "../Components/Camera.h"
 #include "../Components/Light.h"
-#include "../Engine/Observer.h"
+
 
 class Scene : public ISubject
 {
 public:
 	Scene(const std::string& _name = "");
+	void Init(); //call after scene is loaded
 	void Update();
 	std::string GetName();
 
