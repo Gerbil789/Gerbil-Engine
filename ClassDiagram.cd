@@ -1,2 +1,194 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ClassDiagram /> 
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Transform" Collapsed="true">
+    <Position X="19.5" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAIAAAAACCAAAIAAACAIAQCAIAAAghAIAIAAgAAJEA=</HashCode>
+      <FileName>Engine\Transform.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Application" Collapsed="true">
+    <Position X="26" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAQAQAAAAAAAAAAAAAAIAAAiABAAAAI=</HashCode>
+      <FileName>Engine\Application.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Camera" Collapsed="true">
+    <Position X="16.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ICAOAAQAQCEAQAIAIAAoEgAAQqFAAAhAAABAAIQAAAI=</HashCode>
+      <FileName>Components\Camera.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CameraController" Collapsed="true">
+    <Position X="10.25" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEQgBAAAAQAAAIAAAAAIAFAAAAEAAUAAAAAAAAAAAAA=</HashCode>
+      <FileName>Components\CameraController.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Color" Collapsed="true">
+    <Position X="32.25" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAGAABAAAAAAgAAABAABAAABAAABAAAAAAIADAAAAA=</HashCode>
+      <FileName>Utilities\Color.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="IComponent" Collapsed="true">
+    <Position X="13.75" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAAAQAABAAAAAAAAEAAAAAggAgAQABAA=</HashCode>
+      <FileName>Components\Component.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GameObject" Collapsed="true">
+    <Position X="30" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAgAACAIAARAAACABAAgAAAEQAAAAEBAAAYABAA=</HashCode>
+      <FileName>Engine\GameObject.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GUI" Collapsed="true">
+    <Position X="27.75" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAACAAAAAAAAAAAIAADAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>GUI\GUI.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Input" Collapsed="true">
+    <Position X="32.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAQAAAAAAAAAAAAAACQAAEBAAAAQAAAAAiAAQCAAAAA=</HashCode>
+      <FileName>Utilities\Input.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Light" Collapsed="true">
+    <Position X="12" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAIAAAAAAAgAAAAABCAGQAAgAAAAAAAA=</HashCode>
+      <FileName>Components\Light.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Material" Collapsed="true">
+    <Position X="30" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAABAAAAAAAAAAAAAAAAAAIAAAAEAAAAAAAAAABAAAA=</HashCode>
+      <FileName>Engine\Material.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MeshRenderer" Collapsed="true">
+    <Position X="14.5" Y="6.5" Width="1.5" />
+    <InheritanceLine Type="IObserver" ManuallyRouted="true">
+      <Path>
+        <Point X="22.75" Y="2.312" />
+        <Point X="22.75" Y="6.081" />
+        <Point X="15.25" Y="6.081" />
+        <Point X="15.25" Y="6.5" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>ACQIAEAACACAAAAIAAABAAAAAAoAAAAEBABAAERIAAA=</HashCode>
+      <FileName>Components\MeshRenderer.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Model" Collapsed="true">
+    <Position X="30" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQAEAgAAAAAAAhAAAAAAAAEAAAAUABAAAAgAAAAEAgA=</HashCode>
+      <FileName>Engine\Model.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ModelManager" Collapsed="true">
+    <Position X="27.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAACAAAAAABAAAAAABAAAAAAAAAACAAAIAAA=</HashCode>
+      <FileName>Managers\ModelManager.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ObjectManager" Collapsed="true">
+    <Position X="27.75" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQMAAAAAACAAAAAAAAAABgAAAQAAAAAAIAAAAAACAAA=</HashCode>
+      <FileName>Managers\ObjectManager.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="IObserver" Collapsed="true">
+    <Position X="22" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Engine\Observer.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ISubject" Collapsed="true">
+    <Position X="16.5" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAIAAAAAAAAAAIAAAABAAAAAAAAAAAA=</HashCode>
+      <FileName>Engine\Observer.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="IRenderer" Collapsed="true">
+    <Position X="13.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAACAAAAAAAAAAAAAAEAAAgAAAAAAAAAAAAAAAAAAQ=</HashCode>
+      <FileName>Components\Renderer.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RotationScript" Collapsed="true">
+    <Position X="8.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAIAAACAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Scripts\RotationScript.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Scene" Collapsed="true">
+    <Position X="17.75" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAYIACACACIAAAIAgARAAAAAAIIEkABACAACAAAADAA=</HashCode>
+      <FileName>Engine\Scene.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SceneManager" Collapsed="true">
+    <Position X="27.75" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAABACAAABAAEAAgAAAAAAAAAAAQ=</HashCode>
+      <FileName>Managers\SceneManager.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Serializer" Collapsed="true">
+    <Position X="32.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>SgAAAAAAAAIAIBAAAAAAABACAAEAAAAAAAAAAACIAAA=</HashCode>
+      <FileName>Utilities\Serializer.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Shader" Collapsed="true">
+    <Position X="23" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QCAAAAAAACAAAAAAAAAAAiAAAAAEAAAAAAAAAAAAAgA=</HashCode>
+      <FileName>Engine\Shader.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ShaderManager" Collapsed="true">
+    <Position X="27.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAIAAAABBggAEQABAAAAAAARAAIAAAAAIADAAAACAA=</HashCode>
+      <FileName>Managers\ShaderManager.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SpriteRenderer" Collapsed="true">
+    <Position X="12.5" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAgAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAIQA=</HashCode>
+      <FileName>Components\SpriteRenderer.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Time" Collapsed="true">
+    <Position X="32.25" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAgAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Utilities\Time.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
