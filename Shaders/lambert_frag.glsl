@@ -4,7 +4,6 @@ struct VertexData {
 	vec3 worldPosition;
 	vec3 normal;
 	vec2 texCoords;
-	vec4 color;
 };
 
 struct Light {
@@ -13,16 +12,21 @@ struct Light {
     float intensity;
 };
 
+struct Material {
+    vec3 ambient;
+    vec3 diffuse;
+    vec3 specular;
+    float shininess;
+};
+
 in VertexData vertexData;
 
 out vec4 outColor;
 
 const int MAX_LIGHTS = 4;
-
 uniform Light lights[MAX_LIGHTS];
 uniform int numLights; 
-
-uniform vec3 lightPosition;
+uniform Material material;
 
 void main()
 {
@@ -36,6 +40,5 @@ void main()
         finalColor += diffuse;
     }
 
-    vec4 ambient = vec4( 0.1, 0.1, 0.1, 1.0);
-	outColor = (ambient + vec4(finalColor, 1.0)) * vertexData.color;
+	outColor = (vec4(material.ambient, 1.0) + vec4(finalColor, 1.0)) * vec4(material.diffuse, 1.0);
 }

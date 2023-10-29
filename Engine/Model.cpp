@@ -26,7 +26,7 @@ Model::Model(std::string path) {
 		return;
 	}
 
-	textureID = LoadTexture("Textures/test.bmp");
+	//textureID = LoadTexture("Textures/test.bmp");
 
 	glGenBuffers(1, &VBO);
 	glBindBuffer(GL_ARRAY_BUFFER, VBO);

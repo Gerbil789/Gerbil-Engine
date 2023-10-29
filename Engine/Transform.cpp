@@ -53,6 +53,9 @@ void Transform::MoveBy(const glm::vec3& offset)
 
 void Transform::SetRotation(float angle, const glm::vec3& axis)
 {
+	if (angle == 0.0f) {
+		return;
+	}
 	this->rotation = glm::rotate(glm::quat(), glm::radians(angle), axis);
 	Notify();
 }

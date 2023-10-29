@@ -17,6 +17,8 @@ public:
   static const glm::vec3 White;
   static const glm::vec3 DarkGreen;
   static const glm::vec3 Gray;
+
+  static glm::vec3 Random();
 };
 
 #endif

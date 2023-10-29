@@ -13,7 +13,7 @@ public:
 	}
 
 	void LoadScene(Scene* _scene); //load from code
-	void LoadScene(std::string _scene);	//load from file
+	Scene* LoadScene(std::string _scene);	//load from file
 	void SaveScene(); //save to file
 
 	Scene* GetActiveScene();

@@ -1,0 +1,266 @@
+{
+    "gameObjects": [
+        {
+            "children": null,
+            "components": [
+                {
+                    "aspect": 1.5,
+                    "farPlane": 100.0,
+                    "fov": 45.0,
+                    "name": "camera",
+                    "nearPlane": 0.10000000149011612
+                },
+                {
+                    "name": "cameraController",
+                    "speed": 2.0
+                }
+            ],
+            "name": "player",
+            "transform": {
+                "position": [
+                    0.0,
+                    0.0,
+                    5.0
+                ],
+                "rotation": [
+                    1.0,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            }
+        },
+        {
+            "children": [
+                {
+                    "children": [
+                        {
+                            "children": null,
+                            "components": [
+                                {
+                                    "material": "material",
+                                    "model": "sphere",
+                                    "name": "meshRenderer",
+                                    "shader": "phong"
+                                },
+                                {
+                                    "direction": [
+                                        0.0,
+                                        1.0,
+                                        0.0
+                                    ],
+                                    "name": "rotationScript",
+                                    "value": 150.0
+                                }
+                            ],
+                            "name": "moon",
+                            "transform": {
+                                "position": [
+                                    -4.0,
+                                    0.0,
+                                    0.0
+                                ],
+                                "rotation": [
+                                    1.0,
+                                    0.0,
+                                    0.0,
+                                    0.0
+                                ],
+                                "scale": [
+                                    0.4000000059604645,
+                                    0.4000000059604645,
+                                    0.4000000059604645
+                                ]
+                            }
+                        }
+                    ],
+                    "components": [
+                        {
+                            "material": "material",
+                            "model": "sphere",
+                            "name": "meshRenderer",
+                            "shader": "phong"
+                        },
+                        {
+                            "direction": [
+                                0.0,
+                                1.0,
+                                0.0
+                            ],
+                            "name": "rotationScript",
+                            "value": 500.0
+                        }
+                    ],
+                    "name": "earth",
+                    "transform": {
+                        "position": [
+                            -9.0,
+                            0.0,
+                            0.0
+                        ],
+                        "rotation": [
+                            1.0,
+                            0.0,
+                            0.0,
+                            0.0
+                        ],
+                        "scale": [
+                            1.2000000476837158,
+                            1.2000000476837158,
+                            1.2000000476837158
+                        ]
+                    }
+                }
+            ],
+            "components": [
+                {
+                    "direction": [
+                        0.0,
+                        1.0,
+                        0.0
+                    ],
+                    "name": "rotationScript",
+                    "value": -100.0
+                }
+            ],
+            "name": "empty",
+            "transform": {
+                "position": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "rotation": [
+                    1.0,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            }
+        },
+        {
+            "children": [
+                {
+                    "children": null,
+                    "components": [
+                        {
+                            "material": "material",
+                            "model": "sphere",
+                            "name": "meshRenderer",
+                            "shader": "phong"
+                        },
+                        {
+                            "direction": [
+                                0.0,
+                                1.0,
+                                0.0
+                            ],
+                            "name": "rotationScript",
+                            "value": -350.0
+                        }
+                    ],
+                    "name": "mars",
+                    "transform": {
+                        "position": [
+                            -5.0,
+                            0.0,
+                            0.0
+                        ],
+                        "rotation": [
+                            1.0,
+                            0.0,
+                            0.0,
+                            0.0
+                        ],
+                        "scale": [
+                            0.5,
+                            0.5,
+                            0.5
+                        ]
+                    }
+                }
+            ],
+            "components": [
+                {
+                    "material": "material",
+                    "model": "sphere",
+                    "name": "meshRenderer",
+                    "shader": "phong"
+                },
+                {
+                    "direction": [
+                        0.0,
+                        1.0,
+                        0.0
+                    ],
+                    "name": "rotationScript",
+                    "value": 50.0
+                }
+            ],
+            "name": "sun",
+            "transform": {
+                "position": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "rotation": [
+                    1.0,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "scale": [
+                    3.0,
+                    3.0,
+                    3.0
+                ]
+            }
+        },
+        {
+            "children": null,
+            "components": [
+                {
+                    "color": [
+                        1.0,
+                        1.0,
+                        1.0
+                    ],
+                    "intensity": 1.0,
+                    "name": "light",
+                    "type": 1
+                }
+            ],
+            "name": "point light",
+            "transform": {
+                "position": [
+                    0.0,
+                    5.0,
+                    0.0
+                ],
+                "rotation": [
+                    1.0,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            }
+        }
+    ],
+    "sceneName": "TransformTest"
+}

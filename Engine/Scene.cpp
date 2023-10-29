@@ -28,6 +28,7 @@ void Scene::Init()
 
 		
 	}
+	Notify();
 }
 
 void Scene::Update()

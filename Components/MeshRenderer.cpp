@@ -13,13 +13,26 @@ MeshRenderer::MeshRenderer(std::string _model, std::string _shader, Material* _m
 	
 	if (model == nullptr) { std::cerr << "[MeshRemderer] ERROR: could not load model [" << _model << "]\n"; }
 
-	SetFlag(NORMAL);
-	SetFlag(AMBIENT);
-	SetFlag(DIFFUSE);
-	SetFlag(SPECULAR);
-	SetFlag(SHININESS);
-	SetFlag(CAMERA);
-	SetFlag(LIGHTS);
+	if (_shader == "constant") {
+		SetFlag(DIFFUSE);
+	}
+	else if (_shader == "lambert") {
+		SetFlag(NORMAL);
+		SetFlag(AMBIENT);
+		SetFlag(DIFFUSE);
+		SetFlag(LIGHTS);
+	}
+	else if (_shader == "phong") {
+		SetFlag(NORMAL);
+		SetFlag(AMBIENT);
+		SetFlag(DIFFUSE);
+		SetFlag(SPECULAR);
+		SetFlag(SHININESS);
+		SetFlag(CAMERA);
+		SetFlag(LIGHTS);
+	}
+
+	
 
 	if (Scene* scene = SceneManager::GetInstance().GetActiveScene()) {
 		scene->Attach(this);

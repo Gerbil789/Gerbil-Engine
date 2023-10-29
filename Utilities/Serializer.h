@@ -7,6 +7,7 @@
 #include "../Components/MeshRenderer.h"
 #include "../Components/SpriteRenderer.h"
 #include "../Components/Light.h"
+#include "../Scripts/RotationScript.h"
 using json = nlohmann::json;
 
 class Serializer
@@ -24,5 +25,7 @@ private:
 	static GameObject* DeserializeGameObject(const json& _gameObjectData);
 	static Transform* DeserializeTransform(const json& _transformObjectData);
 	static void DeserializeComponent(const json& _componentData, GameObject* _gameObject);
+
+	static void AddGameObjectToScene(GameObject* _gameObject, Scene* _scene);
 };
 

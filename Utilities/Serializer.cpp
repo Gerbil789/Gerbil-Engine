@@ -81,10 +81,21 @@ json Serializer::SerializeTransform(Transform* _transform)
 {
     json serializedTransform;
     glm::vec3 pos = _transform->GetPosition();
-    glm::quat rot = _transform->GetRotation();
     glm::vec3 sca = _transform->GetScale();
+    glm::quat rot = _transform->GetRotation();
+
+    float ang = glm::degrees(2.0f * std::acos(rot.w));
+    glm::vec3 dir = glm::vec3(rot.x, rot.y, rot.z);
+
+    if (glm::length(dir) > 1e-6) {
+        dir = glm::normalize(dir);
+    }
+    else {
+        dir = glm::vec3(1.0f, 1.0f, 1.0f); 
+    }
+
     serializedTransform["position"] = { pos.x, pos.y, pos.z };
-    serializedTransform["rotation"] = { rot.w, rot.x, rot.y, rot.z };
+    serializedTransform["rotation"] = { ang, dir.x, dir.y, dir.z };
     serializedTransform["scale"] = { sca.x, sca.y, sca.z };
 
     return serializedTransform;
@@ -121,11 +132,25 @@ json Serializer::SerializeComponent(IComponent* _component)
         serializedComponent["model"] = meshRenderer->GetModel()->name;
         serializedComponent["material"] = meshRenderer->GetMaterial()->name;
     }
+    else if (name == "rotationScript") {
+        RotationScript* rotationScript = dynamic_cast<RotationScript*>(_component);
+        serializedComponent["value"] = rotationScript->val;
+        glm::vec3 dir = rotationScript->dir;
+        serializedComponent["direction"] = { dir.x, dir.y, dir.z };
+    }
     else {
         std::cout << "[NOT IMPLEMENTED] serialization component of type " << name << "\n";
     }
 
     return serializedComponent;
+}
+
+//add childer go to a scene
+void Serializer::AddGameObjectToScene(GameObject* _gameObject, Scene* _scene) {
+    _scene->Add(_gameObject);
+    for (GameObject* go : _gameObject->GetChildren()) {
+        AddGameObjectToScene(go, _scene);
+    } 
 }
 
 Scene* Serializer::DeserializeScene(const json& _sceneData)
@@ -135,11 +160,13 @@ Scene* Serializer::DeserializeScene(const json& _sceneData)
     for (const json& gameObjectData : gameObjectsArray) {
 
         GameObject* gameObject = DeserializeGameObject(gameObjectData);
-        scene->Add(gameObject);
+        AddGameObjectToScene(gameObject, scene); //recursion
     }
 
     return scene;
 }
+
+
 
 GameObject* Serializer::DeserializeGameObject(const json& _gameObjectData)
 {
@@ -176,8 +203,8 @@ Transform* Serializer::DeserializeTransform(const json& _transformObjectData)
     );
 
     const json& rotationArray = _transformObjectData["rotation"];
-	glm::quat rotation(
-		rotationArray[0].get<float>(), // w
+    float angle = rotationArray[0].get<float>(); //angle
+	glm::vec3 dir(
 		rotationArray[1].get<float>(), // x
 		rotationArray[2].get<float>(), // y
 		rotationArray[3].get<float>()  // z
@@ -192,8 +219,7 @@ Transform* Serializer::DeserializeTransform(const json& _transformObjectData)
 
     Transform* transform = new Transform();
     transform->SetPosition(position);
-    //transform->SetRotation(rotation);
-    transform->SetRotation(0.0f, glm::vec3(1.0f));
+    transform->SetRotation(angle, dir);
     transform->SetScale(scale);
 
     return transform;
@@ -227,12 +253,20 @@ void Serializer::DeserializeComponent(const json& _componentData, GameObject* _g
         _gameObject->AddComponent<Light>(type, color, intensity);
     }
     else if (name == "meshRenderer") {
-
-
         std::string model = _componentData["model"];
         std::string shader = _componentData["shader"];
         std::string material = _componentData["material"];
         _gameObject->AddComponent<MeshRenderer>(model, shader);
+    }
+    else if (name == "rotationScript") {
+        float val = _componentData["value"];
+        const json& positionArray = _componentData["direction"];
+        glm::vec3 dir(
+            positionArray[0].get<float>(),
+            positionArray[1].get<float>(),
+            positionArray[2].get<float>()
+        );
+        _gameObject->AddComponent<RotationScript>(val, dir);
     }
     else {
         std::cout << "[NOT IMPLEMENTED] deserialization component\n";

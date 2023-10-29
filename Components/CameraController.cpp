@@ -7,14 +7,10 @@ CameraController::CameraController(float _speed, Camera* _cam)
 	componentName = "cameraController";
 
 	speed = _speed;
-	
-	if (_cam == nullptr) {
-		std::cerr << "WARNING: CameraController is missing Camera component.\n";
-	}
-	else {
+
+	if(_cam != nullptr){
 		cam = _cam;
 	}
-
 }
 
 void CameraController::Update()
@@ -46,6 +42,10 @@ void CameraController::Update()
 	if (Input::CursorMoved()) {
 		ProcessCameraView();
 	}
+
+	//std::cout << transform->GetPosition().x << " ";
+	//std::cout << transform->GetPosition().y << " ";
+	//std::cout << transform->GetPosition().z << "\n";
 }
 
 

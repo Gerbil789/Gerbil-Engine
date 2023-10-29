@@ -1,0 +1,3704 @@
+{
+    "gameObjects": [
+        {
+            "children": null,
+            "components": [
+                {
+                    "aspect": 1.5,
+                    "farPlane": 100.0,
+                    "fov": 45.0,
+                    "name": "camera",
+                    "nearPlane": 0.10000000149011612
+                },
+                {
+                    "name": "cameraController",
+                    "speed": 2.0
+                }
+            ],
+            "name": "player",
+            "transform": {
+                "position": [
+                    0.0,
+                    0.0,
+                    5.0
+                ],
+                "rotation": [
+                    0.0,
+                    1.0,
+                    1.0,
+                    1.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            }
+        },
+        {
+            "children": null,
+            "components": [
+                {
+                    "material": "material",
+                    "model": "plane",
+                    "name": "meshRenderer",
+                    "shader": "phong"
+                }
+            ],
+            "name": "plane",
+            "transform": {
+                "position": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "rotation": [
+                    0.0,
+                    1.0,
+                    1.0,
+                    1.0
+                ],
+                "scale": [
+                    10.0,
+                    10.0,
+                    10.0
+                ]
+            }
+        },
+        {
+            "children": null,
+            "components": [
+                {
+                    "material": "material",
+                    "model": "rock2",
+                    "name": "meshRenderer",
+                    "shader": "constant"
+                }
+            ],
+            "name": "rock2",
+            "transform": {
+                "position": [
+                    -6.596575736999512,
+                    0.0,
+                    -8.402050971984863
+                ],
+                "rotation": [
+                    340.0,
+                    0.0,
+                    1.0,
+                    0.0
+                ],
+                "scale": [
+                    0.3076540529727936,
+                    0.3076540529727936,
+                    0.3076540529727936
+                ]
+            }
+        },
+        {
+            "children": null,
+            "components": [
+                {
+                    "material": "material",
+                    "model": "rock2",
+                    "name": "meshRenderer",
+                    "shader": "phong"
+                }
+            ],
+            "name": "rock2",
+            "transform": {
+                "position": [
+                    -1.0892057418823242,
+                    0.0,
+                    7.894222736358643
+                ],
+                "rotation": [
+                    73.99999237060547,
+                    0.0,
+                    1.0,
+                    0.0
+                ],
+                "scale": [
+                    0.3358653485774994,
+                    0.3358653485774994,
+                    0.3358653485774994
+                ]
+            }
+        },
+        {
+            "children": null,
+            "components": [
+                {
+                    "material": "material",
+                    "model": "stump",
+                    "name": "meshRenderer",
+                    "shader": "constant"
+                }
+            ],
+            "name": "stump",
+            "transform": {
+                "position": [
+                    -3.3426923751831055,
+                    0.0,
+                    -8.678548812866211
+                ],
+                "rotation": [
+                    65.00000762939453,
+                    0.0,
+                    1.0,
+                    0.0
+                ],
+                "scale": [
+                    0.4193761944770813,
+                    0.4193761944770813,
+                    0.4193761944770813
+                ]
+            }
+        },
+        {
+            "children": null,
+            "components": [
+                {
+                    "material": "material",
+                    "model": "rock1",
+                    "name": "meshRenderer",
+                    "shader": "lambert"
+                }
+            ],
+            "name": "rock1",
+            "transform": {
+                "position": [
+                    8.87874984741211,
+                    0.0,
+                    -2.6328320503234863
+                ],
+                "rotation": [
+                    149.0,
+                    0.0,
+                    1.0,
+                    0.0
+                ],
+                "scale": [
+                    0.3869960606098175,
+                    0.3869960606098175,
+                    0.3869960606098175
+                ]
+            }
+        },
+        {
+            "children": null,
+            "components": [
+                {
+                    "material": "material",
+                    "model": "rock2",
+                    "name": "meshRenderer",
+                    "shader": "lambert"
+                }
+            ],
+            "name": "rock2",
+            "transform": {
+                "position": [
+                    -9.888912200927734,
+                    0.0,
+                    4.127628803253174
+                ],
+                "rotation": [
+                    194.0,
+                    0.0,
+                    1.0,
+                    0.0
+                ],
+                "scale": [
+                    0.3505386412143707,
+                    0.3505386412143707,
+                    0.3505386412143707
+                ]
+            }
+        },
+        {
+            "children": null,
+            "components": [
+                {
+                    "material": "material",
+                    "model": "rock1",
+                    "name": "meshRenderer",
+                    "shader": "phong"
+                }
+            ],
+            "name": "rock1",
+            "transform": {
+                "position": [
+                    4.798425674438477,
+                    0.0,
+                    -0.011902451515197754
+                ],
+                "rotation": [
+                    129.0,
+                    0.0,
+                    0.9999999403953552,
+                    0.0
+                ],
+                "scale": [
+                    0.4015595018863678,
+                    0.4015595018863678,
+                    0.4015595018863678
+                ]
+            }
+        },
+        {
+            "children": null,
+            "components": [
+                {
+                    "material": "material",
+                    "model": "stump",
+                    "name": "meshRenderer",
+                    "shader": "lambert"
+                }
+            ],
+            "name": "stump",
+            "transform": {
+                "position": [
+                    9.160741806030273,
+                    0.0,
+                    -9.501937866210938
+                ],
+                "rotation": [
+                    141.0,
+                    0.0,
+                    1.0,
+                    0.0
+                ],
+                "scale": [
+                    0.31809747219085693,
+                    0.31809747219085693,
+                    0.31809747219085693
+                ]
+            }
+        },
+        {
+            "children": null,
+            "components": [
+                {
+                    "material": "material",
+                    "model": "rock3",
+                    "name": "meshRenderer",
+                    "shader": "phong"
+                }
+            ],
+            "name": "rock3",
+            "transform": {
+                "position": [
+                    -5.7359538078308105,
+                    0.0,
+                    -2.766503095626831
+                ],
+                "rotation": [
+                    338.0,
+                    0.0,
+                    1.0,
+                    0.0
+                ],
+                "scale": [
+                    0.3397595286369324,
+                    0.3397595286369324,
+                    0.3397595286369324
+                ]
+            }
+        },
+        {
+            "children": null,
+            "components": [
+                {
+                    "material": "material",
+                    "model": "stump",
+                    "name": "meshRenderer",
+                    "shader": "lambert"
+                }
+            ],
+            "name": "stump",
+            "transform": {
+                "position": [
+                    -1.027558445930481,
+                    0.0,
+                    -4.369945526123047
+                ],
+                "rotation": [
+                    162.0,
+                    0.0,
+                    1.0,
+                    0.0
+                ],
+                "scale": [
+                    0.3935880661010742,
+                    0.3935880661010742,
+                    0.3935880661010742
+                ]
+            }
+        },
+        {
+            "children": null,
+            "components": [
+                {
+                    "material": "material",
+                    "model": "rock2",
+                    "name": "meshRenderer",
+                    "shader": "phong"
+                }
+            ],
+            "name": "rock2",
+            "transform": {
+                "position": [
+                    8.0822172164917,
+                    0.0,
+                    -4.590289115905762
+                ],
+                "rotation": [
+                    321.0,
+                    0.0,
+                    1.0,
+                    0.0
+                ],
+                "scale": [
+                    0.4390484392642975,
+                    0.4390484392642975,
+                    0.4390484392642975
+                ]
+            }
+        },
+        {
+            "children": null,
+            "components": [
+                {
+                    "material": "material",
+                    "model": "rock1",
+                    "name": "meshRenderer",
+                    "shader": "constant"
+                }
+            ],
+            "name": "rock1",
+            "transform": {
+                "position": [
+                    9.959105491638184,
+                    0.0,
+                    5.912961006164551
+                ],
+                "rotation": [
+                    162.0,
+                    0.0,
+                    1.0,
+                    0.0
+                ],
+                "scale": [
+                    0.3520950973033905,
+                    0.3520950973033905,
+                    0.3520950973033905
+                ]
+            }
+        },
+        {
+            "children": null,
+            "components": [
+                {
+                    "material": "material",
+                    "model": "rock3",
+                    "name": "meshRenderer",
+                    "shader": "constant"
+                }
+            ],
+            "name": "rock3",
+            "transform": {
+                "position": [
+                    5.842769145965576,
+                    0.0,
+                    -7.243568420410156
+                ],
+                "rotation": [
+                    258.0,
+                    0.0,
+                    0.9999999403953552,
+                    0.0
+                ],
+                "scale": [
+                    0.38610491156578064,
+                    0.38610491156578064,
+                    0.38610491156578064
+                ]
+            }
+        },
+        {
+            "children": null,
+            "components": [
+                {
+                    "material": "material",
+                    "model": "rock2",
+                    "name": "meshRenderer",
+                    "shader": "phong"
+                }
+            ],
+            "name": "rock2",
+            "transform": {
+                "position": [
+                    -4.512161731719971,
+                    0.0,
+                    6.801049709320068
+                ],
+                "rotation": [
+                    300.0,
+                    0.0,
+                    1.0,
+                    0.0
+                ],
+                "scale": [
+                    0.32232123613357544,
+                    0.32232123613357544,
+                    0.32232123613357544
+                ]
+            }
+        },
+        {
+            "children": null,
+            "components": [
+                {
+                    "material": "material",
+                    "model": "rock2",
+                    "name": "meshRenderer",
+                    "shader": "lambert"
+                }
+            ],
+            "name": "rock2",
+            "transform": {
+                "position": [
+                    0.7986688613891602,
+                    0.0,
+                    4.272895812988281
+                ],
+                "rotation": [
+                    187.0,
+                    0.0,
+                    1.0,
+                    0.0
+                ],
+                "scale": [
+                    0.4255775511264801,
+                    0.4255775511264801,
+                    0.4255775511264801
+                ]
+            }
+        },
+        {
+            "children": null,
+            "components": [
+                {
+                    "material": "material",
+                    "model": "rock3",
+                    "name": "meshRenderer",
+                    "shader": "phong"
+                }
+            ],
+            "name": "rock3",
+            "transform": {
+                "position": [
+                    1.7148351669311523,
+                    0.0,
+                    -2.5254063606262207
+                ],
+                "rotation": [
+                    332.0,
+                    0.0,
+                    1.0,
+                    0.0
+                ],
+                "scale": [
+                    0.43759575486183167,
+                    0.43759575486183167,
+                    0.43759575486183167
+                ]
+            }
+        },
+        {
+            "children": null,
+            "components": [
+                {
+                    "material": "material",
+                    "model": "rock2",
+                    "name": "meshRenderer",
+                    "shader": "phong"
+                }
+            ],
+            "name": "rock2",
+            "transform": {
+                "position": [
+                    -6.030762672424316,
+                    0.0,
+                    -0.5197304487228394
+                ],
+                "rotation": [
+                    107.99999237060547,
+                    0.0,
+                    1.0,
+                    0.0
+                ],
+                "scale": [
+                    0.33873409032821655,
+                    0.33873409032821655,
+                    0.33873409032821655
+                ]
+            }
+        },
+        {
+            "children": null,
+            "components": [
+                {
+                    "material": "material",
+                    "model": "oak",
+                    "name": "meshRenderer",
+                    "shader": "constant"
+                }
+            ],
+            "name": "oak",
+            "transform": {
+                "position": [
+                    6.143680572509766,
+                    0.0,
+                    -2.5913267135620117
+                ],
+                "rotation": [
+                    303.0,
+                    0.0,
+                    1.0,
+                    0.0
+                ],
+                "scale": [
+                    0.339667946100235,
+                    0.339667946100235,
+                    0.339667946100235
+                ]
+            }
+        },
+        {
+            "children": null,
+            "components": [
+                {
+                    "material": "material",
+                    "model": "rock3",
+                    "name": "meshRenderer",
+                    "shader": "constant"
+                }
+            ],
+            "name": "rock3",
+            "transform": {
+                "position": [
+                    -6.621601104736328,
+                    0.0,
+                    -9.588610649108887
+                ],
+                "rotation": [
+                    280.0,
+                    0.0,
+                    1.0,
+                    0.0
+                ],
+                "scale": [
+                    0.4320841133594513,
+                    0.4320841133594513,
+                    0.4320841133594513
+                ]
+            }
+        },
+        {
+            "children": null,
+            "components": [
+                {
+                    "material": "material",
+                    "model": "stump",
+                    "name": "meshRenderer",
+                    "shader": "lambert"
+                }
+            ],
+            "name": "stump",
+            "transform": {
+                "position": [
+                    4.880214691162109,
+                    0.0,
+                    -9.9896240234375
+                ],
+                "rotation": [
+                    298.0,
+                    0.0,
+                    1.0,
+                    0.0
+                ],
+                "scale": [
+                    0.4796685576438904,
+                    0.4796685576438904,
+                    0.4796685576438904
+                ]
+            }
+        },
+        {
+            "children": null,
+            "components": [
+                {
+                    "material": "material",
+                    "model": "oak",
+                    "name": "meshRenderer",
+                    "shader": "phong"
+                }
+            ],
+            "name": "oak",
+            "transform": {
+                "position": [
+                    0.6180000305175781,
+                    0.0,
+                    8.250679016113281
+                ],
+                "rotation": [
+                    334.0,
+                    0.0,
+                    1.0,
+                    0.0
+                ],
+                "scale": [
+                    0.46041139960289,
+                    0.46041139960289,
+                    0.46041139960289
+                ]
+            }
+        },
+        {
+            "children": null,
+            "components": [
+                {
+                    "material": "material",
+                    "model": "rock3",
+                    "name": "meshRenderer",
+                    "shader": "lambert"
+                }
+            ],
+            "name": "rock3",
+            "transform": {
+                "position": [
+                    0.8951079845428467,
+                    0.0,
+                    -8.652913093566895
+                ],
+                "rotation": [
+                    12.999978065490723,
+                    0.0,
+                    1.0,
+                    0.0
+                ],
+                "scale": [
+                    0.4187414050102234,
+                    0.4187414050102234,
+                    0.4187414050102234
+                ]
+            }
+        },
+        {
+            "children": null,
+            "components": [
+                {
+                    "material": "material",
+                    "model": "spruce",
+                    "name": "meshRenderer",
+                    "shader": "lambert"
+                }
+            ],
+            "name": "spruce",
+            "transform": {
+                "position": [
+                    -3.9732046127319336,
+                    0.0,
+                    -0.2566605806350708
+                ],
+                "rotation": [
+                    320.0,
+                    0.0,
+                    1.0,
+                    0.0
+                ],
+                "scale": [
+                    0.3969694972038269,
+                    0.3969694972038269,
+                    0.3969694972038269
+                ]
+            }
+        },
+        {
+            "children": null,
+            "components": [
+                {
+                    "material": "material",
+                    "model": "rock1",
+                    "name": "meshRenderer",
+                    "shader": "lambert"
+                }
+            ],
+            "name": "rock1",
+            "transform": {
+                "position": [
+                    -0.4257333278656006,
+                    0.0,
+                    -9.872432708740234
+                ],
+                "rotation": [
+                    32.000003814697266,
+                    0.0,
+                    1.0,
+                    0.0
+                ],
+                "scale": [
+                    0.47991272807121277,
+                    0.47991272807121277,
+                    0.47991272807121277
+                ]
+            }
+        },
+        {
+            "children": null,
+            "components": [
+                {
+                    "material": "material",
+                    "model": "stump",
+                    "name": "meshRenderer",
+                    "shader": "phong"
+                }
+            ],
+            "name": "stump",
+            "transform": {
+                "position": [
+                    8.203069686889648,
+                    0.0,
+                    -8.750572204589844
+                ],
+                "rotation": [
+                    349.9999694824219,
+                    0.0,
+                    1.0,
+                    0.0
+                ],
+                "scale": [
+                    0.3792992830276489,
+                    0.3792992830276489,
+                    0.3792992830276489
+                ]
+            }
+        },
+        {
+            "children": null,
+            "components": [
+                {
+                    "material": "material",
+                    "model": "oak",
+                    "name": "meshRenderer",
+                    "shader": "phong"
+                }
+            ],
+            "name": "oak",
+            "transform": {
+                "position": [
+                    5.844600200653076,
+                    0.0,
+                    1.1014127731323242
+                ],
+                "rotation": [
+                    274.0,
+                    0.0,
+                    1.0,
+                    0.0
+                ],
+                "scale": [
+                    0.46690571308135986,
+                    0.46690571308135986,
+                    0.46690571308135986
+                ]
+            }
+        },
+        {
+            "children": null,
+            "components": [
+                {
+                    "material": "material",
+                    "model": "rock3",
+                    "name": "meshRenderer",
+                    "shader": "phong"
+                }
+            ],
+            "name": "rock3",
+            "transform": {
+                "position": [
+                    -4.232612133026123,
+                    0.0,
+                    1.6385388374328613
+                ],
+                "rotation": [
+                    4.999969959259033,
+                    0.0,
+                    1.0,
+                    0.0
+                ],
+                "scale": [
+                    0.4283669590950012,
+                    0.4283669590950012,
+                    0.4283669590950012
+                ]
+            }
+        },
+        {
+            "children": null,
+            "components": [
+                {
+                    "material": "material",
+                    "model": "rock2",
+                    "name": "meshRenderer",
+                    "shader": "constant"
+                }
+            ],
+            "name": "rock2",
+            "transform": {
+                "position": [
+                    -8.283638954162598,
+                    0.0,
+                    -9.688711166381836
+                ],
+                "rotation": [
+                    45.999996185302734,
+                    0.0,
+                    1.0,
+                    0.0
+                ],
+                "scale": [
+                    0.4709952175617218,
+                    0.4709952175617218,
+                    0.4709952175617218
+                ]
+            }
+        },
+        {
+            "children": null,
+            "components": [
+                {
+                    "material": "material",
+                    "model": "rock3",
+                    "name": "meshRenderer",
+                    "shader": "lambert"
+                }
+            ],
+            "name": "rock3",
+            "transform": {
+                "position": [
+                    1.8747520446777344,
+                    0.0,
+                    7.604297637939453
+                ],
+                "rotation": [
+                    305.0,
+                    0.0,
+                    1.0,
+                    0.0
+                ],
+                "scale": [
+                    0.48602253198623657,
+                    0.48602253198623657,
+                    0.48602253198623657
+                ]
+            }
+        },
+        {
+            "children": null,
+            "components": [
+                {
+                    "material": "material",
+                    "model": "rock3",
+                    "name": "meshRenderer",
+                    "shader": "phong"
+                }
+            ],
+            "name": "rock3",
+            "transform": {
+                "position": [
+                    -3.2602925300598145,
+                    0.0,
+                    9.749748229980469
+                ],
+                "rotation": [
+                    100.99999237060547,
+                    0.0,
+                    0.9999999403953552,
+                    0.0
+                ],
+                "scale": [
+                    0.35743582248687744,
+                    0.35743582248687744,
+                    0.35743582248687744
+                ]
+            }
+        },
+        {
+            "children": null,
+            "components": [
+                {
+                    "material": "material",
+                    "model": "stump",
+                    "name": "meshRenderer",
+                    "shader": "lambert"
+                }
+            ],
+            "name": "stump",
+            "transform": {
+                "position": [
+                    7.2728657722473145,
+                    0.0,
+                    8.923306465148926
+                ],
+                "rotation": [
+                    312.0,
+                    0.0,
+                    0.9999999403953552,
+                    0.0
+                ],
+                "scale": [
+                    0.36616411805152893,
+                    0.36616411805152893,
+                    0.36616411805152893
+                ]
+            }
+        },
+        {
+            "children": null,
+            "components": [
+                {
+                    "material": "material",
+                    "model": "stump",
+                    "name": "meshRenderer",
+                    "shader": "lambert"
+                }
+            ],
+            "name": "stump",
+            "transform": {
+                "position": [
+                    9.045991897583008,
+                    0.0,
+                    3.3677172660827637
+                ],
+                "rotation": [
+                    112.0,
+                    0.0,
+                    1.0,
+                    0.0
+                ],
+                "scale": [
+                    0.48451489210128784,
+                    0.48451489210128784,
+                    0.48451489210128784
+                ]
+            }
+        },
+        {
+            "children": null,
+            "components": [
+                {
+                    "material": "material",
+                    "model": "rock3",
+                    "name": "meshRenderer",
+                    "shader": "phong"
+                }
+            ],
+            "name": "rock3",
+            "transform": {
+                "position": [
+                    8.41975212097168,
+                    0.0,
+                    -0.8084350824356079
+                ],
+                "rotation": [
+                    72.99999237060547,
+                    0.0,
+                    1.0,
+                    0.0
+                ],
+                "scale": [
+                    0.39345988631248474,
+                    0.39345988631248474,
+                    0.39345988631248474
+                ]
+            }
+        },
+        {
+            "children": null,
+            "components": [
+                {
+                    "material": "material",
+                    "model": "stump",
+                    "name": "meshRenderer",
+                    "shader": "lambert"
+                }
+            ],
+            "name": "stump",
+            "transform": {
+                "position": [
+                    3.918271064758301,
+                    0.0,
+                    -1.3669240474700928
+                ],
+                "rotation": [
+                    351.00006103515625,
+                    0.0,
+                    1.0,
+                    0.0
+                ],
+                "scale": [
+                    0.4850703477859497,
+                    0.4850703477859497,
+                    0.4850703477859497
+                ]
+            }
+        },
+        {
+            "children": null,
+            "components": [
+                {
+                    "material": "material",
+                    "model": "rock2",
+                    "name": "meshRenderer",
+                    "shader": "lambert"
+                }
+            ],
+            "name": "rock2",
+            "transform": {
+                "position": [
+                    5.612659454345703,
+                    0.0,
+                    -7.861262798309326
+                ],
+                "rotation": [
+                    80.0,
+                    0.0,
+                    1.0,
+                    0.0
+                ],
+                "scale": [
+                    0.43508103489875793,
+                    0.43508103489875793,
+                    0.43508103489875793
+                ]
+            }
+        },
+        {
+            "children": null,
+            "components": [
+                {
+                    "material": "material",
+                    "model": "rock2",
+                    "name": "meshRenderer",
+                    "shader": "lambert"
+                }
+            ],
+            "name": "rock2",
+            "transform": {
+                "position": [
+                    2.6480913162231445,
+                    0.0,
+                    0.34821629524230957
+                ],
+                "rotation": [
+                    286.0,
+                    0.0,
+                    1.0,
+                    0.0
+                ],
+                "scale": [
+                    0.45818352699279785,
+                    0.45818352699279785,
+                    0.45818352699279785
+                ]
+            }
+        },
+        {
+            "children": null,
+            "components": [
+                {
+                    "material": "material",
+                    "model": "spruce",
+                    "name": "meshRenderer",
+                    "shader": "constant"
+                }
+            ],
+            "name": "spruce",
+            "transform": {
+                "position": [
+                    4.886928558349609,
+                    0.0,
+                    -2.7408671379089355
+                ],
+                "rotation": [
+                    83.0,
+                    0.0,
+                    0.9999999403953552,
+                    0.0
+                ],
+                "scale": [
+                    0.34085819125175476,
+                    0.34085819125175476,
+                    0.34085819125175476
+                ]
+            }
+        },
+        {
+            "children": null,
+            "components": [
+                {
+                    "material": "material",
+                    "model": "stump",
+                    "name": "meshRenderer",
+                    "shader": "lambert"
+                }
+            ],
+            "name": "stump",
+            "transform": {
+                "position": [
+                    9.320658683776855,
+                    0.0,
+                    -1.185033917427063
+                ],
+                "rotation": [
+                    27.0000057220459,
+                    0.0,
+                    1.0,
+                    0.0
+                ],
+                "scale": [
+                    0.4014923572540283,
+                    0.4014923572540283,
+                    0.4014923572540283
+                ]
+            }
+        },
+        {
+            "children": null,
+            "components": [
+                {
+                    "material": "material",
+                    "model": "spruce",
+                    "name": "meshRenderer",
+                    "shader": "lambert"
+                }
+            ],
+            "name": "spruce",
+            "transform": {
+                "position": [
+                    -0.9591966867446899,
+                    0.0,
+                    -6.314584732055664
+                ],
+                "rotation": [
+                    7.000012397766113,
+                    0.0,
+                    1.0,
+                    0.0
+                ],
+                "scale": [
+                    0.31994080543518066,
+                    0.31994080543518066,
+                    0.31994080543518066
+                ]
+            }
+        },
+        {
+            "children": null,
+            "components": [
+                {
+                    "material": "material",
+                    "model": "rock1",
+                    "name": "meshRenderer",
+                    "shader": "phong"
+                }
+            ],
+            "name": "rock1",
+            "transform": {
+                "position": [
+                    -0.3878903388977051,
+                    0.0,
+                    -4.925992488861084
+                ],
+                "rotation": [
+                    262.0,
+                    0.0,
+                    1.0,
+                    0.0
+                ],
+                "scale": [
+                    0.4888485372066498,
+                    0.4888485372066498,
+                    0.4888485372066498
+                ]
+            }
+        },
+        {
+            "children": null,
+            "components": [
+                {
+                    "material": "material",
+                    "model": "spruce",
+                    "name": "meshRenderer",
+                    "shader": "lambert"
+                }
+            ],
+            "name": "spruce",
+            "transform": {
+                "position": [
+                    0.061953067779541016,
+                    0.0,
+                    -9.503158569335938
+                ],
+                "rotation": [
+                    336.0,
+                    0.0,
+                    1.0,
+                    0.0
+                ],
+                "scale": [
+                    0.32319405674934387,
+                    0.32319405674934387,
+                    0.32319405674934387
+                ]
+            }
+        },
+        {
+            "children": null,
+            "components": [
+                {
+                    "material": "material",
+                    "model": "oak",
+                    "name": "meshRenderer",
+                    "shader": "phong"
+                }
+            ],
+            "name": "oak",
+            "transform": {
+                "position": [
+                    6.201056480407715,
+                    0.0,
+                    -5.551011562347412
+                ],
+                "rotation": [
+                    157.0,
+                    0.0,
+                    1.0,
+                    0.0
+                ],
+                "scale": [
+                    0.3872951567173004,
+                    0.3872951567173004,
+                    0.3872951567173004
+                ]
+            }
+        },
+        {
+            "children": null,
+            "components": [
+                {
+                    "material": "material",
+                    "model": "stump",
+                    "name": "meshRenderer",
+                    "shader": "constant"
+                }
+            ],
+            "name": "stump",
+            "transform": {
+                "position": [
+                    9.941404342651367,
+                    0.0,
+                    -2.5272374153137207
+                ],
+                "rotation": [
+                    111.0,
+                    0.0,
+                    1.0,
+                    0.0
+                ],
+                "scale": [
+                    0.49457991123199463,
+                    0.49457991123199463,
+                    0.49457991123199463
+                ]
+            }
+        },
+        {
+            "children": null,
+            "components": [
+                {
+                    "material": "material",
+                    "model": "spruce",
+                    "name": "meshRenderer",
+                    "shader": "lambert"
+                }
+            ],
+            "name": "spruce",
+            "transform": {
+                "position": [
+                    2.447890043258667,
+                    0.0,
+                    8.384350776672363
+                ],
+                "rotation": [
+                    103.0,
+                    0.0,
+                    0.9999999403953552,
+                    0.0
+                ],
+                "scale": [
+                    0.33733633160591125,
+                    0.33733633160591125,
+                    0.33733633160591125
+                ]
+            }
+        },
+        {
+            "children": null,
+            "components": [
+                {
+                    "material": "material",
+                    "model": "spruce",
+                    "name": "meshRenderer",
+                    "shader": "lambert"
+                }
+            ],
+            "name": "spruce",
+            "transform": {
+                "position": [
+                    1.9235813617706299,
+                    0.0,
+                    -4.825281620025635
+                ],
+                "rotation": [
+                    115.00000762939453,
+                    0.0,
+                    1.0,
+                    0.0
+                ],
+                "scale": [
+                    0.42726829648017883,
+                    0.42726829648017883,
+                    0.42726829648017883
+                ]
+            }
+        },
+        {
+            "children": null,
+            "components": [
+                {
+                    "material": "material",
+                    "model": "rock3",
+                    "name": "meshRenderer",
+                    "shader": "lambert"
+                }
+            ],
+            "name": "rock3",
+            "transform": {
+                "position": [
+                    2.154911756515503,
+                    0.0,
+                    -3.8059635162353516
+                ],
+                "rotation": [
+                    335.0,
+                    0.0,
+                    1.0,
+                    0.0
+                ],
+                "scale": [
+                    0.3164311647415161,
+                    0.3164311647415161,
+                    0.3164311647415161
+                ]
+            }
+        },
+        {
+            "children": null,
+            "components": [
+                {
+                    "material": "material",
+                    "model": "rock3",
+                    "name": "meshRenderer",
+                    "shader": "lambert"
+                }
+            ],
+            "name": "rock3",
+            "transform": {
+                "position": [
+                    2.070680856704712,
+                    0.0,
+                    -0.2957242727279663
+                ],
+                "rotation": [
+                    52.0,
+                    0.0,
+                    1.0,
+                    0.0
+                ],
+                "scale": [
+                    0.3353404402732849,
+                    0.3353404402732849,
+                    0.3353404402732849
+                ]
+            }
+        },
+        {
+            "children": null,
+            "components": [
+                {
+                    "material": "material",
+                    "model": "spruce",
+                    "name": "meshRenderer",
+                    "shader": "lambert"
+                }
+            ],
+            "name": "spruce",
+            "transform": {
+                "position": [
+                    0.8847320079803467,
+                    0.0,
+                    -4.759972095489502
+                ],
+                "rotation": [
+                    225.0,
+                    0.0,
+                    1.0,
+                    0.0
+                ],
+                "scale": [
+                    0.3916226625442505,
+                    0.3916226625442505,
+                    0.3916226625442505
+                ]
+            }
+        },
+        {
+            "children": null,
+            "components": [
+                {
+                    "material": "material",
+                    "model": "oak",
+                    "name": "meshRenderer",
+                    "shader": "lambert"
+                }
+            ],
+            "name": "oak",
+            "transform": {
+                "position": [
+                    -5.801873683929443,
+                    0.0,
+                    -2.0249032974243164
+                ],
+                "rotation": [
+                    331.0,
+                    0.0,
+                    1.0,
+                    0.0
+                ],
+                "scale": [
+                    0.3556291460990906,
+                    0.3556291460990906,
+                    0.3556291460990906
+                ]
+            }
+        },
+        {
+            "children": null,
+            "components": [
+                {
+                    "material": "material",
+                    "model": "rock1",
+                    "name": "meshRenderer",
+                    "shader": "phong"
+                }
+            ],
+            "name": "rock1",
+            "transform": {
+                "position": [
+                    -3.901791572570801,
+                    0.0,
+                    -7.21610164642334
+                ],
+                "rotation": [
+                    209.0,
+                    0.0,
+                    1.0,
+                    0.0
+                ],
+                "scale": [
+                    0.469542533159256,
+                    0.469542533159256,
+                    0.469542533159256
+                ]
+            }
+        },
+        {
+            "children": null,
+            "components": [
+                {
+                    "material": "material",
+                    "model": "spruce",
+                    "name": "meshRenderer",
+                    "shader": "constant"
+                }
+            ],
+            "name": "spruce",
+            "transform": {
+                "position": [
+                    2.208625078201294,
+                    0.0,
+                    -3.5831780433654785
+                ],
+                "rotation": [
+                    154.0,
+                    0.0,
+                    1.0,
+                    0.0
+                ],
+                "scale": [
+                    0.4508041739463806,
+                    0.4508041739463806,
+                    0.4508041739463806
+                ]
+            }
+        },
+        {
+            "children": null,
+            "components": [
+                {
+                    "material": "material",
+                    "model": "rock2",
+                    "name": "meshRenderer",
+                    "shader": "phong"
+                }
+            ],
+            "name": "rock2",
+            "transform": {
+                "position": [
+                    -8.319650650024414,
+                    0.0,
+                    7.802057266235352
+                ],
+                "rotation": [
+                    322.0,
+                    0.0,
+                    1.0,
+                    0.0
+                ],
+                "scale": [
+                    0.3943327069282532,
+                    0.3943327069282532,
+                    0.3943327069282532
+                ]
+            }
+        },
+        {
+            "children": null,
+            "components": [
+                {
+                    "material": "material",
+                    "model": "rock2",
+                    "name": "meshRenderer",
+                    "shader": "phong"
+                }
+            ],
+            "name": "rock2",
+            "transform": {
+                "position": [
+                    -4.860682964324951,
+                    0.0,
+                    -7.847224235534668
+                ],
+                "rotation": [
+                    122.00000762939453,
+                    0.0,
+                    1.0,
+                    0.0
+                ],
+                "scale": [
+                    0.4196874797344208,
+                    0.4196874797344208,
+                    0.4196874797344208
+                ]
+            }
+        },
+        {
+            "children": null,
+            "components": [
+                {
+                    "material": "material",
+                    "model": "rock2",
+                    "name": "meshRenderer",
+                    "shader": "constant"
+                }
+            ],
+            "name": "rock2",
+            "transform": {
+                "position": [
+                    9.808343887329102,
+                    0.0,
+                    -1.104465126991272
+                ],
+                "rotation": [
+                    151.0,
+                    0.0,
+                    1.0,
+                    0.0
+                ],
+                "scale": [
+                    0.4523056745529175,
+                    0.4523056745529175,
+                    0.4523056745529175
+                ]
+            }
+        },
+        {
+            "children": null,
+            "components": [
+                {
+                    "material": "material",
+                    "model": "rock1",
+                    "name": "meshRenderer",
+                    "shader": "phong"
+                }
+            ],
+            "name": "rock1",
+            "transform": {
+                "position": [
+                    -5.6505022048950195,
+                    0.0,
+                    -6.592913627624512
+                ],
+                "rotation": [
+                    353.0,
+                    0.0,
+                    0.9999999403953552,
+                    0.0
+                ],
+                "scale": [
+                    0.35855892300605774,
+                    0.35855892300605774,
+                    0.35855892300605774
+                ]
+            }
+        },
+        {
+            "children": null,
+            "components": [
+                {
+                    "material": "material",
+                    "model": "rock3",
+                    "name": "meshRenderer",
+                    "shader": "lambert"
+                }
+            ],
+            "name": "rock3",
+            "transform": {
+                "position": [
+                    -7.941831588745117,
+                    0.0,
+                    -2.389904260635376
+                ],
+                "rotation": [
+                    235.00001525878906,
+                    0.0,
+                    0.9999999403953552,
+                    0.0
+                ],
+                "scale": [
+                    0.3410657048225403,
+                    0.3410657048225403,
+                    0.3410657048225403
+                ]
+            }
+        },
+        {
+            "children": null,
+            "components": [
+                {
+                    "material": "material",
+                    "model": "rock3",
+                    "name": "meshRenderer",
+                    "shader": "phong"
+                }
+            ],
+            "name": "rock3",
+            "transform": {
+                "position": [
+                    1.6660058498382568,
+                    0.0,
+                    -2.3703722953796387
+                ],
+                "rotation": [
+                    191.0,
+                    0.0,
+                    1.0,
+                    0.0
+                ],
+                "scale": [
+                    0.38318735361099243,
+                    0.38318735361099243,
+                    0.38318735361099243
+                ]
+            }
+        },
+        {
+            "children": null,
+            "components": [
+                {
+                    "material": "material",
+                    "model": "oak",
+                    "name": "meshRenderer",
+                    "shader": "lambert"
+                }
+            ],
+            "name": "oak",
+            "transform": {
+                "position": [
+                    4.6665849685668945,
+                    0.0,
+                    7.4248480796813965
+                ],
+                "rotation": [
+                    1.0001370906829834,
+                    0.0,
+                    1.0,
+                    0.0
+                ],
+                "scale": [
+                    0.47518235445022583,
+                    0.47518235445022583,
+                    0.47518235445022583
+                ]
+            }
+        },
+        {
+            "children": null,
+            "components": [
+                {
+                    "material": "material",
+                    "model": "rock3",
+                    "name": "meshRenderer",
+                    "shader": "lambert"
+                }
+            ],
+            "name": "rock3",
+            "transform": {
+                "position": [
+                    -5.438093185424805,
+                    0.0,
+                    -5.836054801940918
+                ],
+                "rotation": [
+                    238.99998474121094,
+                    0.0,
+                    1.0,
+                    0.0
+                ],
+                "scale": [
+                    0.34068727493286133,
+                    0.34068727493286133,
+                    0.34068727493286133
+                ]
+            }
+        },
+        {
+            "children": null,
+            "components": [
+                {
+                    "material": "material",
+                    "model": "rock3",
+                    "name": "meshRenderer",
+                    "shader": "phong"
+                }
+            ],
+            "name": "rock3",
+            "transform": {
+                "position": [
+                    2.4076056480407715,
+                    0.0,
+                    9.9932861328125
+                ],
+                "rotation": [
+                    340.0,
+                    0.0,
+                    1.0,
+                    0.0
+                ],
+                "scale": [
+                    0.4555894732475281,
+                    0.4555894732475281,
+                    0.4555894732475281
+                ]
+            }
+        },
+        {
+            "children": null,
+            "components": [
+                {
+                    "material": "material",
+                    "model": "rock2",
+                    "name": "meshRenderer",
+                    "shader": "constant"
+                }
+            ],
+            "name": "rock2",
+            "transform": {
+                "position": [
+                    -8.035218238830566,
+                    0.0,
+                    5.6688127517700195
+                ],
+                "rotation": [
+                    289.0,
+                    0.0,
+                    1.0,
+                    0.0
+                ],
+                "scale": [
+                    0.43732109665870667,
+                    0.43732109665870667,
+                    0.43732109665870667
+                ]
+            }
+        },
+        {
+            "children": null,
+            "components": [
+                {
+                    "material": "material",
+                    "model": "rock3",
+                    "name": "meshRenderer",
+                    "shader": "constant"
+                }
+            ],
+            "name": "rock3",
+            "transform": {
+                "position": [
+                    4.219794273376465,
+                    0.0,
+                    4.302194118499756
+                ],
+                "rotation": [
+                    190.0,
+                    0.0,
+                    1.0,
+                    0.0
+                ],
+                "scale": [
+                    0.3506729304790497,
+                    0.3506729304790497,
+                    0.3506729304790497
+                ]
+            }
+        },
+        {
+            "children": null,
+            "components": [
+                {
+                    "material": "material",
+                    "model": "spruce",
+                    "name": "meshRenderer",
+                    "shader": "lambert"
+                }
+            ],
+            "name": "spruce",
+            "transform": {
+                "position": [
+                    4.6299638748168945,
+                    0.0,
+                    -8.569292068481445
+                ],
+                "rotation": [
+                    327.0,
+                    0.0,
+                    1.0,
+                    0.0
+                ],
+                "scale": [
+                    0.40886563062667847,
+                    0.40886563062667847,
+                    0.40886563062667847
+                ]
+            }
+        },
+        {
+            "children": null,
+            "components": [
+                {
+                    "material": "material",
+                    "model": "rock1",
+                    "name": "meshRenderer",
+                    "shader": "lambert"
+                }
+            ],
+            "name": "rock1",
+            "transform": {
+                "position": [
+                    3.8627278804779053,
+                    0.0,
+                    -6.177251815795898
+                ],
+                "rotation": [
+                    11.999977111816406,
+                    0.0,
+                    1.0,
+                    0.0
+                ],
+                "scale": [
+                    0.44824060797691345,
+                    0.44824060797691345,
+                    0.44824060797691345
+                ]
+            }
+        },
+        {
+            "children": null,
+            "components": [
+                {
+                    "material": "material",
+                    "model": "spruce",
+                    "name": "meshRenderer",
+                    "shader": "lambert"
+                }
+            ],
+            "name": "spruce",
+            "transform": {
+                "position": [
+                    9.710684776306152,
+                    0.0,
+                    -1.261940598487854
+                ],
+                "rotation": [
+                    188.0,
+                    0.0,
+                    1.0,
+                    0.0
+                ],
+                "scale": [
+                    0.4887508749961853,
+                    0.4887508749961853,
+                    0.4887508749961853
+                ]
+            }
+        },
+        {
+            "children": null,
+            "components": [
+                {
+                    "material": "material",
+                    "model": "stump",
+                    "name": "meshRenderer",
+                    "shader": "constant"
+                }
+            ],
+            "name": "stump",
+            "transform": {
+                "position": [
+                    -6.813257217407227,
+                    0.0,
+                    -6.024048805236816
+                ],
+                "rotation": [
+                    210.0,
+                    0.0,
+                    1.0,
+                    0.0
+                ],
+                "scale": [
+                    0.4644886553287506,
+                    0.4644886553287506,
+                    0.4644886553287506
+                ]
+            }
+        },
+        {
+            "children": null,
+            "components": [
+                {
+                    "material": "material",
+                    "model": "rock2",
+                    "name": "meshRenderer",
+                    "shader": "constant"
+                }
+            ],
+            "name": "rock2",
+            "transform": {
+                "position": [
+                    -7.38883638381958,
+                    0.0,
+                    -1.9693595170974731
+                ],
+                "rotation": [
+                    223.0,
+                    0.0,
+                    1.0,
+                    0.0
+                ],
+                "scale": [
+                    0.41057467460632324,
+                    0.41057467460632324,
+                    0.41057467460632324
+                ]
+            }
+        },
+        {
+            "children": null,
+            "components": [
+                {
+                    "material": "material",
+                    "model": "stump",
+                    "name": "meshRenderer",
+                    "shader": "phong"
+                }
+            ],
+            "name": "stump",
+            "transform": {
+                "position": [
+                    6.391491889953613,
+                    0.0,
+                    -0.2481156587600708
+                ],
+                "rotation": [
+                    123.99999237060547,
+                    0.0,
+                    0.9999999403953552,
+                    0.0
+                ],
+                "scale": [
+                    0.36385083198547363,
+                    0.36385083198547363,
+                    0.36385083198547363
+                ]
+            }
+        },
+        {
+            "children": null,
+            "components": [
+                {
+                    "material": "material",
+                    "model": "stump",
+                    "name": "meshRenderer",
+                    "shader": "phong"
+                }
+            ],
+            "name": "stump",
+            "transform": {
+                "position": [
+                    2.996612787246704,
+                    0.0,
+                    6.198004722595215
+                ],
+                "rotation": [
+                    271.0,
+                    0.0,
+                    1.0,
+                    0.0
+                ],
+                "scale": [
+                    0.44175848364830017,
+                    0.44175848364830017,
+                    0.44175848364830017
+                ]
+            }
+        },
+        {
+            "children": null,
+            "components": [
+                {
+                    "material": "material",
+                    "model": "stump",
+                    "name": "meshRenderer",
+                    "shader": "phong"
+                }
+            ],
+            "name": "stump",
+            "transform": {
+                "position": [
+                    -6.465956687927246,
+                    0.0,
+                    -6.316415786743164
+                ],
+                "rotation": [
+                    161.0,
+                    0.0,
+                    1.0,
+                    0.0
+                ],
+                "scale": [
+                    0.47666555643081665,
+                    0.47666555643081665,
+                    0.47666555643081665
+                ]
+            }
+        },
+        {
+            "children": null,
+            "components": [
+                {
+                    "material": "material",
+                    "model": "rock1",
+                    "name": "meshRenderer",
+                    "shader": "phong"
+                }
+            ],
+            "name": "rock1",
+            "transform": {
+                "position": [
+                    -1.5579700469970703,
+                    0.0,
+                    2.5711846351623535
+                ],
+                "rotation": [
+                    175.0,
+                    0.0,
+                    1.0,
+                    0.0
+                ],
+                "scale": [
+                    0.4075167179107666,
+                    0.4075167179107666,
+                    0.4075167179107666
+                ]
+            }
+        },
+        {
+            "children": null,
+            "components": [
+                {
+                    "material": "material",
+                    "model": "oak",
+                    "name": "meshRenderer",
+                    "shader": "lambert"
+                }
+            ],
+            "name": "oak",
+            "transform": {
+                "position": [
+                    -6.983550548553467,
+                    0.0,
+                    -9.951169967651367
+                ],
+                "rotation": [
+                    133.0,
+                    0.0,
+                    1.0,
+                    0.0
+                ],
+                "scale": [
+                    0.4252967834472656,
+                    0.4252967834472656,
+                    0.4252967834472656
+                ]
+            }
+        },
+        {
+            "children": null,
+            "components": [
+                {
+                    "material": "material",
+                    "model": "rock1",
+                    "name": "meshRenderer",
+                    "shader": "constant"
+                }
+            ],
+            "name": "rock1",
+            "transform": {
+                "position": [
+                    1.1282694339752197,
+                    0.0,
+                    6.43116569519043
+                ],
+                "rotation": [
+                    254.00001525878906,
+                    0.0,
+                    1.0,
+                    0.0
+                ],
+                "scale": [
+                    0.4557969868183136,
+                    0.4557969868183136,
+                    0.4557969868183136
+                ]
+            }
+        },
+        {
+            "children": null,
+            "components": [
+                {
+                    "material": "material",
+                    "model": "rock1",
+                    "name": "meshRenderer",
+                    "shader": "constant"
+                }
+            ],
+            "name": "rock1",
+            "transform": {
+                "position": [
+                    8.248847961425781,
+                    0.0,
+                    4.6299638748168945
+                ],
+                "rotation": [
+                    345.9999694824219,
+                    0.0,
+                    0.9999999403953552,
+                    0.0
+                ],
+                "scale": [
+                    0.4091830253601074,
+                    0.4091830253601074,
+                    0.4091830253601074
+                ]
+            }
+        },
+        {
+            "children": null,
+            "components": [
+                {
+                    "material": "material",
+                    "model": "rock1",
+                    "name": "meshRenderer",
+                    "shader": "constant"
+                }
+            ],
+            "name": "rock1",
+            "transform": {
+                "position": [
+                    -7.310708999633789,
+                    0.0,
+                    5.6578264236450195
+                ],
+                "rotation": [
+                    344.0,
+                    0.0,
+                    0.9999999403953552,
+                    0.0
+                ],
+                "scale": [
+                    0.3576006293296814,
+                    0.3576006293296814,
+                    0.3576006293296814
+                ]
+            }
+        },
+        {
+            "children": null,
+            "components": [
+                {
+                    "material": "material",
+                    "model": "rock3",
+                    "name": "meshRenderer",
+                    "shader": "constant"
+                }
+            ],
+            "name": "rock3",
+            "transform": {
+                "position": [
+                    -4.204535007476807,
+                    0.0,
+                    -6.837061882019043
+                ],
+                "rotation": [
+                    168.0,
+                    0.0,
+                    1.0,
+                    0.0
+                ],
+                "scale": [
+                    0.3790063261985779,
+                    0.3790063261985779,
+                    0.3790063261985779
+                ]
+            }
+        },
+        {
+            "children": null,
+            "components": [
+                {
+                    "material": "material",
+                    "model": "stump",
+                    "name": "meshRenderer",
+                    "shader": "constant"
+                }
+            ],
+            "name": "stump",
+            "transform": {
+                "position": [
+                    2.387462854385376,
+                    0.0,
+                    -3.9555044174194336
+                ],
+                "rotation": [
+                    260.0,
+                    0.0,
+                    1.0,
+                    0.0
+                ],
+                "scale": [
+                    0.45966672897338867,
+                    0.45966672897338867,
+                    0.45966672897338867
+                ]
+            }
+        },
+        {
+            "children": null,
+            "components": [
+                {
+                    "material": "material",
+                    "model": "rock1",
+                    "name": "meshRenderer",
+                    "shader": "lambert"
+                }
+            ],
+            "name": "rock1",
+            "transform": {
+                "position": [
+                    -6.5727715492248535,
+                    0.0,
+                    -1.7831963300704956
+                ],
+                "rotation": [
+                    281.0,
+                    0.0,
+                    1.0,
+                    0.0
+                ],
+                "scale": [
+                    0.47599413990974426,
+                    0.47599413990974426,
+                    0.47599413990974426
+                ]
+            }
+        },
+        {
+            "children": null,
+            "components": [
+                {
+                    "material": "material",
+                    "model": "stump",
+                    "name": "meshRenderer",
+                    "shader": "lambert"
+                }
+            ],
+            "name": "stump",
+            "transform": {
+                "position": [
+                    6.613055229187012,
+                    0.0,
+                    2.238532304763794
+                ],
+                "rotation": [
+                    297.0,
+                    0.0,
+                    1.0,
+                    0.0
+                ],
+                "scale": [
+                    0.43164464831352234,
+                    0.43164464831352234,
+                    0.43164464831352234
+                ]
+            }
+        },
+        {
+            "children": null,
+            "components": [
+                {
+                    "material": "material",
+                    "model": "oak",
+                    "name": "meshRenderer",
+                    "shader": "phong"
+                }
+            ],
+            "name": "oak",
+            "transform": {
+                "position": [
+                    9.181493759155273,
+                    0.0,
+                    6.135746002197266
+                ],
+                "rotation": [
+                    285.0,
+                    0.0,
+                    0.9999999403953552,
+                    0.0
+                ],
+                "scale": [
+                    0.3487563729286194,
+                    0.3487563729286194,
+                    0.3487563729286194
+                ]
+            }
+        },
+        {
+            "children": null,
+            "components": [
+                {
+                    "material": "material",
+                    "model": "rock2",
+                    "name": "meshRenderer",
+                    "shader": "phong"
+                }
+            ],
+            "name": "rock2",
+            "transform": {
+                "position": [
+                    -4.097109794616699,
+                    0.0,
+                    -3.23160457611084
+                ],
+                "rotation": [
+                    172.0,
+                    0.0,
+                    1.0,
+                    0.0
+                ],
+                "scale": [
+                    0.30358898639678955,
+                    0.30358898639678955,
+                    0.30358898639678955
+                ]
+            }
+        },
+        {
+            "children": null,
+            "components": [
+                {
+                    "material": "material",
+                    "model": "rock1",
+                    "name": "meshRenderer",
+                    "shader": "constant"
+                }
+            ],
+            "name": "rock1",
+            "transform": {
+                "position": [
+                    9.321269035339355,
+                    0.0,
+                    5.425886154174805
+                ],
+                "rotation": [
+                    127.00000762939453,
+                    0.0,
+                    1.0,
+                    0.0
+                ],
+                "scale": [
+                    0.31198766827583313,
+                    0.31198766827583313,
+                    0.31198766827583313
+                ]
+            }
+        },
+        {
+            "children": null,
+            "components": [
+                {
+                    "material": "material",
+                    "model": "rock1",
+                    "name": "meshRenderer",
+                    "shader": "lambert"
+                }
+            ],
+            "name": "rock1",
+            "transform": {
+                "position": [
+                    1.6208374500274658,
+                    0.0,
+                    5.712149143218994
+                ],
+                "rotation": [
+                    249.00001525878906,
+                    0.0,
+                    1.0,
+                    0.0
+                ],
+                "scale": [
+                    0.396121084690094,
+                    0.396121084690094,
+                    0.396121084690094
+                ]
+            }
+        },
+        {
+            "children": null,
+            "components": [
+                {
+                    "material": "material",
+                    "model": "rock1",
+                    "name": "meshRenderer",
+                    "shader": "lambert"
+                }
+            ],
+            "name": "rock1",
+            "transform": {
+                "position": [
+                    -3.608813762664795,
+                    0.0,
+                    -2.006592273712158
+                ],
+                "rotation": [
+                    216.0,
+                    0.0,
+                    1.0,
+                    0.0
+                ],
+                "scale": [
+                    0.30380871891975403,
+                    0.30380871891975403,
+                    0.30380871891975403
+                ]
+            }
+        },
+        {
+            "children": null,
+            "components": [
+                {
+                    "material": "material",
+                    "model": "oak",
+                    "name": "meshRenderer",
+                    "shader": "phong"
+                }
+            ],
+            "name": "oak",
+            "transform": {
+                "position": [
+                    -9.260231018066406,
+                    0.0,
+                    0.6698811054229736
+                ],
+                "rotation": [
+                    281.0,
+                    0.0,
+                    1.0,
+                    0.0
+                ],
+                "scale": [
+                    0.43042999505996704,
+                    0.43042999505996704,
+                    0.43042999505996704
+                ]
+            }
+        },
+        {
+            "children": null,
+            "components": [
+                {
+                    "material": "material",
+                    "model": "rock1",
+                    "name": "meshRenderer",
+                    "shader": "phong"
+                }
+            ],
+            "name": "rock1",
+            "transform": {
+                "position": [
+                    -9.065523147583008,
+                    0.0,
+                    7.4980926513671875
+                ],
+                "rotation": [
+                    3.999955654144287,
+                    0.0,
+                    1.0,
+                    0.0
+                ],
+                "scale": [
+                    0.3569963574409485,
+                    0.3569963574409485,
+                    0.3569963574409485
+                ]
+            }
+        },
+        {
+            "children": null,
+            "components": [
+                {
+                    "material": "material",
+                    "model": "rock2",
+                    "name": "meshRenderer",
+                    "shader": "phong"
+                }
+            ],
+            "name": "rock2",
+            "transform": {
+                "position": [
+                    -3.7192904949188232,
+                    0.0,
+                    -0.5899226665496826
+                ],
+                "rotation": [
+                    0.0,
+                    1.0,
+                    1.0,
+                    1.0
+                ],
+                "scale": [
+                    0.3931668996810913,
+                    0.3931668996810913,
+                    0.3931668996810913
+                ]
+            }
+        },
+        {
+            "children": null,
+            "components": [
+                {
+                    "material": "material",
+                    "model": "stump",
+                    "name": "meshRenderer",
+                    "shader": "lambert"
+                }
+            ],
+            "name": "stump",
+            "transform": {
+                "position": [
+                    -5.588244438171387,
+                    0.0,
+                    -2.7573471069335938
+                ],
+                "rotation": [
+                    128.0,
+                    0.0,
+                    0.9999999403953552,
+                    0.0
+                ],
+                "scale": [
+                    0.34782859683036804,
+                    0.34782859683036804,
+                    0.34782859683036804
+                ]
+            }
+        },
+        {
+            "children": null,
+            "components": [
+                {
+                    "material": "material",
+                    "model": "rock3",
+                    "name": "meshRenderer",
+                    "shader": "lambert"
+                }
+            ],
+            "name": "rock3",
+            "transform": {
+                "position": [
+                    -4.6488847732543945,
+                    0.0,
+                    4.3192853927612305
+                ],
+                "rotation": [
+                    52.0,
+                    0.0,
+                    1.0,
+                    0.0
+                ],
+                "scale": [
+                    0.44730064272880554,
+                    0.44730064272880554,
+                    0.44730064272880554
+                ]
+            }
+        },
+        {
+            "children": null,
+            "components": [
+                {
+                    "material": "material",
+                    "model": "stump",
+                    "name": "meshRenderer",
+                    "shader": "phong"
+                }
+            ],
+            "name": "stump",
+            "transform": {
+                "position": [
+                    8.837854385375977,
+                    0.0,
+                    -3.979918956756592
+                ],
+                "rotation": [
+                    278.0,
+                    0.0,
+                    1.0,
+                    0.0
+                ],
+                "scale": [
+                    0.45112156867980957,
+                    0.45112156867980957,
+                    0.45112156867980957
+                ]
+            }
+        },
+        {
+            "children": null,
+            "components": [
+                {
+                    "material": "material",
+                    "model": "rock3",
+                    "name": "meshRenderer",
+                    "shader": "constant"
+                }
+            ],
+            "name": "rock3",
+            "transform": {
+                "position": [
+                    -1.0147404670715332,
+                    0.0,
+                    -8.905606269836426
+                ],
+                "rotation": [
+                    168.0,
+                    0.0,
+                    1.0,
+                    0.0
+                ],
+                "scale": [
+                    0.34910428524017334,
+                    0.34910428524017334,
+                    0.34910428524017334
+                ]
+            }
+        },
+        {
+            "children": null,
+            "components": [
+                {
+                    "material": "material",
+                    "model": "stump",
+                    "name": "meshRenderer",
+                    "shader": "constant"
+                }
+            ],
+            "name": "stump",
+            "transform": {
+                "position": [
+                    -6.7430644035339355,
+                    0.0,
+                    -3.4165472984313965
+                ],
+                "rotation": [
+                    161.0,
+                    0.0,
+                    1.0,
+                    0.0
+                ],
+                "scale": [
+                    0.3347117602825165,
+                    0.3347117602825165,
+                    0.3347117602825165
+                ]
+            }
+        },
+        {
+            "children": null,
+            "components": [
+                {
+                    "material": "material",
+                    "model": "rock2",
+                    "name": "meshRenderer",
+                    "shader": "phong"
+                }
+            ],
+            "name": "rock2",
+            "transform": {
+                "position": [
+                    0.4940950870513916,
+                    0.0,
+                    -7.481002330780029
+                ],
+                "rotation": [
+                    141.0,
+                    0.0,
+                    1.0,
+                    0.0
+                ],
+                "scale": [
+                    0.4788140654563904,
+                    0.4788140654563904,
+                    0.4788140654563904
+                ]
+            }
+        },
+        {
+            "children": null,
+            "components": [
+                {
+                    "material": "material",
+                    "model": "oak",
+                    "name": "meshRenderer",
+                    "shader": "constant"
+                }
+            ],
+            "name": "oak",
+            "transform": {
+                "position": [
+                    0.7803583145141602,
+                    0.0,
+                    0.5587935447692871
+                ],
+                "rotation": [
+                    131.0,
+                    0.0,
+                    1.0,
+                    0.0
+                ],
+                "scale": [
+                    0.3976653218269348,
+                    0.3976653218269348,
+                    0.3976653218269348
+                ]
+            }
+        },
+        {
+            "children": null,
+            "components": [
+                {
+                    "material": "material",
+                    "model": "spruce",
+                    "name": "meshRenderer",
+                    "shader": "phong"
+                }
+            ],
+            "name": "spruce",
+            "transform": {
+                "position": [
+                    4.410229682922363,
+                    0.0,
+                    -3.917050838470459
+                ],
+                "rotation": [
+                    28.0,
+                    0.0,
+                    1.0,
+                    0.0
+                ],
+                "scale": [
+                    0.34271371364593506,
+                    0.34271371364593506,
+                    0.34271371364593506
+                ]
+            }
+        },
+        {
+            "children": null,
+            "components": [
+                {
+                    "material": "material",
+                    "model": "rock1",
+                    "name": "meshRenderer",
+                    "shader": "constant"
+                }
+            ],
+            "name": "rock1",
+            "transform": {
+                "position": [
+                    -4.888149261474609,
+                    0.0,
+                    -2.013306140899658
+                ],
+                "rotation": [
+                    27.0000057220459,
+                    0.0,
+                    1.0,
+                    0.0
+                ],
+                "scale": [
+                    0.417642742395401,
+                    0.417642742395401,
+                    0.417642742395401
+                ]
+            }
+        },
+        {
+            "children": null,
+            "components": [
+                {
+                    "material": "material",
+                    "model": "spruce",
+                    "name": "meshRenderer",
+                    "shader": "constant"
+                }
+            ],
+            "name": "spruce",
+            "transform": {
+                "position": [
+                    8.759727478027344,
+                    0.0,
+                    2.237921953201294
+                ],
+                "rotation": [
+                    69.0,
+                    0.0,
+                    1.0,
+                    0.0
+                ],
+                "scale": [
+                    0.483196496963501,
+                    0.483196496963501,
+                    0.483196496963501
+                ]
+            }
+        },
+        {
+            "children": null,
+            "components": [
+                {
+                    "material": "material",
+                    "model": "stump",
+                    "name": "meshRenderer",
+                    "shader": "lambert"
+                }
+            ],
+            "name": "stump",
+            "transform": {
+                "position": [
+                    4.769127368927002,
+                    0.0,
+                    -8.050477981567383
+                ],
+                "rotation": [
+                    229.0,
+                    0.0,
+                    1.0,
+                    0.0
+                ],
+                "scale": [
+                    0.3498550355434418,
+                    0.3498550355434418,
+                    0.3498550355434418
+                ]
+            }
+        },
+        {
+            "children": null,
+            "components": [
+                {
+                    "material": "material",
+                    "model": "spruce",
+                    "name": "meshRenderer",
+                    "shader": "lambert"
+                }
+            ],
+            "name": "spruce",
+            "transform": {
+                "position": [
+                    1.8857383728027344,
+                    0.0,
+                    4.6372880935668945
+                ],
+                "rotation": [
+                    231.0,
+                    0.0,
+                    0.9999999403953552,
+                    0.0
+                ],
+                "scale": [
+                    0.364552766084671,
+                    0.364552766084671,
+                    0.364552766084671
+                ]
+            }
+        },
+        {
+            "children": null,
+            "components": [
+                {
+                    "material": "material",
+                    "model": "oak",
+                    "name": "meshRenderer",
+                    "shader": "lambert"
+                }
+            ],
+            "name": "oak",
+            "transform": {
+                "position": [
+                    8.984954833984375,
+                    0.0,
+                    -8.763999938964844
+                ],
+                "rotation": [
+                    131.0,
+                    0.0,
+                    1.0,
+                    0.0
+                ],
+                "scale": [
+                    0.43760186433792114,
+                    0.43760186433792114,
+                    0.43760186433792114
+                ]
+            }
+        },
+        {
+            "children": null,
+            "components": [
+                {
+                    "material": "material",
+                    "model": "spruce",
+                    "name": "meshRenderer",
+                    "shader": "constant"
+                }
+            ],
+            "name": "spruce",
+            "transform": {
+                "position": [
+                    3.8187813758850098,
+                    0.0,
+                    7.3516035079956055
+                ],
+                "rotation": [
+                    353.99993896484375,
+                    0.0,
+                    0.9999999403953552,
+                    0.0
+                ],
+                "scale": [
+                    0.4125949740409851,
+                    0.4125949740409851,
+                    0.4125949740409851
+                ]
+            }
+        },
+        {
+            "children": null,
+            "components": [
+                {
+                    "material": "material",
+                    "model": "stump",
+                    "name": "meshRenderer",
+                    "shader": "phong"
+                }
+            ],
+            "name": "stump",
+            "transform": {
+                "position": [
+                    -5.797601222991943,
+                    0.0,
+                    -0.6161689758300781
+                ],
+                "rotation": [
+                    77.0,
+                    0.0,
+                    1.0,
+                    0.0
+                ],
+                "scale": [
+                    0.37767571210861206,
+                    0.37767571210861206,
+                    0.37767571210861206
+                ]
+            }
+        },
+        {
+            "children": null,
+            "components": [
+                {
+                    "material": "material",
+                    "model": "stump",
+                    "name": "meshRenderer",
+                    "shader": "lambert"
+                }
+            ],
+            "name": "stump",
+            "transform": {
+                "position": [
+                    -6.193120956420898,
+                    0.0,
+                    -0.7724237442016602
+                ],
+                "rotation": [
+                    86.99999237060547,
+                    0.0,
+                    1.0,
+                    0.0
+                ],
+                "scale": [
+                    0.39850765466690063,
+                    0.39850765466690063,
+                    0.39850765466690063
+                ]
+            }
+        },
+        {
+            "children": null,
+            "components": [
+                {
+                    "material": "material",
+                    "model": "stump",
+                    "name": "meshRenderer",
+                    "shader": "constant"
+                }
+            ],
+            "name": "stump",
+            "transform": {
+                "position": [
+                    6.488540172576904,
+                    0.0,
+                    9.081392288208008
+                ],
+                "rotation": [
+                    1.9999016523361206,
+                    0.0,
+                    1.0,
+                    0.0
+                ],
+                "scale": [
+                    0.35755792260169983,
+                    0.35755792260169983,
+                    0.35755792260169983
+                ]
+            }
+        },
+        {
+            "children": null,
+            "components": [
+                {
+                    "material": "material",
+                    "model": "spruce",
+                    "name": "meshRenderer",
+                    "shader": "lambert"
+                }
+            ],
+            "name": "spruce",
+            "transform": {
+                "position": [
+                    2.526627779006958,
+                    0.0,
+                    -5.156102180480957
+                ],
+                "rotation": [
+                    179.0,
+                    0.0,
+                    1.0,
+                    0.0
+                ],
+                "scale": [
+                    0.39875179529190063,
+                    0.39875179529190063,
+                    0.39875179529190063
+                ]
+            }
+        },
+        {
+            "children": null,
+            "components": [
+                {
+                    "material": "material",
+                    "model": "rock2",
+                    "name": "meshRenderer",
+                    "shader": "lambert"
+                }
+            ],
+            "name": "rock2",
+            "transform": {
+                "position": [
+                    5.706655979156494,
+                    0.0,
+                    9.400616645812988
+                ],
+                "rotation": [
+                    250.0,
+                    0.0,
+                    1.0,
+                    0.0
+                ],
+                "scale": [
+                    0.4710257351398468,
+                    0.4710257351398468,
+                    0.4710257351398468
+                ]
+            }
+        },
+        {
+            "children": null,
+            "components": [
+                {
+                    "material": "material",
+                    "model": "spruce",
+                    "name": "meshRenderer",
+                    "shader": "phong"
+                }
+            ],
+            "name": "spruce",
+            "transform": {
+                "position": [
+                    -7.788628578186035,
+                    0.0,
+                    -2.68837571144104
+                ],
+                "rotation": [
+                    98.0,
+                    0.0,
+                    1.0,
+                    0.0
+                ],
+                "scale": [
+                    0.4568834602832794,
+                    0.4568834602832794,
+                    0.4568834602832794
+                ]
+            }
+        },
+        {
+            "children": null,
+            "components": [
+                {
+                    "material": "material",
+                    "model": "oak",
+                    "name": "meshRenderer",
+                    "shader": "lambert"
+                }
+            ],
+            "name": "oak",
+            "transform": {
+                "position": [
+                    -5.618152141571045,
+                    0.0,
+                    -7.891170978546143
+                ],
+                "rotation": [
+                    211.0,
+                    0.0,
+                    1.0,
+                    0.0
+                ],
+                "scale": [
+                    0.448631227016449,
+                    0.448631227016449,
+                    0.448631227016449
+                ]
+            }
+        },
+        {
+            "children": null,
+            "components": [
+                {
+                    "material": "material",
+                    "model": "stump",
+                    "name": "meshRenderer",
+                    "shader": "phong"
+                }
+            ],
+            "name": "stump",
+            "transform": {
+                "position": [
+                    3.001495599746704,
+                    0.0,
+                    -6.933500289916992
+                ],
+                "rotation": [
+                    222.0,
+                    0.0,
+                    1.0,
+                    0.0
+                ],
+                "scale": [
+                    0.4452742040157318,
+                    0.4452742040157318,
+                    0.4452742040157318
+                ]
+            }
+        },
+        {
+            "children": null,
+            "components": [
+                {
+                    "material": "material",
+                    "model": "oak",
+                    "name": "meshRenderer",
+                    "shader": "constant"
+                }
+            ],
+            "name": "oak",
+            "transform": {
+                "position": [
+                    0.28656840324401855,
+                    0.0,
+                    4.924771785736084
+                ],
+                "rotation": [
+                    233.99998474121094,
+                    0.0,
+                    1.0,
+                    0.0
+                ],
+                "scale": [
+                    0.33541977405548096,
+                    0.33541977405548096,
+                    0.33541977405548096
+                ]
+            }
+        },
+        {
+            "children": null,
+            "components": [
+                {
+                    "material": "material",
+                    "model": "spruce",
+                    "name": "meshRenderer",
+                    "shader": "phong"
+                }
+            ],
+            "name": "spruce",
+            "transform": {
+                "position": [
+                    -8.362987518310547,
+                    0.0,
+                    5.240333080291748
+                ],
+                "rotation": [
+                    249.00001525878906,
+                    0.0,
+                    1.0,
+                    0.0
+                ],
+                "scale": [
+                    0.300262451171875,
+                    0.300262451171875,
+                    0.300262451171875
+                ]
+            }
+        },
+        {
+            "children": null,
+            "components": [
+                {
+                    "material": "material",
+                    "model": "rock3",
+                    "name": "meshRenderer",
+                    "shader": "constant"
+                }
+            ],
+            "name": "rock3",
+            "transform": {
+                "position": [
+                    9.498886108398438,
+                    0.0,
+                    6.475112438201904
+                ],
+                "rotation": [
+                    330.0,
+                    0.0,
+                    1.0,
+                    0.0
+                ],
+                "scale": [
+                    0.4344462454319,
+                    0.4344462454319,
+                    0.4344462454319
+                ]
+            }
+        },
+        {
+            "children": null,
+            "components": [
+                {
+                    "material": "material",
+                    "model": "spruce",
+                    "name": "meshRenderer",
+                    "shader": "constant"
+                }
+            ],
+            "name": "spruce",
+            "transform": {
+                "position": [
+                    -8.196355819702148,
+                    0.0,
+                    2.70058274269104
+                ],
+                "rotation": [
+                    95.0,
+                    0.0,
+                    1.0,
+                    0.0
+                ],
+                "scale": [
+                    0.4078585207462311,
+                    0.4078585207462311,
+                    0.4078585207462311
+                ]
+            }
+        },
+        {
+            "children": null,
+            "components": [
+                {
+                    "material": "material",
+                    "model": "rock1",
+                    "name": "meshRenderer",
+                    "shader": "constant"
+                }
+            ],
+            "name": "rock1",
+            "transform": {
+                "position": [
+                    8.43379020690918,
+                    0.0,
+                    -7.532883644104004
+                ],
+                "rotation": [
+                    145.0,
+                    0.0,
+                    1.0,
+                    0.0
+                ],
+                "scale": [
+                    0.4365825355052948,
+                    0.4365825355052948,
+                    0.4365825355052948
+                ]
+            }
+        },
+        {
+            "children": null,
+            "components": [
+                {
+                    "material": "material",
+                    "model": "spruce",
+                    "name": "meshRenderer",
+                    "shader": "lambert"
+                }
+            ],
+            "name": "spruce",
+            "transform": {
+                "position": [
+                    6.406750679016113,
+                    0.0,
+                    -1.0721153020858765
+                ],
+                "rotation": [
+                    347.0000305175781,
+                    0.0,
+                    1.0,
+                    0.0
+                ],
+                "scale": [
+                    0.4733695387840271,
+                    0.4733695387840271,
+                    0.4733695387840271
+                ]
+            }
+        },
+        {
+            "children": null,
+            "components": [
+                {
+                    "material": "material",
+                    "model": "spruce",
+                    "name": "meshRenderer",
+                    "shader": "constant"
+                }
+            ],
+            "name": "spruce",
+            "transform": {
+                "position": [
+                    -8.326974868774414,
+                    0.0,
+                    7.603076934814453
+                ],
+                "rotation": [
+                    105.99999237060547,
+                    0.0,
+                    1.0,
+                    0.0
+                ],
+                "scale": [
+                    0.49995118379592896,
+                    0.49995118379592896,
+                    0.49995118379592896
+                ]
+            }
+        },
+        {
+            "children": null,
+            "components": [
+                {
+                    "material": "material",
+                    "model": "spruce",
+                    "name": "meshRenderer",
+                    "shader": "lambert"
+                }
+            ],
+            "name": "spruce",
+            "transform": {
+                "position": [
+                    3.3426928520202637,
+                    0.0,
+                    -8.966643333435059
+                ],
+                "rotation": [
+                    147.0,
+                    0.0,
+                    0.9999999403953552,
+                    0.0
+                ],
+                "scale": [
+                    0.34365367889404297,
+                    0.34365367889404297,
+                    0.34365367889404297
+                ]
+            }
+        },
+        {
+            "children": null,
+            "components": [
+                {
+                    "material": "material",
+                    "model": "rock2",
+                    "name": "meshRenderer",
+                    "shader": "phong"
+                }
+            ],
+            "name": "rock2",
+            "transform": {
+                "position": [
+                    -0.2114933729171753,
+                    0.0,
+                    -4.385204792022705
+                ],
+                "rotation": [
+                    177.0,
+                    0.0,
+                    0.9999999403953552,
+                    0.0
+                ],
+                "scale": [
+                    0.4500473141670227,
+                    0.4500473141670227,
+                    0.4500473141670227
+                ]
+            }
+        },
+        {
+            "children": null,
+            "components": [
+                {
+                    "material": "material",
+                    "model": "oak",
+                    "name": "meshRenderer",
+                    "shader": "phong"
+                }
+            ],
+            "name": "oak",
+            "transform": {
+                "position": [
+                    -9.56175422668457,
+                    0.0,
+                    -3.1028170585632324
+                ],
+                "rotation": [
+                    164.0,
+                    0.0,
+                    1.0,
+                    0.0
+                ],
+                "scale": [
+                    0.3881557583808899,
+                    0.3881557583808899,
+                    0.3881557583808899
+                ]
+            }
+        },
+        {
+            "children": null,
+            "components": [
+                {
+                    "material": "material",
+                    "model": "rock2",
+                    "name": "meshRenderer",
+                    "shader": "lambert"
+                }
+            ],
+            "name": "rock2",
+            "transform": {
+                "position": [
+                    0.31098365783691406,
+                    0.0,
+                    -7.005523681640625
+                ],
+                "rotation": [
+                    143.0,
+                    0.0,
+                    1.0,
+                    0.0
+                ],
+                "scale": [
+                    0.3709433376789093,
+                    0.3709433376789093,
+                    0.3709433376789093
+                ]
+            }
+        },
+        {
+            "children": null,
+            "components": [
+                {
+                    "material": "material",
+                    "model": "spruce",
+                    "name": "meshRenderer",
+                    "shader": "constant"
+                }
+            ],
+            "name": "spruce",
+            "transform": {
+                "position": [
+                    -5.364848613739014,
+                    0.0,
+                    0.18952012062072754
+                ],
+                "rotation": [
+                    324.0,
+                    0.0,
+                    1.0,
+                    0.0
+                ],
+                "scale": [
+                    0.4109531044960022,
+                    0.4109531044960022,
+                    0.4109531044960022
+                ]
+            }
+        },
+        {
+            "children": null,
+            "components": [
+                {
+                    "color": [
+                        1.0,
+                        1.0,
+                        1.0
+                    ],
+                    "intensity": 1.0,
+                    "name": "light",
+                    "type": 1
+                }
+            ],
+            "name": "point light",
+            "transform": {
+                "position": [
+                    0.0,
+                    10.0,
+                    0.0
+                ],
+                "rotation": [
+                    0.0,
+                    1.0,
+                    1.0,
+                    1.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            }
+        }
+    ],
+    "sceneName": "Forest"
+}
