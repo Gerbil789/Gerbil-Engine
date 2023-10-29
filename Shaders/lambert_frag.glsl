@@ -23,10 +23,11 @@ in VertexData vertexData;
 
 out vec4 outColor;
 
-const int MAX_LIGHTS = 4;
+const int MAX_LIGHTS = 10;
 uniform Light lights[MAX_LIGHTS];
 uniform int numLights; 
 uniform Material material;
+uniform vec3 color;
 
 void main()
 {
@@ -40,5 +41,5 @@ void main()
         finalColor += diffuse;
     }
 
-	outColor = (vec4(material.ambient, 1.0) + vec4(finalColor, 1.0)) * vec4(material.diffuse, 1.0);
+	outColor = (vec4(material.ambient, 1.0) + vec4(finalColor, 1.0)) * vec4(color, 1.0);
 }

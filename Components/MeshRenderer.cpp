@@ -1,10 +1,11 @@
 #include "MeshRenderer.h"
 #include "../Engine/Transform.h"
 
-MeshRenderer::MeshRenderer(std::string _model, std::string _shader, Material* _material)
+MeshRenderer::MeshRenderer(std::string _model, std::string _shader, glm::vec3 _color, Material* _material)
 {
 	componentName = "meshRenderer";
 
+	color = _color;
 	material = _material;
 	transformMatrix = glm::mat4(1.0f);
 	shaderProgramId = shaderManager.GetShaderProgramId(_shader);
@@ -14,18 +15,16 @@ MeshRenderer::MeshRenderer(std::string _model, std::string _shader, Material* _m
 	if (model == nullptr) { std::cerr << "[MeshRemderer] ERROR: could not load model [" << _model << "]\n"; }
 
 	if (_shader == "constant") {
-		SetFlag(DIFFUSE);
+
 	}
 	else if (_shader == "lambert") {
-		SetFlag(NORMAL);
 		SetFlag(AMBIENT);
-		SetFlag(DIFFUSE);
+		//SetFlag(DIFFUSE);
 		SetFlag(LIGHTS);
 	}
 	else if (_shader == "phong") {
-		SetFlag(NORMAL);
 		SetFlag(AMBIENT);
-		SetFlag(DIFFUSE);
+		//SetFlag(DIFFUSE);
 		SetFlag(SPECULAR);
 		SetFlag(SHININESS);
 		SetFlag(CAMERA);
@@ -45,10 +44,7 @@ void MeshRenderer::Update()
 	shaderManager.SetUniform("viewMatrix", shader->viewMatrix);
 	shaderManager.SetUniform("projectionMatrix", shader->projectionMatrix);
 	shaderManager.SetUniform("modelMatrix", transformMatrix);
-
-	if (IsFlagSet(NORMAL)) {
-		shaderManager.SetUniform("normalMatrix", glm::mat3(1.0f));
-	}
+	shaderManager.SetUniform("color", color);
 
 	if (IsFlagSet(AMBIENT)) {
 		shaderManager.SetUniform("material.ambient", material->ambient);

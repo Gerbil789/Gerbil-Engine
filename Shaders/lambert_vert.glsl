@@ -16,12 +16,11 @@ out mat4 model;
 uniform mat4 modelMatrix;
 uniform mat4 viewMatrix;
 uniform mat4 projectionMatrix;
-uniform mat3 normalMatrix;
 
 void main()
 {
 	vertexData.worldPosition = vec3(modelMatrix * vec4(position, 1.0f));
-	vertexData.normal = mat3(transpose(inverse(modelMatrix))) * normalMatrix * normal;
+	vertexData.normal = mat3(transpose(inverse(modelMatrix))) * normal;
 	vertexData.texCoords = texCoords;
 
 	model = modelMatrix;

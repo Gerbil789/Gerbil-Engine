@@ -16,7 +16,7 @@ class IRenderer : public IComponent
 {
 public:
 	enum FLAGS {
-		NORMAL = 1 << 0,	// 1
+		COLOR = 1 << 0,	// 1
 		CAMERA = 1 << 1,	// 2
 		SPECULAR = 1 << 2,  // 4
 		AMBIENT = 1 << 3,	// 8

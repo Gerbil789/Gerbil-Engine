@@ -11,7 +11,7 @@ class Transform;
 class MeshRenderer : public IRenderer, public IObserver
 {
 public:
-	MeshRenderer(std::string _model = "sphere", std::string _shader = "phong", Material* _material = new Material());
+	MeshRenderer(std::string _model = "sphere", std::string _shader = "phong", glm::vec3 _color = Color::White, Material* _material = new Material());
 	void Update() override;
 	void SetTransform(Transform* t) override;
 	void UpdateObserver(ISubject* _subject) override; 
@@ -32,5 +32,6 @@ private:
 	glm::mat4 transformMatrix;
 	Model* model;
 	Material* material;
+	glm::vec3 color;
 };
 

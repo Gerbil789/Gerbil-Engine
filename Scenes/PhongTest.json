@@ -39,107 +39,13 @@
             "children": null,
             "components": [
                 {
-                    "color": [
-                        1.0,
-                        1.0,
-                        1.0
-                    ],
-                    "intensity": 1.0,
-                    "name": "light",
-                    "type": 1
-                }
-            ],
-            "name": "point light",
-            "transform": {
-                "position": [
-                    0.0,
-                    3.0,
-                    5.0
-                ],
-                "rotation": [
-                    0.0,
-                    1.0,
-                    1.0,
-                    1.0
-                ],
-                "scale": [
-                    1.0,
-                    1.0,
-                    1.0
-                ]
-            }
-        },
-        {
-            "children": null,
-            "components": [
-                {
                     "material": "material",
                     "model": "sphere",
                     "name": "meshRenderer",
                     "shader": "phong"
                 }
             ],
-            "name": "sphere",
-            "transform": {
-                "position": [
-                    -6.0,
-                    0.0,
-                    0.0
-                ],
-                "rotation": [
-                    0.0,
-                    1.0,
-                    1.0,
-                    1.0
-                ],
-                "scale": [
-                    1.0,
-                    1.0,
-                    1.0
-                ]
-            }
-        },
-        {
-            "children": null,
-            "components": [
-                {
-                    "material": "material",
-                    "model": "torus",
-                    "name": "meshRenderer",
-                    "shader": "phong"
-                }
-            ],
-            "name": "torus",
-            "transform": {
-                "position": [
-                    -2.0,
-                    0.0,
-                    0.0
-                ],
-                "rotation": [
-                    0.0,
-                    1.0,
-                    1.0,
-                    1.0
-                ],
-                "scale": [
-                    1.0,
-                    1.0,
-                    1.0
-                ]
-            }
-        },
-        {
-            "children": null,
-            "components": [
-                {
-                    "material": "material",
-                    "model": "cube",
-                    "name": "meshRenderer",
-                    "shader": "phong"
-                }
-            ],
-            "name": "cube",
+            "name": "sphere1",
             "transform": {
                 "position": [
                     2.0,
@@ -164,15 +70,109 @@
             "components": [
                 {
                     "material": "material",
-                    "model": "cone",
+                    "model": "sphere",
                     "name": "meshRenderer",
                     "shader": "phong"
                 }
             ],
-            "name": "cone",
+            "name": "sphere2",
             "transform": {
                 "position": [
-                    6.0,
+                    -2.0,
+                    0.0,
+                    0.0
+                ],
+                "rotation": [
+                    0.0,
+                    1.0,
+                    1.0,
+                    1.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            }
+        },
+        {
+            "children": null,
+            "components": [
+                {
+                    "material": "material",
+                    "model": "sphere",
+                    "name": "meshRenderer",
+                    "shader": "phong"
+                }
+            ],
+            "name": "sphere3",
+            "transform": {
+                "position": [
+                    0.0,
+                    2.0,
+                    0.0
+                ],
+                "rotation": [
+                    0.0,
+                    1.0,
+                    1.0,
+                    1.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            }
+        },
+        {
+            "children": null,
+            "components": [
+                {
+                    "material": "material",
+                    "model": "sphere",
+                    "name": "meshRenderer",
+                    "shader": "phong"
+                }
+            ],
+            "name": "sphere4",
+            "transform": {
+                "position": [
+                    0.0,
+                    -2.0,
+                    0.0
+                ],
+                "rotation": [
+                    0.0,
+                    1.0,
+                    1.0,
+                    1.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            }
+        },
+        {
+            "children": null,
+            "components": [
+                {
+                    "color": [
+                        1.0,
+                        1.0,
+                        1.0
+                    ],
+                    "intensity": 1.0,
+                    "name": "light",
+                    "type": 1
+                }
+            ],
+            "name": "point light",
+            "transform": {
+                "position": [
+                    0.0,
                     0.0,
                     0.0
                 ],
@@ -190,5 +190,5 @@
             }
         }
     ],
-    "sceneName": "ResizeTest"
+    "sceneName": "PhongTest"
 }

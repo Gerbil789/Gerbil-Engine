@@ -81,7 +81,7 @@ void Application::InitScenes()
 
 	//------------Scene 1-------------- PHONG TEST
 	/*
-	Scene* scene1 = new Scene();
+	Scene* scene1 = new Scene("PhongTest");
 	SceneManager::GetInstance().LoadScene(scene1);
 
 
@@ -184,7 +184,7 @@ void Application::InitScenes()
 	Serializer::SerializeToJson(scene);
 	*/
 	//------------Scene 3-------------- LIGHT TEST
-	/*
+/*
 	Scene* scene = new Scene("LightTest1");
 	SceneManager::GetInstance().LoadScene(scene);
 
@@ -211,7 +211,7 @@ void Application::InitScenes()
 	SceneManager::GetInstance().SaveScene();
 	*/
 	//------------Scene 4-------------- RESIZE TEST
-	/*
+/*
 	Scene* scene = new Scene("ResizeTest");
 	SceneManager::GetInstance().LoadScene(scene);
 
@@ -284,11 +284,11 @@ void Application::InitScenes()
 	for (int i = 0; i < 120; i++) {
 		std::string type = types[std::rand() % 6];
 		std::string shader = shaders[std::rand() % 3];
+		//std::string shader = "phong";
 
 
 		GameObject* go = new GameObject(type);
-		MeshRenderer* meshRenderer = go->AddComponent<MeshRenderer>(type, shader);
-		meshRenderer->GetMaterial()->diffuse = Color::Random();
+		MeshRenderer* meshRenderer = go->AddComponent<MeshRenderer>(type, shader, Color::Random());
 		float scale = 0.3 + static_cast<float>(std::rand()) / RAND_MAX * (0.5 - 0.3);
 		go->transform->SetScale(glm::vec3(scale));
 
@@ -301,11 +301,17 @@ void Application::InitScenes()
 		scene->Add(go);
 	}
 
-	GameObject* pointLight = new GameObject("point light");
-	pointLight->AddComponent<Light>(Light::POINT, Color::White);
-	pointLight->transform->SetPosition(glm::vec3(0.0f, 10.0f, 0.0f));
+	for (int i = 0; i < 5; i++) {
+		GameObject* pointLight = new GameObject("point light");
+		pointLight->AddComponent<Light>(Light::POINT, Color::White);
+		float x = -10.0 + static_cast<float>(std::rand()) / RAND_MAX * (10.0 - (-10.0));
+		float z = -10.0 + static_cast<float>(std::rand()) / RAND_MAX * (10.0 - (-10.0));
+		pointLight->transform->SetPosition(glm::vec3(x, 2.0f, z));
 
-	scene->Add(pointLight);
+		scene->Add(pointLight);
+	}
+
+	
 
 
 
