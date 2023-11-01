@@ -3,7 +3,8 @@
 #include "../Managers/ShaderManager.h"
 #include "../Managers/ObjectManager.h"
 #include "../Components/Camera.h"
-#include "../Components/Light.h"
+#include "../PointLight.h"
+#include "../DirectionalLight.h"
 
 
 class Scene : public ISubject
@@ -20,9 +21,12 @@ public:
 
 	void SetActiveCamera(Camera* _cam);
 	Camera* GetActiveCamera();
-	std::vector<Light*> GetLights();
-	void AddLight(Light* _light);
-	void RemoveLight(Light* _light);
+
+	std::vector<PointLight*> GetPointLights();
+	std::vector<DirectionalLight*> GetDirectionalLights();
+
+
+	void RemoveLight(ILight* _light);
 
 	void Attach(IObserver* _observer) override;
 	void Detach(IObserver* _observer) override;
@@ -32,7 +36,8 @@ private:
 	std::string name;
 	ObjectManager objectManager;
 	Camera* activeCam;
-	std::vector<Light*> lights;
+	std::vector<PointLight*> pointLights;
+	std::vector<DirectionalLight*> directionalLights;
 	std::vector<IObserver*> observers; //mesh renderers
 	
 };

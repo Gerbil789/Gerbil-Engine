@@ -120,11 +120,10 @@ json Serializer::SerializeComponent(IComponent* _component)
         serializedComponent["speed"] = cameraController->GetSpeed();
     }
     else if (name == "light") {
-        Light* light = dynamic_cast<Light*>(_component);
-        serializedComponent["type"] = light->GetType();
+       /* ILight* light = dynamic_cast<ILight*>(_component);
         serializedComponent["intensity"] = light->GetIntensity();
         glm::vec3 col = light->GetColor();
-        serializedComponent["color"] = { col.x, col.y, col.z };
+        serializedComponent["color"] = { col.x, col.y, col.z };*/
     }
     else if (name == "meshRenderer") {
         MeshRenderer* meshRenderer = dynamic_cast<MeshRenderer*>(_component);
@@ -241,7 +240,7 @@ void Serializer::DeserializeComponent(const json& _componentData, GameObject* _g
         _gameObject->AddComponent<CameraController>(speed); 
     }
     else if (name == "light") {
-        int type = _componentData["type"];
+       /* int type = _componentData["type"];
         const json& positionArray = _componentData["color"];
         glm::vec3 color(
             positionArray[0].get<float>(),
@@ -250,7 +249,7 @@ void Serializer::DeserializeComponent(const json& _componentData, GameObject* _g
         );
         float intensity = _componentData["intensity"];
 
-        _gameObject->AddComponent<Light>(type, color, intensity);
+        _gameObject->AddComponent<ILight>(color, intensity);*/
     }
     else if (name == "meshRenderer") {
         std::string model = _componentData["model"];

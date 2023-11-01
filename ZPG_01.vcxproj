@@ -132,6 +132,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="DirectionalLight.h" />
     <ClInclude Include="Engine\Application.h" />
     <ClInclude Include="Components/Camera.h" />
     <ClInclude Include="Components/CameraController.h" />
@@ -148,8 +149,10 @@
     <ClInclude Include="Components\Light.h" />
     <ClInclude Include="Engine\Material.h" />
     <ClInclude Include="Engine\Observer.h" />
+    <ClInclude Include="PointLight.h" />
     <ClInclude Include="Scripts\RotationScript.h" />
     <ClInclude Include="Managers\SceneManager.h" />
+    <ClInclude Include="SpotLight.h" />
     <ClInclude Include="Utilities/Serializer.h" />
     <ClInclude Include="Engine\Shader.h" />
     <ClInclude Include="Utilities/Color.h" />
@@ -168,6 +171,7 @@
     <ClInclude Include="Managers/ShaderManager.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="DirectionalLight.cpp" />
     <ClCompile Include="Engine\Application.cpp" />
     <ClCompile Include="Components/Camera.cpp" />
     <ClCompile Include="Components/CameraController.cpp" />
@@ -182,8 +186,10 @@
     <ClCompile Include="Components\Light.cpp" />
     <ClCompile Include="Engine\Material.cpp" />
     <ClCompile Include="Engine\Observer.cpp" />
+    <ClCompile Include="PointLight.cpp" />
     <ClCompile Include="Scripts\RotationScript.cpp" />
     <ClCompile Include="Managers\SceneManager.cpp" />
+    <ClCompile Include="SpotLight.cpp" />
     <ClCompile Include="Utilities/Serializer.cpp" />
     <ClCompile Include="Engine\Shader.cpp" />
     <ClCompile Include="Utilities/Color.cpp" />

@@ -13,6 +13,9 @@ Scene::Scene(const std::string& _name)
 	{
 		name = _name;
 	}
+
+	pointLights = std::vector<PointLight*>();
+	directionalLights = std::vector<DirectionalLight*>();
 }
 
 void Scene::Init()
@@ -51,9 +54,14 @@ void Scene::Add(GameObject* _object)
 {
 	objectManager.Add(_object);
 
-	if (Light* light = _object->GetComponent<Light>()) {
-		AddLight(light);
+	if (PointLight* light = _object->GetComponent<PointLight>()) {
+		pointLights.push_back(light);
+		Notify();
+	}else if (DirectionalLight* light = _object->GetComponent<DirectionalLight>()) {
+		directionalLights.push_back(light);
+		Notify();
 	}
+	
 }
 
 ObjectManager& Scene::GetObjectManager()
@@ -83,28 +91,29 @@ Camera* Scene::GetActiveCamera()
 }
 
 
-std::vector<Light*> Scene::GetLights()
+std::vector<PointLight*> Scene::GetPointLights()
 {
-	return lights;
+	return pointLights;
 }
 
-void Scene::AddLight(Light* _light)
+std::vector<DirectionalLight*> Scene::GetDirectionalLights()
 {
-	lights.push_back(_light);
-	Notify();
+	return directionalLights;
 }
 
-void Scene::RemoveLight(Light* _light)
+
+
+void Scene::RemoveLight(ILight* _light)
 {
-	lights.erase(
+	/*lights.erase(
 		std::remove_if(
 			lights.begin(),
 			lights.end(),
-			[_light](Light* ptr) { return ptr == _light; }
+			[_light](ILight* ptr) { return ptr == _light; }
 		),
 		lights.end()
 	);
-	Notify();
+	Notify();*/
 }
 
 void Scene::Attach(IObserver* _observer)

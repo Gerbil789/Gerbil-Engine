@@ -4,6 +4,8 @@
 #include "../Engine/GameObject.h"
 #include "../Managers/SceneManager.h"
 
+#include "../PointLight.h"
+#include "../DirectionalLight.h"
 #include "../Engine/Observer.h"
 
 class Transform;
@@ -27,8 +29,10 @@ public:
 private:
 	GLuint shaderProgramId;
 	Shader* shader;
-	int numLights = 0;
-	std::vector<Light*> lights;
+	std::vector<PointLight*> pointLights;
+	int pointLightCount = 0;
+	std::vector<DirectionalLight*> directionalLights;
+	int directionalLightCount = 0;
 	glm::mat4 transformMatrix;
 	Model* model;
 	Material* material;
