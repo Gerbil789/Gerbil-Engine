@@ -94,7 +94,7 @@ void MeshRenderer::SetTransform(Transform* t)
 
 void MeshRenderer::UpdateObserver(ISubject* _subject)
 {
-	if (Scene* scene = dynamic_cast<Scene*>(_subject)) {
+ 	if (Scene* scene = dynamic_cast<Scene*>(_subject)) {
 		pointLights = scene->GetPointLights();
 		pointLightCount = (int)pointLights.size();
 

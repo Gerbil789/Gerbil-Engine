@@ -93,24 +93,34 @@ void Application::InitScenes()
 	scene1->Add(player_go);
 	scene1->Add(ground);
 
-	for (int i = 0; i < 10; i++) {
-		GameObject* sphere = new GameObject("sphere1");
-		sphere->AddComponent<MeshRenderer>("sphere");
-		sphere->transform->SetPosition(glm::vec3(3.0f * i, 1.0f, 2.0f));
-		scene1->Add(sphere);
-	}
+
 
 	for (int i = 0; i < 10; i++) {
-		GameObject* sphere = new GameObject("sphere1");
-		sphere->AddComponent<MeshRenderer>("sphere");
-		sphere->transform->SetPosition(glm::vec3(3.0f * i, 1.0f, -2.0f));
-		scene1->Add(sphere);
+		for (int j = -5; j < 0; j++) {
+			GameObject* sphere = new GameObject("sphere1");
+			sphere->AddComponent<MeshRenderer>("sphere", "phong", Color::Random());
+			sphere->transform->SetPosition(glm::vec3(3.0f * i, 1.0f, 3.0f * j));
+			scene1->Add(sphere);
+		}
+
+		for (int j = 1; j < 6; j++) {
+			GameObject* sphere = new GameObject("sphere1");
+			sphere->AddComponent<MeshRenderer>("sphere", "phong", Color::Random());
+			sphere->transform->SetPosition(glm::vec3(3.0f * i, 1.0f, 3.0f * j));
+			scene1->Add(sphere);
+		}
+		
 	}
+
+	
 
 	
 	for (int i = 0; i < 5; i++) {
 		GameObject* pointLight = new GameObject("point light");
-		pointLight->AddComponent<PointLight>(Color::Random(), 0.5f * i);
+		glm::vec3 color = Color::Random();
+		pointLight->AddComponent<PointLight>(color, 0.5f * i + 1);
+		pointLight->AddComponent<MeshRenderer>("sphere", "constant", color);
+		pointLight->transform->SetScale(glm::vec3(0.1f));
 		pointLight->transform->SetPosition(glm::vec3(6.0f * i, 1.0f, 0.0f));
 		scene1->Add(pointLight);
 	}
@@ -118,8 +128,8 @@ void Application::InitScenes()
 	
 
 	GameObject* dir = new GameObject("dir");
-	dir->AddComponent<DirectionalLight>(Color::Yellow, 0.1f);
-	scene1->Add(dir);
+	dir->AddComponent<DirectionalLight>(Color::Black, 0.5f);
+	//scene1->Add(dir);
 	
 
 
