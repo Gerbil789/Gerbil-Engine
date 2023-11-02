@@ -67,14 +67,18 @@ void MeshRenderer::Update()
 	}
 
 	if (IsFlagSet(LIGHTS)) {
-		shaderManager.SetUniform("numLights", numLights);
-		for (int i = 0; i < numLights; i++) {
-			shaderManager.SetUniform(("lights[" + std::to_string(i) + "].position").c_str(), lights[i]->transform->GetPosition());
-			shaderManager.SetUniform(("lights[" + std::to_string(i) + "].color").c_str(), lights[i]->GetColor());
-			shaderManager.SetUniform(("lights[" + std::to_string(i) + "].intensity").c_str(), lights[i]->GetIntensity());
-			
-			//light type - not implemented
-			//shaderManager.SetUniform(("lights[" + std::to_string(i) + "].type").c_str(), lights[i]->GetType());
+		shaderManager.SetUniform("pointLightCount", pointLightCount);
+		for (int i = 0; i < pointLightCount; i++) {
+			shaderManager.SetUniform(("pointLights[" + std::to_string(i) + "].position").c_str(), pointLights[i]->transform->GetPosition());
+			shaderManager.SetUniform(("pointLights[" + std::to_string(i) + "].color").c_str(), pointLights[i]->GetColor());
+			shaderManager.SetUniform(("pointLights[" + std::to_string(i) + "].intensity").c_str(), pointLights[i]->GetIntensity());
+		}
+
+		shaderManager.SetUniform("directionalLightCount", directionalLightCount);
+		for (int i = 0; i < directionalLightCount; i++) {
+			shaderManager.SetUniform(("directionalLights[" + std::to_string(i) + "].color").c_str(), directionalLights[i]->GetColor());
+			shaderManager.SetUniform(("directionalLights[" + std::to_string(i) + "].intensity").c_str(), directionalLights[i]->GetIntensity());
+			shaderManager.SetUniform(("directionalLights[" + std::to_string(i) + "].direction").c_str(), directionalLights[i]->GetDirection());
 		}
 	}
 
@@ -90,9 +94,12 @@ void MeshRenderer::SetTransform(Transform* t)
 
 void MeshRenderer::UpdateObserver(ISubject* _subject)
 {
-	if (Scene* scene = dynamic_cast<Scene*>(_subject)) {
-		lights = scene->GetLights();
-		numLights = (int)lights.size();
+ 	if (Scene* scene = dynamic_cast<Scene*>(_subject)) {
+		pointLights = scene->GetPointLights();
+		pointLightCount = (int)pointLights.size();
+
+		directionalLights = scene->GetDirectionalLights();
+		directionalLightCount = (int)directionalLights.size();
 	}
 }
 

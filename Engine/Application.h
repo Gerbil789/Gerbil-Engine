@@ -15,6 +15,9 @@
 #include "../Managers/ModelManager.h"
 #include "../Scripts/RotationScript.h"
 #include "../GUI/GUI.h"
+#include "../PointLight.h"
+#include "../SpotLight.h"
+#include "../DirectionalLight.h"
 
 
 class Application
