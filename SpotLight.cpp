@@ -14,5 +14,6 @@ void SpotLight::SetDirection(glm::vec3 _direction)
 
 glm::vec3 SpotLight::GetDirection()
 {
-	return direction;
+	glm::vec3 transformedDirection = glm::mat3(transform->GetRotation()) * direction;
+	return transformedDirection;
 }

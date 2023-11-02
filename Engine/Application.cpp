@@ -94,26 +94,45 @@ void Application::InitScenes()
 	scene1->Add(ground);
 
 
-	for (int i = 0; i < 10; i++) {
-		GameObject* sphere = new GameObject("sphere");
-		sphere->AddComponent<MeshRenderer>("sphere");
-		sphere->transform->SetPosition(glm::vec3(3.0f * i, 1.0f, 3.0f));
-		scene1->Add(sphere);
-	}
-
-	for (int i = 0; i < 10; i++) {
-		GameObject* sphere = new GameObject("sphere");
-		sphere->AddComponent<MeshRenderer>("sphere");
-		sphere->transform->SetPosition(glm::vec3(3.0f * i, 1.0f, -3.0f));
-		scene1->Add(sphere);
+	for (int i = -7; i <= 7; i++) {
+		for (int j = -7; j <= 7; j++) {
+			GameObject* sphere = new GameObject("sphere");
+			sphere->AddComponent<MeshRenderer>("sphere", "phong", Color::Random());
+			sphere->transform->SetPosition(glm::vec3(3.0f * i, 1.0f, 3.0f * j));
+			scene1->Add(sphere);
+		}
 	}
 
 
-	GameObject* dir = new GameObject("directional light");
-	dir->AddComponent<DirectionalLight>(Color::White, 0.1f);
-	scene1->Add(dir);
 
-	for(int i = 0; i < 5; i++) {
+	GameObject* empty = new GameObject("empty");
+	empty->AddComponent<RotationScript>(150.0f, glm::vec3(0.0f, 1.0f, 0.0f));
+	scene1->Add(empty);
+
+	GameObject* spot1 = new GameObject("spot light");
+	spot1->AddComponent<SpotLight>(Color::Red, 5.0f);
+	spot1->transform->SetPosition(glm::vec3(0.0f, 5.0f, 0.0f));
+	spot1->transform->SetScale(glm::vec3(0.1f));
+	spot1->transform->RotateBy(45.0f, glm::vec3(1.0f, 0.0f, 0.0f));
+	spot1->AddComponent<RotationScript>(150.0f, glm::vec3(0.0f, 1.0f, 0.0f));
+	scene1->Add(spot1);
+	empty->AddChildren(spot1);
+
+	GameObject* spot2 = new GameObject("spot light");
+	spot2->AddComponent<SpotLight>(Color::Blue, 5.0f);
+	spot2->transform->SetPosition(glm::vec3(0.0f, 5.0f, 0.0f));
+	spot2->transform->SetScale(glm::vec3(0.1f));
+	spot2->transform->RotateBy(180.0f, glm::vec3(0.0f, 1.0f, 0.0f));
+	spot2->transform->RotateBy(45.0f, glm::vec3(1.0f, 0.0f, 0.0f));
+	spot2->AddComponent<RotationScript>(150.0f, glm::vec3(0.0f, 1.0f, 0.0f));
+	scene1->Add(spot2);
+	empty->AddChildren(spot2);
+
+	//GameObject* dir = new GameObject("directional light");
+	//dir->AddComponent<DirectionalLight>(Color::White, 0.1f);
+	//scene1->Add(dir);
+
+	/*for(int i = 0; i < 5; i++) {
 		GameObject* point = new GameObject("point light");
 		glm::vec3 color = Color::Random();
 		point->AddComponent<PointLight>(color);
@@ -121,7 +140,7 @@ void Application::InitScenes()
 		point->transform->SetScale(glm::vec3(0.1f));
 		point->transform->SetPosition(glm::vec3(5.0f * i, 1.0f, 0.0f));
 		scene1->Add(point);
-	}
+	}*/
 
 
 	//SceneManager::GetInstance().SaveScene();

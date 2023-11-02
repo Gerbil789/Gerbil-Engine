@@ -1,6 +1,6 @@
 #include "Transform.h"
 
-Transform::Transform(glm::vec3 position, glm::vec3 rotation, glm::vec3 scale)
+Transform::Transform(glm::vec3 position, glm::quat rotation, glm::vec3 scale)
 {
 	this->position = position;
 	this->rotation = rotation;
@@ -21,7 +21,9 @@ glm::mat4 Transform::GetModel() const
 	}
 	
 	model = glm::translate(model, this->position);
+
 	model *= glm::mat4_cast(this->rotation);
+
 	model = glm::scale(model, this->scale);
 
 	return model;
@@ -29,11 +31,16 @@ glm::mat4 Transform::GetModel() const
 
 glm::vec3 Transform::GetPosition() const
 {
+	
 	return this->position;
 }
 glm::quat Transform::GetRotation() const
 {
+	if (parentTransform != nullptr) {
+		return parentTransform->GetRotation() * this->rotation;
+	}
 	return this->rotation;
+	
 }
 glm::vec3 Transform::GetScale() const
 {
