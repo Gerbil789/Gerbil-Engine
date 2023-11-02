@@ -15,5 +15,5 @@ void RotationScript::Update()
 	this->transform->RotateBy(val * Time::deltaTime, dir);
 	std::cout << "[" << gameObject->GetName() << "] ";
 	glm::vec3 pos = transform->GetPosition();
-	std::cout << pos.x << " " << pos.y << " " << pos.z << "\n";
+	//std::cout << pos.x << " " << pos.y << " " << pos.z << "\n";
 }

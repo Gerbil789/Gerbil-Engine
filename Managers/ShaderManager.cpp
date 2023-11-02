@@ -77,6 +77,9 @@ void ShaderManager::Init()
 	Shader* phongShader = CreateShader("phong", "Shaders/phong_vert.glsl", "Shaders/phong_frag.glsl");
 	shaderPrograms.push_back(phongShader);
 
+	Shader* blinnShader = CreateShader("blinn", "Shaders/blinn_vert.glsl", "Shaders/blinn_frag.glsl");
+	shaderPrograms.push_back(blinnShader);
+
 	
 	initialized = true;
 }

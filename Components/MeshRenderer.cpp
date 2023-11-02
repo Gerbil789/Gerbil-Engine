@@ -22,7 +22,7 @@ MeshRenderer::MeshRenderer(std::string _model, std::string _shader, glm::vec3 _c
 		//SetFlag(DIFFUSE);
 		SetFlag(LIGHTS);
 	}
-	else if (_shader == "phong") {
+	else if (_shader == "phong" || _shader == "blinn") {
 		SetFlag(AMBIENT);
 		//SetFlag(DIFFUSE);
 		SetFlag(SPECULAR);

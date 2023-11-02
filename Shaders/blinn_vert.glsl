@@ -21,7 +21,6 @@ uniform mat4 projectionMatrix;
 
 void main()
 {
-	#todo: fix...
 	vertexData.worldPosition = vec3(modelMatrix * vec4(position, 1.0f));
 	vertexData.normal = mat3(transpose(inverse(modelMatrix))) * normal;
 	vertexData.texCoords = texCoords;
