@@ -61,6 +61,10 @@ void Scene::Add(GameObject* _object)
 		directionalLights.push_back(light);
 		Notify();
 	}
+	else if (SpotLight* light = _object->GetComponent<SpotLight>()) {
+		spotLights.push_back(light);
+		Notify();
+	}
 	
 }
 
@@ -99,6 +103,11 @@ std::vector<PointLight*> Scene::GetPointLights()
 std::vector<DirectionalLight*> Scene::GetDirectionalLights()
 {
 	return directionalLights;
+}
+
+std::vector<SpotLight*> Scene::GetSpotLights()
+{
+	return spotLights;
 }
 
 

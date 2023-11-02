@@ -85,90 +85,49 @@ void Application::InitScenes()
 	player_go->GetComponent<Camera>()->SetTarget(glm::vec3(0.0f, 0.0f, -5.0f));
 	player_go->GetComponent<Camera>()->SetAspect(ratio);
 	player_go->AddComponent<CameraController>(2.0f, player_go->GetComponent<Camera>());
+	player_go->transform->SetPosition(glm::vec3(0.0f, 2.0f, 0.0f));
+	scene1->Add(player_go);
 
 	GameObject* ground = new GameObject("ground");
 	ground->AddComponent<MeshRenderer>("plane");
 	ground->transform->SetScale(glm::vec3(100.0f));
-
-	scene1->Add(player_go);
 	scene1->Add(ground);
 
 
-	SceneManager::GetInstance().SaveScene();
-	//Serializer::SerializeToJson(scene1);
-	//Serializer::DeserializeFromJson("Scenes/newScene1.json");
-	*/
-	//------------Scene 2-------------- TRANSFORM TEST
-	/*
-	Scene* scene = new Scene("TransformTest");
-	SceneManager::GetInstance().LoadScene(scene);
+	for (int i = 0; i < 10; i++) {
+		GameObject* sphere = new GameObject("sphere");
+		sphere->AddComponent<MeshRenderer>("sphere");
+		sphere->transform->SetPosition(glm::vec3(3.0f * i, 1.0f, 3.0f));
+		scene1->Add(sphere);
+	}
 
-	GameObject* player_go = new GameObject("player");
-	player_go->transform->SetPosition(glm::vec3(0.0f, 0.0f, 5.0f));
-	player_go->AddComponent<Camera>();
-	player_go->GetComponent<Camera>()->SetTarget(glm::vec3(0.0f, 0.0f, -5.0f));
-	player_go->GetComponent<Camera>()->SetAspect(ratio);
-	player_go->AddComponent<CameraController>(2.0f, player_go->GetComponent<Camera>());
-	scene->SetActiveCamera(player_go->GetComponent<Camera>());
-
-	GameObject* empty = new GameObject("empty");
-	empty->AddComponent<RotationScript>(-100);
-
-	GameObject* sun = new GameObject("sun");
-	sun->AddComponent<MeshRenderer>("sphere");
-	sun->transform->SetScale(glm::vec3(3.0f));
-	sun->AddComponent<RotationScript>();
-
-	GameObject* earth = new GameObject("earth");
-	earth->AddComponent<MeshRenderer>("sphere");
-	earth->transform->SetPosition(glm::vec3(-9.0f, 0.0f, 0.0f));
-	earth->transform->SetScale(glm::vec3(1.2));
-	earth->AddComponent<RotationScript>(500.0f);
-
-	GameObject* moon = new GameObject("moon");
-	moon->AddComponent<MeshRenderer>("sphere");
-	moon->transform->SetPosition(glm::vec3(-4.0f, 0.0f, 0.0f));
-	moon->transform->SetScale(glm::vec3(0.4f));
-	moon->AddComponent<RotationScript>(150.0f);
-
-	GameObject* mars = new GameObject("mars");
-	mars->AddComponent<MeshRenderer>("sphere");
-	mars->transform->SetPosition(glm::vec3(-5.0f, 0.0f, 0.0f));
-	mars->transform->SetScale(glm::vec3(0.5f));
-	mars->AddComponent<RotationScript>(-350.0f);
-
-	GameObject* pointLight = new GameObject("point light");
-	pointLight->AddComponent<Light>(Light::POINT, Color::White);
-	pointLight->transform->SetPosition(glm::vec3(0.0f, 5.0f, 0.0f));
-
-	empty->AddChildren(earth);
-	earth->AddChildren(moon);
-	sun->AddChildren(mars);
+	for (int i = 0; i < 10; i++) {
+		GameObject* sphere = new GameObject("sphere");
+		sphere->AddComponent<MeshRenderer>("sphere");
+		sphere->transform->SetPosition(glm::vec3(3.0f * i, 1.0f, -3.0f));
+		scene1->Add(sphere);
+	}
 
 
-	scene->Add(player_go);
-	scene->Add(empty);
-	scene->Add(sun);
-	scene->Add(earth);
-	scene->Add(moon);
-	scene->Add(mars);
-	scene->Add(pointLight);
+	GameObject* dir = new GameObject("directional light");
+	dir->AddComponent<DirectionalLight>(Color::White, 0.1f);
+	scene1->Add(dir);
 
-	Serializer::SerializeToJson(scene);
-	*/
-	//------------Scene 3-------------- LIGHT TEST
-/*
-	Scene* scene = new Scene("LightTest1");
-	SceneManager::GetInstance().LoadScene(scene);
-
+	for(int i = 0; i < 5; i++) {
+		GameObject* point = new GameObject("point light");
+		glm::vec3 color = Color::Random();
+		point->AddComponent<PointLight>(color);
+		point->AddComponent<MeshRenderer>("sphere", "constant", color);
+		point->transform->SetScale(glm::vec3(0.1f));
+		point->transform->SetPosition(glm::vec3(5.0f * i, 1.0f, 0.0f));
+		scene1->Add(point);
+	}
 
 
-
-	
-
-	scene1->SetActiveCamera(player_go->GetComponent<Camera>());
-	
+	//SceneManager::GetInstance().SaveScene();
 }
+
+
 
 void Application::Run()
 {

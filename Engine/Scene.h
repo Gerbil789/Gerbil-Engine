@@ -5,6 +5,7 @@
 #include "../Components/Camera.h"
 #include "../PointLight.h"
 #include "../DirectionalLight.h"
+#include "../SpotLight.h"
 
 
 class Scene : public ISubject
@@ -24,6 +25,7 @@ public:
 
 	std::vector<PointLight*> GetPointLights();
 	std::vector<DirectionalLight*> GetDirectionalLights();
+	std::vector<SpotLight*> GetSpotLights();
 
 
 	void RemoveLight(ILight* _light);
@@ -38,6 +40,7 @@ private:
 	Camera* activeCam;
 	std::vector<PointLight*> pointLights;
 	std::vector<DirectionalLight*> directionalLights;
+	std::vector<SpotLight*> spotLights;
 	std::vector<IObserver*> observers; //mesh renderers
 	
 };

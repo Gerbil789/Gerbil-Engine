@@ -33,6 +33,8 @@ private:
 	int pointLightCount = 0;
 	std::vector<DirectionalLight*> directionalLights;
 	int directionalLightCount = 0;
+	std::vector<SpotLight*> spotLights;
+	int spotLightCount = 0;
 	glm::mat4 transformMatrix;
 	Model* model;
 	Material* material;

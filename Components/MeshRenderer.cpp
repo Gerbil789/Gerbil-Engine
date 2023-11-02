@@ -80,6 +80,14 @@ void MeshRenderer::Update()
 			shaderManager.SetUniform(("directionalLights[" + std::to_string(i) + "].intensity").c_str(), directionalLights[i]->GetIntensity());
 			shaderManager.SetUniform(("directionalLights[" + std::to_string(i) + "].direction").c_str(), directionalLights[i]->GetDirection());
 		}
+
+		shaderManager.SetUniform("spotLightCount", spotLightCount);
+		for (int i = 0; i < spotLightCount; i++) {
+			shaderManager.SetUniform(("spotLights[" + std::to_string(i) + "].position").c_str(), spotLights[i]->transform->GetPosition());
+			shaderManager.SetUniform(("spotLights[" + std::to_string(i) + "].color").c_str(), spotLights[i]->GetColor());
+			shaderManager.SetUniform(("spotLights[" + std::to_string(i) + "].intensity").c_str(), spotLights[i]->GetIntensity());
+			shaderManager.SetUniform(("spotLights[" + std::to_string(i) + "].direction").c_str(), spotLights[i]->GetDirection());
+		}
 	}
 
 	model->Draw();
@@ -100,6 +108,9 @@ void MeshRenderer::UpdateObserver(ISubject* _subject)
 
 		directionalLights = scene->GetDirectionalLights();
 		directionalLightCount = (int)directionalLights.size();
+
+		spotLights = scene->GetSpotLights();
+		spotLightCount = (int)spotLights.size();
 	}
 }
 
