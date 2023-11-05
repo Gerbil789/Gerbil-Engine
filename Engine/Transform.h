@@ -7,7 +7,7 @@
 
 #include "../Engine/Observer.h"
 
-class Transform: public ISubject
+class Transform: public ISubject, public IObserver
 {
 public:
 	Transform(glm::vec3 position = glm::vec3(0.0f), glm::quat rotation = glm::quat(1.0f, 0.0f, 0.0f, 0.0f), glm::vec3 scale = glm::vec3(1.0f));
@@ -32,6 +32,8 @@ public:
 	void Attach(IObserver* _observer) override;
 	void Detach(IObserver* _observer) override;
 	void Notify() override;
+
+	void UpdateObserver();
 private:
 	Transform* parentTransform = nullptr;
 	glm::vec3 position;

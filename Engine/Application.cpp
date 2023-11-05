@@ -76,24 +76,25 @@ void Application::Init()
 
 void Application::InitScenes()
 {
-	Scene* scene1 = new Scene("PhongTest");
+	Scene* scene1 = new Scene();
 	SceneManager::GetInstance().LoadScene(scene1);
 
+	//player
 	GameObject* player_go = new GameObject("player");
-	player_go->transform->SetPosition(glm::vec3(0.0f, 0.0f, 5.0f));
 	player_go->AddComponent<Camera>();
-	player_go->GetComponent<Camera>()->SetTarget(glm::vec3(0.0f, 0.0f, -5.0f));
 	player_go->GetComponent<Camera>()->SetAspect(ratio);
 	player_go->AddComponent<CameraController>(2.0f, player_go->GetComponent<Camera>());
-	player_go->transform->SetPosition(glm::vec3(0.0f, 2.0f, 0.0f));
+	player_go->transform->SetPosition(glm::vec3(0.0f, 5.0f, 0.0f));
 	scene1->Add(player_go);
 
+
+	//ground
 	GameObject* ground = new GameObject("ground");
 	ground->AddComponent<MeshRenderer>("plane");
 	ground->transform->SetScale(glm::vec3(100.0f));
 	scene1->Add(ground);
 
-
+	//spheres
 	for (int i = -7; i <= 7; i++) {
 		for (int j = -7; j <= 7; j++) {
 			GameObject* sphere = new GameObject("sphere");
@@ -105,32 +106,37 @@ void Application::InitScenes()
 
 
 
-	GameObject* empty = new GameObject("empty");
-	empty->AddComponent<RotationScript>(150.0f, glm::vec3(0.0f, 1.0f, 0.0f));
-	scene1->Add(empty);
+	GameObject* rotator = new GameObject("empty");
+	rotator->AddComponent<RotationScript>(150.0f, glm::vec3(0.0f, 1.0f, 0.0f));
+	rotator->transform->SetPosition(glm::vec3(0.0f, 6.0f, 0.0f));
+	rotator->AddComponent<MeshRenderer>("cube", "constant", Color::Gray);
+	rotator->transform->SetScale(glm::vec3(0.5f));
+	scene1->Add(rotator);
 
+	//red light
 	GameObject* spot1 = new GameObject("spot light");
 	spot1->AddComponent<SpotLight>(Color::Red, 5.0f);
-	spot1->transform->SetPosition(glm::vec3(0.0f, 5.0f, 0.0f));
-	spot1->transform->SetScale(glm::vec3(0.1f));
-	spot1->transform->RotateBy(45.0f, glm::vec3(1.0f, 0.0f, 0.0f));
-	spot1->AddComponent<RotationScript>(150.0f, glm::vec3(0.0f, 1.0f, 0.0f));
+	spot1->transform->SetPosition(glm::vec3(0.0f, 0.0f, -1.0f));
+	spot1->AddComponent<MeshRenderer>("cube", "constant", Color::Red);
+	spot1->transform->SetScale(glm::vec3(0.5f));
+	spot1->transform->RotateBy(45.0f, glm::vec3(1.0f, 0.0f, 0.0f)); //set 45 angle
 	scene1->Add(spot1);
-	empty->AddChildren(spot1);
+	rotator->AddChildren(spot1);
 
+	//blue light
 	GameObject* spot2 = new GameObject("spot light");
 	spot2->AddComponent<SpotLight>(Color::Blue, 5.0f);
-	spot2->transform->SetPosition(glm::vec3(0.0f, 5.0f, 0.0f));
-	spot2->transform->SetScale(glm::vec3(0.1f));
+	spot2->transform->SetPosition(glm::vec3(0.0f, 0.0f, 1.0f));
+	spot2->AddComponent<MeshRenderer>("cube", "constant", Color::Blue);
+	spot2->transform->SetScale(glm::vec3(0.5f));
 	spot2->transform->RotateBy(180.0f, glm::vec3(0.0f, 1.0f, 0.0f));
 	spot2->transform->RotateBy(45.0f, glm::vec3(1.0f, 0.0f, 0.0f));
-	spot2->AddComponent<RotationScript>(150.0f, glm::vec3(0.0f, 1.0f, 0.0f));
 	scene1->Add(spot2);
-	empty->AddChildren(spot2);
+	rotator->AddChildren(spot2);
 
-	//GameObject* dir = new GameObject("directional light");
-	//dir->AddComponent<DirectionalLight>(Color::White, 0.1f);
-	//scene1->Add(dir);
+	/*GameObject* dir = new GameObject("directional light");
+	dir->AddComponent<DirectionalLight>(Color::White, 0.1f);
+	scene1->Add(dir);*/
 
 	/*for(int i = 0; i < 5; i++) {
 		GameObject* point = new GameObject("point light");
@@ -138,11 +144,16 @@ void Application::InitScenes()
 		point->AddComponent<PointLight>(color);
 		point->AddComponent<MeshRenderer>("sphere", "constant", color);
 		point->transform->SetScale(glm::vec3(0.1f));
-		point->transform->SetPosition(glm::vec3(5.0f * i, 1.0f, 0.0f));
+		point->transform->SetPosition(glm::vec3(5.0f * i, 3.0f, 0.0f));
 		scene1->Add(point);
 	}*/
 
-
+	//flash light
+	GameObject* flashLight = new GameObject("flash light");
+	flashLight->AddComponent<SpotLight>(Color::White, 5.0f);
+	scene1->Add(flashLight);
+	player_go->AddChildren(flashLight);
+	
 	//SceneManager::GetInstance().SaveScene();
 }
 
@@ -162,6 +173,9 @@ void Application::Run()
 
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		SceneManager::GetInstance().GetActiveScene()->Update();
+		//nejhezèí øídek kódu co jsem kdy napsal
+		//[tmp øešení] nastavit smìr baterky na smìr kamery
+		SceneManager::GetInstance().GetActiveScene()->GetObjectManager().FindByName("flash light")->GetComponent<SpotLight>()->SetDirection(SceneManager::GetInstance().GetActiveScene()->GetActiveCamera()->GetFront());
 
 		glfwPollEvents();
 		gui.Update();

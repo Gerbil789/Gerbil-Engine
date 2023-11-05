@@ -42,10 +42,17 @@ void CameraController::Update()
 	if (Input::CursorMoved()) {
 		ProcessCameraView();
 	}
+	 
+	/*std::cout << "Pos: ";
+	std::cout << transform->GetPosition().x << " ";
+	std::cout << transform->GetPosition().y << " ";
+	std::cout << transform->GetPosition().z << "\n";
 
-	//std::cout << transform->GetPosition().x << " ";
-	//std::cout << transform->GetPosition().y << " ";
-	//std::cout << transform->GetPosition().z << "\n";
+	std::cout << "Rot: ";
+	std::cout << transform->GetRotation().x << " ";
+	std::cout << transform->GetRotation().y << " ";
+	std::cout << transform->GetRotation().z << " ";
+	std::cout << transform->GetRotation().w << "\n";*/
 }
 
 

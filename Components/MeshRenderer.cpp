@@ -87,8 +87,8 @@ void MeshRenderer::Update()
 			shaderManager.SetUniform(("spotLights[" + std::to_string(i) + "].color").c_str(), spotLights[i]->GetColor());
 			shaderManager.SetUniform(("spotLights[" + std::to_string(i) + "].intensity").c_str(), spotLights[i]->GetIntensity());
 			shaderManager.SetUniform(("spotLights[" + std::to_string(i) + "].direction").c_str(), spotLights[i]->GetDirection());
-			shaderManager.SetUniform(("spotLights[" + std::to_string(i) + "].innerConeAngle").c_str(), 30.0f);
-			shaderManager.SetUniform(("spotLights[" + std::to_string(i) + "].outerConeAngle").c_str(), 40.0f);
+			shaderManager.SetUniform(("spotLights[" + std::to_string(i) + "].innerConeAngle").c_str(), 20.0f);
+			shaderManager.SetUniform(("spotLights[" + std::to_string(i) + "].outerConeAngle").c_str(), 30.0f);
 		}
 	}
 

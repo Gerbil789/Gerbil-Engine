@@ -10,6 +10,7 @@ Transform::Transform(glm::vec3 position, glm::quat rotation, glm::vec3 scale)
 void Transform::SetParentTransform(Transform* _transform)
 {
 	parentTransform = _transform;
+	parentTransform->Attach(this);
 	Notify();
 }
 
@@ -31,7 +32,9 @@ glm::mat4 Transform::GetModel() const
 
 glm::vec3 Transform::GetPosition() const
 {
-	
+	if (parentTransform != nullptr) {
+		return parentTransform->GetPosition() + this->position;
+	}
 	return this->position;
 }
 glm::quat Transform::GetRotation() const
@@ -109,5 +112,10 @@ void Transform::Notify()
 	for (IObserver* observer : observers) {
 		observer->UpdateObserver();
 	}
+}
+
+void Transform::UpdateObserver()
+{
+	Notify();
 }
 
