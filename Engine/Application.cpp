@@ -79,6 +79,8 @@ void Application::InitScenes()
 	Scene* scene1 = new Scene();
 	SceneManager::GetInstance().LoadScene(scene1);
 
+	Material* m1 = new Material();
+
 	//player
 	GameObject* player_go = new GameObject("player");
 	player_go->AddComponent<Camera>();
@@ -90,7 +92,7 @@ void Application::InitScenes()
 
 	//ground
 	GameObject* ground = new GameObject("ground");
-	ground->AddComponent<MeshRenderer>("plane");
+	ground->AddComponent<MeshRenderer>("plane", "phong", Color::White, m1);
 	ground->transform->SetScale(glm::vec3(100.0f));
 	scene1->Add(ground);
 
@@ -98,7 +100,7 @@ void Application::InitScenes()
 	for (int i = -7; i <= 7; i++) {
 		for (int j = -7; j <= 7; j++) {
 			GameObject* sphere = new GameObject("sphere");
-			sphere->AddComponent<MeshRenderer>("sphere", "phong", Color::Random());
+			sphere->AddComponent<MeshRenderer>("sphere", "phong", Color::Random(), m1);
 			sphere->transform->SetPosition(glm::vec3(3.0f * i, 1.0f, 3.0f * j));
 			scene1->Add(sphere);
 		}
@@ -109,15 +111,15 @@ void Application::InitScenes()
 	GameObject* rotator = new GameObject("empty");
 	rotator->AddComponent<RotationScript>(150.0f, glm::vec3(0.0f, 1.0f, 0.0f));
 	rotator->transform->SetPosition(glm::vec3(0.0f, 6.0f, 0.0f));
-	rotator->AddComponent<MeshRenderer>("cube", "constant", Color::Gray);
+	//rotator->AddComponent<MeshRenderer>("cube", "constant", Color::Gray);
 	rotator->transform->SetScale(glm::vec3(0.5f));
 	scene1->Add(rotator);
 
 	//red light
 	GameObject* spot1 = new GameObject("spot light");
-	spot1->AddComponent<SpotLight>(Color::Red, 5.0f);
+	spot1->AddComponent<SpotLight>(Color::Red, 15.0f);
 	spot1->transform->SetPosition(glm::vec3(0.0f, 0.0f, -1.0f));
-	spot1->AddComponent<MeshRenderer>("cube", "constant", Color::Red);
+	//spot1->AddComponent<MeshRenderer>("cube", "constant", Color::Red);
 	spot1->transform->SetScale(glm::vec3(0.5f));
 	spot1->transform->RotateBy(45.0f, glm::vec3(1.0f, 0.0f, 0.0f)); //set 45 angle
 	scene1->Add(spot1);
@@ -125,18 +127,18 @@ void Application::InitScenes()
 
 	//blue light
 	GameObject* spot2 = new GameObject("spot light");
-	spot2->AddComponent<SpotLight>(Color::Blue, 5.0f);
+	spot2->AddComponent<SpotLight>(Color::Blue, 15.0f);
 	spot2->transform->SetPosition(glm::vec3(0.0f, 0.0f, 1.0f));
-	spot2->AddComponent<MeshRenderer>("cube", "constant", Color::Blue);
+	//spot2->AddComponent<MeshRenderer>("cube", "constant", Color::Blue);
 	spot2->transform->SetScale(glm::vec3(0.5f));
 	spot2->transform->RotateBy(180.0f, glm::vec3(0.0f, 1.0f, 0.0f));
 	spot2->transform->RotateBy(45.0f, glm::vec3(1.0f, 0.0f, 0.0f));
 	scene1->Add(spot2);
 	rotator->AddChildren(spot2);
 
-	/*GameObject* dir = new GameObject("directional light");
-	dir->AddComponent<DirectionalLight>(Color::White, 0.1f);
-	scene1->Add(dir);*/
+	GameObject* dir = new GameObject("directional light");
+	dir->AddComponent<DirectionalLight>(Color::White, 0.5f);
+	scene1->Add(dir);
 
 	/*for(int i = 0; i < 5; i++) {
 		GameObject* point = new GameObject("point light");

@@ -27,6 +27,7 @@ public:
 	void SetUniform(const char* _uniform, const glm::mat4& _value);
 	void SetUniform(const char* _uniform, const glm::vec3& _value);
 	void SetUniform(const char* _uniform, const int& _value);
+	void SetUniform(const char* _uniform, const GLuint& _value);
 	void SetUniform(const char* _uniform, const float& _value);
 private:
 	int currentShaderId = -1;

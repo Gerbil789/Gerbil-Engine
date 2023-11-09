@@ -80,6 +80,9 @@ void ShaderManager::Init()
 	Shader* blinnShader = CreateShader("blinn", "Shaders/blinn_vert.glsl", "Shaders/blinn_frag.glsl");
 	shaderPrograms.push_back(blinnShader);
 
+	Shader* textureShader = CreateShader("texture", "Shaders/texture_vert.glsl", "Shaders/texture_frag.glsl");
+	shaderPrograms.push_back(textureShader);
+
 	
 	initialized = true;
 }
@@ -160,6 +163,15 @@ void ShaderManager::SetUniform(const char* _uniform, const glm::vec3& _value)
 }
 
 void ShaderManager::SetUniform(const char* _uniform, const int& _value)
+{
+	GLint uniform_id = glGetUniformLocation(currentShaderId, _uniform);
+	if (uniform_id == -1) {
+		std::cout << "ERROR: could not find " << _uniform << " uniform\n";
+	}
+	glUniform1i(uniform_id, _value);
+}
+
+void ShaderManager::SetUniform(const char* _uniform, const GLuint& _value)
 {
 	GLint uniform_id = glGetUniformLocation(currentShaderId, _uniform);
 	if (uniform_id == -1) {

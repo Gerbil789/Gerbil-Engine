@@ -26,7 +26,7 @@ Model::Model(std::string path) {
 		return;
 	}
 
-	//textureID = LoadTexture("Textures/test.bmp");
+	textureID = LoadTexture("Textures/test.bmp");
 
 	glGenBuffers(1, &VBO);
 	glBindBuffer(GL_ARRAY_BUFFER, VBO);
@@ -193,6 +193,7 @@ bool Model::LoadTexture(std::string path) {
 	// Use C++ constants for OpenGL parameters
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_BGR, GL_UNSIGNED_BYTE, data.data());
 
+
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
 
@@ -203,7 +204,7 @@ bool Model::LoadTexture(std::string path) {
 
 void Model::Draw()
 {
-	//glBindTexture(GL_TEXTURE_2D, textureID);
+	glBindTexture(GL_TEXTURE_2D, textureID);
 	glBindVertexArray(VAO);
 
 	glDrawArrays(GL_TRIANGLES, 0, vertices.size());

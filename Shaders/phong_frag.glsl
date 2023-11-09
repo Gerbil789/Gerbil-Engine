@@ -53,6 +53,8 @@ uniform Material material;
 uniform vec3 cameraPosition;
 uniform vec3 color;
 
+uniform sampler2D textureUnitID;
+
 void main()
 {
 	vec3 finalColor = vec3(0.0);
@@ -118,5 +120,5 @@ void main()
     }
 
 	finalColor = finalColor * color;
-	outColor = vec4(finalColor, 1.0);
+	outColor = vec4(finalColor, 1.0) * texture(textureUnitID, vertexData.texCoords);
 }

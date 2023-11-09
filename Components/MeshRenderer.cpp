@@ -1,6 +1,8 @@
 #include "MeshRenderer.h"
 #include "../Engine/Transform.h"
 
+
+
 MeshRenderer::MeshRenderer(std::string _model, std::string _shader, glm::vec3 _color, Material* _material)
 {
 	componentName = "meshRenderer";
@@ -29,6 +31,10 @@ MeshRenderer::MeshRenderer(std::string _model, std::string _shader, glm::vec3 _c
 		SetFlag(SHININESS);
 		SetFlag(CAMERA);
 		SetFlag(LIGHTS);
+		SetFlag(TEXTURE);
+	}
+	else if (_shader == "texture") {
+		SetFlag(TEXTURE);
 	}
 
 	
@@ -92,7 +98,29 @@ void MeshRenderer::Update()
 		}
 	}
 
-	model->Draw();
+	if (IsFlagSet(TEXTURE)) {
+		//Bind the first texture to the first texture unit.
+		glActiveTexture(GL_TEXTURE0);
+		glBindTexture(GL_TEXTURE_2D, material->textureID);
+
+		GLint uniformID = glGetUniformLocation(shaderProgramId, "textureUnitID");
+		if (uniformID == -1) {
+			std::cout << "ERROR: could not find " << "textureUnitID" << " uniform\n";
+		}
+		glUniform1i(uniformID, GL_TEXTURE0);
+
+		
+	}
+
+	
+	
+	//glBindTexture(GL_TEXTURE_2D, model->textureID);
+	glBindVertexArray(model->VAO);
+
+	glDrawArrays(GL_TRIANGLES, 0, model->vertices.size());
+
+	glBindVertexArray(0);
+	//model->Draw();
 }
 
 void MeshRenderer::SetTransform(Transform* t)

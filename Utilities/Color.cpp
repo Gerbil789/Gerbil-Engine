@@ -12,12 +12,12 @@ const glm::vec3 Color::White = glm::vec3(1.0f, 1.0f, 1.0f);
 const glm::vec3 Color::DarkGreen = glm::vec3(0.0f, 0.5f, 0.0f);
 const glm::vec3 Color::Gray = glm::vec3(0.4f, 0.4f, 0.4f);
 
-glm::vec3 Color::Random()
+glm::vec3 Color::Random(float min)
 {
     glm::vec3 color;
-    color.x = static_cast<float>(std::rand()) / RAND_MAX; 
-    color.y = static_cast<float>(std::rand()) / RAND_MAX; 
-    color.z = static_cast<float>(std::rand()) / RAND_MAX; 
+    color.x = static_cast<float>(std::rand()) / RAND_MAX + min;
+    color.y = static_cast<float>(std::rand()) / RAND_MAX + min;
+    color.z = static_cast<float>(std::rand()) / RAND_MAX + min;
 
     return color;
 }

@@ -18,7 +18,7 @@ public:
   static const glm::vec3 DarkGreen;
   static const glm::vec3 Gray;
 
-  static glm::vec3 Random();
+  static glm::vec3 Random(float min = 0.5f);
 };
 
 #endif
