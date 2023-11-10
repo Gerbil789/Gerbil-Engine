@@ -19,7 +19,6 @@ public:
 	size_t GetObjectCount();
 	std::vector<GameObject*> GetObjects();
 	GameObject* FindByName(std::string _name);
-
 	void Dispose();
 
 private:

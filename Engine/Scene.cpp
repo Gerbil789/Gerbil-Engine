@@ -34,9 +34,22 @@ void Scene::Init()
 	Notify();
 }
 
+void Scene::SetSkybox()
+{
+	skybox = new GameObject("skybox");
+	Material* m_skybox = new Material("", true);
+	skybox->AddComponent<MeshRenderer>("cube", "constant", Color::White, m_skybox);
+}
+
 void Scene::Update()
 {
 	objectManager.UpdateObjects();
+}
+
+void Scene::UpdateSkybox()
+{
+	skybox->transform->SetPosition(activeCam->transform->GetPosition());
+	skybox->GetComponent<MeshRenderer>()->Update();
 }
 
 std::string Scene::GetName()

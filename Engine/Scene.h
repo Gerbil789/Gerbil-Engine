@@ -12,8 +12,10 @@ class Scene : public ISubject
 {
 public:
 	Scene(const std::string& _name = "");
-	void Init(); //call after scene is loaded
+	void Init();
+	void SetSkybox();
 	void Update();
+	void UpdateSkybox();
 	std::string GetName();
 
 	void Dispose();
@@ -36,6 +38,7 @@ public:
 private:
 	static int sceneCount;
 	std::string name;
+	GameObject* skybox;
 	ObjectManager objectManager;
 	Camera* activeCam;
 	std::vector<PointLight*> pointLights;

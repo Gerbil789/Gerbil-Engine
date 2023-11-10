@@ -78,8 +78,9 @@ void Application::InitScenes()
 {
 	Scene* scene1 = new Scene();
 	SceneManager::GetInstance().LoadScene(scene1);
+	scene1->SetSkybox();
 
-	Material* m1 = new Material();
+	Material* m1 = new Material("Textures/test_grid.png");
 
 	//player
 	GameObject* player_go = new GameObject("player");
@@ -97,8 +98,10 @@ void Application::InitScenes()
 	scene1->Add(ground);
 
 	//spheres
+	std::string models[] = { "sphere", "cube", "oak", "spruce"};
 	for (int i = -7; i <= 7; i++) {
 		for (int j = -7; j <= 7; j++) {
+			std::string model = models[rand() % 4];
 			GameObject* sphere = new GameObject("sphere");
 			sphere->AddComponent<MeshRenderer>("sphere", "phong", Color::Random(), m1);
 			sphere->transform->SetPosition(glm::vec3(3.0f * i, 1.0f, 3.0f * j));
@@ -172,8 +175,9 @@ void Application::Run()
 		}
 
 		Time::Update();
-
+		
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+		//SceneManager::GetInstance().GetActiveScene()->UpdateSkybox();
 		SceneManager::GetInstance().GetActiveScene()->Update();
 		//nejhezèí øídek kódu co jsem kdy napsal
 		//[tmp øešení] nastavit smìr baterky na smìr kamery
