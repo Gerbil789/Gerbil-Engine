@@ -16,41 +16,32 @@ Scene::Scene(const std::string& _name)
 
 	pointLights = std::vector<PointLight*>();
 	directionalLights = std::vector<DirectionalLight*>();
+
+	GameObject* skybox = new GameObject("skybox");
+	Material* m_skybox = new Material("Textures/clouds.jpg", "m_skybox");
+	MeshRenderer* renderer =  skybox->AddComponent<MeshRenderer>("skydome", "texture", Color::White, m_skybox);
+	//renderer->SetFlag(renderer->SKYBOX);
+	SetSky(skybox);
+
 }
 
-void Scene::Init()
-{
-	for (GameObject* go : objectManager.GetObjects()) {
-		if (MeshRenderer* meshRenderer = go->GetComponent<MeshRenderer>()) {
-			Attach(meshRenderer);
-		}
-		
-		if (CameraController* cameraController = go->GetComponent<CameraController>()) {
-			cameraController->SetCam(GetActiveCamera());
-		}
 
-		
-	}
-	Notify();
-}
-
-void Scene::SetSkybox()
+void Scene::SetSky(GameObject* _sky)
 {
-	skybox = new GameObject("skybox");
-	Material* m_skybox = new Material("", true);
-	skybox->AddComponent<MeshRenderer>("cube", "constant", Color::White, m_skybox);
+	sky = _sky;
 }
 
 void Scene::Update()
 {
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+	sky->transform->SetPosition(GetActiveCamera()->transform->GetPosition() + glm::vec3(0.0f, -0.25f, 0.0f));
+	sky->Update();
+	glClear(GL_DEPTH_BUFFER_BIT);
+
 	objectManager.UpdateObjects();
 }
 
-void Scene::UpdateSkybox()
-{
-	skybox->transform->SetPosition(activeCam->transform->GetPosition());
-	skybox->GetComponent<MeshRenderer>()->Update();
-}
 
 std::string Scene::GetName()
 {

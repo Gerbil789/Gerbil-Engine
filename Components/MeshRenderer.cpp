@@ -17,14 +17,16 @@ MeshRenderer::MeshRenderer(std::string _model, std::string _shader, glm::vec3 _c
 	if (model == nullptr) { std::cerr << "[MeshRemderer] ERROR: could not load model [" << _model << "]\n"; }
 
 	if (_shader == "constant") {
-
+		SetFlag(COLOR);
 	}
 	else if (_shader == "lambert") {
+		SetFlag(COLOR);
 		SetFlag(AMBIENT);
 		//SetFlag(DIFFUSE);
 		SetFlag(LIGHTS);
 	}
 	else if (_shader == "phong" || _shader == "blinn") {
+		SetFlag(COLOR);
 		SetFlag(AMBIENT);
 		//SetFlag(DIFFUSE);
 		SetFlag(SPECULAR);
@@ -50,8 +52,9 @@ void MeshRenderer::Update()
 	shaderManager.SetUniform("viewMatrix", shader->viewMatrix);
 	shaderManager.SetUniform("projectionMatrix", shader->projectionMatrix);
 	shaderManager.SetUniform("modelMatrix", transformMatrix);
-	shaderManager.SetUniform("color", color);
-
+	if (IsFlagSet(COLOR)) {
+		shaderManager.SetUniform("color", color);
+	}
 	if (IsFlagSet(AMBIENT)) {
 		shaderManager.SetUniform("material.ambient", material->ambient);
 	}
@@ -99,15 +102,20 @@ void MeshRenderer::Update()
 	}
 
 	if (IsFlagSet(TEXTURE)) {
-		//Bind the first texture to the first texture unit.
-		glActiveTexture(GL_TEXTURE0);
-		glBindTexture(GL_TEXTURE_2D, material->textureID);
+		//glActiveTexture(GL_TEXTURE0);
+		if (IsFlagSet(SKYBOX)) {
+			glBindTexture(GL_TEXTURE_CUBE_MAP, material->textureID);
+		}
+		else {
+			glBindTexture(GL_TEXTURE_2D, material->textureID);
+		}
+
 
 		GLint uniformID = glGetUniformLocation(shaderProgramId, "textureUnitID");
 		if (uniformID == -1) {
 			std::cout << "ERROR: could not find " << "textureUnitID" << " uniform\n";
 		}
-		glUniform1i(uniformID, GL_TEXTURE0);
+		glUniform1i(uniformID, 0);
 
 		
 	}

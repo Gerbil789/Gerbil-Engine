@@ -10,7 +10,7 @@ Scene* SceneManager::LoadScene(std::string _scene)
 {
 	const std::string filePath = "Scenes/" + _scene + ".json";
 	activeScene = Serializer::DeserializeFromJson(filePath);
-	activeScene->Init();
+	//activeScene->Init();
 	return activeScene;
 }
 

@@ -1,7 +1,6 @@
 #version 330 core
 
 out vec4 outColor;
-uniform vec3 color;
 
 struct VertexData {
 	vec3 worldPosition;
@@ -13,5 +12,8 @@ uniform sampler2D textureUnitID;
 
 void main()
 {
-	outColor = vec4(color, 1.0) * texture(textureUnitID, vertexData.texCoords);
+	//vec3 texColor = texture(textureUnitID, vertexData.texCoords).rgb;
+	//outColor = vec4(texColor, 1.0);
+
+	outColor = texture(textureUnitID, vertexData.texCoords);
 }

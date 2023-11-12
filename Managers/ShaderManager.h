@@ -8,7 +8,6 @@
 #include "../Components/Camera.h"
 #include "../Engine/Shader.h"
 
-
 class ShaderManager
 {
 public:

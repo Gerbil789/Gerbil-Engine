@@ -71,16 +71,16 @@ void Application::Init()
 
 	ShaderManager::GetInstance().Init();
 
-	ModelManager::GetInstance().Init();
+	ModelManager::GetInstance().Init();	
 }
 
 void Application::InitScenes()
 {
 	Scene* scene1 = new Scene();
 	SceneManager::GetInstance().LoadScene(scene1);
-	scene1->SetSkybox();
 
-	Material* m1 = new Material("Textures/test_grid.png");
+	Material* m_test_grid = new Material("Textures/test_grid.png", "m_test_grid");
+	Material* m_wood = new Material("Textures/wooden_fence.png", "m_wood");
 
 	//player
 	GameObject* player_go = new GameObject("player");
@@ -93,8 +93,8 @@ void Application::InitScenes()
 
 	//ground
 	GameObject* ground = new GameObject("ground");
-	ground->AddComponent<MeshRenderer>("plane", "phong", Color::White, m1);
-	ground->transform->SetScale(glm::vec3(100.0f));
+	ground->AddComponent<MeshRenderer>("plane", "phong", Color::White, m_test_grid);
+	ground->transform->SetScale(glm::vec3(50.0f));
 	scene1->Add(ground);
 
 	//spheres
@@ -103,18 +103,22 @@ void Application::InitScenes()
 		for (int j = -7; j <= 7; j++) {
 			std::string model = models[rand() % 4];
 			GameObject* sphere = new GameObject("sphere");
-			sphere->AddComponent<MeshRenderer>("sphere", "phong", Color::Random(), m1);
+			//tmp test multiple textures
+			if (rand() % 2 == 1) {
+				sphere->AddComponent<MeshRenderer>("sphere", "phong", Color::Random(), m_test_grid);
+			}
+			else {
+				sphere->AddComponent<MeshRenderer>("sphere", "phong", Color::Random(), m_wood);
+			}
 			sphere->transform->SetPosition(glm::vec3(3.0f * i, 1.0f, 3.0f * j));
 			scene1->Add(sphere);
 		}
 	}
 
 
-
 	GameObject* rotator = new GameObject("empty");
 	rotator->AddComponent<RotationScript>(150.0f, glm::vec3(0.0f, 1.0f, 0.0f));
 	rotator->transform->SetPosition(glm::vec3(0.0f, 6.0f, 0.0f));
-	//rotator->AddComponent<MeshRenderer>("cube", "constant", Color::Gray);
 	rotator->transform->SetScale(glm::vec3(0.5f));
 	scene1->Add(rotator);
 
@@ -122,7 +126,6 @@ void Application::InitScenes()
 	GameObject* spot1 = new GameObject("spot light");
 	spot1->AddComponent<SpotLight>(Color::Red, 15.0f);
 	spot1->transform->SetPosition(glm::vec3(0.0f, 0.0f, -1.0f));
-	//spot1->AddComponent<MeshRenderer>("cube", "constant", Color::Red);
 	spot1->transform->SetScale(glm::vec3(0.5f));
 	spot1->transform->RotateBy(45.0f, glm::vec3(1.0f, 0.0f, 0.0f)); //set 45 angle
 	scene1->Add(spot1);
@@ -132,37 +135,23 @@ void Application::InitScenes()
 	GameObject* spot2 = new GameObject("spot light");
 	spot2->AddComponent<SpotLight>(Color::Blue, 15.0f);
 	spot2->transform->SetPosition(glm::vec3(0.0f, 0.0f, 1.0f));
-	//spot2->AddComponent<MeshRenderer>("cube", "constant", Color::Blue);
 	spot2->transform->SetScale(glm::vec3(0.5f));
 	spot2->transform->RotateBy(180.0f, glm::vec3(0.0f, 1.0f, 0.0f));
 	spot2->transform->RotateBy(45.0f, glm::vec3(1.0f, 0.0f, 0.0f));
 	scene1->Add(spot2);
 	rotator->AddChildren(spot2);
 
+	//directional light
 	GameObject* dir = new GameObject("directional light");
 	dir->AddComponent<DirectionalLight>(Color::White, 0.5f);
 	scene1->Add(dir);
-
-	/*for(int i = 0; i < 5; i++) {
-		GameObject* point = new GameObject("point light");
-		glm::vec3 color = Color::Random();
-		point->AddComponent<PointLight>(color);
-		point->AddComponent<MeshRenderer>("sphere", "constant", color);
-		point->transform->SetScale(glm::vec3(0.1f));
-		point->transform->SetPosition(glm::vec3(5.0f * i, 3.0f, 0.0f));
-		scene1->Add(point);
-	}*/
 
 	//flash light
 	GameObject* flashLight = new GameObject("flash light");
 	flashLight->AddComponent<SpotLight>(Color::White, 5.0f);
 	scene1->Add(flashLight);
 	player_go->AddChildren(flashLight);
-	
-	//SceneManager::GetInstance().SaveScene();
 }
-
-
 
 void Application::Run()
 {
@@ -176,11 +165,9 @@ void Application::Run()
 
 		Time::Update();
 		
-		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-		//SceneManager::GetInstance().GetActiveScene()->UpdateSkybox();
 		SceneManager::GetInstance().GetActiveScene()->Update();
-		//nejhezèí øídek kódu co jsem kdy napsal
-		//[tmp øešení] nastavit smìr baterky na smìr kamery
+		
+		//todo: make a controller class for this
 		SceneManager::GetInstance().GetActiveScene()->GetObjectManager().FindByName("flash light")->GetComponent<SpotLight>()->SetDirection(SceneManager::GetInstance().GetActiveScene()->GetActiveCamera()->GetFront());
 
 		glfwPollEvents();

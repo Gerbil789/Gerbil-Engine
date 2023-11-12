@@ -23,7 +23,8 @@ public:
 		DIFFUSE = 1 << 4,	// 16
 		SHININESS = 1 << 5, // 32
 		LIGHTS = 1 << 6,	// 64
-		TEXTURE = 1 << 7	// 128
+		TEXTURE = 1 << 7,	// 128
+		SKYBOX = 1 << 8		// 256
 	};
 
 	void SetFlag(FLAGS _flag);
