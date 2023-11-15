@@ -151,6 +151,7 @@
     <ClInclude Include="Engine\Material.h" />
     <ClInclude Include="Engine\Observer.h" />
     <ClInclude Include="PointLight.h" />
+    <ClInclude Include="RatController.h" />
     <ClInclude Include="Scripts\RotationScript.h" />
     <ClInclude Include="Managers\SceneManager.h" />
     <ClInclude Include="SpotLight.h" />
@@ -189,6 +190,7 @@
     <ClCompile Include="Engine\Material.cpp" />
     <ClCompile Include="Engine\Observer.cpp" />
     <ClCompile Include="PointLight.cpp" />
+    <ClCompile Include="RatController.cpp" />
     <ClCompile Include="Scripts\RotationScript.cpp" />
     <ClCompile Include="Managers\SceneManager.cpp" />
     <ClCompile Include="SpotLight.cpp" />

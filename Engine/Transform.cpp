@@ -66,7 +66,8 @@ void Transform::SetRotation(float angle, const glm::vec3& axis)
 	if (angle == 0.0f) {
 		return;
 	}
-	this->rotation = glm::rotate(glm::quat(), glm::radians(angle), axis);
+	glm::quat rot = glm::quat(1.0f, 0.0f, 0.0f, 0.0f);
+	this->rotation = glm::rotate(rot, glm::radians(angle), axis);
 	Notify();
 }
 void Transform::SetRotation(glm::quat quaternion)

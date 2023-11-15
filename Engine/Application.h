@@ -19,6 +19,8 @@
 #include "../SpotLight.h"
 #include "../DirectionalLight.h"
 
+#include "../RatController.h"
+
 
 
 class Application

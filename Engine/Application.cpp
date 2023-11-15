@@ -81,10 +81,13 @@ void Application::InitScenes()
 
 	Material* m_test_grid = new Material("Textures/test_grid.png", "m_test_grid");
 	Material* m_wood = new Material("Textures/wooden_fence.png", "m_wood");
+	Material* m_house = new Material("Textures/house_texture.png", "m_house");
+	Material* m_rat = new Material("Textures/rattex.jpeg", "m_rat");
 
 	//player
 	GameObject* player_go = new GameObject("player");
 	player_go->AddComponent<Camera>();
+	Camera* cam = player_go->GetComponent<Camera>();
 	player_go->GetComponent<Camera>()->SetAspect(ratio);
 	player_go->AddComponent<CameraController>(2.0f, player_go->GetComponent<Camera>());
 	player_go->transform->SetPosition(glm::vec3(0.0f, 5.0f, 0.0f));
@@ -97,49 +100,57 @@ void Application::InitScenes()
 	ground->transform->SetScale(glm::vec3(50.0f));
 	scene1->Add(ground);
 
+	GameObject* house = new GameObject("house");
+	house->AddComponent<MeshRenderer>("model", "phong", Color::White, m_house);
+	//house->transform->SetScale(glm::vec3(50.0f));
+	//scene1->Add(house);
+
+	GameObject* rat = new GameObject("rat");
+	rat->AddComponent<MeshRenderer>("rat", "phong", Color::White, m_rat);
+	//rat->AddComponent<RatController>();
+	scene1->Add(rat);
+
 	//spheres
-	std::string models[] = { "sphere", "cube", "oak", "spruce"};
-	for (int i = -7; i <= 7; i++) {
-		for (int j = -7; j <= 7; j++) {
-			std::string model = models[rand() % 4];
-			GameObject* sphere = new GameObject("sphere");
-			//tmp test multiple textures
-			if (rand() % 2 == 1) {
-				sphere->AddComponent<MeshRenderer>("sphere", "phong", Color::Random(), m_test_grid);
-			}
-			else {
-				sphere->AddComponent<MeshRenderer>("sphere", "phong", Color::Random(), m_wood);
-			}
-			sphere->transform->SetPosition(glm::vec3(3.0f * i, 1.0f, 3.0f * j));
-			scene1->Add(sphere);
-		}
-	}
+	//std::string models[] = { "sphere", "cube", "oak", "spruce"};
+	//for (int i = -7; i <= 7; i++) {
+	//	for (int j = -7; j <= 7; j++) {
+	//		std::string model = models[rand() % 4];
+	//		GameObject* sphere = new GameObject("sphere");
+	//		//tmp test multiple textures
+	//		
+	//		sphere->AddComponent<MeshRenderer>("rat", "phong", Color::Random(), m_rat);
+	//		sphere->transform->SetScale(glm::vec3(static_cast<float>(std::rand()) / RAND_MAX + 0.5f));
+	//		sphere->transform->SetPosition(glm::vec3(3.0f * i, 1.0f, 3.0f * j));
+	//		sphere->transform->SetRotation(std::rand() % 360, glm::vec3(0.0f, 1.0f, 0.0f));
+	//		scene1->Add(sphere);
+	//	}
+	//}
 
 
-	GameObject* rotator = new GameObject("empty");
-	rotator->AddComponent<RotationScript>(150.0f, glm::vec3(0.0f, 1.0f, 0.0f));
-	rotator->transform->SetPosition(glm::vec3(0.0f, 6.0f, 0.0f));
-	rotator->transform->SetScale(glm::vec3(0.5f));
-	scene1->Add(rotator);
+	//GameObject* rotator = new GameObject("empty");
+	//rotator->AddComponent<RotationScript>(150.0f, glm::vec3(0.0f, 1.0f, 0.0f));
+	//rotator->transform->SetPosition(glm::vec3(0.0f, 6.0f, 0.0f));
+	//rotator->transform->SetScale(glm::vec3(0.5f));
+	//scene1->Add(rotator);
 
-	//red light
-	GameObject* spot1 = new GameObject("spot light");
-	spot1->AddComponent<SpotLight>(Color::Red, 15.0f);
-	spot1->transform->SetPosition(glm::vec3(0.0f, 0.0f, -1.0f));
-	spot1->transform->SetScale(glm::vec3(0.5f));
-	spot1->transform->RotateBy(45.0f, glm::vec3(1.0f, 0.0f, 0.0f)); //set 45 angle
-	scene1->Add(spot1);
-	rotator->AddChildren(spot1);
+	////red light
+	//GameObject* spot1 = new GameObject("spot light");
+	//spot1->AddComponent<SpotLight>(Color::Red, 15.0f);
+	//spot1->transform->SetPosition(glm::vec3(0.0f, 0.0f, -1.0f));
+	//spot1->transform->SetScale(glm::vec3(0.5f));
+	//spot1->transform->RotateBy(45.0f, glm::vec3(1.0f, 0.0f, 0.0f)); //set 45 angle
+	//scene1->Add(spot1);
+	//rotator->AddChildren(spot1);
 
-	//blue light
-	GameObject* spot2 = new GameObject("spot light");
-	spot2->AddComponent<SpotLight>(Color::Blue, 15.0f);
-	spot2->transform->SetPosition(glm::vec3(0.0f, 0.0f, 1.0f));
-	spot2->transform->SetScale(glm::vec3(0.5f));
-	spot2->transform->RotateBy(180.0f, glm::vec3(0.0f, 1.0f, 0.0f));
-	spot2->transform->RotateBy(45.0f, glm::vec3(1.0f, 0.0f, 0.0f));
-	scene1->Add(spot2);
-	rotator->AddChildren(spot2);
+	////blue light
+	//GameObject* spot2 = new GameObject("spot light");
+	//spot2->AddComponent<SpotLight>(Color::Blue, 15.0f);
+	//spot2->transform->SetPosition(glm::vec3(0.0f, 0.0f, 1.0f));
+	//spot2->transform->SetScale(glm::vec3(0.5f));
+	//spot2->transform->RotateBy(180.0f, glm::vec3(0.0f, 1.0f, 0.0f));
+	//spot2->transform->RotateBy(45.0f, glm::vec3(1.0f, 0.0f, 0.0f));
+	//scene1->Add(spot2);
+	//rotator->AddChildren(spot2);
 
 	//directional light
 	GameObject* dir = new GameObject("directional light");
