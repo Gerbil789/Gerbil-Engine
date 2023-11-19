@@ -102,29 +102,25 @@ void Application::InitScenes()
 
 	GameObject* house = new GameObject("house");
 	house->AddComponent<MeshRenderer>("model", "phong", Color::White, m_house);
-	//house->transform->SetScale(glm::vec3(50.0f));
-	//scene1->Add(house);
+	house->transform->SetScale(glm::vec3(2.0f));
+	house->transform->SetPosition(glm::vec3(-30.0f, 0.0f, -10.0f));
+	scene1->Add(house);
 
-	GameObject* rat = new GameObject("rat");
-	rat->AddComponent<MeshRenderer>("rat", "phong", Color::White, m_rat);
+	//GameObject* rat = new GameObject("rat");
+	//rat->AddComponent<MeshRenderer>("rat", "phong", Color::White, m_rat);
 	//rat->AddComponent<RatController>();
-	scene1->Add(rat);
+	//scene1->Add(rat);
 
-	//spheres
-	//std::string models[] = { "sphere", "cube", "oak", "spruce"};
-	//for (int i = -7; i <= 7; i++) {
-	//	for (int j = -7; j <= 7; j++) {
-	//		std::string model = models[rand() % 4];
-	//		GameObject* sphere = new GameObject("sphere");
-	//		//tmp test multiple textures
-	//		
-	//		sphere->AddComponent<MeshRenderer>("rat", "phong", Color::Random(), m_rat);
-	//		sphere->transform->SetScale(glm::vec3(static_cast<float>(std::rand()) / RAND_MAX + 0.5f));
-	//		sphere->transform->SetPosition(glm::vec3(3.0f * i, 1.0f, 3.0f * j));
-	//		sphere->transform->SetRotation(std::rand() % 360, glm::vec3(0.0f, 1.0f, 0.0f));
-	//		scene1->Add(sphere);
-	//	}
-	//}
+	for (int i = -7; i <= 7; i++) {
+		for (int j = -7; j <= 7; j++) {
+			GameObject* sphere = new GameObject("rat");
+			sphere->AddComponent<MeshRenderer>("rat", "phong", Color::Random(), m_rat);
+			sphere->transform->SetScale(glm::vec3(static_cast<float>(std::rand()) / RAND_MAX + 0.5f));
+			sphere->transform->SetPosition(glm::vec3(3.0f * i, 1.0f, 3.0f * j));
+			sphere->transform->SetRotation(std::rand() % 360, glm::vec3(0.0f, 1.0f, 0.0f));
+			scene1->Add(sphere);
+		}
+	}
 
 
 	//GameObject* rotator = new GameObject("empty");
@@ -178,7 +174,7 @@ void Application::Run()
 		
 		SceneManager::GetInstance().GetActiveScene()->Update();
 		
-		//todo: make a controller class for this
+		//todo: make a controller class for flashlight instead of this line
 		SceneManager::GetInstance().GetActiveScene()->GetObjectManager().FindByName("flash light")->GetComponent<SpotLight>()->SetDirection(SceneManager::GetInstance().GetActiveScene()->GetActiveCamera()->GetFront());
 
 		glfwPollEvents();
