@@ -29,10 +29,20 @@ void ObjectManager::UpdateObjects()
 	}
 }
 
-GameObject* ObjectManager::FindByName(std::string _name)
+GameObject* ObjectManager::GetGameObject(std::string _name)
 {
 	for (GameObject* ptr : objects) {
 		if (ptr->GetName() == _name) {
+			return ptr;
+		}
+	}
+	return nullptr;
+}
+
+GameObject* ObjectManager::GetGameObject(int _id)
+{
+	for (GameObject* ptr : objects) {
+		if (ptr->id == _id) {
 			return ptr;
 		}
 	}

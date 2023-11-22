@@ -171,6 +171,7 @@ void Application::InitScenes()
 
 void Application::Run()
 {
+
 	GUI gui(window, SceneManager::GetInstance().GetActiveScene());
 
 	while (!glfwWindowShouldClose(window)) {
@@ -184,7 +185,11 @@ void Application::Run()
 		SceneManager::GetInstance().GetActiveScene()->Update();
 		
 		//todo: make a controller class for flashlight instead of this line
-		SceneManager::GetInstance().GetActiveScene()->GetObjectManager().FindByName("flash light")->GetComponent<SpotLight>()->SetDirection(SceneManager::GetInstance().GetActiveScene()->GetActiveCamera()->GetFront());
+		SceneManager::GetInstance().GetActiveScene()->GetObjectManager().GetGameObject("flash light")->GetComponent<SpotLight>()->SetDirection(SceneManager::GetInstance().GetActiveScene()->GetActiveCamera()->GetFront());
+
+
+		GLint viewport[4];
+		glGetIntegerv(GL_VIEWPORT, viewport);
 
 		GLbyte color[4];
 		GLfloat depth;
@@ -193,7 +198,7 @@ void Application::Run()
 		GLint x = Input::GetMouseX();
 		GLint y = Input::GetMouseY();
 
-		int newy = 720 - y;
+		int newy = viewport[3] - y;
 
 		glReadPixels(x, newy, 1, 1, GL_RGBA, GL_UNSIGNED_BYTE, color);
 		glReadPixels(x, newy, 1, 1, GL_DEPTH_COMPONENT, GL_FLOAT, &depth);
@@ -204,14 +209,21 @@ void Application::Run()
 		glm::mat4 view = ShaderManager::GetInstance().GetShaderProgram(ShaderManager::GetInstance().GetShaderProgramId("phong"))->viewMatrix;
 		glm::mat4 projection = ShaderManager::GetInstance().GetShaderProgram(ShaderManager::GetInstance().GetShaderProgramId("phong"))->projectionMatrix;
 		
-		GLint viewport[4];
-		glGetIntegerv(GL_VIEWPORT, viewport);
+		
 		glm::vec4 viewPort = glm::vec4(0, 0, viewport[2], viewport[3]);
 		glm::vec3 pos = glm::unProject(screenX, view, projection, viewPort);
 
-		if (Input::IsMouseButtonClicked(0)) {
+		if (Input::IsMouseButtonClicked(0) && index > 2) {
 			printf("Clicked on pixel %d, %d, color %02hhx%02hhx%02hhx%02hhx, depth% f, stencil index % u\n", x, y, color[0], color[1], color[2], color[3], depth, index);
 			printf("unProject [%f,%f,%f]\n", pos.x, pos.y, pos.z);
+	
+			printf("Name %s\n", SceneManager::GetInstance().GetActiveScene()->GetObjectManager().GetGameObject(index)->GetName().c_str());
+
+
+			GameObject* sphere = new GameObject("sphere");
+			sphere->AddComponent<MeshRenderer>("sphere", "phong", Color::White);
+			sphere->transform->SetPosition(glm::vec3(pos.x, pos.y, pos.z));
+			SceneManager::GetInstance().GetActiveScene()->Add(sphere);
 		}		
 
 		glfwPollEvents();

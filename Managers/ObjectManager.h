@@ -18,7 +18,8 @@ public:
 	void Remove(GameObject* _object);
 	size_t GetObjectCount();
 	std::vector<GameObject*> GetObjects();
-	GameObject* FindByName(std::string _name);
+	GameObject* GetGameObject(std::string _name);
+	GameObject* GetGameObject(int _id);
 	void Dispose();
 
 private:

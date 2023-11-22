@@ -43,6 +43,7 @@ MeshRenderer::MeshRenderer(std::string _model, std::string _shader, glm::vec3 _c
 
 	if (Scene* scene = SceneManager::GetInstance().GetActiveScene()) {
 		scene->Attach(this);
+		scene->Notify();
 	}
 }
 
