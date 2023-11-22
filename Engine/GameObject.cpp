@@ -1,8 +1,10 @@
 #include "GameObject.h"
 
+int GameObject::nextID = 2;
+
 GameObject::GameObject(std::string name)
 {
-	this->id = std::rand() % 254 + 1;
+	this->id = nextID++;
 	this->name = name;
 	this->transform = new Transform();
 }

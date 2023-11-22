@@ -1,11 +1,13 @@
 #include "Application.h"
 
+
 static void error_callback(int error, const char* description) { fputs(description, stderr); }
 
-static void window_size_callback(GLFWwindow* window, int width, int height) {
-	printf("resize %d, %d \n", width, height);
-	SceneManager::GetInstance().GetActiveScene()->GetActiveCamera()->SetAspect((float)width / height);
-	glViewport(0, 0, width, height);
+static void window_size_callback(GLFWwindow* window, int _width, int _height) {
+	
+	printf("resize %d, %d \n", _width, _height);
+	SceneManager::GetInstance().GetActiveScene()->GetActiveCamera()->SetAspect((float)_width / _height);
+	glViewport(0, 0, _width, _height);
 }
 
 
@@ -201,7 +203,10 @@ void Application::Run()
 		
 		glm::mat4 view = ShaderManager::GetInstance().GetShaderProgram(ShaderManager::GetInstance().GetShaderProgramId("phong"))->viewMatrix;
 		glm::mat4 projection = ShaderManager::GetInstance().GetShaderProgram(ShaderManager::GetInstance().GetShaderProgramId("phong"))->projectionMatrix;
-		glm::vec4 viewPort = glm::vec4(0, 0, 1080, 720);
+		
+		GLint viewport[4];
+		glGetIntegerv(GL_VIEWPORT, viewport);
+		glm::vec4 viewPort = glm::vec4(0, 0, viewport[2], viewport[3]);
 		glm::vec3 pos = glm::unProject(screenX, view, projection, viewPort);
 
 		if (Input::IsMouseButtonClicked(0)) {

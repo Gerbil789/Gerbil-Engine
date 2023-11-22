@@ -10,6 +10,7 @@ class GameObject
 {
 public:
 	int id;
+	static int nextID;
 	GameObject(std::string name);
 	void Update();
 	std::string GetName();

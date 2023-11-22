@@ -31,9 +31,11 @@ public:
 	void Run();
 private:
 	GLFWwindow* window;
-	int width, height;
+	int width;
+	int height;
 	float ratio;
 	
 
 };
+
 
