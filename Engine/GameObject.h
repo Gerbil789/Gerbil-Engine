@@ -9,6 +9,7 @@
 class GameObject
 {
 public:
+	int id;
 	GameObject(std::string name);
 	void Update();
 	std::string GetName();

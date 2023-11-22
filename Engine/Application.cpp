@@ -8,6 +8,8 @@ static void window_size_callback(GLFWwindow* window, int width, int height) {
 	glViewport(0, 0, width, height);
 }
 
+
+
 static void window_focus_callback(GLFWwindow* window, int focused) {}
 
 static void window_iconify_callback(GLFWwindow* window, int iconified) { printf("window_iconify_callback \n"); }
@@ -60,8 +62,10 @@ void Application::Init()
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
 	glOrtho(-ratio, ratio, -1.f, 1.f, 1.f, -1.f);
-	glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+	//glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 	glEnable(GL_DEPTH_TEST);
+	glEnable(GL_STENCIL_TEST);
+	glStencilOp(GL_KEEP, GL_KEEP, GL_REPLACE);
 
 	glfwSetWindowFocusCallback(window, window_focus_callback);
 
@@ -94,33 +98,36 @@ void Application::InitScenes()
 	scene1->Add(player_go);
 
 
-	//ground
 	GameObject* ground = new GameObject("ground");
-	ground->AddComponent<MeshRenderer>("plane", "phong", Color::White, m_test_grid);
-	ground->transform->SetScale(glm::vec3(50.0f));
+	ground->AddComponent<MeshRenderer>("landscape", "phong", Color::White, m_test_grid);
+	ground->transform->SetScale(glm::vec3(5.0f));
 	scene1->Add(ground);
 
-	GameObject* house = new GameObject("house");
-	house->AddComponent<MeshRenderer>("model", "phong", Color::White, m_house);
-	house->transform->SetScale(glm::vec3(2.0f));
-	house->transform->SetPosition(glm::vec3(-30.0f, 0.0f, -10.0f));
-	scene1->Add(house);
+	GameObject* cube = new GameObject("cube");
+	cube->AddComponent<MeshRenderer>("cube", "phong", Color::White, m_test_grid);
+	cube->transform->SetPosition(glm::vec3(-3.0f, 0.0f, 0.0f));
+	scene1->Add(cube);
+
+	GameObject* sphere = new GameObject("sphere");
+	sphere->AddComponent<MeshRenderer>("sphere", "phong", Color::White, m_test_grid);
+	sphere->transform->SetPosition(glm::vec3(3.0f, 0.0f, 0.0f));
+	scene1->Add(sphere);
 
 	//GameObject* rat = new GameObject("rat");
 	//rat->AddComponent<MeshRenderer>("rat", "phong", Color::White, m_rat);
 	//rat->AddComponent<RatController>();
 	//scene1->Add(rat);
 
-	for (int i = -7; i <= 7; i++) {
-		for (int j = -7; j <= 7; j++) {
-			GameObject* sphere = new GameObject("rat");
-			sphere->AddComponent<MeshRenderer>("rat", "phong", Color::Random(), m_rat);
-			sphere->transform->SetScale(glm::vec3(static_cast<float>(std::rand()) / RAND_MAX + 0.5f));
-			sphere->transform->SetPosition(glm::vec3(3.0f * i, 1.0f, 3.0f * j));
-			sphere->transform->SetRotation(std::rand() % 360, glm::vec3(0.0f, 1.0f, 0.0f));
-			scene1->Add(sphere);
-		}
-	}
+	//for (int i = -7; i <= 7; i++) {
+	//	for (int j = -7; j <= 7; j++) {
+	//		GameObject* sphere = new GameObject("rat");
+	//		sphere->AddComponent<MeshRenderer>("rat", "phong", Color::Random(), m_rat);
+	//		sphere->transform->SetScale(glm::vec3(static_cast<float>(std::rand()) / RAND_MAX + 0.5f));
+	//		sphere->transform->SetPosition(glm::vec3(3.0f * i, 1.0f, 3.0f * j));
+	//		sphere->transform->SetRotation(std::rand() % 360, glm::vec3(0.0f, 1.0f, 0.0f));
+	//		scene1->Add(sphere);
+	//	}
+	//}
 
 
 	//GameObject* rotator = new GameObject("empty");
@@ -176,6 +183,31 @@ void Application::Run()
 		
 		//todo: make a controller class for flashlight instead of this line
 		SceneManager::GetInstance().GetActiveScene()->GetObjectManager().FindByName("flash light")->GetComponent<SpotLight>()->SetDirection(SceneManager::GetInstance().GetActiveScene()->GetActiveCamera()->GetFront());
+
+		GLbyte color[4];
+		GLfloat depth;
+		GLuint index;
+
+		GLint x = Input::GetMouseX();
+		GLint y = Input::GetMouseY();
+
+		int newy = 720 - y;
+
+		glReadPixels(x, newy, 1, 1, GL_RGBA, GL_UNSIGNED_BYTE, color);
+		glReadPixels(x, newy, 1, 1, GL_DEPTH_COMPONENT, GL_FLOAT, &depth);
+		glReadPixels(x, newy, 1, 1, GL_STENCIL_INDEX, GL_UNSIGNED_INT, &index);
+
+		glm::vec3 screenX = glm::vec3(x, newy, depth);
+		
+		glm::mat4 view = ShaderManager::GetInstance().GetShaderProgram(ShaderManager::GetInstance().GetShaderProgramId("phong"))->viewMatrix;
+		glm::mat4 projection = ShaderManager::GetInstance().GetShaderProgram(ShaderManager::GetInstance().GetShaderProgramId("phong"))->projectionMatrix;
+		glm::vec4 viewPort = glm::vec4(0, 0, 1080, 720);
+		glm::vec3 pos = glm::unProject(screenX, view, projection, viewPort);
+
+		if (Input::IsMouseButtonClicked(0)) {
+			printf("Clicked on pixel %d, %d, color %02hhx%02hhx%02hhx%02hhx, depth% f, stencil index % u\n", x, y, color[0], color[1], color[2], color[3], depth, index);
+			printf("unProject [%f,%f,%f]\n", pos.x, pos.y, pos.z);
+		}		
 
 		glfwPollEvents();
 		gui.Update();

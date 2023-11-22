@@ -124,7 +124,7 @@ void MeshRenderer::Update()
 	
 	//glBindTexture(GL_TEXTURE_2D, model->textureID);
 	glBindVertexArray(model->VAO);
-
+	glStencilFunc(GL_ALWAYS, gameObject->id, 0xFF);
 	glDrawArrays(GL_TRIANGLES, 0, model->vertices.size());
 
 	glBindVertexArray(0);

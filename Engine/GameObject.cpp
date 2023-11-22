@@ -2,6 +2,7 @@
 
 GameObject::GameObject(std::string name)
 {
+	this->id = std::rand() % 254 + 1;
 	this->name = name;
 	this->transform = new Transform();
 }
