@@ -17,7 +17,7 @@ public:
 		float _fov = 45.0f,
 		float _aspect = 4.0f / 3.0f,
 		float _nearPlane = 0.1f,
-		float _farPlane = 100.0f,
+		float _farPlane = 500.0f,
 		glm::vec3 _target = glm::vec3(0.0f, 0.0f, 1.0f)
 	);
 

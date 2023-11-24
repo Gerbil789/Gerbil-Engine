@@ -88,7 +88,8 @@ void Application::InitScenes()
 	Material* m_test_grid = new Material("Textures/test_grid.png", "m_test_grid");
 	Material* m_wood = new Material("Textures/wooden_fence.png", "m_wood");
 	Material* m_house = new Material("Textures/house_texture.png", "m_house");
-	Material* m_rat = new Material("Textures/rattex.jpeg", "m_rat");
+
+	Material* m_landscape = new Material("Textures/landscape.png", ",_landscape");
 
 	//player
 	GameObject* player_go = new GameObject("player");
@@ -101,35 +102,17 @@ void Application::InitScenes()
 
 
 	GameObject* ground = new GameObject("ground");
-	ground->AddComponent<MeshRenderer>("landscape", "phong", Color::White, m_test_grid);
-	ground->transform->SetScale(glm::vec3(5.0f));
+	ground->AddComponent<MeshRenderer>("landscape", "phong", Color::White, m_landscape);
 	scene1->Add(ground);
 
-	GameObject* cube = new GameObject("cube");
-	cube->AddComponent<MeshRenderer>("cube", "phong", Color::White, m_test_grid);
-	cube->transform->SetPosition(glm::vec3(-3.0f, 0.0f, 0.0f));
-	scene1->Add(cube);
 
-	GameObject* sphere = new GameObject("sphere");
-	sphere->AddComponent<MeshRenderer>("sphere", "phong", Color::White, m_test_grid);
-	sphere->transform->SetPosition(glm::vec3(3.0f, 0.0f, 0.0f));
-	scene1->Add(sphere);
 
 	//GameObject* rat = new GameObject("rat");
 	//rat->AddComponent<MeshRenderer>("rat", "phong", Color::White, m_rat);
 	//rat->AddComponent<RatController>();
 	//scene1->Add(rat);
 
-	//for (int i = -7; i <= 7; i++) {
-	//	for (int j = -7; j <= 7; j++) {
-	//		GameObject* sphere = new GameObject("rat");
-	//		sphere->AddComponent<MeshRenderer>("rat", "phong", Color::Random(), m_rat);
-	//		sphere->transform->SetScale(glm::vec3(static_cast<float>(std::rand()) / RAND_MAX + 0.5f));
-	//		sphere->transform->SetPosition(glm::vec3(3.0f * i, 1.0f, 3.0f * j));
-	//		sphere->transform->SetRotation(std::rand() % 360, glm::vec3(0.0f, 1.0f, 0.0f));
-	//		scene1->Add(sphere);
-	//	}
-	//}
+
 
 
 	//GameObject* rotator = new GameObject("empty");
@@ -171,7 +154,7 @@ void Application::InitScenes()
 
 void Application::Run()
 {
-
+	Material* m_rat = new Material("Textures/rattex.jpeg", "m_rat");
 	GUI gui(window, SceneManager::GetInstance().GetActiveScene());
 
 	while (!glfwWindowShouldClose(window)) {
@@ -220,10 +203,11 @@ void Application::Run()
 			printf("Name %s\n", SceneManager::GetInstance().GetActiveScene()->GetObjectManager().GetGameObject(index)->GetName().c_str());
 
 
-			GameObject* sphere = new GameObject("sphere");
-			sphere->AddComponent<MeshRenderer>("sphere", "phong", Color::White);
-			sphere->transform->SetPosition(glm::vec3(pos.x, pos.y, pos.z));
-			SceneManager::GetInstance().GetActiveScene()->Add(sphere);
+			GameObject* rat = new GameObject("rat");
+			rat->AddComponent<MeshRenderer>("rat", "phong", Color::White, m_rat);
+			rat->transform->SetPosition(glm::vec3(pos.x, pos.y + 1.0f, pos.z));
+			rat->AddComponent<RotationScript>(200.0f, glm::vec3(0.0f, 1.0f, 0.0f));
+			SceneManager::GetInstance().GetActiveScene()->Add(rat);
 		}		
 
 		glfwPollEvents();
