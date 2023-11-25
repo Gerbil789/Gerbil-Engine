@@ -26,8 +26,6 @@ Model::Model(std::string path) {
 		return;
 	}
 
-	textureID = LoadTexture("Textures/test.bmp");
-
 	glGenBuffers(1, &VBO);
 	glBindBuffer(GL_ARRAY_BUFFER, VBO);
 	
@@ -140,65 +138,7 @@ bool Model::LoadOBJ(std::string path, std::vector<glm::vec3>& out_vertices, std:
 }
 
 
-bool Model::LoadTexture(std::string path) {
-	// Use C++ file streams instead of C-style file operations
-	std::ifstream file(path, std::ios::binary);
-	if (!file.is_open()) {
-		std::cerr << "Image could not be opened" << std::endl;
-		return false;
-	}
 
-	// Use C++ standard vectors for dynamic memory allocation
-	std::vector<uint8_t> header(54); // Each BMP file begins with a 54-byte header
-	uint32_t dataPos;
-	uint32_t width, height;
-	uint32_t imageSize;
-
-	// Read the header and handle errors
-	if (!file.read(reinterpret_cast<char*>(header.data()), 54)) {
-		std::cerr << "Not a correct BMP file" << std::endl;
-		return false;
-	}
-
-	if (header[0] != 'B' || header[1] != 'M') {
-		std::cerr << "Not a correct BMP file" << std::endl;
-		return false;
-	}
-
-	dataPos = *reinterpret_cast<uint32_t*>(&header[0x0A]);
-	imageSize = *reinterpret_cast<uint32_t*>(&header[0x22]);
-	width = *reinterpret_cast<uint32_t*>(&header[0x12]);
-	height = *reinterpret_cast<uint32_t*>(&header[0x16]);
-
-	if (imageSize == 0)
-		imageSize = width * height * 3;
-	if (dataPos == 0)
-		dataPos = 54;
-
-	std::vector<uint8_t> data(imageSize);
-
-	// Read the image data
-	if (!file.read(reinterpret_cast<char*>(data.data()), imageSize)) {
-		std::cerr << "Error while reading image data" << std::endl;
-		return false;
-	}
-
-	// Close the file using C++ RAII
-	file.close();
-
-	// Use smart pointers for resource management
-	glGenTextures(1, &textureID);
-	glBindTexture(GL_TEXTURE_2D, textureID);
-
-	// Use C++ constants for OpenGL parameters
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_BGR, GL_UNSIGNED_BYTE, data.data());
-
-
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-
-	return true;
-}
 
 
 

@@ -3,9 +3,9 @@
 #include "../Managers/ShaderManager.h"
 #include "../Managers/ObjectManager.h"
 #include "../Components/Camera.h"
-#include "../PointLight.h"
-#include "../DirectionalLight.h"
-#include "../SpotLight.h"
+#include "../Components/PointLight.h"
+#include "../Components/DirectionalLight.h"
+#include "../Components/SpotLight.h"
 
 
 class Scene : public ISubject

@@ -5,8 +5,8 @@
 #include "../Engine/GameObject.h"
 #include "../Managers/SceneManager.h"
 
-#include "../PointLight.h"
-#include "../DirectionalLight.h"
+#include "../Components/PointLight.h"
+#include "../Components/DirectionalLight.h"
 #include "../Engine/Observer.h"
 
 

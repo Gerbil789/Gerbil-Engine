@@ -15,11 +15,11 @@
 #include "../Managers/ModelManager.h"
 #include "../Scripts/RotationScript.h"
 #include "../GUI/GUI.h"
-#include "../PointLight.h"
-#include "../SpotLight.h"
-#include "../DirectionalLight.h"
+#include "../Components/PointLight.h"
+#include "../Components/SpotLight.h"
+#include "../Components/DirectionalLight.h"
 
-#include "../RatController.h"
+
 
 
 
@@ -34,6 +34,8 @@ private:
 	int width;
 	int height;
 	float ratio;
+
+	Scene* activeScene;
 	
 
 };

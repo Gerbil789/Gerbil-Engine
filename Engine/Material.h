@@ -5,7 +5,7 @@
 #include <GL/glew.h>
 #include <iostream>
 #include <vector>
-#include "../ImageLoader.h"
+#include "../Utilities/ImageLoader.h"
 
 class Material
 {

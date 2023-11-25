@@ -84,11 +84,10 @@ void Application::InitScenes()
 {
 	Scene* scene1 = new Scene();
 	SceneManager::GetInstance().LoadScene(scene1);
+	this->activeScene = scene1;
 
 	Material* m_test_grid = new Material("Textures/test_grid.png", "m_test_grid");
-	Material* m_wood = new Material("Textures/wooden_fence.png", "m_wood");
 	Material* m_house = new Material("Textures/house_texture.png", "m_house");
-
 	Material* m_landscape = new Material("Textures/landscape.png", ",_landscape");
 
 	//player
@@ -101,44 +100,10 @@ void Application::InitScenes()
 	scene1->Add(player_go);
 
 
-	GameObject* ground = new GameObject("ground");
-	ground->AddComponent<MeshRenderer>("landscape", "phong", Color::White, m_landscape);
-	scene1->Add(ground);
+	GameObject* landscape = new GameObject("landscape");
+	landscape->AddComponent<MeshRenderer>("landscape", "phong", Color::White, m_landscape);
+	scene1->Add(landscape);
 
-
-
-	//GameObject* rat = new GameObject("rat");
-	//rat->AddComponent<MeshRenderer>("rat", "phong", Color::White, m_rat);
-	//rat->AddComponent<RatController>();
-	//scene1->Add(rat);
-
-
-
-
-	//GameObject* rotator = new GameObject("empty");
-	//rotator->AddComponent<RotationScript>(150.0f, glm::vec3(0.0f, 1.0f, 0.0f));
-	//rotator->transform->SetPosition(glm::vec3(0.0f, 6.0f, 0.0f));
-	//rotator->transform->SetScale(glm::vec3(0.5f));
-	//scene1->Add(rotator);
-
-	////red light
-	//GameObject* spot1 = new GameObject("spot light");
-	//spot1->AddComponent<SpotLight>(Color::Red, 15.0f);
-	//spot1->transform->SetPosition(glm::vec3(0.0f, 0.0f, -1.0f));
-	//spot1->transform->SetScale(glm::vec3(0.5f));
-	//spot1->transform->RotateBy(45.0f, glm::vec3(1.0f, 0.0f, 0.0f)); //set 45 angle
-	//scene1->Add(spot1);
-	//rotator->AddChildren(spot1);
-
-	////blue light
-	//GameObject* spot2 = new GameObject("spot light");
-	//spot2->AddComponent<SpotLight>(Color::Blue, 15.0f);
-	//spot2->transform->SetPosition(glm::vec3(0.0f, 0.0f, 1.0f));
-	//spot2->transform->SetScale(glm::vec3(0.5f));
-	//spot2->transform->RotateBy(180.0f, glm::vec3(0.0f, 1.0f, 0.0f));
-	//spot2->transform->RotateBy(45.0f, glm::vec3(1.0f, 0.0f, 0.0f));
-	//scene1->Add(spot2);
-	//rotator->AddChildren(spot2);
 
 	//directional light
 	GameObject* dir = new GameObject("directional light");
@@ -146,10 +111,10 @@ void Application::InitScenes()
 	scene1->Add(dir);
 
 	//flash light
-	GameObject* flashLight = new GameObject("flash light");
-	flashLight->AddComponent<SpotLight>(Color::White, 5.0f);
-	scene1->Add(flashLight);
-	player_go->AddChildren(flashLight);
+	//GameObject* flashLight = new GameObject("flash light");
+	//flashLight->AddComponent<SpotLight>(Color::White, 5.0f);
+	//scene1->Add(flashLight);
+	//player_go->AddChildren(flashLight);
 }
 
 void Application::Run()
@@ -165,10 +130,10 @@ void Application::Run()
 
 		Time::Update();
 		
-		SceneManager::GetInstance().GetActiveScene()->Update();
+		activeScene->Update();
 		
 		//todo: make a controller class for flashlight instead of this line
-		SceneManager::GetInstance().GetActiveScene()->GetObjectManager().GetGameObject("flash light")->GetComponent<SpotLight>()->SetDirection(SceneManager::GetInstance().GetActiveScene()->GetActiveCamera()->GetFront());
+		//SceneManager::GetInstance().GetActiveScene()->GetObjectManager().GetGameObject("flash light")->GetComponent<SpotLight>()->SetDirection(SceneManager::GetInstance().GetActiveScene()->GetActiveCamera()->GetFront());
 
 
 		GLint viewport[4];
@@ -197,17 +162,16 @@ void Application::Run()
 		glm::vec3 pos = glm::unProject(screenX, view, projection, viewPort);
 
 		if (Input::IsMouseButtonClicked(0) && index > 2) {
-			printf("Clicked on pixel %d, %d, color %02hhx%02hhx%02hhx%02hhx, depth% f, stencil index % u\n", x, y, color[0], color[1], color[2], color[3], depth, index);
-			printf("unProject [%f,%f,%f]\n", pos.x, pos.y, pos.z);
-	
-			printf("Name %s\n", SceneManager::GetInstance().GetActiveScene()->GetObjectManager().GetGameObject(index)->GetName().c_str());
+			//printf("Clicked on pixel %d, %d, color %02hhx%02hhx%02hhx%02hhx, depth% f, stencil index % u\n", x, y, color[0], color[1], color[2], color[3], depth, index);
+			//printf("unProject [%f,%f,%f]\n", pos.x, pos.y, pos.z);
+			//printf("Name %s\n", SceneManager::GetInstance().GetActiveScene()->GetObjectManager().GetGameObject(index)->GetName().c_str());
 
 
 			GameObject* rat = new GameObject("rat");
 			rat->AddComponent<MeshRenderer>("rat", "phong", Color::White, m_rat);
 			rat->transform->SetPosition(glm::vec3(pos.x, pos.y + 1.0f, pos.z));
 			rat->AddComponent<RotationScript>(200.0f, glm::vec3(0.0f, 1.0f, 0.0f));
-			SceneManager::GetInstance().GetActiveScene()->Add(rat);
+			activeScene->Add(rat);
 		}		
 
 		glfwPollEvents();
