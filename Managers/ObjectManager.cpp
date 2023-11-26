@@ -51,10 +51,10 @@ GameObject* ObjectManager::GetGameObject(int _id)
 
 void ObjectManager::Dispose()
 {
-	for (GameObject* ptr : objects) {
+	/*for (GameObject* ptr : objects) {
 		ptr->Dispose();
 		delete ptr;
-	}
+	}*/
 }
 
 void ObjectManager::Remove(GameObject* _object)

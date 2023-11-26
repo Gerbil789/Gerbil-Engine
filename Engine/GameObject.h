@@ -5,6 +5,8 @@
 
 #include "../Engine/Transform.h"
 #include "../Components/Component.h"
+#include "../Utilities/Time.h"
+
 
 class GameObject
 {
@@ -13,8 +15,9 @@ public:
 	static int nextID;
 	GameObject(std::string name);
 	void Update();
+	void Destroy();
+	void Destroy(float t);
 	std::string GetName();
-	void Dispose();
 	Transform* transform = new Transform();
 	void AddChildren(GameObject* _child);
 	void RemoveChildren(GameObject* _child);
@@ -58,5 +61,8 @@ private:
 	std::vector<IComponent*> components;
 	GameObject* parent = nullptr;
 	std::vector<GameObject*> children;
+
+	bool destroy = false;
+	float countdown;
 };
 

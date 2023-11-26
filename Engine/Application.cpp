@@ -87,8 +87,8 @@ void Application::InitScenes()
 	this->activeScene = scene1;
 
 	Material* m_test_grid = new Material("Textures/test_grid.png", "m_test_grid");
-	Material* m_house = new Material("Textures/house_texture.png", "m_house");
-	Material* m_landscape = new Material("Textures/landscape.png", ",_landscape");
+	//Material* m_house = new Material("Textures/house_texture.png", "m_house");
+	//Material* m_landscape = new Material("Textures/landscape.png", ",_landscape");
 
 	//player
 	GameObject* player_go = new GameObject("player");
@@ -119,6 +119,14 @@ void Application::InitScenes()
 	scene1->Add(ground);
 
 
+	GameObject* sprite = new GameObject("sprite");
+	sprite->AddComponent<SpriteRenderer>();
+	sprite->transform->SetScale(glm::vec3(2.0f));
+	sprite->transform->SetPosition(glm::vec3(10.0f, 3.0f, 0.0f));
+	sprite->transform->SetRotation(90.0f, glm::vec3(1.0f, 0.0f, 0.0f));
+	sprite->AddComponent<RotationScript>(100.0f, glm::vec3(0.0f, 0.0f, 1.0f));
+	scene1->Add(sprite);
+
 	//directional light
 	GameObject* dir = new GameObject("directional light");
 	dir->AddComponent<DirectionalLight>(Color::White, 0.5f);
@@ -133,7 +141,8 @@ void Application::InitScenes()
 
 void Application::Run()
 {
-	Material* m_rat = new Material("Textures/rattex.jpeg", "m_rat");
+	//Material* m_rat = new Material("Textures/rattex.jpeg", "m_rat");
+	Material* m_test_grid = new Material("Textures/test_grid.png", "m_test_grid");
 
 	MoveOnSplineScript* tmp = activeScene->GetObjectManager().GetGameObject("sphere_on_spline")->GetComponent<MoveOnSplineScript>();
 	float t = 0;
@@ -209,11 +218,13 @@ void Application::Run()
 			printf("Name %s\n", SceneManager::GetInstance().GetActiveScene()->GetObjectManager().GetGameObject(index)->GetName().c_str());
 
 
-			GameObject* rat = new GameObject("rat");
-			rat->AddComponent<MeshRenderer>("rat", "phong", Color::White, m_rat);
-			rat->transform->SetPosition(glm::vec3(pos.x, pos.y + 1.0f, pos.z));
-			rat->AddComponent<RotationScript>(200.0f, glm::vec3(0.0f, 1.0f, 0.0f));
-			activeScene->Add(rat);
+			GameObject* sphere = new GameObject("sphere");
+			sphere->AddComponent<MeshRenderer>("sphere", "constant", Color::Random());
+			sphere->transform->SetPosition(glm::vec3(pos.x, pos.y, pos.z));
+			sphere->AddComponent<RotationScript>(200.0f, glm::vec3(0.0f, 1.0f, 0.0f));
+			activeScene->Add(sphere);
+
+			sphere->Destroy(5.0f);
 		}		
 
 		glfwPollEvents();

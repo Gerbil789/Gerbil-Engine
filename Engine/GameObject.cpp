@@ -1,4 +1,6 @@
+#include "../Managers/SceneManager.h"
 #include "GameObject.h"
+
 
 int GameObject::nextID = 2;
 
@@ -11,9 +13,28 @@ GameObject::GameObject(std::string name)
 
 void GameObject::Update()
 {
+	if (destroy) {
+		countdown -= Time::deltaTime;
+		if (countdown <= 0.0f) {
+			Destroy();
+		}
+	}
+
 	for (IComponent* component : components) {
 		component->Update();
 	}
+}
+
+void GameObject::Destroy()
+{
+	SceneManager::GetInstance().GetActiveScene()->GetObjectManager().Remove(this);
+	delete this;
+}
+
+void GameObject::Destroy(float t)
+{
+	countdown = t;
+	destroy = true;
 }
 
 
@@ -22,9 +43,6 @@ std::string GameObject::GetName()
 	return this->name;
 }
 
-void GameObject::Dispose()
-{
-}
 
 void GameObject::AddChildren(GameObject* _child)
 {

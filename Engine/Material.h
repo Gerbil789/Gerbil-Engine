@@ -20,6 +20,6 @@ public:
 	GLuint textureID = 0;
 
 
-	void LoadTexture(std::string path);
+	static GLuint LoadTexture(std::string path);
 };
 

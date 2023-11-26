@@ -4,7 +4,7 @@
 Material::Material(std::string path, std::string _name)
 {
 	name = _name;
-	LoadTexture(path);
+	textureID = LoadTexture(path);
 }
 
 bool endsWith(const std::string& str, const std::string& suffix) {
@@ -17,10 +17,11 @@ bool endsWith(const std::string& str, const std::string& suffix) {
 }
 
 
-void Material::LoadTexture(std::string path)
+GLuint Material::LoadTexture(std::string path)
 {
-	glGenTextures(1, &this->textureID);
-	glBindTexture(GL_TEXTURE_2D, this->textureID);
+	GLuint id;
+	glGenTextures(1, &id);
+	glBindTexture(GL_TEXTURE_2D, id);
 
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
@@ -44,5 +45,6 @@ void Material::LoadTexture(std::string path)
 	glGenerateMipmap(GL_TEXTURE_2D);
 
 	ImageLoader::FreeImage(data);
+	return id;
 }
 

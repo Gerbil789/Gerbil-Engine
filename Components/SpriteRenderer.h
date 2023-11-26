@@ -4,13 +4,22 @@
 #include "../Engine/GameObject.h"
 
 
-class SpriteRenderer : public IRenderer
+
+class SpriteRenderer : public IRenderer, public IObserver
 {
 public:
-	SpriteRenderer(glm::vec3 color = glm::vec3(1.0f));
+	SpriteRenderer(std::string _texture = "Textures/gerbil.jpg", glm::vec3 _color = Color::White);
 	void Update() override;
+
+	void SetTransform(Transform* t) override;
+	void UpdateObserver() override; //update transfrom
+
 private:
-	glm::vec3 spriteColor;
-	GLuint VAO, shaderProgram;
+	GLuint shaderProgramId;
+	Shader* shader;
+	GLuint textureId;
+	glm::mat4 transformMatrix;
+	Model* model;
+	glm::vec3 color;
 };
 

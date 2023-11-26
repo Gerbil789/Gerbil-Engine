@@ -18,7 +18,7 @@ Scene::Scene(const std::string& _name)
 	directionalLights = std::vector<DirectionalLight*>();
 
 	GameObject* skybox = new GameObject("skybox");
-	Material* m_skybox = new Material("Textures/clouds.jpg", "m_skybox");
+	Material* m_skybox = new Material("Textures/sky.jpg", "m_skybox");
 	MeshRenderer* renderer =  skybox->AddComponent<MeshRenderer>("skydome", "texture", Color::White, m_skybox);
 	//renderer->SetFlag(renderer->SKYBOX);
 	SetSky(skybox);

@@ -83,6 +83,9 @@ void ShaderManager::Init()
 	Shader* textureShader = CreateShader("texture", "Shaders/texture_vert.glsl", "Shaders/texture_frag.glsl");
 	shaderPrograms.push_back(textureShader);
 
+	Shader* spriteShader = CreateShader("sprite", "Shaders/sprite_vert.glsl", "Shaders/sprite_frag.glsl");
+	shaderPrograms.push_back(spriteShader);
+
 	
 	initialized = true;
 }
