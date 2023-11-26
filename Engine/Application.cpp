@@ -105,11 +105,13 @@ void Application::InitScenes()
 
 	GameObject* spline = new GameObject("Spline");
 	Spline* splineComponent = spline->AddComponent<Spline>();
+	splineComponent->Draw();
 	scene1->Add(spline);
 
 	GameObject* sphere = new GameObject("sphere_on_spline");
 	sphere->AddComponent<MeshRenderer>();
 	sphere->AddComponent<MoveOnSplineScript>(splineComponent);
+	sphere->AddComponent<RotationScript>(100.0f, glm::vec3(0.0f, 1.0f, 0.0f));
 	scene1->Add(sphere);
 
 
@@ -118,14 +120,28 @@ void Application::InitScenes()
 	ground->transform->SetScale(glm::vec3(20.0f));
 	scene1->Add(ground);
 
+	GameObject* coin = new GameObject("coin_sprite");
+	coin->AddComponent<SpriteRenderer>("Textures/coin.png");
+	coin->transform->SetPosition(glm::vec3(8.0f, 2.0f, 0.0f));
+	coin->transform->SetRotation(90.0f, glm::vec3(1.0f, 0.0f, 0.0f));
+	coin->AddComponent<RotationScript>(100.0f, glm::vec3(0.0f, 0.0f, 1.0f));
+	scene1->Add(coin);
 
-	GameObject* sprite = new GameObject("sprite");
-	sprite->AddComponent<SpriteRenderer>();
-	sprite->transform->SetScale(glm::vec3(2.0f));
-	sprite->transform->SetPosition(glm::vec3(10.0f, 3.0f, 0.0f));
-	sprite->transform->SetRotation(90.0f, glm::vec3(1.0f, 0.0f, 0.0f));
-	sprite->AddComponent<RotationScript>(100.0f, glm::vec3(0.0f, 0.0f, 1.0f));
-	scene1->Add(sprite);
+	GameObject* cat1 = new GameObject("cat1_sprite");
+	cat1->AddComponent<SpriteRenderer>("Textures/cat1.jpg");
+	cat1->transform->SetScale(glm::vec3(1.0f * 2, 0.0f, 1.46f * 2));
+	cat1->transform->SetPosition(glm::vec3(10.0f, 3.0f, 2.5f));
+	cat1->transform->RotateBy(90.0f, glm::vec3(0.0f, 0.0f, 1.0f));
+	cat1->transform->RotateBy(90.0f, glm::vec3(0.0f, -1.0f, 0.0f));
+	scene1->Add(cat1);
+
+	GameObject* cat2 = new GameObject("cat2_sprite");
+	cat2->AddComponent<SpriteRenderer>("Textures/cat2.jpg");
+	cat2->transform->SetScale(glm::vec3(1.0f * 2, 0.0f, 1.46f * 2));
+	cat2->transform->SetPosition(glm::vec3(10.0f, 3.0f, -2.5f));
+	cat2->transform->RotateBy(90.0f, glm::vec3(0.0f, 0.0f, 1.0f));
+	cat2->transform->RotateBy(90.0f, glm::vec3(0.0f, -1.0f, 0.0f));
+	scene1->Add(cat2);
 
 	//directional light
 	GameObject* dir = new GameObject("directional light");
@@ -213,9 +229,9 @@ void Application::Run()
 		glm::vec3 pos = glm::unProject(screenCenter, view, projection, viewPort); // mouse position
 
 		if (Input::IsMouseButtonClicked(0) && index > 2) {
-			printf("Clicked on pixel %d, %d, color %02hhx%02hhx%02hhx%02hhx, depth% f, stencil index % u\n", x, y, color[0], color[1], color[2], color[3], depth, index);
-			printf("unProject [%f,%f,%f]\n", pos.x, pos.y, pos.z);
-			printf("Name %s\n", SceneManager::GetInstance().GetActiveScene()->GetObjectManager().GetGameObject(index)->GetName().c_str());
+			//printf("Clicked on pixel %d, %d, color %02hhx%02hhx%02hhx%02hhx, depth% f, stencil index % u\n", x, y, color[0], color[1], color[2], color[3], depth, index);
+			//printf("unProject [%f,%f,%f]\n", pos.x, pos.y, pos.z);
+			//printf("Name %s\n", SceneManager::GetInstance().GetActiveScene()->GetObjectManager().GetGameObject(index)->GetName().c_str());
 
 
 			GameObject* sphere = new GameObject("sphere");

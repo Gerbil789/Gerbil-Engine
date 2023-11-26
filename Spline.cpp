@@ -1,22 +1,50 @@
+#include "../Components/MeshRenderer.h"
+#include <algorithm>
+#include <glm/glm.hpp>
 #include "Spline.h"
 
-Spline::Spline()
+
+Spline::Spline(const std::vector<glm::vec3>& _controlPoints)
 {
-	controlPoints = { glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(1.0f, 2.0f, 0.0f), glm::vec3(3.0f, 4.0f, 0.0f), glm::vec3(5.0f, 0.0f, 0.0f) };
+    controlPoints = _controlPoints;
 }
 
 glm::vec3 Spline::GetPosition(float t)
 {
-    float u = 1 - t;
-    float tt = t * t;
-    float uu = u * u;
-    float uuu = uu * u;
-    float ttt = tt * t;
+    t = std::clamp(t, 0.0f, 1.0f);
 
-    glm::vec3 p = uuu * controlPoints[0]; // (1-t)^3 * P0
-    p += 3 * uu * t * controlPoints[1];   // 3t(1-t)^2 * P1
-    p += 3 * u * tt * controlPoints[2];   // 3t^2(1-t) * P2
-    p += ttt * controlPoints[3];          // t^3 * P3
+    int n = static_cast<int>(controlPoints.size()) - 1;
+
+    glm::vec3 p(0.0f);
+
+    for (int i = 0; i <= n; ++i) {
+        float coeff = factorial(n) / (factorial(i) * factorial(n - i));
+        float term = coeff * glm::pow(t, i) * glm::pow(1.0f - t, n - i);
+        p += term * controlPoints[i];
+    }
 
     return p;
+}
+
+void Spline::Draw()
+{
+    for (glm::vec3 pos : controlPoints) {
+        GameObject* go = new GameObject("control_point");
+        go->AddComponent<MeshRenderer>("sphere", "constant", Color::Blue);
+        go->transform->SetScale(glm::vec3(0.2f));
+        go->transform->SetPosition(pos);
+        this->gameObject->AddChildren(go);
+
+        SceneManager::GetInstance().GetActiveScene()->Add(go);
+    }
+
+    for (float t = 0.0f; t <= 1.0f; t += 0.05f) {
+        GameObject* go = new GameObject("spline_point");
+        go->AddComponent<MeshRenderer>("sphere", "constant", Color::Red);
+        go->transform->SetScale(glm::vec3(0.1f));
+        go->transform->SetPosition(GetPosition(t));
+        this->gameObject->AddChildren(go);
+
+        SceneManager::GetInstance().GetActiveScene()->Add(go);
+    }
 }

@@ -8,7 +8,7 @@
 class SpriteRenderer : public IRenderer, public IObserver
 {
 public:
-	SpriteRenderer(std::string _texture = "Textures/gerbil.jpg", glm::vec3 _color = Color::White);
+	SpriteRenderer(std::string _texture = "Textures/coin.png", glm::vec3 _color = Color::White);
 	void Update() override;
 
 	void SetTransform(Transform* t) override;

@@ -8,6 +8,14 @@ uniform vec3 color;
 
 void main()
 {
-	vec4 texColor = texture(textureUnitID, TexCoords) * vec4(color, 1.0f);
-	outColor = texColor;
+    vec4 texColor = texture(textureUnitID, TexCoords);
+
+    if (texColor.a == 0.0) {
+        discard; // Discard the fragment (make it transparent)
+    } else {
+        outColor = vec4(texColor.rgb * texColor.a, texColor.a);
+    }
+
+    outColor.rgb *= color;
+    outColor.a = texColor.a;
 }
