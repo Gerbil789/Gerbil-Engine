@@ -20,6 +20,7 @@
 #include "../Components/DirectionalLight.h"
 
 
+#include "../MoveOnSplineScript.h"
 
 
 

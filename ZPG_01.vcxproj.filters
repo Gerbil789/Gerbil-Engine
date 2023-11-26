@@ -117,22 +117,22 @@
     <ClInclude Include="Engine\Transform.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="PointLight.h">
+    <ClInclude Include="Components/DirectionalLight.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="DirectionalLight.h">
+    <ClInclude Include="Utilities/ImageLoader.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="SpotLight.h">
+    <ClInclude Include="Components/PointLight.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ImageLoader.h">
+    <ClInclude Include="Components/SpotLight.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="RatController.h">
+    <ClInclude Include="Spline.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="WobbleScript.h">
+    <ClInclude Include="MoveOnSplineScript.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -236,22 +236,22 @@
     <ClCompile Include="Engine\Transform.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="PointLight.cpp">
+    <ClCompile Include="Components/DirectionalLight.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="DirectionalLight.cpp">
+    <ClCompile Include="Utilities/ImageLoader.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="SpotLight.cpp">
+    <ClCompile Include="Components/PointLight.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ImageLoader.cpp">
+    <ClCompile Include="Components/SpotLight.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="RatController.cpp">
+    <ClCompile Include="Spline.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="WobbleScript.cpp">
+    <ClCompile Include="MoveOnSplineScript.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

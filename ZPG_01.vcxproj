@@ -137,6 +137,8 @@
     <ClInclude Include="Components/Camera.h" />
     <ClInclude Include="Components/CameraController.h" />
     <ClInclude Include="GUI\GUI.h" />
+    <ClInclude Include="MoveOnSplineScript.h" />
+    <ClInclude Include="Spline.h" />
     <ClInclude Include="Utilities/ImageLoader.h" />
     <ClInclude Include="lib\imgui\imconfig.h" />
     <ClInclude Include="lib\imgui\imgui.h" />
@@ -177,6 +179,8 @@
     <ClCompile Include="Components/Camera.cpp" />
     <ClCompile Include="Components/CameraController.cpp" />
     <ClCompile Include="GUI\GUI.cpp" />
+    <ClCompile Include="MoveOnSplineScript.cpp" />
+    <ClCompile Include="Spline.cpp" />
     <ClCompile Include="Utilities/ImageLoader.cpp" />
     <ClCompile Include="lib\imgui\imgui.cpp" />
     <ClCompile Include="lib\imgui\imgui_demo.cpp" />

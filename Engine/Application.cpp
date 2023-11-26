@@ -64,7 +64,7 @@ void Application::Init()
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
 	glOrtho(-ratio, ratio, -1.f, 1.f, 1.f, -1.f);
-	//glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+	glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 	glEnable(GL_DEPTH_TEST);
 	glEnable(GL_STENCIL_TEST);
 	glStencilOp(GL_KEEP, GL_KEEP, GL_REPLACE);
@@ -99,10 +99,24 @@ void Application::InitScenes()
 	player_go->transform->SetPosition(glm::vec3(0.0f, 5.0f, 0.0f));
 	scene1->Add(player_go);
 
+	//GameObject* landscape = new GameObject("landscape");
+	//landscape->AddComponent<MeshRenderer>("landscape", "phong", Color::White, m_landscape);
+	//scene1->Add(landscape);
 
-	GameObject* landscape = new GameObject("landscape");
-	landscape->AddComponent<MeshRenderer>("landscape", "phong", Color::White, m_landscape);
-	scene1->Add(landscape);
+	GameObject* spline = new GameObject("Spline");
+	Spline* splineComponent = spline->AddComponent<Spline>();
+	scene1->Add(spline);
+
+	GameObject* sphere = new GameObject("sphere_on_spline");
+	sphere->AddComponent<MeshRenderer>();
+	sphere->AddComponent<MoveOnSplineScript>(splineComponent);
+	scene1->Add(sphere);
+
+
+	GameObject* ground = new GameObject("ground");
+	ground->AddComponent<MeshRenderer>("plane", "phong", Color::White, m_test_grid);
+	ground->transform->SetScale(glm::vec3(20.0f));
+	scene1->Add(ground);
 
 
 	//directional light
@@ -111,15 +125,20 @@ void Application::InitScenes()
 	scene1->Add(dir);
 
 	//flash light
-	//GameObject* flashLight = new GameObject("flash light");
-	//flashLight->AddComponent<SpotLight>(Color::White, 5.0f);
-	//scene1->Add(flashLight);
-	//player_go->AddChildren(flashLight);
+	GameObject* flashLight = new GameObject("flash light");
+	flashLight->AddComponent<SpotLight>(Color::White, 5.0f);
+	scene1->Add(flashLight);
+	player_go->AddChildren(flashLight);
 }
 
 void Application::Run()
 {
 	Material* m_rat = new Material("Textures/rattex.jpeg", "m_rat");
+
+	MoveOnSplineScript* tmp = activeScene->GetObjectManager().GetGameObject("sphere_on_spline")->GetComponent<MoveOnSplineScript>();
+	float t = 0;
+	float speed = 0.5f;
+
 	GUI gui(window, SceneManager::GetInstance().GetActiveScene());
 
 	while (!glfwWindowShouldClose(window)) {
@@ -129,12 +148,28 @@ void Application::Run()
 		}
 
 		Time::Update();
-		
-		activeScene->Update();
-		
-		//todo: make a controller class for flashlight instead of this line
-		//SceneManager::GetInstance().GetActiveScene()->GetObjectManager().GetGameObject("flash light")->GetComponent<SpotLight>()->SetDirection(SceneManager::GetInstance().GetActiveScene()->GetActiveCamera()->GetFront());
 
+
+		if (Input::IsKeyDown(GLFW_KEY_UP)) {
+			t += Time::deltaTime * speed;
+			t = std::clamp(t, 0.0f, 1.0f);
+			std::cout << "t: " << t << "\n";
+
+			tmp->Move(t);
+		}
+
+		if (Input::IsKeyDown(GLFW_KEY_DOWN)) {
+			t -= Time::deltaTime * speed;
+			t = std::clamp(t, 0.0f, 1.0f);
+			std::cout << "t: " << t << "\n";
+
+			tmp->Move(t);
+		}
+
+		activeScene->Update();
+
+		//todo: make a controller class for flashlight instead of this line
+		SceneManager::GetInstance().GetActiveScene()->GetObjectManager().GetGameObject("flash light")->GetComponent<SpotLight>()->SetDirection(SceneManager::GetInstance().GetActiveScene()->GetActiveCamera()->GetFront());
 
 		GLint viewport[4];
 		glGetIntegerv(GL_VIEWPORT, viewport);
@@ -143,28 +178,35 @@ void Application::Run()
 		GLfloat depth;
 		GLuint index;
 
-		GLint x = Input::GetMouseX();
-		GLint y = Input::GetMouseY();
+		//GLint x = Input::GetMouseX();
+		//GLint y = Input::GetMouseY();
 
-		int newy = viewport[3] - y;
+		GLint x = viewport[2] / 2;
+		GLint y = viewport[3] / 2;
 
-		glReadPixels(x, newy, 1, 1, GL_RGBA, GL_UNSIGNED_BYTE, color);
-		glReadPixels(x, newy, 1, 1, GL_DEPTH_COMPONENT, GL_FLOAT, &depth);
-		glReadPixels(x, newy, 1, 1, GL_STENCIL_INDEX, GL_UNSIGNED_INT, &index);
+		//int newy = viewport[3] - y;
+		//glReadPixels(x, newy, 1, 1, GL_RGBA, GL_UNSIGNED_BYTE, color);
+		//glReadPixels(x, newy, 1, 1, GL_DEPTH_COMPONENT, GL_FLOAT, &depth);
+		//glReadPixels(x, newy, 1, 1, GL_STENCIL_INDEX, GL_UNSIGNED_INT, &index);
 
-		glm::vec3 screenX = glm::vec3(x, newy, depth);
+		glReadPixels(x, y, 1, 1, GL_RGBA, GL_UNSIGNED_BYTE, color);
+		glReadPixels(x, y, 1, 1, GL_DEPTH_COMPONENT, GL_FLOAT, &depth);
+		glReadPixels(x, y, 1, 1, GL_STENCIL_INDEX, GL_UNSIGNED_INT, &index);
+
+		//glm::vec3 screenX = glm::vec3(x, newy, depth);
+		glm::vec3 screenCenter = glm::vec3(x, y, depth);
 		
 		glm::mat4 view = ShaderManager::GetInstance().GetShaderProgram(ShaderManager::GetInstance().GetShaderProgramId("phong"))->viewMatrix;
 		glm::mat4 projection = ShaderManager::GetInstance().GetShaderProgram(ShaderManager::GetInstance().GetShaderProgramId("phong"))->projectionMatrix;
 		
 		
 		glm::vec4 viewPort = glm::vec4(0, 0, viewport[2], viewport[3]);
-		glm::vec3 pos = glm::unProject(screenX, view, projection, viewPort);
+		glm::vec3 pos = glm::unProject(screenCenter, view, projection, viewPort); // mouse position
 
 		if (Input::IsMouseButtonClicked(0) && index > 2) {
-			//printf("Clicked on pixel %d, %d, color %02hhx%02hhx%02hhx%02hhx, depth% f, stencil index % u\n", x, y, color[0], color[1], color[2], color[3], depth, index);
-			//printf("unProject [%f,%f,%f]\n", pos.x, pos.y, pos.z);
-			//printf("Name %s\n", SceneManager::GetInstance().GetActiveScene()->GetObjectManager().GetGameObject(index)->GetName().c_str());
+			printf("Clicked on pixel %d, %d, color %02hhx%02hhx%02hhx%02hhx, depth% f, stencil index % u\n", x, y, color[0], color[1], color[2], color[3], depth, index);
+			printf("unProject [%f,%f,%f]\n", pos.x, pos.y, pos.z);
+			printf("Name %s\n", SceneManager::GetInstance().GetActiveScene()->GetObjectManager().GetGameObject(index)->GetName().c_str());
 
 
 			GameObject* rat = new GameObject("rat");

@@ -24,11 +24,12 @@ public:
 	std::vector<IComponent*> GetComponents();
 
 	template <typename T>
-	void AddComponent() {
+	T* AddComponent() {
 		T* newComponent = new T();
 		newComponent->SetGameObject(this);
 		newComponent->SetTransform(this->transform);
 		components.push_back(newComponent);
+		return newComponent;
 	}
 
 	template <typename T, typename... Args>
