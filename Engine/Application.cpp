@@ -127,21 +127,20 @@ void Application::InitScenes()
 	coin->AddComponent<RotationScript>(100.0f, glm::vec3(0.0f, 0.0f, 1.0f));
 	scene1->Add(coin);
 
-	GameObject* cat1 = new GameObject("cat1_sprite");
-	cat1->AddComponent<SpriteRenderer>("Textures/cat1.jpg");
-	cat1->transform->SetScale(glm::vec3(1.0f * 2, 0.0f, 1.46f * 2));
-	cat1->transform->SetPosition(glm::vec3(10.0f, 3.0f, 2.5f));
-	cat1->transform->RotateBy(90.0f, glm::vec3(0.0f, 0.0f, 1.0f));
-	cat1->transform->RotateBy(90.0f, glm::vec3(0.0f, -1.0f, 0.0f));
-	scene1->Add(cat1);
 
-	GameObject* cat2 = new GameObject("cat2_sprite");
-	cat2->AddComponent<SpriteRenderer>("Textures/cat2.jpg");
-	cat2->transform->SetScale(glm::vec3(1.0f * 2, 0.0f, 1.46f * 2));
-	cat2->transform->SetPosition(glm::vec3(10.0f, 3.0f, -2.5f));
-	cat2->transform->RotateBy(90.0f, glm::vec3(0.0f, 0.0f, 1.0f));
-	cat2->transform->RotateBy(90.0f, glm::vec3(0.0f, -1.0f, 0.0f));
-	scene1->Add(cat2);
+
+	std::string cats[] = { "Textures/cat1.jpg", "Textures/cat2.jpg", "Textures/cat3.jpg", "Textures/cat4.jpg", "Textures/cat5.jpg", "Textures/cat6.jpg", "Textures/cat7.jpg", "Textures/cat8.jpg" };
+
+	for (int i = 0; i < 8; i++) {
+		GameObject* cat = new GameObject("cat_sprite");
+		cat->AddComponent<SpriteRenderer>(cats[i]);
+		cat->transform->SetScale(glm::vec3(1.0f * 2, 0.0f, 1.46f * 2));
+		cat->transform->SetPosition(glm::vec3(10.0f, 3.0f, -17.5f + i * 5.0f));
+		cat->transform->RotateBy(90.0f, glm::vec3(0.0f, 0.0f, 1.0f));
+		cat->transform->RotateBy(90.0f, glm::vec3(0.0f, -1.0f, 0.0f));
+		scene1->Add(cat);
+	}
+
 
 	//directional light
 	GameObject* dir = new GameObject("directional light");
@@ -178,16 +177,12 @@ void Application::Run()
 		if (Input::IsKeyDown(GLFW_KEY_UP)) {
 			t += Time::deltaTime * speed;
 			t = std::clamp(t, 0.0f, 1.0f);
-			std::cout << "t: " << t << "\n";
-
 			tmp->Move(t);
 		}
 
 		if (Input::IsKeyDown(GLFW_KEY_DOWN)) {
 			t -= Time::deltaTime * speed;
 			t = std::clamp(t, 0.0f, 1.0f);
-			std::cout << "t: " << t << "\n";
-
 			tmp->Move(t);
 		}
 
