@@ -7,6 +7,7 @@ static void window_size_callback(GLFWwindow* window, int _width, int _height) {
 	
 	printf("resize %d, %d \n", _width, _height);
 	SceneManager::GetInstance().GetActiveScene()->GetActiveCamera()->SetAspect((float)_width / _height);
+
 	glViewport(0, 0, _width, _height);
 }
 
@@ -105,10 +106,9 @@ void Application::InitScenes()
 
 	std::vector<glm::vec3> controlPoints = {
 			 glm::vec3(0.0f, 0.0f, 0.0f),
-			 glm::vec3(2.5f, 5.0f, 0.0f),
+			 glm::vec3(1.0f, 5.0f, 5.0f),
+			 glm::vec3(4.0f, 5.0f, -5.0f),
 			 glm::vec3(5.0f, 0.0f, 0.0f)
-			 //glm::vec3(5.0f, 0.0f, 0.0f)
-			 // Add more control points as needed
 	};
 
 	GameObject* spline = new GameObject("Spline");
@@ -122,12 +122,13 @@ void Application::InitScenes()
 	sphere->AddComponent<RotationScript>(100.0f, glm::vec3(0.0f, 1.0f, 0.0f));
 	scene1->Add(sphere);
 
-
+	//ground
 	GameObject* ground = new GameObject("ground");
 	ground->AddComponent<MeshRenderer>("plane", "phong", Color::White, m_test_grid);
 	ground->transform->SetScale(glm::vec3(20.0f));
 	scene1->Add(ground);
 
+	//coin
 	GameObject* coin = new GameObject("coin_sprite");
 	coin->AddComponent<SpriteRenderer>("Textures/coin.png");
 	coin->transform->SetPosition(glm::vec3(8.0f, 2.0f, 0.0f));
@@ -135,10 +136,8 @@ void Application::InitScenes()
 	coin->AddComponent<RotationScript>(100.0f, glm::vec3(0.0f, 0.0f, 1.0f));
 	scene1->Add(coin);
 
-
-
+	//cats
 	std::string cats[] = { "Textures/cat1.jpg", "Textures/cat2.jpg", "Textures/cat3.jpg", "Textures/cat4.jpg", "Textures/cat5.jpg", "Textures/cat6.jpg", "Textures/cat7.jpg", "Textures/cat8.jpg" };
-
 	for (int i = 0; i < 8; i++) {
 		GameObject* cat = new GameObject("cat_sprite");
 		cat->AddComponent<SpriteRenderer>(cats[i]);
@@ -164,7 +163,6 @@ void Application::InitScenes()
 
 void Application::Run()
 {
-	//Material* m_rat = new Material("Textures/rattex.jpeg", "m_rat");
 	Material* m_test_grid = new Material("Textures/test_grid.png", "m_test_grid");
 
 	MoveOnSplineScript* tmp = activeScene->GetObjectManager().GetGameObject("sphere_on_spline")->GetComponent<MoveOnSplineScript>();
@@ -172,7 +170,6 @@ void Application::Run()
 	float speed = 0.5f;
 
 	GUI gui(window, SceneManager::GetInstance().GetActiveScene());
-
 	while (!glfwWindowShouldClose(window)) {
 
 		if (Input::IsKeyDown(GLFW_KEY_ESCAPE)) {

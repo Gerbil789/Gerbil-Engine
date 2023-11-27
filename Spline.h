@@ -13,13 +13,5 @@ public:
 private:
 	std::vector<glm::vec3> controlPoints;
 	bool closedLoop;
-	
-	float factorial(int n) {
-		float result = 1;
-		for (int i = 1; i <= n; ++i) {
-			result *= i;
-		}
-		return result;
-	}
 };
 

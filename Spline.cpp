@@ -14,27 +14,24 @@ glm::vec3 Spline::GetPosition(float t)
 {
     t = std::clamp(t, 0.0f, 1.0f);
 
-    
-
-    if (closedLoop) {
-      controlPoints.push_back(controlPoints[0]);
-    }
-
-    int n = static_cast<int>(controlPoints.size()) - 1;
+    int n = controlPoints.size() - 1;
    
+    glm::mat4 A = glm::mat4(glm::vec4(
+        -1.0, 3.0, -3.0, 1.0),
+        glm::vec4(3.0, -6.0, 3.0, 0),
+        glm::vec4(-3.0, 3.0, 0, 0),
+        glm::vec4(1, 0, 0, 0)
+    );
 
-    glm::vec3 p(0.0f);
-
+    glm::mat4x3 B;  // Matrix for control points
     for (int i = 0; i <= n; ++i) {
-        float coeff = factorial(n) / (factorial(i) * factorial(n - i));
-        float term = coeff * glm::pow(t, i) * glm::pow(1.0f - t, n - i);
-        p += term * controlPoints[i];
+        B[i] = glm::vec3(controlPoints[i]);
     }
 
-    if (closedLoop) {
-      controlPoints.pop_back();
-    }
+    glm::vec4 parameters = glm::vec4(t * t * t, t * t, t, 1.0f);
 
+
+    glm::vec3 p = parameters * A * glm::transpose(B);
     return p;
 }
 
