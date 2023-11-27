@@ -103,8 +103,16 @@ void Application::InitScenes()
 	//landscape->AddComponent<MeshRenderer>("landscape", "phong", Color::White, m_landscape);
 	//scene1->Add(landscape);
 
+	std::vector<glm::vec3> controlPoints = {
+			 glm::vec3(0.0f, 0.0f, 0.0f),
+			 glm::vec3(2.5f, 5.0f, 0.0f),
+			 glm::vec3(5.0f, 0.0f, 0.0f)
+			 //glm::vec3(5.0f, 0.0f, 0.0f)
+			 // Add more control points as needed
+	};
+
 	GameObject* spline = new GameObject("Spline");
-	Spline* splineComponent = spline->AddComponent<Spline>();
+	Spline* splineComponent = spline->AddComponent<Spline>(controlPoints, false);
 	splineComponent->Draw();
 	scene1->Add(spline);
 

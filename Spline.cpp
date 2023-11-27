@@ -4,16 +4,24 @@
 #include "Spline.h"
 
 
-Spline::Spline(const std::vector<glm::vec3>& _controlPoints)
+Spline::Spline(const std::vector<glm::vec3>& _controlPoints, bool _closedLoop)
 {
     controlPoints = _controlPoints;
+    closedLoop = _closedLoop;
 }
 
 glm::vec3 Spline::GetPosition(float t)
 {
     t = std::clamp(t, 0.0f, 1.0f);
 
+    
+
+    if (closedLoop) {
+      controlPoints.push_back(controlPoints[0]);
+    }
+
     int n = static_cast<int>(controlPoints.size()) - 1;
+   
 
     glm::vec3 p(0.0f);
 
@@ -21,6 +29,10 @@ glm::vec3 Spline::GetPosition(float t)
         float coeff = factorial(n) / (factorial(i) * factorial(n - i));
         float term = coeff * glm::pow(t, i) * glm::pow(1.0f - t, n - i);
         p += term * controlPoints[i];
+    }
+
+    if (closedLoop) {
+      controlPoints.pop_back();
     }
 
     return p;
