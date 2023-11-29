@@ -88,8 +88,7 @@ void Application::InitScenes()
 	this->activeScene = scene1;
 
 	Material* m_test_grid = new Material("Textures/test_grid.png", "m_test_grid");
-	//Material* m_house = new Material("Textures/house_texture.png", "m_house");
-	//Material* m_landscape = new Material("Textures/landscape.png", ",_landscape");
+	Material* m_gun = new Material("Textures/gun_color.png", "m_gun");
 
 	//player
 	GameObject* player_go = new GameObject("player");
@@ -100,17 +99,14 @@ void Application::InitScenes()
 	player_go->transform->SetPosition(glm::vec3(0.0f, 5.0f, 0.0f));
 	scene1->Add(player_go);
 
-	//GameObject* landscape = new GameObject("landscape");
-	//landscape->AddComponent<MeshRenderer>("landscape", "phong", Color::White, m_landscape);
-	//scene1->Add(landscape);
-
+	//spline
 	std::vector<glm::vec3> controlPoints = {
 			 glm::vec3(0.0f, 0.0f, 0.0f),
 			 glm::vec3(1.0f, 5.0f, 5.0f),
 			 glm::vec3(4.0f, 5.0f, -5.0f),
 			 glm::vec3(5.0f, 0.0f, 0.0f)
 	};
-
+	
 	GameObject* spline = new GameObject("Spline");
 	Spline* splineComponent = spline->AddComponent<Spline>(controlPoints, false);
 	splineComponent->Draw();
@@ -135,6 +131,44 @@ void Application::InitScenes()
 	coin->transform->SetRotation(90.0f, glm::vec3(1.0f, 0.0f, 0.0f));
 	coin->AddComponent<RotationScript>(100.0f, glm::vec3(0.0f, 0.0f, 1.0f));
 	scene1->Add(coin);
+
+	//skulls
+	GameObject* skulls = new GameObject("skulls_sprite");
+	skulls->AddComponent<SpriteRenderer>("Textures/skulls.png");
+	skulls->transform->SetScale(glm::vec3(3.0f * 3, 0.0f, 0.7f * 3));
+	skulls->transform->SetPosition(glm::vec3(-10.0f, 3.0f, 0.0f));
+	skulls->transform->RotateBy(90.0f, glm::vec3(0.0f, 0.0f, 1.0f));
+	skulls->transform->RotateBy(90.0f, glm::vec3(0.0f, -1.0f, 0.0f));
+	scene1->Add(skulls);
+
+	//gun
+	GameObject* gun_frame = new GameObject("gun");
+	gun_frame->AddComponent<MeshRenderer>("gun_frame", "phong", Color::White, m_gun);
+	gun_frame->transform->SetPosition(glm::vec3(0.0f, 5.0f, 0.0f));
+	gun_frame->AddComponent<RotationScript>(200.0f, glm::vec3(1.0f));
+	scene1->Add(gun_frame);
+
+	GameObject* gun_slide = new GameObject("slider");
+	gun_slide->AddComponent<MeshRenderer>("gun_slide", "phong", Color::White, m_gun);
+	gun_frame->AddChildren(gun_slide);
+	scene1->Add(gun_slide);
+
+	GameObject* gun_trigger = new GameObject("trigger");
+	gun_trigger->AddComponent<MeshRenderer>("gun_trigger", "phong", Color::White, m_gun);
+	gun_frame->AddChildren(gun_trigger);
+	gun_trigger->transform->SetPosition(glm::vec3(0.0f, -0.05f, 0.1f));
+	scene1->Add(gun_trigger);
+
+	GameObject* gun_hammer = new GameObject("hammer");
+	gun_hammer->AddComponent<MeshRenderer>("gun_hammer", "phong", Color::White, m_gun);
+	gun_frame->AddChildren(gun_hammer);
+	gun_hammer->transform->SetPosition(glm::vec3(0.0f, -0.035f, -0.13f));
+	scene1->Add(gun_hammer);
+
+	GameObject* gun_silencer = new GameObject("silencer");
+	gun_silencer->AddComponent<MeshRenderer>("gun_silencer", "phong", Color::White, m_gun);
+	gun_frame->AddChildren(gun_silencer);
+	scene1->Add(gun_silencer);
 
 	//cats
 	std::string cats[] = { "Textures/cat1.jpg", "Textures/cat2.jpg", "Textures/cat3.jpg", "Textures/cat4.jpg", "Textures/cat5.jpg", "Textures/cat6.jpg", "Textures/cat7.jpg", "Textures/cat8.jpg" };
@@ -178,7 +212,7 @@ void Application::Run()
 
 		Time::Update();
 
-
+		//[TMP]spline testing
 		if (Input::IsKeyDown(GLFW_KEY_UP)) {
 			t += Time::deltaTime * speed;
 			t = std::clamp(t, 0.0f, 1.0f);
@@ -203,13 +237,14 @@ void Application::Run()
 		GLfloat depth;
 		GLuint index;
 
-		//GLint x = Input::GetMouseX();
-		//GLint y = Input::GetMouseY();
-
+		//center of the screen
 		GLint x = viewport[2] / 2;
 		GLint y = viewport[3] / 2;
 
-		//int newy = viewport[3] - y;
+		//GLint x = Input::GetMouseX();
+		//GLint y = Input::GetMouseY();
+
+		//int newy = viewport[3] - y; //WHY?
 		//glReadPixels(x, newy, 1, 1, GL_RGBA, GL_UNSIGNED_BYTE, color);
 		//glReadPixels(x, newy, 1, 1, GL_DEPTH_COMPONENT, GL_FLOAT, &depth);
 		//glReadPixels(x, newy, 1, 1, GL_STENCIL_INDEX, GL_UNSIGNED_INT, &index);
@@ -233,14 +268,13 @@ void Application::Run()
 			//printf("unProject [%f,%f,%f]\n", pos.x, pos.y, pos.z);
 			//printf("Name %s\n", SceneManager::GetInstance().GetActiveScene()->GetObjectManager().GetGameObject(index)->GetName().c_str());
 
-
 			GameObject* sphere = new GameObject("sphere");
 			sphere->AddComponent<MeshRenderer>("sphere", "constant", Color::Random());
 			sphere->transform->SetPosition(glm::vec3(pos.x, pos.y, pos.z));
 			sphere->AddComponent<RotationScript>(200.0f, glm::vec3(0.0f, 1.0f, 0.0f));
 			activeScene->Add(sphere);
 
-			sphere->Destroy(5.0f);
+			sphere->Destroy(5.0f); //delete sphere after 5 sec
 		}		
 
 		glfwPollEvents();
