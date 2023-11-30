@@ -5,7 +5,7 @@
 #include <GL/glew.h>
 #include <iostream>
 #include <vector>
-#include "../Utilities/ImageLoader.h"
+
 
 class Material
 {
@@ -18,8 +18,5 @@ public:
 	float shininess = 16.0f;
 
 	GLuint textureID = 0;
-
-
-	static GLuint LoadTexture(std::string path);
 };
 

@@ -3,8 +3,6 @@
 #include "../Components/Renderer.h"
 #include "../Engine/GameObject.h"
 
-
-
 class SpriteRenderer : public IRenderer, public IObserver
 {
 public:

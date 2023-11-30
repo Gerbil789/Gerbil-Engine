@@ -5,6 +5,7 @@
 #include "../imgui/imgui_impl_opengl3.h"
 
 #include "../Engine/Scene.h"
+#include "../Utilities/ImageLoader.h"
 
 
 class GUI
@@ -14,7 +15,9 @@ public:
 	void Dispose();
 	void Update();
 private:
+	GLuint crosshairTextureID;
 	void ShowHierarchy();
 	Scene* scene;
+	GLFWwindow* window;
 };
 

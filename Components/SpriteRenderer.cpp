@@ -1,5 +1,5 @@
 #include "SpriteRenderer.h"
-
+#include "../Utilities/ImageLoader.h"
 
 SpriteRenderer::SpriteRenderer(std::string _texture, glm::vec3 _color)
 {
@@ -11,7 +11,7 @@ SpriteRenderer::SpriteRenderer(std::string _texture, glm::vec3 _color)
 	model = ModelManager::GetInstance().GetModel("plane");
 	transformMatrix = glm::mat4(1.0f);
 
-	textureId = Material::LoadTexture(_texture);
+	textureId = ImageLoader::LoadTexture(_texture);
 }
 
 void SpriteRenderer::Update()

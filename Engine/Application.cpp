@@ -132,15 +132,6 @@ void Application::InitScenes()
 	coin->AddComponent<RotationScript>(100.0f, glm::vec3(0.0f, 0.0f, 1.0f));
 	scene1->Add(coin);
 
-	//skulls
-	GameObject* skulls = new GameObject("skulls_sprite");
-	skulls->AddComponent<SpriteRenderer>("Textures/skulls.png");
-	skulls->transform->SetScale(glm::vec3(3.0f * 3, 0.0f, 0.7f * 3));
-	skulls->transform->SetPosition(glm::vec3(-10.0f, 3.0f, 0.0f));
-	skulls->transform->RotateBy(90.0f, glm::vec3(0.0f, 0.0f, 1.0f));
-	skulls->transform->RotateBy(90.0f, glm::vec3(0.0f, -1.0f, 0.0f));
-	scene1->Add(skulls);
-
 	//gun
 	GameObject* gun_frame = new GameObject("gun");
 	gun_frame->AddComponent<MeshRenderer>("gun_frame", "phong", Color::White, m_gun);
