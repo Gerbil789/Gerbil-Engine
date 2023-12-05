@@ -129,10 +129,16 @@
     <ClInclude Include="Components/SpotLight.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Spline.h">
+    <ClInclude Include="Scripts\Enemy.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="MoveOnSplineScript.h">
+    <ClInclude Include="Scripts\EnemySpawner.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Scripts\MoveOnSplineScript.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Components/Spline.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -248,10 +254,16 @@
     <ClCompile Include="Components/SpotLight.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Spline.cpp">
+    <ClCompile Include="Scripts\Enemy.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="MoveOnSplineScript.cpp">
+    <ClCompile Include="Scripts\EnemySpawner.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Scripts\MoveOnSplineScript.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Components/Spline.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
