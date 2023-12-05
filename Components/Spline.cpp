@@ -28,6 +28,7 @@ glm::vec3 Spline::GetPosition(float t)
         B[i] = glm::vec3(controlPoints[i]);
     }
 
+
     glm::vec4 parameters = glm::vec4(t * t * t, t * t, t, 1.0f);
 
 

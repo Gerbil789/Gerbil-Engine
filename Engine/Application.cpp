@@ -4,7 +4,7 @@
 static void error_callback(int error, const char* description) { fputs(description, stderr); }
 
 static void window_size_callback(GLFWwindow* window, int _width, int _height) {
-	
+
 	printf("resize %d, %d \n", _width, _height);
 	SceneManager::GetInstance().GetActiveScene()->GetActiveCamera()->SetAspect((float)_width / _height);
 
@@ -78,88 +78,88 @@ void Application::Init()
 
 	ShaderManager::GetInstance().Init();
 
-	ModelManager::GetInstance().Init();	
+	ModelManager::GetInstance().Init();
 }
 
 void Application::InitScenes()
 {
-	Scene* scene1 = new Scene();
-	SceneManager::GetInstance().LoadScene(scene1);
-	this->activeScene = scene1;
+	Scene* scene = new Scene();
+	SceneManager::GetInstance().LoadScene(scene);
+	this->activeScene = scene;
 
+	//init materials
 	Material* m_test_grid = new Material("Textures/test_grid.png", "m_test_grid");
 	Material* m_gun = new Material("Textures/gun_color.png", "m_gun");
+	Material* m_tree = new Material("Textures/trees.png", "m_tree");
 
 	//player
-	GameObject* player_go = new GameObject("player");
-	player_go->AddComponent<Camera>();
-	Camera* cam = player_go->GetComponent<Camera>();
-	player_go->GetComponent<Camera>()->SetAspect(ratio);
-	player_go->AddComponent<CameraController>(2.0f, player_go->GetComponent<Camera>());
-	player_go->transform->SetPosition(glm::vec3(0.0f, 5.0f, 0.0f));
-	scene1->Add(player_go);
+	GameObject* player = new GameObject("player");
+	player->AddComponent<Camera>();
+	Camera* cam = player->GetComponent<Camera>();
+	player->GetComponent<Camera>()->SetAspect(ratio);
+	player->AddComponent<CameraController>(2.0f, player->GetComponent<Camera>());
+	player->transform->SetPosition(glm::vec3(0.0f, 5.0f, 0.0f));
+	scene->Add(player);
+
+	//ground
+	for (int i = -5; i <= 5; i++) {
+		for (int j = -5; j <= 5; j++) {
+			GameObject* ground = new GameObject("ground");
+			ground->AddComponent<MeshRenderer>("plane", "phong", Color::White, m_test_grid);
+			ground->transform->SetPosition(glm::vec3(i * 20, 0.0f, j * 20));
+			ground->transform->SetScale(glm::vec3(10.0f));
+			scene->Add(ground);
+		}
+	}
 
 	//spline
 	std::vector<glm::vec3> controlPoints = {
-			 glm::vec3(0.0f, 0.0f, 0.0f),
-			 glm::vec3(1.0f, 5.0f, 5.0f),
-			 glm::vec3(4.0f, 5.0f, -5.0f),
-			 glm::vec3(5.0f, 0.0f, 0.0f)
+			 glm::vec3(-10.0f, 0.0f, 0.0f),
+			 glm::vec3(-5.0f, 0.0f, 10.0f),
+			 glm::vec3(5.0f, 0.0f, -10.0f),
+			 glm::vec3(10.0f, 0.0f, 0.0f)
 	};
-	
+
 	GameObject* spline = new GameObject("Spline");
 	Spline* splineComponent = spline->AddComponent<Spline>(controlPoints, false);
-	splineComponent->Draw();
-	scene1->Add(spline);
+	splineComponent->Draw(); //debug spline
+	scene->Add(spline);
 
-	GameObject* sphere = new GameObject("sphere_on_spline");
-	sphere->AddComponent<MeshRenderer>();
-	sphere->AddComponent<MoveOnSplineScript>(splineComponent);
-	sphere->AddComponent<RotationScript>(100.0f, glm::vec3(0.0f, 1.0f, 0.0f));
-	scene1->Add(sphere);
+	//rat spawner
+	GameObject* spawner = new GameObject("spawner");
+	spawner->AddComponent<EnemySpawner>(splineComponent);
+	scene->Add(spawner);
 
-	//ground
-	GameObject* ground = new GameObject("ground");
-	ground->AddComponent<MeshRenderer>("plane", "phong", Color::White, m_test_grid);
-	ground->transform->SetScale(glm::vec3(20.0f));
-	scene1->Add(ground);
-
-	//coin
-	GameObject* coin = new GameObject("coin_sprite");
-	coin->AddComponent<SpriteRenderer>("Textures/coin.png");
-	coin->transform->SetPosition(glm::vec3(8.0f, 2.0f, 0.0f));
-	coin->transform->SetRotation(90.0f, glm::vec3(1.0f, 0.0f, 0.0f));
-	coin->AddComponent<RotationScript>(100.0f, glm::vec3(0.0f, 0.0f, 1.0f));
-	scene1->Add(coin);
 
 	//gun
 	GameObject* gun_frame = new GameObject("gun");
 	gun_frame->AddComponent<MeshRenderer>("gun_frame", "phong", Color::White, m_gun);
 	gun_frame->transform->SetPosition(glm::vec3(0.0f, 5.0f, 0.0f));
-	gun_frame->AddComponent<RotationScript>(200.0f, glm::vec3(1.0f));
-	scene1->Add(gun_frame);
+	gun_frame->AddComponent<RotationScript>(50.0f, glm::vec3(0.0f, 1.0f, 0.0f));
+	scene->Add(gun_frame);
 
 	GameObject* gun_slide = new GameObject("slider");
 	gun_slide->AddComponent<MeshRenderer>("gun_slide", "phong", Color::White, m_gun);
 	gun_frame->AddChildren(gun_slide);
-	scene1->Add(gun_slide);
+	scene->Add(gun_slide);
 
 	GameObject* gun_trigger = new GameObject("trigger");
 	gun_trigger->AddComponent<MeshRenderer>("gun_trigger", "phong", Color::White, m_gun);
 	gun_frame->AddChildren(gun_trigger);
 	gun_trigger->transform->SetPosition(glm::vec3(0.0f, -0.05f, 0.1f));
-	scene1->Add(gun_trigger);
+	scene->Add(gun_trigger);
 
 	GameObject* gun_hammer = new GameObject("hammer");
 	gun_hammer->AddComponent<MeshRenderer>("gun_hammer", "phong", Color::White, m_gun);
 	gun_frame->AddChildren(gun_hammer);
 	gun_hammer->transform->SetPosition(glm::vec3(0.0f, -0.035f, -0.13f));
-	scene1->Add(gun_hammer);
+	scene->Add(gun_hammer);
 
 	GameObject* gun_silencer = new GameObject("silencer");
 	gun_silencer->AddComponent<MeshRenderer>("gun_silencer", "phong", Color::White, m_gun);
 	gun_frame->AddChildren(gun_silencer);
-	scene1->Add(gun_silencer);
+	scene->Add(gun_silencer);
+
 
 	//cats
 	std::string cats[] = { "Textures/cat1.jpg", "Textures/cat2.jpg", "Textures/cat3.jpg", "Textures/cat4.jpg", "Textures/cat5.jpg", "Textures/cat6.jpg", "Textures/cat7.jpg", "Textures/cat8.jpg" };
@@ -167,33 +167,47 @@ void Application::InitScenes()
 		GameObject* cat = new GameObject("cat_sprite");
 		cat->AddComponent<SpriteRenderer>(cats[i]);
 		cat->transform->SetScale(glm::vec3(1.0f * 2, 0.0f, 1.46f * 2));
-		cat->transform->SetPosition(glm::vec3(10.0f, 3.0f, -17.5f + i * 5.0f));
+		cat->transform->SetPosition(glm::vec3(20.0f, 3.0f, -17.5f + i * 5.0f));
 		cat->transform->RotateBy(90.0f, glm::vec3(0.0f, 0.0f, 1.0f));
 		cat->transform->RotateBy(90.0f, glm::vec3(0.0f, -1.0f, 0.0f));
-		scene1->Add(cat);
+		scene->Add(cat);
 	}
 
+	//trees
+	for (int i = 0; i < 200; i++) {
+		float scale = 1 + static_cast<float>(std::rand()) / RAND_MAX;
+		float rot = std::rand() % 360;
+		float centerX = 0.0f;
+		float centerZ = 0.0f;
+		float exclusionRadius = 30.0f; 
+		float x, z;
+		do {
+			x = centerX + (static_cast<float>(std::rand()) / RAND_MAX - 0.5f) * 100.0f;
+			z = centerZ + (static_cast<float>(std::rand()) / RAND_MAX - 0.5f) * 100.0f;
+		} while (std::sqrt((x - centerX) * (x - centerX) + (z - centerZ) * (z - centerZ)) < exclusionRadius);
+
+		GameObject* tree = new GameObject("tree");
+		tree->AddComponent<MeshRenderer>("spruce", "phong", Color::Random(), m_tree);
+		tree->transform->SetPosition(glm::vec3(x, 0.0f, z));
+		tree->transform->SetScale(glm::vec3(scale));
+		tree->transform->SetRotation(rot, glm::vec3(0.0f, 1.0f, 0.0f));
+		scene->Add(tree);
+	}
 
 	//directional light
 	GameObject* dir = new GameObject("directional light");
 	dir->AddComponent<DirectionalLight>(Color::White, 0.5f);
-	scene1->Add(dir);
+	scene->Add(dir);
 
 	//flash light
 	GameObject* flashLight = new GameObject("flash light");
 	flashLight->AddComponent<SpotLight>(Color::White, 5.0f);
-	scene1->Add(flashLight);
-	player_go->AddChildren(flashLight);
+	scene->Add(flashLight);
+	player->AddChildren(flashLight);
 }
 
 void Application::Run()
 {
-	Material* m_test_grid = new Material("Textures/test_grid.png", "m_test_grid");
-
-	MoveOnSplineScript* tmp = activeScene->GetObjectManager().GetGameObject("sphere_on_spline")->GetComponent<MoveOnSplineScript>();
-	float t = 0;
-	float speed = 0.5f;
-
 	GUI gui(window, SceneManager::GetInstance().GetActiveScene());
 	while (!glfwWindowShouldClose(window)) {
 
@@ -203,23 +217,10 @@ void Application::Run()
 
 		Time::Update();
 
-		//[TMP]spline testing
-		if (Input::IsKeyDown(GLFW_KEY_UP)) {
-			t += Time::deltaTime * speed;
-			t = std::clamp(t, 0.0f, 1.0f);
-			tmp->Move(t);
-		}
-
-		if (Input::IsKeyDown(GLFW_KEY_DOWN)) {
-			t -= Time::deltaTime * speed;
-			t = std::clamp(t, 0.0f, 1.0f);
-			tmp->Move(t);
-		}
-
 		activeScene->Update();
 
 		//todo: make a controller class for flashlight instead of this line
-		SceneManager::GetInstance().GetActiveScene()->GetObjectManager().GetGameObject("flash light")->GetComponent<SpotLight>()->SetDirection(SceneManager::GetInstance().GetActiveScene()->GetActiveCamera()->GetFront());
+		activeScene->GetObjectManager().GetGameObject("flash light")->GetComponent<SpotLight>()->SetDirection(activeScene->GetActiveCamera()->GetFront());
 
 		GLint viewport[4];
 		glGetIntegerv(GL_VIEWPORT, viewport);
@@ -232,27 +233,18 @@ void Application::Run()
 		GLint x = viewport[2] / 2;
 		GLint y = viewport[3] / 2;
 
-		//GLint x = Input::GetMouseX();
-		//GLint y = Input::GetMouseY();
-
-		//int newy = viewport[3] - y; //WHY?
-		//glReadPixels(x, newy, 1, 1, GL_RGBA, GL_UNSIGNED_BYTE, color);
-		//glReadPixels(x, newy, 1, 1, GL_DEPTH_COMPONENT, GL_FLOAT, &depth);
-		//glReadPixels(x, newy, 1, 1, GL_STENCIL_INDEX, GL_UNSIGNED_INT, &index);
-
 		glReadPixels(x, y, 1, 1, GL_RGBA, GL_UNSIGNED_BYTE, color);
 		glReadPixels(x, y, 1, 1, GL_DEPTH_COMPONENT, GL_FLOAT, &depth);
 		glReadPixels(x, y, 1, 1, GL_STENCIL_INDEX, GL_UNSIGNED_INT, &index);
 
-		//glm::vec3 screenX = glm::vec3(x, newy, depth);
 		glm::vec3 screenCenter = glm::vec3(x, y, depth);
-		
+
 		glm::mat4 view = ShaderManager::GetInstance().GetShaderProgram(ShaderManager::GetInstance().GetShaderProgramId("phong"))->viewMatrix;
 		glm::mat4 projection = ShaderManager::GetInstance().GetShaderProgram(ShaderManager::GetInstance().GetShaderProgramId("phong"))->projectionMatrix;
-		
-		
+
+
 		glm::vec4 viewPort = glm::vec4(0, 0, viewport[2], viewport[3]);
-		glm::vec3 pos = glm::unProject(screenCenter, view, projection, viewPort); // mouse position
+		glm::vec3 pos = glm::unProject(screenCenter, view, projection, viewPort); // mouse position (center of the screen)
 
 		if (Input::IsMouseButtonClicked(0) && index > 2) {
 			//printf("Clicked on pixel %d, %d, color %02hhx%02hhx%02hhx%02hhx, depth% f, stencil index % u\n", x, y, color[0], color[1], color[2], color[3], depth, index);
@@ -260,13 +252,17 @@ void Application::Run()
 			//printf("Name %s\n", SceneManager::GetInstance().GetActiveScene()->GetObjectManager().GetGameObject(index)->GetName().c_str());
 
 			GameObject* sphere = new GameObject("sphere");
-			sphere->AddComponent<MeshRenderer>("sphere", "constant", Color::Random());
+			sphere->AddComponent<MeshRenderer>("sphere", "constant", Color::Red);
 			sphere->transform->SetPosition(glm::vec3(pos.x, pos.y, pos.z));
-			sphere->AddComponent<RotationScript>(200.0f, glm::vec3(0.0f, 1.0f, 0.0f));
+			sphere->transform->SetScale(glm::vec3(0.2f));
 			activeScene->Add(sphere);
+			sphere->Destroy(1.0f); //delete sphere after 1 sec
 
-			sphere->Destroy(5.0f); //delete sphere after 5 sec
-		}		
+			GameObject* go = SceneManager::GetInstance().GetActiveScene()->GetObjectManager().GetGameObject(index);
+			if (go->GetComponent<Enemy>()) {
+				go->GetComponent<Enemy>()->Kill();
+			}
+		}
 
 		glfwPollEvents();
 		gui.Update();

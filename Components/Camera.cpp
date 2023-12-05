@@ -31,7 +31,6 @@ glm::vec3 Camera::GetLeft()
 	glm::vec3 result = glm::cross(up, target);
 
 	if (glm::any(glm::isnan(result))) {
-		// Print or log information to help debug the issue.
 		std::cout << "NaN encountered in cross product: up = " << up.x << " " << up.y << " " << up.z << ", target = " << target.x << " " << target.y << " " << target.z << "\n";
 	}
 

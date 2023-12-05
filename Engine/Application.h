@@ -20,7 +20,9 @@
 #include "../Components/DirectionalLight.h"
 
 
-#include "../MoveOnSplineScript.h"
+#include "../Scripts/MoveOnSplineScript.h"
+#include "../Scripts/Enemy.h"
+#include "../Scripts/EnemySpawner.h"
 
 
 

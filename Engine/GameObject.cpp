@@ -2,11 +2,20 @@
 #include "GameObject.h"
 
 
-int GameObject::nextID = 2;
+int GameObject::nextID = 5;
 
 GameObject::GameObject(std::string name)
 {
-	this->id = nextID++;
+	//to do: make id pool or something... (255 limit)
+	if (name == "tree" || name == "sphere") {
+		id = 3;
+	}
+	else {
+		this->id = nextID++;
+	}
+
+	//std::cout << "ID: " << id << "\n";
+	
 	this->name = name;
 	this->transform = new Transform();
 }
@@ -28,6 +37,7 @@ void GameObject::Update()
 void GameObject::Destroy()
 {
 	SceneManager::GetInstance().GetActiveScene()->GetObjectManager().Remove(this);
+
 	delete this;
 }
 
